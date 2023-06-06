@@ -1,0 +1,11 @@
+{% extends 'template/base.html' %}
+
+{% block conteudo %}
+
+<h1>Você está na tela de Mural!</h1>
+
+<a href='{% url 'home' %}'>Voltar a tela inicial</a> <br> <br>
+<a href="{% url 'cadastro' %}">Cadastre-se</a> <br> <br>
+<a href="{% url 'login' %}">Já possuo uma conta</a>
+
+{% endblock conteudo %}

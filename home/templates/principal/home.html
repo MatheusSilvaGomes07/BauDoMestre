@@ -1,0 +1,10 @@
+{% extends "template/base.html" %}
+
+{% block conteudo %}
+    <title>Home - Baú do Mestre</title>
+
+    <h1>Seja bem vindo ao Baú do Mestre!</h1>
+    <a href="{% url 'mural' %}">Comece sua jornada</a> <br> <br>
+    <a href="{% url 'cadastro' %}">Cadastre-se</a> <br> <br>
+    <a href="{% url 'login' %}">Já possuo uma conta</a>
+{% endblock conteudo %}
