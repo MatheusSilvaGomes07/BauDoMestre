@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="{% static 'img/Ain.png' %}" type="image/x-icon">
 </head>
 <body>
-    <h1>Navbar</h1>
+    <nav>Navbar <a href="{% url 'cadastro' %}">Cadastre-se </a><a href="{% url 'login' %}">Login</a></nav>
 
     {% block conteudo %}
     
