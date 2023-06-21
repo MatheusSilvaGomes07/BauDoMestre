@@ -11,8 +11,12 @@
     <link rel="shortcut icon" href="{% static 'img/Ain.png' %}" type="image/x-icon">
 </head>
 <body>
-    <nav>Navbar <a href="{% url 'cadastro' %}">Cadastre-se </a><a href="{% url 'login' %}">Login</a></nav>
-
+    
+    {% if user.is_authenticated %}
+    <nav>Navbar <a href="{% url 'account_signup' %}">Cadastre-se </a><a href="{% url 'account_logout' %}">Logout</a></nav>
+    {% else %}
+    <nav>Navbar <a href="{% url 'account_signup' %}">Cadastre-se </a><a href="{% url 'account_login' %}">Login</a></nav>
+    {% endif %}
     {% block conteudo %}
     
     {% endblock conteudo %}
