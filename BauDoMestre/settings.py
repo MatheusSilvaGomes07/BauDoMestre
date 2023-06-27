@@ -35,6 +35,9 @@ INSTALLED_APPS = [
 
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 
 SITE_ID = 1
