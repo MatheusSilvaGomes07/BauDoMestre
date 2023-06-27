@@ -13,7 +13,7 @@
 <body>
     
     {% if user.is_authenticated %}
-    <nav>Navbar <a href="{% url 'account_logout' %}">Logout</a></nav>
+    <nav>Navbar <a href="{% url 'account_logout' %}">Logout </a> <a href="{%url 'usuario' %}" style=>Perfil</a></nav>
     {% else %}
     <nav>Navbar <a href="{% url 'account_signup' %}">Cadastre-se </a><a href="{% url 'account_login' %}">Login</a></nav>
     {% endif %}
