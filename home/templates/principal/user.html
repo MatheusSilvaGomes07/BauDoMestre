@@ -1,0 +1,11 @@
+{% extends 'template/base.html' %}
+
+{% block conteudo %}
+<title>Usuário - Baú do Mestre</title>
+<h1>Você está na tela de conta do usuário!</h1>
+
+<h1>Seja bem vindo {{ user }}!<h1> <br> <br>
+
+<a href="{% url 'home' %}">Voltar a tela inicial</a> <br> <br>
+
+{% endblock conteudo %}
