@@ -1,0 +1,23 @@
+{% extends 'template/base.html' %}
+
+{% block conteudo %}
+
+<h1>Você está na tela de criação de mesas!</h1>
+<title>Criar Mesas - Baú do Mestre</title>
+
+<a href='{% url 'home' %}'>Voltar a tela inicial</a> <br> <br>
+<a href="{% url 'account_signup' %}">Cadastre-se</a> <br> <br>
+<a href="{% url 'account_login' %}">Login</a>
+
+<br> <br>
+
+<h1>Criar Campanha</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Criar</button>
+</form>
+
+
+{% endblock conteudo %}
