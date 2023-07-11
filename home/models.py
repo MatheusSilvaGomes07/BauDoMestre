@@ -27,13 +27,13 @@ class Campanha(models.Model):
     )
     nomeCampanha = models.CharField(max_length=52)
     sistemaCampanha = models.CharField(max_length=100, choices= SISTEMAS_RPG_CHOICES)
-    descricaoCampanha = models.CharField(max_length=256)
+    descricaoCampanha = models.TextField(max_length=256)
     fotoCampanha = models.ImageField(upload_to='static/img/FotoCampanha/')
     ambienteCampanha = models.CharField(max_length=100, choices= AMBIENTES_RPG_CHOICES)
     numeroJogadores = models.IntegerField()
     diasSessao = models.CharField(max_length=52)
     generoRPG = models.CharField(max_length=100, choices=GENERO_RPG_CHOICES)
     
-    def __str__(self):
-        return f"Nome da Campanha: {self.nomeCampanha}, Mestre: {self.nomeMestre.username}, Email do Mestre: {self.nomeMestre.email}"
+    # def __str__(self):
+    #     return f"Nome da Campanha: {self.nomeCampanha}, Mestre: {self.nomeMestre.username}, Email do Mestre: {self.nomeMestre.email}, Nome da foto: {self.fotoCampanha}"
 
