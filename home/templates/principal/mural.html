@@ -6,8 +6,12 @@
 <title>Mural - Baú do Mestre</title>
 
 <a href='{% url 'home' %}'>Voltar a tela inicial</a> <br> <br>
+
+{% if user.is_authenticated%}
+{% else %}
 <a href="{% url 'account_signup' %}">Cadastre-se</a> <br> <br>
 <a href="{% url 'account_login' %}">Login</a>
+{% endif %}
 
 <br> <br> 
 

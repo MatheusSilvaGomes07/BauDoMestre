@@ -1,0 +1,15 @@
+{% extends "template/base.html" %}
+
+{% block conteudo %}
+<title>Edição de Perfil - Baú do Mestre</title>
+
+<h1>Editar perfil do usuário</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ formPerfil.as_p }}
+    <button type="submit">Editar</button>
+</form>
+
+    
+{% endblock conteudo %}

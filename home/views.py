@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Campanha
-from .forms import CampanhaForm
+from .models import Campanha, Perfil
+from .forms import CampanhaForm, PerfilForm
 
 def home(request):
     return render(request, 'principal/home.html')
@@ -30,4 +30,27 @@ def teste(request):
 
 @login_required
 def usuario(request):
-    return render(request, 'principal/user.html')
+    perfil = Perfil.objects.get(nomePerfil=request.user)
+    return render(request, 'principal/user.html', {'perfil': perfil})
+
+@login_required
+def editarconta(request):
+    perfil, created = Perfil.objects.update_or_create(nomePerfil=request.user, defaults={
+        'descricao': request.POST.get('descricao', 'Indefinido'),
+        'tipo_sessao': request.POST.get('tipo_sessao', 'Indefinido'),
+        'tipo_player': request.POST.get('tipo_player', 'Indefinido'),
+        'sistema_rpg': request.POST.get('sistema_rpg', 'Indefinido')
+    })
+
+    if request.method == 'POST':
+        formPerfil = PerfilForm(request.POST, request.FILES, instance=perfil)
+        if formPerfil.is_valid():
+            if 'fotoConta' in request.FILES:
+                perfil.fotoConta = request.FILES['fotoConta']
+            formPerfil.save()
+            return redirect('usuario')
+    else:
+        formPerfil = PerfilForm(instance=perfil)
+
+    return render(request, 'principal/editarPerfil.html', {'formPerfil': formPerfil})
+

@@ -4,8 +4,24 @@
 <title>Usuário - Baú do Mestre</title>
 <h1>Você está na tela de conta do usuário!</h1>
 
-<h1>Seja bem vindo {{ user }}!<h1> <br> <br>
+<h1>Seja bem vindo, {{ user }}!<h1> <br> <br>
+
+<h2>Foto de usuário:</h2>
+<img src="{{ perfil.fotoConta.url }}" alt="Foto de usuário" width="350">
+
+<h2>Descrição da conta:</h2>
+<p>{{ perfil.descricao }}</p>
+
+<h2>Sistema de RPG preferido:</h2>
+<p>{{ perfil.sistema_rpg }}</p>
+
+<h2>Tipo de sessão:</h2>
+<p>{{ perfil.tipo_sessao }}</p>
+
+<h2>Tipo de player:</h2>
+<p>{{ perfil.tipo_player }}</p>
 
 <a href="{% url 'home' %}">Voltar a tela inicial</a> <br> <br>
+<a href="{% url 'editarconta' %}">Editar o perfil do usuário</a> <br> <br>
 
 {% endblock conteudo %}

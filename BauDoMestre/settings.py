@@ -27,11 +27,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'home',
 ]
+
 
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
