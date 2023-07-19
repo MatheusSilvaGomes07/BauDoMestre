@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Campanha, Perfil
 from .forms import CampanhaForm, PerfilForm
+from django.db.models import Q
 
 def home(request):
     return render(request, 'principal/home.html')
@@ -11,6 +12,17 @@ def mural(request):
     return render(request, 'principal/mural.html', {'campanhas': campanhas})
 
 @login_required
+def buscarmesa(request):
+    sistema_busca = request.GET.get('q')
+    campanhas = Campanha.objects.all()
+
+    if sistema_busca:
+        campanhas = campanhas.filter(
+            Q(nomeCampanha__icontains=sistema_busca)
+        )
+    return render(request, 'principal/muralLogado.html', {'campanhas': campanhas})
+
+@login_required
 def criarCampanhas(request):
     if request.method == 'POST':
         form = CampanhaForm(request.POST, request.FILES)
@@ -18,7 +30,7 @@ def criarCampanhas(request):
             campanha = form.save(commit=False)
             campanha.nomeMestre = request.user
             campanha.save()
-            return redirect('mural')
+            return redirect('buscarmesa')
     else:
         form = CampanhaForm()
     

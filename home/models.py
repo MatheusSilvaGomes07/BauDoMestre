@@ -9,22 +9,22 @@ import os
 class Perfil(models.Model):
     nomePerfil = models.ForeignKey(User, on_delete=models.CASCADE)
     SESSION_CHOICES = (
-        ('online', 'Online'),
-        ('presencial', 'Presencial'),
+        ('Online', 'Online'),
+        ('Presencial', 'Presencial'),
     )
 
     PLAYER_TYPE_CHOICES = (
-        ('mestre', 'Mestre'),
-        ('jogador', 'Jogador'),
-        ('ambos', 'Ambos'),
+        ('Mestre', 'Mestre'),
+        ('Jogador', 'Jogador'),
+        ('Ambos', 'Ambos'),
     )
 
     RPG_SYSTEM_CHOICES = (
-        ('dnd', 'Dungeons & Dragons'),
-        ('tormenta20', 'Tormenta20'),
-        ('ordem_par', 'Ordem Paranormal'),
-        ('cthulhu', 'Call of Cthulhu'),
-        ('outros', 'Outros'),
+        ('Dungeons & Dragons', 'Dungeons & Dragons'),
+        ('Tormenta20', 'Tormenta20'),
+        ('Ordem Paranormal', 'Ordem Paranormal'),
+        ('Call of Cthulhu', 'Call of Cthulhu'),
+        ('Outros', 'Outros'),
     )
 
     fotoConta = models.ImageField(upload_to='static/img/fotoUser')

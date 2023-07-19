@@ -1,0 +1,66 @@
+{% extends 'template/base.html' %}
+
+{% block conteudo %}
+
+<h1>Você está na tela de Mural!</h1>
+<title>Mural - Baú do Mestre</title>
+
+<a href='{% url 'home' %}'>Voltar a tela inicial</a> <br> <br>
+
+<form method="GET" class="search-form">
+    <input type="text" name="q" placeholder="Buscar por nome da campanha">
+    <button type="submit">Buscar</button>
+</form>
+{% if campanhas %}
+    {% comment %} <ul>
+        {% for campanha in campanhas %}
+            <li>
+                <a href="{% url 'detalhes_campanha' campanha.pk %}">{{ campanha.nomeCampanha }}</a>
+                <!-- Exibir outras informações da campanha, se necessário -->
+            </li>
+        {% endfor %}
+    </ul> {% endcomment %}
+{% else %}
+    <p>Nenhuma campanha encontrada.</p>
+{% endif %}
+
+
+
+<a href="{% url 'criarCampanhas' %}">Crie suas próprias mesas</a>
+
+<br> <br>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Foto</th>
+            <th>Nome da Campanha</th>
+            <th>Mestre</th>
+            <th>Sistema</th>
+            <th>Descrição</th>
+            <th>Ambiente</th>
+            <th>Número de Jogadores</th>
+            <th>Dias de Sessão</th>
+            <th>Gênero</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for campanha in campanhas %}
+        <tr>
+            <td><img src="{{ campanha.fotoCampanha.url }}" alt="Foto da Campanha" width="150" height="100"></td>
+            <td>{{ campanha.nomeCampanha }}</td>
+            <td>{{ campanha.nomeMestre }}</td>
+            <td>{{ campanha.sistemaCampanha }}</td>
+            <td>{{ campanha.descricaoCampanha }}</td>
+            <td>{{ campanha.ambienteCampanha }}</td>
+            <td>{{ campanha.numeroJogadores }}</td>
+            <td>{{ campanha.diasSessao }}</td>
+            <td>{{ campanha.generoRPG }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock conteudo %}
