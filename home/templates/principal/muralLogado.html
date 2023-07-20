@@ -9,17 +9,37 @@
 
 <form method="GET" class="search-form">
     <input type="text" name="q" placeholder="Buscar por nome da campanha">
+    <label for="sistema">Sistema:</label>
+    <select name="sistema" id="sistema">
+        <option value="">Todos</option>
+        <option value="Dungeons & Dragons">Dungeons & Dragons</option>
+        <option value="Ordem Paranormal">Ordem Paranormal</option>
+        <option value="Tormenta20">Tormenta20</option>
+        <option value="Call of Cthulu">Call of Cthulu</option>
+        <option value="Outro">Outro</option>
+    </select>
+    <label for="ambiente">Ambiente:</label>
+    <select name="ambiente" id="ambiente">
+        <option value="">Todos</option>
+        <option value="Online">Online</option>
+        <option value="Presencial">Presencial</option>
+    </select>
+    <label for="genero">Gênero:</label>
+    <select name="genero" id="genero">
+        <option value="">Todos</option>
+        <option value="Aventura">Aventura</option>
+        <option value="Comédia">Comédia</option>
+        <option value="Drama">Drama</option>
+        <option value="Fantasia">Fantasia</option>
+        <option value="Histórico">Histórico</option>
+        <option value="Mistério">Mistério</option>
+        <option value="Suspense">Suspense</option>
+        <option value="Terror">Terror</option>
+    </select>
     <button type="submit">Buscar</button>
 </form>
+
 {% if campanhas %}
-    {% comment %} <ul>
-        {% for campanha in campanhas %}
-            <li>
-                <a href="{% url 'detalhes_campanha' campanha.pk %}">{{ campanha.nomeCampanha }}</a>
-                <!-- Exibir outras informações da campanha, se necessário -->
-            </li>
-        {% endfor %}
-    </ul> {% endcomment %}
 {% else %}
     <p>Nenhuma campanha encontrada.</p>
 {% endif %}

@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Campanha, Perfil
 from .forms import CampanhaForm, PerfilForm
 from django.db.models import Q
+from django.contrib.auth.models import User
 
 def home(request):
     return render(request, 'principal/home.html')
@@ -14,13 +15,31 @@ def mural(request):
 @login_required
 def buscarmesa(request):
     sistema_busca = request.GET.get('q')
+    sistema_filtro = request.GET.get('sistema')
+    ambiente_filtro = request.GET.get('ambiente')
+    genero_filtro = request.GET.get('genero')
+
     campanhas = Campanha.objects.all()
 
     if sistema_busca:
         campanhas = campanhas.filter(
             Q(nomeCampanha__icontains=sistema_busca)
         )
+    if sistema_filtro:
+        campanhas = campanhas.filter(
+            Q(sistemaCampanha__icontains=sistema_filtro)
+        )
+    if ambiente_filtro:
+        campanhas = campanhas.filter(
+            Q(ambienteCampanha__icontains=ambiente_filtro)
+        )
+    if genero_filtro:
+        campanhas = campanhas.filter(
+            Q(generoRPG__icontains=genero_filtro)
+        )
+
     return render(request, 'principal/muralLogado.html', {'campanhas': campanhas})
+
 
 @login_required
 def criarCampanhas(request):
