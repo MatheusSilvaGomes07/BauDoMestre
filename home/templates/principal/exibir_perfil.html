@@ -1,0 +1,14 @@
+{% extends "template/base.html" %}
+
+{% block conteudo %}
+
+    <title>{{ perfil.nomePerfil.username }} - Baú do Mestre</title>
+
+    <img src="{{ perfil.fotoConta.url }}" alt="Foto de usuário" width="350" height="250">
+    <h1>{{ perfil.nomePerfil.username }}</h1>
+    <p>{{ perfil.descricao }}</p>
+    <p{{ perfil.tipo_player }}></p>
+    <p>{{ perfil.tipo_sessao }}</p>
+    <p>{{ perfil.sistema_rpg }}</p>
+    
+{% endblock conteudo %}

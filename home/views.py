@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .models import Campanha, Perfil
 from .forms import CampanhaForm, PerfilForm
 from django.db.models import Q
-from django.contrib.auth.models import User
+
 
 def home(request):
     return render(request, 'principal/home.html')
@@ -11,6 +12,18 @@ def home(request):
 def mural(request):
     campanhas = Campanha.objects.all()
     return render(request, 'principal/mural.html', {'campanhas': campanhas})
+
+
+@login_required
+def search_user(request):
+    conta_busca = request.GET.get('q')
+    users = []
+    if conta_busca:
+        users = Perfil.objects.filter(
+            Q(nomePerfil__username__icontains=conta_busca)
+        )
+    return render(request, 'principal/buscaUser.html', {'users': users, 'busca_realizada': bool(conta_busca)})
+
 
 @login_required
 def buscarmesa(request):
@@ -85,3 +98,7 @@ def editarconta(request):
 
     return render(request, 'principal/editarPerfil.html', {'formPerfil': formPerfil})
 
+@login_required
+def exibir_perfil(request, perfil_slug):
+    perfil = get_object_or_404(Perfil, slug=perfil_slug)
+    return render(request, 'principal/exibir_perfil.html', {'perfil': perfil})

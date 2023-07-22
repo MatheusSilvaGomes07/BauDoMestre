@@ -2,12 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-import os
+from django.utils.text import slugify
+
 
 
 # Model do Usuário
 class Perfil(models.Model):
     nomePerfil = models.ForeignKey(User, on_delete=models.CASCADE)
+    slug = models.SlugField(unique=True)
     SESSION_CHOICES = (
         ('Online', 'Online'),
         ('Presencial', 'Presencial'),
@@ -32,6 +34,10 @@ class Perfil(models.Model):
     tipo_player = models.CharField(max_length=20, choices=PLAYER_TYPE_CHOICES, blank=True)
     descricao = models.TextField(blank=True)
     sistema_rpg = models.CharField(max_length=20, choices=RPG_SYSTEM_CHOICES, blank=True)  
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nomePerfil.username)
+        super(Perfil, self).save(*args, **kwargs)
 
 
 # Model do Mural
@@ -69,5 +75,5 @@ class Campanha(models.Model):
 
 @receiver(post_save, sender=User)
 def criar_perfil_usuario(sender, instance, created, **kwargs):
-    if created:
+    if created and not Perfil.objects.filter(nomePerfil=instance).exists():
         Perfil.objects.create(nomePerfil=instance, descricao='Indefinido', tipo_sessao='Indefinido', tipo_player='Indefinido', sistema_rpg='Indefinido', fotoConta ='static/img/fotoUser/Ain.png')
