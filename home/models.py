@@ -42,7 +42,7 @@ class Perfil(models.Model):
 
 # Model do Mural
 class Campanha(models.Model):
-    nomeMestre = models.ForeignKey(User, on_delete=models.CASCADE)
+    nomeMestre = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     SISTEMAS_RPG_CHOICES = (
         ('Dungeons & Dragons', 'Dungeons & Dragons'),
         ('Ordem Paranormal', 'Ordem Paranormal'),

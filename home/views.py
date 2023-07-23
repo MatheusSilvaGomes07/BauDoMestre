@@ -13,18 +13,6 @@ def mural(request):
     campanhas = Campanha.objects.all()
     return render(request, 'principal/mural.html', {'campanhas': campanhas})
 
-
-@login_required
-def search_user(request):
-    conta_busca = request.GET.get('q')
-    users = []
-    if conta_busca:
-        users = Perfil.objects.filter(
-            Q(nomePerfil__username__icontains=conta_busca)
-        )
-    return render(request, 'principal/buscaUser.html', {'users': users, 'busca_realizada': bool(conta_busca)})
-
-
 @login_required
 def buscarmesa(request):
     sistema_busca = request.GET.get('q')
@@ -55,12 +43,24 @@ def buscarmesa(request):
 
 
 @login_required
+def search_user(request):
+    conta_busca = request.GET.get('q')
+    users = []
+    if conta_busca:
+        users = Perfil.objects.filter(
+            Q(nomePerfil__username__icontains=conta_busca)
+        )
+    return render(request, 'principal/buscaUser.html', {'users': users, 'busca_realizada': bool(conta_busca)})
+
+
+@login_required
 def criarCampanhas(request):
     if request.method == 'POST':
         form = CampanhaForm(request.POST, request.FILES)
         if form.is_valid():
             campanha = form.save(commit=False)
-            campanha.nomeMestre = request.user
+            perfil_mestre = get_object_or_404(Perfil, nomePerfil=request.user)
+            campanha.nomeMestre = perfil_mestre
             campanha.save()
             return redirect('buscarmesa')
     else:

@@ -40,7 +40,7 @@
         <tr>
             <td><img src="{{ campanha.fotoCampanha.url }}" alt="Foto da Campanha" width="150" height="100"></td>
             <td>{{ campanha.nomeCampanha }}</td>
-            <td>{{ campanha.nomeMestre }}</td>
+            <td><a href="{% url 'exibir_perfil' perfil_slug=campanha.nomeMestre.slug %}">{{ campanha.nomeMestre.nomePerfil.username }}</a></td>
             <td>{{ campanha.sistemaCampanha }}</td>
             <td>{{ campanha.descricaoCampanha }}</td>
             <td>{{ campanha.ambienteCampanha }}</td>
