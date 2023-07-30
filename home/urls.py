@@ -12,5 +12,5 @@ urlpatterns = [
     path('editarConta', views.editarconta, name='editarconta'),
     path('buscarMesa/', views.buscarmesa, name='buscarmesa'),
     path('buscarMesa/detalhes_campanha/<int:pk>/', views.buscarmesa, name='detalhes_campanha'),
-    path('user/<slug:perfil_slug>/', views.exibir_perfil, name='exibir_perfil'),
+    path('usuario/<slug:perfil_slug>/', views.exibir_perfil, name='exibir_perfil'),
 ]

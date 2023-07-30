@@ -79,12 +79,7 @@ def usuario(request):
 
 @login_required
 def editarconta(request):
-    perfil, created = Perfil.objects.update_or_create(nomePerfil=request.user, defaults={
-        'descricao': request.POST.get('descricao', 'Indefinido'),
-        'tipo_sessao': request.POST.get('tipo_sessao', 'Indefinido'),
-        'tipo_player': request.POST.get('tipo_player', 'Indefinido'),
-        'sistema_rpg': request.POST.get('sistema_rpg', 'Indefinido')
-    })
+    perfil, created = Perfil.objects.update_or_create(nomePerfil=request.user)
 
     if request.method == 'POST':
         formPerfil = PerfilForm(request.POST, request.FILES, instance=perfil)
