@@ -1,3 +1,5 @@
+import os
+import shutil
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -30,10 +32,10 @@ class Perfil(models.Model):
     )
 
     fotoConta = models.ImageField(upload_to='static/img/fotoUser')
-    tipo_sessao = models.CharField(max_length=20, choices=SESSION_CHOICES, blank=True)
-    tipo_player = models.CharField(max_length=20, choices=PLAYER_TYPE_CHOICES, blank=True)
-    descricao = models.TextField(blank=True)
-    sistema_rpg = models.CharField(max_length=20, choices=RPG_SYSTEM_CHOICES, blank=True)  
+    tipo_sessao = models.CharField(max_length=20, choices=SESSION_CHOICES)
+    tipo_player = models.CharField(max_length=20, choices=PLAYER_TYPE_CHOICES)
+    descricao = models.TextField(max_length=256)
+    sistema_rpg = models.CharField(max_length=20, choices=RPG_SYSTEM_CHOICES)  
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nomePerfil.username)
@@ -76,4 +78,21 @@ class Campanha(models.Model):
 @receiver(post_save, sender=User)
 def criar_perfil_usuario(sender, instance, created, **kwargs):
     if created and not Perfil.objects.filter(nomePerfil=instance).exists():
-        Perfil.objects.create(nomePerfil=instance, descricao='Indefinido', tipo_sessao='Indefinido', tipo_player='Indefinido', sistema_rpg='Indefinido', fotoConta ='static/img/fotoUser/Ain.png')
+        # Criação do Perfil
+        perfil = Perfil.objects.create(nomePerfil=instance, descricao='Indefinido', tipo_sessao='Indefinido', tipo_player='Indefinido', sistema_rpg='Indefinido')
+
+        # Obter o nome do usuário
+        nome_usuario = instance.username
+
+        # Copiar a imagem genérica 'Ain.png' para uma nova imagem com o nome do usuário
+        caminho_origem = 'static/img/fotoUser/Ain.png'
+        caminho_destino = f'static/img/fotoUser/{nome_usuario}.png'
+        
+        try:
+            shutil.copyfile(caminho_origem, caminho_destino)
+        except FileNotFoundError:
+            print("Arquivo 'Ain.png' não encontrado.")
+
+        # Definir o caminho da nova imagem no campo fotoConta do perfil
+        perfil.fotoConta = caminho_destino
+        perfil.save()

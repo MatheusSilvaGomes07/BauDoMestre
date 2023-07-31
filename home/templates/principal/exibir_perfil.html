@@ -1,4 +1,4 @@
-{% extends "template/base.html" %}
+{% extends "principal/base.html" %}
 
 {% block conteudo %}
 
@@ -6,9 +6,11 @@
 
     <img src="{{ perfil.fotoConta.url }}" alt="Foto de usuário" width="350" height="250">
     <h1>{{ perfil.nomePerfil.username }}</h1>
-    <p>{{ perfil.descricao }}</p>
-    <p{{ perfil.tipo_player }}></p>
-    <p>{{ perfil.tipo_sessao }}</p>
     <p>{{ perfil.sistema_rpg }}</p>
+    <p>{{ perfil.tipo_player }}</p>
+    <p>{{ perfil.tipo_sessao }}</p>
+    <p>{{ perfil.descricao }}</p>
     
+    <a href='{% url 'home' %}'>Voltar a tela inicial</a>
+
 {% endblock conteudo %}
