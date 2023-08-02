@@ -7,8 +7,7 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 
 
-
-# Model do Usuário
+# Model do Perfil do usuário
 class Perfil(models.Model):
     nomePerfil = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True)
@@ -42,7 +41,7 @@ class Perfil(models.Model):
         super(Perfil, self).save(*args, **kwargs)
 
 
-# Model do Mural
+# Model das Campanhas
 class Campanha(models.Model):
     nomeMestre = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     SISTEMAS_RPG_CHOICES = (
@@ -75,17 +74,15 @@ class Campanha(models.Model):
     diasSessao = models.CharField(max_length=52)
     generoRPG = models.CharField(max_length=100, choices=GENERO_RPG_CHOICES)
 
+# Atualiza o perfil do usuário assim que a conta é criada
 @receiver(post_save, sender=User)
 def criar_perfil_usuario(sender, instance, created, **kwargs):
     if created and not Perfil.objects.filter(nomePerfil=instance).exists():
-        # Criação do Perfil
         perfil = Perfil.objects.create(nomePerfil=instance, descricao='Indefinido', tipo_sessao='Indefinido', tipo_player='Indefinido', sistema_rpg='Indefinido')
-
-        # Obter o nome do usuário
+        
+        # Cria a foto única para cada usuário
         nome_usuario = instance.username
-
-        # Copiar a imagem genérica 'Ain.png' para uma nova imagem com o nome do usuário
-        caminho_origem = 'static/img/fotoUser/Ain.png'
+        caminho_origem = 'static/img/Ain.png'
         caminho_destino = f'static/img/fotoUser/{nome_usuario}.png'
         
         try:
@@ -93,6 +90,5 @@ def criar_perfil_usuario(sender, instance, created, **kwargs):
         except FileNotFoundError:
             print("Arquivo 'Ain.png' não encontrado.")
 
-        # Definir o caminho da nova imagem no campo fotoConta do perfil
         perfil.fotoConta = caminho_destino
         perfil.save()

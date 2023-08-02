@@ -1,7 +1,7 @@
 from django import forms
 from .models import Campanha, Perfil
 
-
+# Forms da Campanha
 class CampanhaForm(forms.ModelForm):
     class Meta:
         model = Campanha
@@ -17,6 +17,7 @@ class CampanhaForm(forms.ModelForm):
             'generoRPG': 'Gênero de RPG',
         }
 
+# Forms do Perfil do usuário
 class PerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
@@ -29,6 +30,7 @@ class PerfilForm(forms.ModelForm):
             'tipo_player': 'Tipo de player:',
         }
 
+    # Upload da foto do usuário já alterando o nome da imagem
     def save(self, commit=True):
         perfil = super().save(commit=False)
 

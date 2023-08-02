@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from .models import Campanha, Perfil
 from .forms import CampanhaForm, PerfilForm
 from django.db.models import Q
@@ -19,7 +18,6 @@ def buscarmesa(request):
     sistema_filtro = request.GET.get('sistema')
     ambiente_filtro = request.GET.get('ambiente')
     genero_filtro = request.GET.get('genero')
-
     campanhas = Campanha.objects.all()
 
     if sistema_busca:
@@ -54,6 +52,11 @@ def search_user(request):
 
 
 @login_required
+def exibir_perfil(request, perfil_slug):
+    perfil = get_object_or_404(Perfil, slug=perfil_slug)
+    return render(request, 'principal/exibir_perfil.html', {'perfil': perfil})
+
+@login_required
 def criarCampanhas(request):
     if request.method == 'POST':
         form = CampanhaForm(request.POST, request.FILES)
@@ -67,6 +70,7 @@ def criarCampanhas(request):
         form = CampanhaForm()
     
     return render(request, 'principal/criarMesas.html', {'form': form}) 
+
 
 @login_required
 def teste(request):
@@ -93,7 +97,3 @@ def editarconta(request):
 
     return render(request, 'principal/editarPerfil.html', {'formPerfil': formPerfil})
 
-@login_required
-def exibir_perfil(request, perfil_slug):
-    perfil = get_object_or_404(Perfil, slug=perfil_slug)
-    return render(request, 'principal/exibir_perfil.html', {'perfil': perfil})
