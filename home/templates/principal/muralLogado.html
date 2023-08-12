@@ -45,8 +45,12 @@
 {% endif %}
 
 
-
+{% if perfil.tipo_player == "Ambos" or perfil.tipo_player == "Mestre" %}
 <a href="{% url 'criarCampanhas' %}">Crie suas próprias mesas</a>
+{% endif %}
+
+
+{% comment %} <a href="{% url 'criarCampanhas' %}">Crie suas próprias mesas</a> {% endcomment %}
 
 <br> <br>
 
