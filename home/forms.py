@@ -21,13 +21,14 @@ class CampanhaForm(forms.ModelForm):
 class PerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
-        fields = ['fotoConta', 'descricao', 'tipo_sessao', 'tipo_player', 'sistema_rpg']
+        fields = ['fotoConta', 'idade', 'descricao', 'tipo_sessao', 'tipo_player', 'sistema_rpg']
         labels = {
             'fotoConta': 'Insira a foto de usuário',
             'descricao': 'Descrição da conta:',
             'sistema_rpg': 'Sistema de RPG preferido:',
             'tipo_sessao': 'Tipo de sessão:',
             'tipo_player': 'Tipo de player:',
+            'idade': 'Insira sua idade:'
         }
 
     # Upload da foto do usuário já alterando o nome da imagem

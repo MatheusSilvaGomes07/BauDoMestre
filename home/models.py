@@ -34,7 +34,8 @@ class Perfil(models.Model):
     tipo_sessao = models.CharField(max_length=20, choices=SESSION_CHOICES)
     tipo_player = models.CharField(max_length=20, choices=PLAYER_TYPE_CHOICES)
     descricao = models.TextField(max_length=256)
-    sistema_rpg = models.CharField(max_length=20, choices=RPG_SYSTEM_CHOICES)  
+    sistema_rpg = models.CharField(max_length=20, choices=RPG_SYSTEM_CHOICES)
+    idade = models.IntegerField()
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nomePerfil.username)
