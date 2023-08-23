@@ -30,12 +30,12 @@ class Perfil(models.Model):
         ('Outros', 'Outros'),
     )
 
-    fotoConta = models.ImageField(upload_to='static/img/fotoUser')
-    tipo_sessao = models.CharField(max_length=20, choices=SESSION_CHOICES)
-    tipo_player = models.CharField(max_length=20, choices=PLAYER_TYPE_CHOICES)
-    descricao = models.TextField(max_length=256)
-    sistema_rpg = models.CharField(max_length=20, choices=RPG_SYSTEM_CHOICES)
-    idade = models.IntegerField()
+    fotoConta = models.ImageField(upload_to='static/img/fotoUser', null=True)
+    tipo_sessao = models.CharField(max_length=20, choices=SESSION_CHOICES, null=True)
+    tipo_player = models.CharField(max_length=20, choices=PLAYER_TYPE_CHOICES, null=True)
+    descricao = models.TextField(max_length=256, null=True)
+    sistema_rpg = models.CharField(max_length=20, choices=RPG_SYSTEM_CHOICES, null=True)
+    idade = models.IntegerField(null=True)
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nomePerfil.username)
@@ -58,22 +58,20 @@ class Campanha(models.Model):
     )
     GENERO_RPG_CHOICES = (
         ('Aventura', 'Aventura'),
-        ('Comédia', 'Comédia'),
-        ('Drama', 'Drama'),
         ('Fantasia', 'Fantasia'),
         ('Histórico', 'Histórico'),
         ('Mistério', 'Mistério'),
         ('Suspense', 'Suspense'),
         ('Terror', 'Terror'),
     )
-    nomeCampanha = models.CharField(max_length=52)
-    sistemaCampanha = models.CharField(max_length=100, choices=SISTEMAS_RPG_CHOICES)
-    descricaoCampanha = models.TextField(max_length=256)
-    fotoCampanha = models.ImageField(upload_to='static/img/FotoCampanha/')
-    ambienteCampanha = models.CharField(max_length=100, choices=AMBIENTES_RPG_CHOICES)
-    numeroJogadores = models.IntegerField()
-    diasSessao = models.CharField(max_length=52)
-    generoRPG = models.CharField(max_length=100, choices=GENERO_RPG_CHOICES)
+    nomeCampanha = models.CharField(max_length=52, null=True)
+    sistemaCampanha = models.CharField(max_length=100, choices=SISTEMAS_RPG_CHOICES, null=True)
+    descricaoCampanha = models.TextField(max_length=256, null=True)
+    fotoCampanha = models.ImageField(upload_to='static/img/FotoCampanha/', null=True)
+    ambienteCampanha = models.CharField(max_length=100, choices=AMBIENTES_RPG_CHOICES, null=True)
+    numeroJogadores = models.IntegerField(null=True)
+    diasSessao = models.CharField(max_length=52, null=True)
+    generoRPG = models.CharField(max_length=100, choices=GENERO_RPG_CHOICES, null=True)
 
 # Atualiza o perfil do usuário assim que a conta é criada
 @receiver(post_save, sender=User)
