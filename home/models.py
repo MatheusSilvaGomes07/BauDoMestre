@@ -79,7 +79,7 @@ class Campanha(models.Model):
 @receiver(post_save, sender=User)
 def criar_perfil_usuario(sender, instance, created, **kwargs):
     if created and not Perfil.objects.filter(nomePerfil=instance).exists():
-        perfil = Perfil.objects.create(nomePerfil=instance, descricao='Indefinido', tipo_sessao='Indefinido', tipo_player='Indefinido', sistema_rpg='Indefinido')
+        perfil = Perfil.objects.create(nomePerfil=instance, descricao='Indefinido', tipo_sessao='Indefinido', tipo_player='Indefinido', sistema_rpg='Indefinido', idade='0')
         
         # Cria a foto única para cada usuário
         nome_usuario = instance.username
