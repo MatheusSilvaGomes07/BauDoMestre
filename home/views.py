@@ -4,6 +4,7 @@ from .models import Campanha, Perfil
 from .forms import CampanhaForm, PerfilForm
 from django.db.models import Q
 from functools import wraps
+from random import randint
 
 # Decorator manual feito para impedir que não mestres entrem no link pela url
 def jogadores_permitidos(required_types):
@@ -18,6 +19,10 @@ def jogadores_permitidos(required_types):
         return _wrapped_view
     return decorator
 
+# Tela de 404
+def handler404(request, exception):
+    aleatorio = randint(1, 6)
+    return render(request, 'principal/404.html', {'aleatorio': aleatorio})
 
 # view da home
 def home(request):

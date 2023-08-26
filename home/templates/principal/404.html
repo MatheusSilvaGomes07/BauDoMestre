@@ -1,0 +1,27 @@
+{% extends 'principal/base.html' %}
+
+{% block conteudo %}
+
+<title>Página não encontrada!</title>
+
+{% if aleatorio == 1 %}
+<h1>Você está perdido viajante?</h1>
+{% elif aleatorio == 2 %}
+<h1>Parece que você entrou na masmorra errada!</h1>
+{% elif aleatorio == 3 %}
+<h1>Aqui não é a caverna da espada sagrada!</h1>
+{% elif aleatorio == 4 %}
+<h1>Desculpe, mas sua princesa está em outro castelo.</h1>
+{% elif aleatorio == 5 %}
+<h1>Parece que o dragão já foi embora!</h1>
+{% else %}
+<h1>Esse mapa está mesmo correto?</h1>
+{% endif %}
+
+<p>Ops, parece que a URL que você acessou está indisponível no momento ou foi digitada errad, tente novamente mais tarde.</p>
+
+<p>Se o problema persistir contacte nosso suporte!</p>
+<a href={% url 'home' %}><p>Tela inicial</p></a>
+
+<p>{{ aleatorio }}</p>
+{% endblock%}
