@@ -68,8 +68,31 @@
 {{ dnd.inspiracao }}
 <label>Inspiração</label>
 
-<label style="background-color: gray;">3</label>
-<label style="background-color: gray;">Bônus de proficiência</label>
+<label id="bonusProf">0</label>
+<label>Bônus de proficiência</label>
+
+<script>
+    
+    const nivel = document.getElementById('id_nivel');
+    const bonusProf = document.getElementById('bonusProf');
+
+    nivel.addEventListener('input', function() {
+        // Atualiza o conteúdo do parágrafo com o valor inserido no input
+       const valorNivel = parseInt(nivel.value);
+
+        bonus = Math.floor(2+((valorNivel - 1) /4))
+
+        if(valorNivel != null && !isNaN(valorNivel)) {
+            bonusProf.textContent = bonus;
+        } else {
+            bonusProf.textContent = 0;
+        }
+        
+
+    });
+</script>
+
+
 <!-- Saving Throws -->
 <div class="salvaguarda_box">
     {{ dnd.forcaSalvaguarda }}
@@ -263,11 +286,42 @@
 </div>
 
 
-<div id="fields-container" class="ataques_box">
-    <!-- Aqui é onde os campos dinâmicos serão adicionados -->
-    <button type="button" id="add-field-button">+</button>
+<div class="ataques_box">
+    <table>
+        <tr>
+            <td>Ataque</td>
+            <td>Bônus</td>
+            <td>Dano/Tipo</td>
+        </tr>
+        <tr>
+            <td>{{ dnd.nomeAtk1 }}</td>
+            <td>{{ dnd.bonusAtk1 }}</td>
+            <td>{{ dnd.danoTipoAtk1 }}</td>
+        </tr>
+        <tr>
+            <td>{{ dnd.nomeAtk2 }}</td>
+            <td>{{ dnd.bonusAtk2 }}</td>
+            <td>{{ dnd.danoTipoAtk2 }}</td>
+        </tr>
+        <tr>
+            <td>{{ dnd.nomeAtk3 }}</td>
+            <td>{{ dnd.bonusAtk3 }}</td>
+            <td>{{ dnd.danoTipoAtk3}}</td>
+        </tr>
+        <tr>
+            <td>{{ dnd.nomeAtk4 }}</td>
+            <td>{{ dnd.bonusAtk4 }}</td>
+            <td>{{ dnd.danoTipoAtk4}}</td>
+        </tr>
+        <tr>
+            <td>{{ dnd.nomeAtk5 }}</td>
+            <td>{{ dnd.bonusAtk5 }}</td>
+            <td>{{ dnd.danoTipoAtk5}}</td>
+        </tr>
+    </table>
+    
 </div>
-
+<br>
 <div class="Dinheiro">
     <label>PC</label>
     {{ dnd.pc }}
@@ -316,3 +370,10 @@
 
 <button type="submit">Salvar</button>
 </form>
+
+
+
+
+
+
+

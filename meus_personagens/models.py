@@ -88,6 +88,29 @@ class DnD(Personagem):
     deathFailure2 = models.BooleanField(default=False)
     deathFailure3 = models.BooleanField(default=False)
 
+
+    #Ataques
+    nomeAtk1 = models.CharField(max_length=100, blank=True, null=True)
+    bonusAtk1 = models.IntegerField(default=0, blank=True, null=True)
+    danoTipoAtk1 = models.CharField(max_length=100, blank=True, null=True)
+
+    nomeAtk2 = models.CharField(max_length=100, blank=True, null=True)
+    bonusAtk2 = models.IntegerField(default=0, blank=True, null=True)
+    danoTipoAtk2 = models.CharField(max_length=100, blank=True, null=True)
+
+    nomeAtk3 = models.CharField(max_length=100, blank=True, null=True)
+    bonusAtk3 = models.IntegerField(default=0, blank=True, null=True)
+    danoTipoAtk3 = models.CharField(max_length=100, blank=True, null=True)
+
+    nomeAtk4 = models.CharField(max_length=100, blank=True, null=True)
+    bonusAtk4 = models.IntegerField(default=0, blank=True, null=True)
+    danoTipoAtk4 = models.CharField(max_length=100, blank=True, null=True)
+
+    nomeAtk5 = models.CharField(max_length=100, blank=True, null=True)
+    bonusAtk5 = models.IntegerField(default=0, blank=True, null=True)
+    danoTipoAtk5 = models.CharField(max_length=100, blank=True, null=True)
+
+
     #Dinheiro
     pc = models.IntegerField(default=0)
     pp = models.IntegerField(default=0)
@@ -98,6 +121,9 @@ class DnD(Personagem):
 
     #inventario
     inventario = models.TextField(null=True, blank=True)
+
+    
+
 
 
     #Caracteristicas
