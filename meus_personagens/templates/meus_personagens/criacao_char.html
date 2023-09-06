@@ -1,0 +1,57 @@
+{% extends 'meus_personagens/base.html' %}
+{% load static %}
+
+{% block title %}
+    Criação de personagem
+{% endblock %}
+
+{% block css_files %}
+ <link rel="stylesheet" href="{% static 'meus_personagens/fichadnd.css'%}"></link>
+{% endblock %}
+
+{% block content %}
+
+<p><a href="{% url 'home' %}">Home</a></p>
+<h1>Criação de Personagem</h1>
+<label>Escolha o sistema de RPG: </label>
+<select id="escolhaFormulario">
+    <option>--</option>
+    <option value="DnD">DnD</option>
+    <option value="OrdemParanormal">Ordem Paranormal</option>
+</select>
+
+
+<div id="formularioDnD" style="display: none;">
+  {% include "meus_personagens/includes/dndform.html"%}
+</div>
+
+
+
+
+<div id="formularioOrdemParanormal" style="display: none;">
+<form method="post">
+    {% csrf_token %}
+    {{ ordem.as_p }}
+    <button type="submit">Salvar</button>
+</form>
+</div>
+
+
+<script>
+    const escolhaFormulario = document.getElementById('escolhaFormulario');
+    const formularioDnD = document.getElementById('formularioDnD');
+    const formularioOrdemParanormal = document.getElementById('formularioOrdemParanormal');
+
+    escolhaFormulario.addEventListener('change', function() {
+        if (escolhaFormulario.value === 'DnD') {
+            formularioDnD.style.display = 'block';
+            formularioOrdemParanormal.style.display = 'none';
+        } else if (escolhaFormulario.value === 'OrdemParanormal') {
+            formularioDnD.style.display = 'none';
+            formularioOrdemParanormal.style.display = 'block';
+        }
+    });
+
+</script>
+
+{% endblock %}

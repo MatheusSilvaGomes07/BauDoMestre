@@ -1,0 +1,31 @@
+textarea{
+   resize: none;
+}
+
+
+.atributos_box{
+  
+   display: flex;
+   flex-direction: column;
+   width: 10%;
+}
+
+.atributo{
+   
+   margin: 2px;
+   padding: 3%;
+}
+
+.atributo input{
+   width: 30px;
+   height: 30px;
+   text-align: center;
+}
+
+
+.ataques_box{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: gray;
+}

@@ -1,0 +1,318 @@
+{% load static %}
+
+<form method="post">
+    {% csrf_token %}
+
+    <!-- Box inicial dos dados do personagem -->
+<div class="sheet_header">
+    {{ dnd.nome.label_tag }}
+    {{ dnd.nome }}
+
+    {{ dnd.classe.label_tag }}
+    {{ dnd.classe }}
+
+    {{ dnd.sub_classe.label_tag }}
+    {{ dnd.sub_classe }}
+
+    {{ dnd.nivel.label_tag }}
+    {{ dnd.nivel }}
+
+    {{ dnd.raca.label_tag }}
+    {{ dnd.raca }}
+
+    {{ dnd.sub_raca.label_tag }}
+    {{ dnd.sub_raca }}
+
+    {{ dnd.xp.label_tag }}
+    {{ dnd.xp }}
+
+</div>
+
+<br>
+
+<!-- Box de atributos -->
+<div class="atributos_box">
+    <div class="atributo">
+        <label>FORÇA</label>
+        {{ dnd.forca }}
+    </div>
+
+    <div class="atributo">
+        <label>DEXTREZA</label>
+        {{ dnd.dex }}
+    </div>
+
+    <div class="atributo">
+        <label>CONSTITUIÇÃO</label>
+        {{ dnd.const }}
+    </div>
+
+    <div class="atributo">
+        <label>INTELIGÊNCIA</label>
+        {{ dnd.int }}
+    </div>
+
+    <div class="atributo">
+        <label>SABEDORIA</label>
+        {{ dnd.sab }}
+    </div>
+
+    <div class="atributo">
+        <label>CARISMA</label>
+        {{ dnd.carisma }}
+    </div>
+</div>
+
+<br>
+
+{{ dnd.inspiracao }}
+<label>Inspiração</label>
+
+<label style="background-color: gray;">3</label>
+<label style="background-color: gray;">Bônus de proficiência</label>
+<!-- Saving Throws -->
+<div class="salvaguarda_box">
+    {{ dnd.forcaSalvaguarda }}
+    <label>Força</label>
+
+    {{ dnd.dexSalvaguarda }}
+    <label>Dextreza</label>
+
+    {{ dnd.constSalvaguarda }}
+    <label>Constituição</label>
+
+    {{ dnd.intSalvaguarda }}
+    <label>Inteligência</label>
+
+    {{ dnd.sabSalvaguarda }}
+    <label>Sabedoria</label>
+
+    {{ dnd.carismaSalvaguarda }}
+    <label>Carisma</label>
+</div>
+
+<br>
+
+<!-- Perícias -->
+<div class="pericias">
+
+    <div class="pericia">
+        {{ dnd.acrobacia }}
+        <label>10</label>
+        <label>Acrobacia(Dex)</label>
+    </div>
+    
+
+    <div class="pericia">
+        {{ dnd.adestrarAnimais }}
+        <label>10</label>
+        <label>Adestrar Animais(Sab)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.arcana }}
+        <label>10</label>
+        <label>Arcana(Int)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.atletismo }}
+        <label>10</label>
+        <label>Atletismo(For)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.enganacao }}
+        <label>10</label>
+        <label>Enganação(Car)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.historia }}
+        <label>10</label>
+        <label>Historia(Int)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.intuicao }}
+        <label>10</label>
+        <label>Intuição(Sab)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.intimidacao }}
+        <label>10</label>
+        <label>Intimidação(Car)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.investigacao }}
+        <label>10</label>
+        <label>Investigação(Int)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.medicina }}
+        <label>10</label>
+        <label>Medicina(Sab)</label>
+    </div>
+
+
+    <div class="pericia">
+        {{ dnd.natureza }}
+        <label>10</label>
+        <label>Natureza(Int)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.percepcao }}
+        <label>10</label>
+        <label>Percepção(Sab)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.atuacao }}
+        <label>10</label>
+        <label>Atuação(Car)</label>
+    </div>
+    
+
+    <div class="pericia">
+        {{ dnd.persuasao }}
+        <label>10</label>
+        <label>Persuasão(Car)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.religiao }}
+        <label>10</label>
+        <label>Religião(Int)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.prestigitacao }}
+        <label>10</label>
+        <label>Prestigitação(Dex)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.furtividade }}
+        <label>10</label>
+        <label>Furtividade(Dex)</label>
+    </div>
+
+    <div class="pericia">
+        {{ dnd.sobrevivencia }}
+        <label>10</label>
+        <label>Sobrevivência(Sab)</label>
+    </div>
+
+</div>
+
+<div class="profecienciasFerramentas">
+    <label>Proficiencia com ferramentas e Habilidades Customizadas</label>
+    {{ dnd.proficienciasFerramentas }}
+</div>
+
+<div class="outrasProf_Linguagens">
+    <label>Outras Proficiências e Linguagens</label>
+    {{ dnd.outrasProf_Linguagens }}
+</div>
+
+<br>
+
+<!-- Meio -->
+<div class="coluna_meio">
+    {{ dnd.ca }}
+    <label>Classe de Armadura</label>
+    
+    <label style="background-color: gray;">5</label>
+    <label style="background-color: gray;">Iniciativa</label>
+
+    {{ dnd.movi }}
+    <label>Movimentação</label>
+
+    <br>
+
+    {{ dnd.vida.label_tag }}
+    {{ dnd.vida }}
+
+    {{ dnd.vidaTemp }}
+    <label>Vida Temporária</label>
+
+    <label>Total</label>
+    {{ dnd.hitDice }}
+    <select id=" {{ dnd.hitDiceType.id_for_label }}" name="{{ dnd.hitDiceType.name }}">
+        {% for value, label in dnd.hitDiceType.field.choices %}
+            <option value="{{ value }}" {% if dnd.hitDiceType.value == value %}selected{% endif %}>{{ label }}</option>>
+        {% endfor %}
+    </select>
+
+    <div class="death_saving">
+        <label>Sucesso</label>
+        {{ dnd.deathSucess1 }}
+        {{ dnd.deathSucess2 }}
+        {{ dnd.deathSucess3 }}
+        <br>
+        <label>Falha</label>
+        {{ dnd.deathFailure1 }}
+        {{ dnd.deathFailure2 }}
+        {{ dnd.deathFailure3 }}
+    </div>
+
+</div>
+
+
+<div id="fields-container" class="ataques_box">
+    <!-- Aqui é onde os campos dinâmicos serão adicionados -->
+    <button type="button" id="add-field-button">+</button>
+</div>
+
+<div class="Dinheiro">
+    <label>PC</label>
+    {{ dnd.pc }}
+
+    <label>PP</label>
+    {{ dnd.pp }}
+
+    <label>PE</label>
+    {{ dnd.pe }}
+
+    <label>PO</label>
+    {{ dnd.po }}
+
+    <label>PL</label>
+    {{ dnd.pl }}
+</div>
+
+
+<div class="inventario_box">
+    <label>Inventário</label>
+    {{ dnd.inventario }}
+</div>
+<br>
+
+<div class="caracteristicas">
+    <label>Características</label>
+    {{ dnd.personalidade }}
+    <label>Personalidade</label>
+
+    {{ dnd.ideias }}
+    <label>Ideais</label>
+
+    {{ dnd.vinculos }}
+    <label>Vínculos</label>
+
+    {{ dnd.fraquezas }}
+    <label>Fraquezas</label>
+
+</div>
+
+<div class="caracteristicas">
+    {{ dnd.caracteristicas }}
+    <label> Características & Talentos </label>
+</div>
+
+
+<button type="submit">Salvar</button>
+</form>
