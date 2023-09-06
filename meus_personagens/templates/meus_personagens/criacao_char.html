@@ -15,7 +15,7 @@
 <h1>Criação de Personagem</h1>
 <label>Escolha o sistema de RPG: </label>
 <select id="escolhaFormulario">
-    <option>--</option>
+    <option value="--">--</option>
     <option value="DnD">DnD</option>
     <option value="OrdemParanormal">Ordem Paranormal</option>
 </select>
@@ -29,11 +29,7 @@
 
 
 <div id="formularioOrdemParanormal" style="display: none;">
-<form method="post">
-    {% csrf_token %}
-    {{ ordem.as_p }}
-    <button type="submit">Salvar</button>
-</form>
+{% include "meus_personagens/includes/ordemform.html"%}
 </div>
 
 
@@ -42,6 +38,7 @@
     const formularioDnD = document.getElementById('formularioDnD');
     const formularioOrdemParanormal = document.getElementById('formularioOrdemParanormal');
 
+
     escolhaFormulario.addEventListener('change', function() {
         if (escolhaFormulario.value === 'DnD') {
             formularioDnD.style.display = 'block';
@@ -49,6 +46,9 @@
         } else if (escolhaFormulario.value === 'OrdemParanormal') {
             formularioDnD.style.display = 'none';
             formularioOrdemParanormal.style.display = 'block';
+        } else {
+            formularioDnD.style.display = 'none';
+            formularioOrdemParanormal.style.display = 'none';
         }
     });
 

@@ -71,27 +71,6 @@
 <label id="bonusProf">0</label>
 <label>Bônus de proficiência</label>
 
-<script>
-    
-    const nivel = document.getElementById('id_nivel');
-    const bonusProf = document.getElementById('bonusProf');
-
-    nivel.addEventListener('input', function() {
-        // Atualiza o conteúdo do parágrafo com o valor inserido no input
-       const valorNivel = parseInt(nivel.value);
-
-        bonus = Math.floor(2+((valorNivel - 1) /4))
-
-        if(valorNivel != null && !isNaN(valorNivel)) {
-            bonusProf.textContent = bonus;
-        } else {
-            bonusProf.textContent = 0;
-        }
-        
-
-    });
-</script>
-
 
 <!-- Saving Throws -->
 <div class="salvaguarda_box">
@@ -374,6 +353,23 @@
 
 
 
+<script>
+    
+    const nivel = document.getElementById('id_nivel');
+    const bonusProf = document.getElementById('bonusProf');
 
+    nivel.addEventListener('input', function() {
+        // Atualiza o conteúdo do parágrafo com o valor inserido no input
+       const valorNivel = parseInt(nivel.value);
 
+        bonus = Math.floor(2+((valorNivel - 1) /4))
 
+        if(valorNivel != null && !isNaN(valorNivel)) {
+            bonusProf.textContent = bonus;
+        } else {
+            bonusProf.textContent = 0;
+        }
+        
+
+    });
+</script>

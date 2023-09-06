@@ -6,8 +6,10 @@ from django.contrib.auth.models import User
 
 
 class Personagem(models.Model):
-    nome = models.CharField(max_length=100)
     nomePerfil = models.ForeignKey(User, on_delete=models.CASCADE)
+    nome = models.CharField(max_length=100)
+    vida = models.IntegerField(null=True)
+    
     
 
     class Meta:
@@ -16,7 +18,6 @@ class Personagem(models.Model):
 
 class DnD(Personagem):
     #Dados Iniciais
-    vida = models.IntegerField(null=True)
     classe = models.CharField(max_length=100)
     sub_classe = models.CharField(max_length=100, blank=True, null=True)
     nivel = models.IntegerField(validators=[MinValueValidator(1)])
@@ -137,4 +138,38 @@ class DnD(Personagem):
 
 
 class OrdemParanormal(Personagem):
+
+    #Atributos
+    agi = models.IntegerField(default=0)
+    inte = models.IntegerField(default=0)
+    vig = models.IntegerField(default=0)
+    pre = models.IntegerField(default=0)
+    forc = models.IntegerField(default=0)
+    
+
+    origem = models.CharField(max_length=100)
+
+    classesOptions = [
+            ('Combatente', 'Combatente'),
+            ('Especialista', 'Especialista'),
+            ('Ocultista', 'Ocultista'),
+    ]
+    classe = models.CharField(max_length=20, choices=classesOptions, default='Combatente')
+
     nex = models.IntegerField(validators=[MaxValueValidator(99), MinValueValidator(0)])
+    peRodada = models.IntegerField(default=0)
+    deslocamento = models.FloatField(default=0)
+
+    pe = models.IntegerField(default=0)
+
+
+    equipBonus = models.IntegerField(default=0)
+    defOutrosBonus = models.IntegerField(default=0)
+
+    sanidade = models.IntegerField(default=0)
+
+    protecao = models.CharField(max_length=250, blank=True, null=True)
+    resistencias = models.CharField(max_length=250, blank=True, null=True)
+
+
+   

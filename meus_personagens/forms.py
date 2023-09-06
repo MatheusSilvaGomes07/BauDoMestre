@@ -20,4 +20,5 @@ class DnDForm(forms.ModelForm):
 class OrdemParanormalForm(forms.ModelForm):
     class Meta:
         model = OrdemParanormal
-        fields = ['nome', 'nex']
+        fields = '__all__'
+        exclude = ['nomePerfil']

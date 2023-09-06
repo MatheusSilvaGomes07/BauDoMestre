@@ -6,15 +6,14 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+@login_required
 def index(request):
     dnd = DnD.objects.all()
     ordem = OrdemParanormal.objects.all()
 
     todos_personagens = list(dnd) + list(ordem)
 
-    return render(request, 'meus_personagens/index.html', {
-        'todos_personagens': todos_personagens
-    })
+    return render(request, 'meus_personagens/index.html', {'todos_personagens': todos_personagens})
 
 @login_required
 def criacao_char(request):
@@ -40,11 +39,13 @@ def criacao_char(request):
 
     return render(request, 'meus_personagens/criacao_char.html', {'dnd': formDnD, 'ordem': formOrdem})
 
+@login_required
 def detail_charDnD(request, id):
     personagem = get_object_or_404(DnD, pk=id)
 
     return render(request, 'meus_personagens/detail_char.html', {'personagem': personagem})
 
+@login_required
 def detail_charOrdemParanormal(request, id):
     personagem = get_object_or_404(OrdemParanormal, pk=id)
 
