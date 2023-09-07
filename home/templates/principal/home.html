@@ -10,6 +10,22 @@
     <a href="{% url 'mural' %}">Descubra campanhas incríveis</a> <br> <br>
     {% endif %}
     <a href="{% url 'account_signup' %}">Comece sua jornada</a> <br> <br>
-    <a href="{% url 'meus_personagens' %}">Meus personagens</a>
+    <a href="{% url 'meus_personagens' %}">Meus personagens</a>  <br> <br>
+    <a href="{% url 'Novo_grupo' %}" class="btn btn-secondary">novo grupo</a>
+
+    <ul>
+      {% for grupo in grupos %}
+      <div id="{{ grupo.uuid }}">
+        <li><a>{{ grupo.uuid }}</a></li>
+          {% if request.user in grupo.members.all %}
+            <a href="{% url 'Abrir_chat' uuid=grupo.uuid %}">abrir</a>
+            <a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">sair</a>
+            <a href="{% url 'Remover_grupo' uuid=grupo.uuid %}">excluir</a>
+          {% else %}
+            <a href="{% url 'Entrar_grupo' uuid=grupo.uuid %}">Entrar</a>
+          {% endif %}
+      </div>
+      {% endfor %}
+    </ul>
     
 {% endblock conteudo %}

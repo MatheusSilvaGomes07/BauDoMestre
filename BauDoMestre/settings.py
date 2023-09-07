@@ -16,10 +16,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [('localhost', 6379)],
+        },
+    },
+}
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -29,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'allauth',
+    'chat',
     'meus_personagens',
     'allauth.account',
     'allauth.socialaccount',
@@ -75,6 +85,7 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = 'BauDoMestre.asgi.application'
 WSGI_APPLICATION = 'BauDoMestre.wsgi.application'
 
 
