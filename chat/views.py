@@ -3,15 +3,19 @@ from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from .models import Grupo
 
+@login_required
+def home(request):
+	grupos = Grupo.objects.all()
+	return render(request, 'home/templates/principal/home.html', {'grupos':grupos})
 
-# Create your views here.
 @login_required
 def Novo_grupo(request):
-	u = request.user
-	new = Grupo.objects.create()
-	new.membros.add(u)
-	new.save()
-	return redirect('principal/home.html')
+    u = request.user
+    new = Grupo.objects.create()
+    new.membros.add(u)
+    new.save()
+    print("Novo grupo criado com sucesso:", new.uuid) 
+    return redirect('home')
 
 
 @login_required
@@ -20,7 +24,7 @@ def Entrar_grupo(request, uuid):
 	gp = Grupo.objects.get(uuid=uuid)
 	gp.membros.add(u)
 	gp.save()
-	return redirect('principal/home.html')
+	return redirect('home')
 
 
 @login_required
@@ -29,7 +33,7 @@ def Sair_grupo(request, uuid):
 	gp = Grupo.objects.get(uuid=uuid)
 	gp.membros.remove(u)
 	gp.save()
-	return redirect('principal/home.html')
+	return redirect('home')
 
 
 @login_required
@@ -46,4 +50,4 @@ def Abrir_chat(request, uuid):
 def Remover_grupo(request, uuid):
 	u = request.user
 	Grupo.objects.get(uuid=uuid).delete()
-	return redirect('principal/home.html')
+	return redirect('home')
