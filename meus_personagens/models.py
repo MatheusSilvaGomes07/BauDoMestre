@@ -16,6 +16,9 @@ class Personagem(models.Model):
         abstract = True
         unique_together = ('nome',)
 
+
+
+
 class DnD(Personagem):
     #Dados Iniciais
     classe = models.CharField(max_length=100)
@@ -345,3 +348,235 @@ class OrdemParanormal(Personagem):
     personalidade = models.CharField(max_length=500, null=True, blank=True)
     historico = models.CharField(max_length=500, null=True, blank=True)
     objetivo = models.CharField(max_length=500, null=True, blank=True)
+
+
+
+
+
+class Tormenta(Personagem):
+    raca = models.CharField(max_length=100)
+    origem = models.CharField(max_length=100, null=True, blank=True)
+    classe = models.CharField(max_length=100)
+    nivel = models.IntegerField(default=1)
+    divindade = models.CharField(max_length=50)
+
+    #Atributos
+    forca = models.IntegerField(default=0)
+    des = models.IntegerField(default=0)
+    const = models.IntegerField(default=0)
+    inteli = models.IntegerField(default=0)
+    sab = models.IntegerField(default=0)
+    car = models.IntegerField(default=0)
+
+    pvMax = models.IntegerField(default=0)
+    pvAtual = models.IntegerField(default=0)
+
+    manaMax = models.IntegerField(default=0)
+    manaAtual = models.IntegerField(default=0)
+
+    #Ataques
+    atkNome1 = models.CharField(max_length=100, null=True, blank=True)
+    atkBonus1 = models.CharField(max_length=100, null=True, blank=True)
+    atkDano1 = models.CharField(max_length=100, null=True, blank=True)
+    atkDanoExtra1 = models.CharField(max_length=100, null=True, blank=True)
+    dadoCrit1 = models.IntegerField(default=20)
+    multiplicadorCrit1 = models.IntegerField(default=2)
+    alcance1 = models.CharField(max_length=20, null=True, blank=True)
+
+    atkNome2 = models.CharField(max_length=100, null=True, blank=True)
+    atkBonus2 = models.CharField(max_length=100, null=True, blank=True)
+    atkDano2 = models.CharField(max_length=100, null=True, blank=True)
+    atkDanoExtra2 = models.CharField(max_length=100, null=True, blank=True)
+    dadoCrit2 = models.IntegerField(default=20)
+    multiplicadorCrit2 = models.IntegerField(default=2)
+    alcance2 = models.CharField(max_length=20, null=True, blank=True)
+
+    atkNome3 = models.CharField(max_length=100, null=True, blank=True)
+    atkBonus3 = models.CharField(max_length=100, null=True, blank=True)
+    atkDano3 = models.CharField(max_length=100, null=True, blank=True)
+    atkDanoExtra3 = models.CharField(max_length=100, null=True, blank=True)
+    dadoCrit3 = models.IntegerField(default=20)
+    multiplicadorCrit3 = models.IntegerField(default=2)
+    alcance3 = models.CharField(max_length=20, null=True, blank=True)
+
+    atkNome4 = models.CharField(max_length=100, null=True, blank=True)
+    atkBonus4 = models.CharField(max_length=100, null=True, blank=True)
+    atkDano4 = models.CharField(max_length=100, null=True, blank=True)
+    atkDanoExtra4 = models.CharField(max_length=100, null=True, blank=True)
+    dadoCrit4 = models.IntegerField(default=20)
+    multiplicadorCrit4 = models.IntegerField(default=2)
+    alcance4 = models.CharField(max_length=20, null=True, blank=True)
+
+    atkNome5 = models.CharField(max_length=100, null=True, blank=True)
+    atkBonus5 = models.CharField(max_length=100, null=True, blank=True)
+    atkDano5 = models.CharField(max_length=100, null=True, blank=True)
+    atkDanoExtra5 = models.CharField(max_length=100, null=True, blank=True)
+    dadoCrit5 = models.IntegerField(default=20)
+    multiplicadorCrit5 = models.IntegerField(default=2)
+    alcance5 = models.CharField(max_length=20, null=True, blank=True)
+
+
+    #Defesa CA (Soma tudo)
+    desBonus = models.BooleanField(default=True)
+    armaduraBonus = models.IntegerField(default=0)
+    escudoBonus = models.IntegerField(default=0)
+    outrosBonus = models.IntegerField(default=0)
+    
+    #Itens de armadura e escudo
+    nomeArmadura = models.CharField(max_length=100, null=True, blank=True)
+    bonusArmaduraItem = models.IntegerField(default=0)
+    penalidadeArmadura = models.IntegerField(default=0)
+
+    nomeEscudo = models.CharField(max_length=100, null=True, blank=True)
+    bonusEscudoItem = models.IntegerField(default=0)
+    penalidadeEscudo = models.IntegerField(default=0)
+
+    #Proficiencias & Outras Características
+    proficiencias = models.TextField(null=True, blank=True)
+
+
+    #Magias
+    magiasCirculo1 = models.TextField(null=True, blank=True)
+    magiasCirculo2 = models.TextField(null=True, blank=True)
+    magiasCirculo3 = models.TextField(null=True, blank=True)
+    magiasCirculo4 = models.TextField(null=True, blank=True)
+    magiasCirculo5 = models.TextField(null=True, blank=True)
+
+    #Pericias
+    periciasMod = [
+            ('For', 'For'),
+            ('Des', 'Des'),
+            ('Con', 'Con'),
+            ('Int', 'Int'),
+            ('Sab', 'Sab'),
+            ('Car', 'Car'),
+    ]
+
+    acrobacia = models.BooleanField(default=False)
+    acrobaciaMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
+    acrobaciaOutros = models.IntegerField(default=0)
+
+    adestramento = models.BooleanField(default=False)
+    adestramentoMod = models.CharField(max_length=3, choices=periciasMod, default='Car')
+    adestramentoOutros = models.IntegerField(default=0)
+
+    atletismo = models.BooleanField(default=False)
+    atletismoMod = models.CharField(max_length=3, choices=periciasMod, default='For')
+    atletismoOutros = models.IntegerField(default=0)
+
+    atuacao = models.BooleanField(default=False)
+    atuacaoMod = models.CharField(max_length=3, choices=periciasMod, default='Car')
+    atuacaoOutros = models.IntegerField(default=0)
+
+    cavalgar = models.BooleanField(default=False)
+    cavalgarMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
+    cavalgarOutros = models.IntegerField(default=0)
+
+    conhecimento = models.BooleanField(default=False)
+    conhecimentoMod = models.CharField(max_length=3, choices=periciasMod, default='Int')
+    conhecimentoOutros = models.IntegerField(default=0)
+
+    cura = models.BooleanField(default=False)
+    curaMod = models.CharField(max_length=3, choices=periciasMod, default='Sab')
+    curaOutros = models.IntegerField(default=0)
+
+    diplomacia = models.BooleanField(default=False)
+    diplomaciaMod = models.CharField(max_length=3, choices=periciasMod, default='Car')
+    diplomaciaOutros = models.IntegerField(default=0)
+
+    enganacao = models.BooleanField(default=False)
+    enganacaoMod = models.CharField(max_length=3, choices=periciasMod, default='Car')
+    enganacaoOutros = models.IntegerField(default=0)
+
+    fortitude = models.BooleanField(default=False)
+    fortitudeMod = models.CharField(max_length=3, choices=periciasMod, default='Con')
+    fortitudeOutros = models.IntegerField(default=0)
+
+    furtividade = models.BooleanField(default=False)
+    furtividadeMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
+    furtividadeOutros = models.IntegerField(default=0)
+
+    guerra = models.BooleanField(default=False)
+    guerraMod = models.CharField(max_length=3, choices=periciasMod, default='Int')
+    guerraOutros = models.IntegerField(default=0)
+
+    iniciativa = models.BooleanField(default=False)
+    iniciativaMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
+    iniciativaOutros = models.IntegerField(default=0)
+    
+    intimidacao = models.BooleanField(default=False)
+    intimidacaoMod = models.CharField(max_length=3, choices=periciasMod, default='Car')
+    intimidacaoOutros = models.IntegerField(default=0)
+    
+    intuicao = models.BooleanField(default=False)
+    intuicaoMod = models.CharField(max_length=3, choices=periciasMod, default='Sab')
+    intuicaoOutros = models.IntegerField(default=0)
+    
+    investigacao = models.BooleanField(default=False)
+    investigacaoMod = models.CharField(max_length=3, choices=periciasMod, default='Int')
+    investigacaoOutros = models.IntegerField(default=0)
+    
+    jogatina = models.BooleanField(default=False)
+    jogatinaMod = models.CharField(max_length=3, choices=periciasMod, default='Car')
+    jogatinaOutros = models.IntegerField(default=0)
+    
+    ladinagem = models.BooleanField(default=False)
+    ladinagemMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
+    ladinagemOutros = models.IntegerField(default=0)
+
+    luta = models.BooleanField(default=False)
+    lutaMod = models.CharField(max_length=3, choices=periciasMod, default='For')
+    lutaOutros = models.IntegerField(default=0)
+    
+    misticismo = models.BooleanField(default=False)
+    misticismoMod = models.CharField(max_length=3, choices=periciasMod, default='Int')
+    misticismoOutros = models.IntegerField(default=0)
+    
+    nobreza = models.BooleanField(default=False)
+    nobrezaMod = models.CharField(max_length=3, choices=periciasMod, default='Int')
+    nobrezaOutros = models.IntegerField(default=0)
+    
+    oficio1 = models.BooleanField(default=False)
+    oficio1Nome = models.CharField(max_length=50, null=True, blank=True)
+    oficio1Mod = models.CharField(max_length=3, choices=periciasMod, default='Int')
+    oficio1Outros = models.IntegerField(default=0)
+
+    oficio2 = models.BooleanField(default=False)
+    oficio2Nome = models.CharField(max_length=50, null=True, blank=True)
+    oficio2Mod = models.CharField(max_length=3, choices=periciasMod, default='Int')
+    oficio2Outros = models.IntegerField(default=0)
+    
+    percepcao = models.BooleanField(default=False)
+    percepcaoMod = models.CharField(max_length=3, choices=periciasMod, default='Sab')
+    percepcaoOutros = models.IntegerField(default=0)
+    
+    pilotagem = models.BooleanField(default=False)
+    pilotagemMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
+    pilotagemOutros = models.IntegerField(default=0)
+    
+    pontaria = models.BooleanField(default=False)
+    pontariaMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
+    pontariaOutros = models.IntegerField(default=0)
+    
+    reflexos = models.BooleanField(default=False)
+    reflexosMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
+    reflexosOutros = models.IntegerField(default=0)
+    
+    religiao = models.BooleanField(default=False)
+    religiaoMod = models.CharField(max_length=3, choices=periciasMod, default='Sab')
+    religiaoOutros = models.IntegerField(default=0)
+
+    sobrevivencia = models.BooleanField(default=False)
+    sobrevivenciaMod = models.CharField(max_length=3, choices=periciasMod, default='Sab')
+    sobrevivenciaOutros = models.IntegerField(default=0)
+    
+    vontade = models.BooleanField(default=False)
+    vontadeMod = models.CharField(max_length=3, choices=periciasMod, default='Sab')
+    vontadeOutros = models.IntegerField(default=0)
+    
+
+    #Equipamentos
+    equipamentos = models.TextField(blank=True, null=True)
+    TS = models.IntegerField(default=0)
+    TO = models.IntegerField(default=0)
+    carga = models.IntegerField(default=0)

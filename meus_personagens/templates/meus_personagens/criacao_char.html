@@ -18,37 +18,55 @@
     <option value="--">--</option>
     <option value="DnD">DnD</option>
     <option value="OrdemParanormal">Ordem Paranormal</option>
+    <option value="Tormenta20">Tormenta20</option>
 </select>
 
 
 <div id="formularioDnD" style="display: none;">
-  {% include "meus_personagens/includes/dndform.html"%}
+    {% include "meus_personagens/includes/dndform.html"%}
 </div>
 
 
 
 
 <div id="formularioOrdemParanormal" style="display: none;">
-{% include "meus_personagens/includes/ordemform.html"%}
+    {% include "meus_personagens/includes/ordemform.html"%}
 </div>
+
+
+
+
+<div id="formularioTormenta20" style="display: none;">
+    {% include "meus_personagens/includes/tormentaform.html"%}
+</div>
+
+
 
 
 <script>
     const escolhaFormulario = document.getElementById('escolhaFormulario');
     const formularioDnD = document.getElementById('formularioDnD');
     const formularioOrdemParanormal = document.getElementById('formularioOrdemParanormal');
+    const formularioTormenta20 = document.getElementById('formularioTormenta20');
 
-
+    
     escolhaFormulario.addEventListener('change', function() {
         if (escolhaFormulario.value === 'DnD') {
             formularioDnD.style.display = 'block';
             formularioOrdemParanormal.style.display = 'none';
+            
         } else if (escolhaFormulario.value === 'OrdemParanormal') {
             formularioDnD.style.display = 'none';
             formularioOrdemParanormal.style.display = 'block';
+            
+        }else if (escolhaFormulario.value === 'Tormenta20') {
+            formularioDnD.style.display = 'none';
+            formularioOrdemParanormal.style.display = 'none';
+            formularioTormenta20.style.display = 'block';
         } else {
             formularioDnD.style.display = 'none';
             formularioOrdemParanormal.style.display = 'none';
+
         }
     });
 

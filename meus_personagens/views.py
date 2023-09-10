@@ -1,7 +1,7 @@
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import DnDForm, OrdemParanormalForm
-from .models import DnD, OrdemParanormal
+from .forms import DnDForm, OrdemParanormalForm, TormentaForm
+from .models import DnD, OrdemParanormal, Tormenta
 from django.contrib.auth.decorators import login_required
 
 
@@ -37,7 +37,19 @@ def criacao_char(request):
     else:
         formOrdem = OrdemParanormalForm()
 
-    return render(request, 'meus_personagens/criacao_char.html', {'dnd': formDnD, 'ordem': formOrdem})
+    if request.method == 'POST':
+        formT = TormentaForm(request.POST)
+        if formT.is_valid():
+            tormenta = formT.save(commit=False)
+            tormenta.nomePerfil = request.user
+            tormenta.save()
+            return redirect('meus_personagens')
+    else:
+        formT = TormentaForm()
+
+    
+
+    return render(request, 'meus_personagens/criacao_char.html', {'dnd': formDnD, 'ordem': formOrdem, 'tormenta': formT })
 
 @login_required
 def detail_charDnD(request, id):
