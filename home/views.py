@@ -25,7 +25,7 @@ def handler404(request, exception):
     return render(request, 'principal/404.html', {'aleatorio': aleatorio})
 
 # view da home
-def home(request):
+def index(request):
     return render(request, 'principal/home.html')
 
 # view do mural não logado

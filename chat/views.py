@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from .models import Grupo
+from home.views import buscarmesa
 
 @login_required
-def home(request):
+def buscarmesa(request):
 	grupos = Grupo.objects.all()
 	return render(request, 'home/templates/principal/home.html', {'grupos':grupos})
 
@@ -15,7 +16,7 @@ def Novo_grupo(request):
     new.membros.add(u)
     new.save()
     print("Novo grupo criado com sucesso:", new.uuid) 
-    return redirect('home')
+    return redirect('buscarmesa')
 
 
 @login_required
@@ -24,7 +25,7 @@ def Entrar_grupo(request, uuid):
 	gp = Grupo.objects.get(uuid=uuid)
 	gp.membros.add(u)
 	gp.save()
-	return redirect('home')
+	return redirect('buscarmesa')
 
 
 @login_required
@@ -33,7 +34,7 @@ def Sair_grupo(request, uuid):
 	gp = Grupo.objects.get(uuid=uuid)
 	gp.membros.remove(u)
 	gp.save()
-	return redirect('home')
+	return redirect('buscarmesa')
 
 
 @login_required
@@ -50,4 +51,4 @@ def Abrir_chat(request, uuid):
 def Remover_grupo(request, uuid):
 	u = request.user
 	Grupo.objects.get(uuid=uuid).delete()
-	return redirect('home')
+	return redirect('buscarmesa')

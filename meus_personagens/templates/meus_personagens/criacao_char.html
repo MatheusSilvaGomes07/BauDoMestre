@@ -1,4 +1,5 @@
 {% extends 'meus_personagens/base.html' %}
+
 {% load static %}
 
 {% block title %}
@@ -11,12 +12,12 @@
 
 {% block content %}
 
-<p><a href="{% url 'home' %}">Home</a></p>
+<p><a href="{% url 'index' %}">Home</a></p>
 <h1>Criação de Personagem</h1>
 <label>Escolha o sistema de RPG: </label>
 <select id="escolhaFormulario">
     <option value="--">--</option>
-    <option value="DnD">DnD</option>
+    <option value="DnD">Dungeons & Dragons</option>
     <option value="OrdemParanormal">Ordem Paranormal</option>
     <option value="Tormenta20">Tormenta20</option>
 </select>
@@ -54,10 +55,12 @@
         if (escolhaFormulario.value === 'DnD') {
             formularioDnD.style.display = 'block';
             formularioOrdemParanormal.style.display = 'none';
-            
+            formularioTormenta20.style.display = 'none';
+
         } else if (escolhaFormulario.value === 'OrdemParanormal') {
             formularioDnD.style.display = 'none';
             formularioOrdemParanormal.style.display = 'block';
+            formularioTormenta20.style.display = 'none';
             
         }else if (escolhaFormulario.value === 'Tormenta20') {
             formularioDnD.style.display = 'none';
@@ -66,6 +69,7 @@
         } else {
             formularioDnD.style.display = 'none';
             formularioOrdemParanormal.style.display = 'none';
+            formularioTormenta20.style.display = 'none';
 
         }
     });

@@ -1,14 +1,14 @@
 {% extends 'meus_personagens/base.html' %}
 
 {% block title %}
-    Listagem dos meus personagens
+    {{user}} - Listagem dos meus personagens
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'criacao_char' %}">Criar personagem</a>
+    <h3><a href="{% url 'criacao_char' %}">Criar personagem</a></h3>
     <h1> Meus personagens </h1>
+    
     <ul>
-        
         <!-- Arrumar o ordem paranormal pois o link está sendo movido para ele também-->
         {% for personagem in todos_personagens %}
             <li><a href="{% url 'detail_char_dnd' personagem.id %}">{{ personagem.nome }}</a></li>
