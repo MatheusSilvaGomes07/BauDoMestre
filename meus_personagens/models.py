@@ -580,3 +580,37 @@ class Tormenta(Personagem):
     TS = models.IntegerField(default=0)
     TO = models.IntegerField(default=0)
     carga = models.IntegerField(default=0)
+
+
+
+
+class CallOfCthulhu(Personagem):
+    ocupacao = models.CharField(max_length=100)
+    localNascimento = models.CharField(max_length=100, null=True, blank=True)
+    pronome = models.CharField(max_length=10, null=True, blank=True)
+    residencia = models.CharField(max_length=100)
+    idade = models.IntegerField()
+
+    #Atributos
+    forca = models.IntegerField(default=0)
+    con = models.IntegerField(default=0)
+    des = models.IntegerField(default=0)
+    int = models.IntegerField(default=0)
+    tam = models.IntegerField(default=0)
+    pod = models.IntegerField(default=0)
+    apa = models.IntegerField(default=0)
+    edu = models.IntegerField(default=0)
+
+    pvMax = models.IntegerField(default=0, null=True, blank=True)
+    pvAtual = models.IntegerField(default=0, null=True, blank=True)
+
+    magiaMax = models.IntegerField(default=0, null=True, blank=True)
+    magiaAtual = models.IntegerField(default=0, null=True, blank=True)
+
+    sorte = models.IntegerField(default=0)
+
+    sanidadeMax = models.IntegerField(default=0, null=True, blank=True)
+    sanidadeAtual = models.IntegerField(default=0, null=True, blank=True)
+
+    #Pericias
+   
