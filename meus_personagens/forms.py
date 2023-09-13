@@ -1,5 +1,5 @@
 from django import forms
-from .models import DnD, OrdemParanormal, Tormenta
+from .models import DnD, OrdemParanormal, Tormenta, CallOfCthulhu
 
 
 
@@ -28,4 +28,11 @@ class TormentaForm(forms.ModelForm):
     class Meta:
         model = Tormenta
         fields = '__all__'
+        exclude = ['nomePerfil']
+
+
+class CallOfCthulhuForm(forms.ModelForm):
+    class Meta:
+        model = CallOfCthulhu
+        field = '__all__'
         exclude = ['nomePerfil']

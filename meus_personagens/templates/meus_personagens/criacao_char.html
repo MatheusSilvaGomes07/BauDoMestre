@@ -20,6 +20,7 @@
     <option value="DnD">Dungeons & Dragons</option>
     <option value="OrdemParanormal">Ordem Paranormal</option>
     <option value="Tormenta20">Tormenta20</option>
+    <option value="CoC">Call of Cthulhu 7e (1920)</option>
 </select>
 
 
@@ -41,7 +42,9 @@
     {% include "meus_personagens/includes/tormentaform.html"%}
 </div>
 
-
+<div id="formularioCoC" style="display: none;">
+    {% include "meus_personagens/includes/cocform.html"%}
+</div>
 
 
 <script>
@@ -49,6 +52,8 @@
     const formularioDnD = document.getElementById('formularioDnD');
     const formularioOrdemParanormal = document.getElementById('formularioOrdemParanormal');
     const formularioTormenta20 = document.getElementById('formularioTormenta20');
+    const formularioCoC= document.getElementById('formularioCoC');
+
 
     
     escolhaFormulario.addEventListener('change', function() {
@@ -56,20 +61,33 @@
             formularioDnD.style.display = 'block';
             formularioOrdemParanormal.style.display = 'none';
             formularioTormenta20.style.display = 'none';
+            formularioCoC.style.display = 'none';
+
 
         } else if (escolhaFormulario.value === 'OrdemParanormal') {
             formularioDnD.style.display = 'none';
             formularioOrdemParanormal.style.display = 'block';
             formularioTormenta20.style.display = 'none';
+            formularioCoC.style.display = 'none';
             
         }else if (escolhaFormulario.value === 'Tormenta20') {
             formularioDnD.style.display = 'none';
             formularioOrdemParanormal.style.display = 'none';
             formularioTormenta20.style.display = 'block';
-        } else {
+            formularioCoC.style.display = 'none';
+
+        }else if (escolhaFormulario.value === 'CoC') {
             formularioDnD.style.display = 'none';
             formularioOrdemParanormal.style.display = 'none';
             formularioTormenta20.style.display = 'none';
+            formularioCoC.style.display = 'block';
+
+        }
+         else {
+            formularioDnD.style.display = 'none';
+            formularioOrdemParanormal.style.display = 'none';
+            formularioTormenta20.style.display = 'none';
+            formularioCoC.style.display = 'none';
 
         }
     });

@@ -1,7 +1,7 @@
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import DnDForm, OrdemParanormalForm, TormentaForm
-from .models import DnD, OrdemParanormal, Tormenta
+from .forms import DnDForm, OrdemParanormalForm, TormentaForm, CallOfCthulhuForm
+from .models import DnD, OrdemParanormal, Tormenta, CallOfCthulhu
 from django.contrib.auth.decorators import login_required
 
 
@@ -10,8 +10,10 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     dnd = DnD.objects.all()
     ordem = OrdemParanormal.objects.all()
+    tormenta20 = Tormenta.objects.all()
+    coc = CallOfCthulhu.objects.all()
 
-    todos_personagens = list(dnd) + list(ordem)
+    todos_personagens = list(dnd) + list(ordem) + list(tormenta20) + list(coc)
 
     return render(request, 'meus_personagens/index.html', {'todos_personagens': todos_personagens})
 
@@ -38,18 +40,29 @@ def criacao_char(request):
         formOrdem = OrdemParanormalForm()
 
     if request.method == 'POST':
-        formT = TormentaForm(request.POST)
-        if formT.is_valid():
-            tormenta = formT.save(commit=False)
+        formTormenta = TormentaForm(request.POST)
+        if formTormenta.is_valid():
+            tormenta = formTormenta.save(commit=False)
             tormenta.nomePerfil = request.user
             tormenta.save()
             return redirect('meus_personagens')
     else:
-        formT = TormentaForm()
+        formTormenta = TormentaForm()
+
+    if request.method == 'POST':
+        formCoC = CallOfCthulhuForm(request.POST)
+        if formCoC.is_valid():
+            CoC =  formCoC.save(commit=False)
+            CoC.nomePerfil = request.user
+            CoC.save()
+            return redirect('meus_personagens')
+    else:
+         formCoC = CallOfCthulhuForm()
+        
 
     
 
-    return render(request, 'meus_personagens/criacao_char.html', {'dnd': formDnD, 'ordem': formOrdem, 'tormenta': formT })
+    return render(request, 'meus_personagens/criacao_char.html', {'dnd': formDnD, 'ordem': formOrdem, 'tormenta': formTormenta, 'coc7e': formCoC })
 
 @login_required
 def detail_charDnD(request, id):

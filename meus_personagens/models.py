@@ -613,4 +613,249 @@ class CallOfCthulhu(Personagem):
     sanidadeAtual = models.IntegerField(default=0, null=True, blank=True)
 
     #Pericias
-   
+    contabilidade = models.BooleanField(default=False)
+    contabilidadeMod = models.IntegerField(null=True, blank=True)
+
+    antropologia = models.BooleanField(default=False)
+    antropologiaMod = models.IntegerField(null=True, blank=True)
+    
+    arqueologia = models.BooleanField(default=False)
+    arqueologiaMod = models.IntegerField(null=True, blank=True)
+    
+    livre1 = models.BooleanField(default=False)
+    livre1Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre1Mod = models.IntegerField(null=True, blank=True)
+    
+    livre2 = models.BooleanField(default=False)
+    livre2Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre2Mod = models.IntegerField(null=True, blank=True)
+
+    seducao = models.BooleanField(default=False)
+    seducaoMod = models.IntegerField(null=True, blank=True)
+    
+    escalada = models.BooleanField(default=False)
+    escaladaMod = models.IntegerField(null=True, blank=True)
+    
+
+    creditoMod = models.IntegerField(null=True, blank=True)
+
+
+    cthulhuMitosMod = models.IntegerField(null=True, blank=True)
+
+    disfarce = models.BooleanField(default=False)
+    disfarceMod = models.IntegerField(null=True, blank=True)
+
+    esquiva = models.BooleanField(default=False)
+    esquivaMod = models.IntegerField(null=True, blank=True)
+
+    dirigirAuto = models.BooleanField(default=False)
+    dirigirAutoMod = models.IntegerField(null=True, blank=True)
+
+    reparoEletrico = models.BooleanField(default=False)
+    reparoEletricoMod = models.IntegerField(null=True, blank=True)
+
+    conversaRapida = models.BooleanField(default=False)
+    conversaRapidaMod = models.IntegerField(null=True, blank=True)
+
+    luta = models.BooleanField(default=False)
+    luraMod = models.IntegerField(null=True, blank=True)
+
+    livre3 = models.BooleanField(default=False)
+    livre3Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre3Mod = models.IntegerField(null=True, blank=True)
+
+    livre4 = models.BooleanField(default=False)
+    livre4Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre4Mod = models.IntegerField(null=True, blank=True)
+
+    #Pistola
+    armaDeFogo = models.BooleanField(default=False)
+    armaDeFogoMod = models.IntegerField(null=True, blank=True)
+
+    #Rifles e escopetas
+    armaDeFogoPesada = models.BooleanField(default=False)
+    armaDeFogoPesadaMod = models.IntegerField(null=True, blank=True)
+
+    livre4 = models.BooleanField(default=False)
+    livre4Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre4Mod = models.IntegerField(null=True, blank=True)
+    
+    primeirosSocorros = models.BooleanField(default=False)
+    primeirosSocorrosMod = models.IntegerField(null=True, blank=True)
+
+    historia = models.BooleanField(default=False)
+    historiaMod = models.IntegerField(null=True, blank=True)
+
+    intimidacao = models.BooleanField(default=False)
+    intimidacaoMod = models.IntegerField(null=True, blank=True)    
+     
+    pulo = models.BooleanField(default=False)
+    puloMod = models.IntegerField(null=True, blank=True)  
+
+    livre5 = models.BooleanField(default=False)
+    livre5Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre5Mod = models.IntegerField(null=True, blank=True)
+
+    livre6 = models.BooleanField(default=False)
+    livre6Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre6Mod = models.IntegerField(null=True, blank=True)
+
+    livre7 = models.BooleanField(default=False)
+    livre7Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre7Mod = models.IntegerField(null=True, blank=True)
+
+    livre8 = models.BooleanField(default=False)
+    livre8Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre8Mod = models.IntegerField(null=True, blank=True)
+
+    direito = models.BooleanField(default=False)
+    direitoMod = models.IntegerField(null=True, blank=True)
+
+    pesquisarBiblioteca = models.BooleanField(default=False)
+    pesquisarBibliotecaMod = models.IntegerField(null=True, blank=True)
+
+    escutar = models.BooleanField(default=False)
+    escutarMod = models.IntegerField(null=True, blank=True)
+
+    chaveiro = models.BooleanField(default=False)
+    chaveiroMod = models.IntegerField(null=True, blank=True)
+
+    reparoMecanico = models.BooleanField(default=False)
+    reparoMecanicoMod = models.IntegerField(null=True, blank=True)
+
+    medicina = models.BooleanField(default=False)
+    medicinaMod = models.IntegerField(null=True, blank=True)
+
+    linguaNativa = models.BooleanField(default=False)
+    linguaNativaMod = models.IntegerField(null=True, blank=True)
+
+    navegacao = models.BooleanField(default=False)
+    navegacaoMod = models.IntegerField(null=True, blank=True)
+
+    persuasao = models.BooleanField(default=False)
+    persuasaoMod = models.IntegerField(null=True, blank=True)
+
+    livre9 = models.BooleanField(default=False)
+    livre9Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre9Mod = models.IntegerField(null=True, blank=True)
+
+    psicanalise = models.BooleanField(default=False)
+    psicanaliseMod = models.IntegerField(null=True, blank=True)
+
+    psicologia = models.BooleanField(default=False)
+    psicologiaMod = models.IntegerField(null=True, blank=True)
+
+    cavalgar = models.BooleanField(default=False)
+    cavalgarMod = models.IntegerField(null=True, blank=True)
+
+    livre10 = models.BooleanField(default=False)
+    livre10Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre10Mod = models.IntegerField(null=True, blank=True)
+
+    livre11 = models.BooleanField(default=False)
+    livre11Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre11Mod = models.IntegerField(null=True, blank=True)
+
+    livre12 = models.BooleanField(default=False)
+    livre12Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre12Mod = models.IntegerField(null=True, blank=True)
+
+    maosHabeis = models.BooleanField(default=False)
+    maosHabeisMod = models.IntegerField(null=True, blank=True)
+
+    esconder = models.BooleanField(default=False)
+    esconderMod = models.IntegerField(null=True, blank=True)
+
+    furtividade = models.BooleanField(default=False)
+    furtividadeMod = models.IntegerField(null=True, blank=True)
+
+    livre13 = models.BooleanField(default=False)
+    livre13Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre13Mod = models.IntegerField(null=True, blank=True)
+
+    nadar = models.BooleanField(default=False)
+    nadarMod = models.IntegerField(null=True, blank=True)
+
+    arremessar = models.BooleanField(default=False)
+    arremessarMod = models.IntegerField(null=True, blank=True)
+
+    rastrear = models.BooleanField(default=False)
+    rastrearMod = models.IntegerField(null=True, blank=True)
+
+    livre14 = models.BooleanField(default=False)
+    livre14Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre14Mod = models.IntegerField(null=True, blank=True)
+
+    livre15 = models.BooleanField(default=False)
+    livre15Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre15Mod = models.IntegerField(null=True, blank=True)
+
+    livre16 = models.BooleanField(default=False)
+    livre16Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre16Mod = models.IntegerField(null=True, blank=True)
+
+    livre17 = models.BooleanField(default=False)
+    livre17Nome = models.CharField(max_length=50, null=True, blank=True)
+    livre17Mod = models.IntegerField(null=True, blank=True)
+
+    #Ataques
+    ataque1 = models.CharField(max_length=100, null=True, blank=True)
+    ataque1Mod = models.IntegerField(null=True, blank=True)
+    ataque1Dano = models.CharField(max_length=100, null=True, blank=True)
+    ataque1Num = models.IntegerField(null=True, blank=True)
+    ataque1Alcance = models.FloatField(null=True, blank=True)
+    ataque1Municao = models.IntegerField(null=True, blank=True)
+    ataque1Defeito = models.IntegerField(null=True, blank=True)
+
+    ataque2 = models.CharField(max_length=100, null=True, blank=True)
+    ataque2Mod = models.IntegerField(null=True, blank=True)
+    ataque2Dano = models.CharField(max_length=100, null=True, blank=True)
+    ataque2Num = models.IntegerField(null=True, blank=True)
+    ataque2Alcance = models.FloatField(null=True, blank=True)
+    ataque2Municao = models.IntegerField(null=True, blank=True)
+    ataque2Defeito = models.IntegerField(null=True, blank=True) 
+    
+    ataque3 = models.CharField(max_length=100, null=True, blank=True)
+    ataque3Mod = models.IntegerField(null=True, blank=True)
+    ataque3Dano = models.CharField(max_length=100, null=True, blank=True)
+    ataque3Num = models.IntegerField(null=True, blank=True)
+    ataque3Alcance = models.FloatField(null=True, blank=True)
+    ataque3Municao = models.IntegerField(null=True, blank=True)
+    ataque3Defeito = models.IntegerField(null=True, blank=True)
+
+    ataque4 = models.CharField(max_length=100, null=True, blank=True)
+    ataque4Mod = models.IntegerField(null=True, blank=True)
+    ataque4Dano = models.CharField(max_length=100, null=True, blank=True)
+    ataque4Num = models.IntegerField(null=True, blank=True)
+    ataque4Alcance = models.FloatField(null=True, blank=True)
+    ataque4Municao = models.IntegerField(null=True, blank=True)
+    ataque4Defeito = models.IntegerField(null=True, blank=True)
+
+    movimentacao = models.IntegerField(null=True, blank=True)
+    build = models.IntegerField(null=True, blank=True)
+    esquiva2 = models.IntegerField(null=True, blank=True)
+    danoBonus = models.IntegerField(null=True, blank=True)
+
+
+    #Lores
+    descricaoPessoal = models.TextField(null=True, blank=True)
+    ideologia = models.TextField(null=True, blank=True)
+    pessoasSignificantes = models.TextField(null=True, blank=True)
+    lugaresSignificativos = models.TextField(null=True, blank=True)
+    bensPreciosos = models.TextField(null=True, blank=True)
+    tracos = models.TextField(null=True, blank=True)
+    feridas = models.TextField(null=True, blank=True)
+    fobiasManias = models.TextField(null=True, blank=True)
+    magias = models.TextField(null=True, blank=True)
+    encontroEntidades = models.TextField(null=True, blank=True)
+
+    equipamentos = models.TextField(null=True, blank=True)
+    posses = models.TextField(null=True, blank=True)
+
+
+    #Riquezas
+    nivelGastos = models.CharField(max_length=100, null=True, blank=True)
+    dinheiro = models.IntegerField(null=True, blank=True)
+    bens = models.CharField(max_length=100, null=True, blank=True)
+    lore = models.TextField(null=True, blank=True)
+
