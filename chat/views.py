@@ -2,12 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from .models import Grupo
-from home.views import buscarmesa
 
-@login_required
-def buscarmesa(request):
-	grupos = Grupo.objects.all()
-	return render(request, 'home/templates/principal/home.html', {'grupos':grupos})
 
 @login_required
 def Novo_grupo(request):
@@ -42,8 +37,8 @@ def Abrir_chat(request, uuid):
 	grupo = Grupo.objects.get(uuid=uuid)
 	if request.user not in grupo.membros.all():
 		return HttpResponseForbidden('Not a member. Try another group.')
-	mensagens = grupo.mensagens_set.all()
-	sorted_messages = sorted(mensagens, key=lambda x: x.tempo)
+	messages = grupo.message_set.all()
+	sorted_messages = sorted(messages, key=lambda x: x.tempo)
 	return render(request, 'chat.html', context={'messages':sorted_messages, 'uuid': uuid})
 
 

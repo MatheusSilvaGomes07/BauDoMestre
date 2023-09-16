@@ -88,19 +88,18 @@
     </tbody>
 </table>
 
-<ul>
-    {% for grupo in grupos %}
-    <div id="{{ grupo.uuid }}">
-      <li><a>{{ grupo.uuid }}</a></li>
-        {% if request.user in Grupo.membros.all %}
-          <a href="{% url 'Abrir_chat' uuid=grupo.uuid %}">abrir</a>
-          <a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">sair</a>
-          <a href="{% url 'Remover_grupo' uuid=grupo.uuid %}">excluir</a>
-        {% else %}
-          <a href="{% url 'Entrar_grupo' uuid=grupo.uuid %}">Entrar</a>
-        {% endif %}
-    </div>
-    {% endfor %}
-  </ul>
+{% for grupo in grupos %}
+<div id="{{ grupo.uuid }}">
+  <li><a>{{ grupo.uuid }}</a></li>
+    {% if request.user in grupo.membros.all %}
+      <a href="{% url 'Abrir_chat' uuid=grupo.uuid %}">abrir</a>
+      <a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">sair</a>
+      <a href="{% url 'Remover_grupo' uuid=grupo.uuid %}">excluir</a>
+    {% else %}
+      <a href="{% url 'Entrar_grupo' uuid=grupo.uuid %}">Entrar</a>
+    {% endif %}
+</div>
+{% endfor %}
+  
 
 {% endblock conteudo %}

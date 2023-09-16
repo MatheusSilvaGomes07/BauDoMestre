@@ -4,6 +4,7 @@ from .models import Campanha, Perfil
 from .forms import CampanhaForm, PerfilForm
 from django.db.models import Q
 from functools import wraps
+from chat.models import Mensagem, Grupo
 from random import randint
 
 # Decorator manual feito para impedir que não mestres entrem no link pela url
@@ -42,6 +43,8 @@ def buscarmesa(request):
     ambiente_filtro = request.GET.get('ambiente')
     genero_filtro = request.GET.get('genero')
     campanhas = Campanha.objects.all()
+    grupos = Grupo.objects.all()
+    
 
     if sistema_busca:
         campanhas = campanhas.filter(
@@ -60,7 +63,7 @@ def buscarmesa(request):
             Q(generoRPG__icontains=genero_filtro)
         )
 
-    return render(request, 'principal/muralLogado.html', {'campanhas': campanhas, 'perfil': perfil})
+    return render(request, 'principal/muralLogado.html', {'campanhas': campanhas, 'perfil': perfil, 'grupos': grupos})
 
 
 # view da busca de usuários
