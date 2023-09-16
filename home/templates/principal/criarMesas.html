@@ -11,10 +11,13 @@
 
 <h1>Criar Campanha</h1>
 
+
+
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Criar</button>
+    <a href="{% url 'Novo_grupo' %}" class="btn btn-secondary">criar chat?</a>
 </form>
 
 
