@@ -1,0 +1,10 @@
+{% extends 'meus_personagens/base.html' %}
+
+{% block title %}
+    Dados do personagem
+{% endblock %}
+
+{% block content %}
+    <h1>{{ personagem.nome }}</h1>
+    <p>Divindade {{ personagem.divindade }}</p>
+{% endblock%}

@@ -8,14 +8,14 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required
 def index(request):
-    dnd = DnD.objects.all()
-    ordem = OrdemParanormal.objects.all()
-    tormenta20 = Tormenta.objects.all()
-    coc = CallOfCthulhu.objects.all()
+    user = request.user
 
-    todos_personagens = list(dnd) + list(ordem) + list(tormenta20) + list(coc)
+    dnd = DnD.objects.filter(nomePerfil=user)
+    ordem = OrdemParanormal.objects.filter(nomePerfil=user)
+    tormenta20 = Tormenta.objects.filter(nomePerfil=user)
+    coc = CallOfCthulhu.objects.filter(nomePerfil=user)
 
-    return render(request, 'meus_personagens/index.html', {'todos_personagens': todos_personagens})
+    return render(request, 'meus_personagens/index.html', { 'dnd': dnd, 'ordem': ordem, 'tormenta20': tormenta20, 'coc': coc })
 
 @login_required
 def criacao_char(request):
@@ -67,11 +67,37 @@ def criacao_char(request):
 @login_required
 def detail_charDnD(request, id):
     personagem = get_object_or_404(DnD, pk=id)
+    user = request.user
 
-    return render(request, 'meus_personagens/detail_char.html', {'personagem': personagem})
-
+    if user == personagem.nomePerfil or user.is_staff:
+        return render(request, 'meus_personagens/detail_char_dnd.html', {'personagem': personagem})
+    else:
+         return HttpResponse("Você não tem permissão para visualizar este perfil.")
+    
 @login_required
 def detail_charOrdemParanormal(request, id):
     personagem = get_object_or_404(OrdemParanormal, pk=id)
+    user = request.user
 
-    return render(request, 'meus_personagens/detail_char.html', {'personagem': personagem})
+    if user == personagem.nomePerfil or user.is_staff:
+        return render(request, 'meus_personagens/detail_char_ordem.html', {'personagem': personagem})
+    else:
+         return HttpResponse("Você não tem permissão para visualizar este perfil.")
+    
+def detail_charTormenta(request, id):
+    personagem = get_object_or_404(Tormenta, pk=id)
+    user = request.user
+
+    if user == personagem.nomePerfil or user.is_staff:
+        return render(request, 'meus_personagens/detail_char_tormenta.html', {'personagem': personagem})
+    else:
+         return HttpResponse("Você não tem permissão para visualizar este perfil.")
+
+def detail_charCoC(request, id):
+    personagem = get_object_or_404(CallOfCthulhu, pk=id)
+    user = request.user
+
+    if user == personagem.nomePerfil or user.is_staff:
+        return render(request, 'meus_personagens/detail_char_coc.html', {'personagem': personagem})
+    else:
+         return HttpResponse("Você não tem permissão para visualizar este perfil.")

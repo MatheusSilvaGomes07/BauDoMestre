@@ -10,8 +10,17 @@
     
     <ul>
         <!-- Arrumar o ordem paranormal pois o link está sendo movido para ele também-->
-        {% for personagem in todos_personagens %}
+        {% for personagem in dnd %}
             <li><a href="{% url 'detail_char_dnd' personagem.id %}">{{ personagem.nome }}</a></li>
+        {% endfor %}
+        {% for personagem in ordem %}
+            <li><a href="{% url 'detail_char_ordem' personagem.id %}">{{ personagem.nome }}</a></li>
+        {% endfor %}
+        {% for personagem in tormenta20 %}
+            <li><a href="{% url 'detail_char_tormenta' personagem.id %}">{{ personagem.nome }}</a></li>
+        {% endfor %}
+        {% for personagem in coc %}
+            <li><a href="{% url 'detail_char_coc' personagem.id %}">{{ personagem.nome }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}

@@ -126,6 +126,62 @@ class DnD(Personagem):
     #inventario
     inventario = models.TextField(null=True, blank=True)
 
+    #2° Página, Magias
+    spellCastingOptions = [
+        ('--', '--'),
+        ('Força', 'Força'),
+        ('Dextreza', 'Dextreza'),
+        ('Constituição', 'Constituição'),
+        ('Inteligência', 'Inteligência'),
+        ('Sabedoria', 'Sabedoria'),
+        ('Carisma', 'Carisma'),
+    ]
+
+    spellCasting = models.CharField(max_length=20, choices=spellCastingOptions, default='--')
+    spellDC = models.IntegerField(null=True, blank=True)
+    spellAttackBonus = models.IntegerField(null=True, blank=True)
+
+
+    cantips = models.TextField(null=True, blank=True)
+
+    circulo1QteMax = models.IntegerField(null=True, blank=True)
+    circulo1Qte = models.IntegerField(null=True, blank=True)
+    circulo1 = models.TextField(null=True, blank=True)
+
+    circulo2QteMax = models.IntegerField(null=True, blank=True)
+    circulo2Qte = models.IntegerField(null=True, blank=True)
+    circulo2 = models.TextField(null=True, blank=True)
+
+    circulo3QteMax = models.IntegerField(null=True, blank=True)
+    circulo3Qte = models.IntegerField(null=True, blank=True)
+    circulo3 = models.TextField(null=True, blank=True)
+
+    circulo4QteMax = models.IntegerField(null=True, blank=True)
+    circulo4Qte = models.IntegerField(null=True, blank=True)
+    circulo4 = models.TextField(null=True, blank=True)
+
+    circulo5QteMax = models.IntegerField(null=True, blank=True)
+    circulo5Qte = models.IntegerField(null=True, blank=True)
+    circulo5 = models.TextField(null=True, blank=True)
+
+    circulo6QteMax = models.IntegerField(null=True, blank=True)
+    circulo6Qte = models.IntegerField(null=True, blank=True)
+    circulo6 = models.TextField(null=True, blank=True)
+
+    circulo7QteMax = models.IntegerField(null=True, blank=True)
+    circulo7Qte = models.IntegerField(null=True, blank=True)
+    circulo7 = models.TextField(null=True, blank=True)
+
+    circulo8QteMax = models.IntegerField(null=True, blank=True)
+    circulo8Qte = models.IntegerField(null=True, blank=True)
+    circulo8 = models.TextField(null=True, blank=True)
+
+    circulo9QteMax = models.IntegerField(null=True, blank=True)
+    circulo9Qte = models.IntegerField(null=True, blank=True)
+    circulo9 = models.TextField(null=True, blank=True)
+
+
+
     
 
 
