@@ -18,16 +18,16 @@ class JoinAndLeave(WebsocketConsumer):
 	def receive(self, text_data):
 		text_data_json = json.loads(text_data)
 		message = text_data_json['message']
-		user_id = self.scope['user'].user_id
+		id = self.scope['user'].id
 
-		user = Perfil.objects.get(user_id=user_id)
+		user = Perfil.objects.get(id=id)
 		group = Grupo.objects.get(uuid=self.room_uuid)
 
 		db_insert = Mensagem(autor=user,conteudo=message,grupo=group)
 		db_insert.save()
 
 		async_to_sync(self.channel_layer.group_send)(
-		    self.room_group_name, {'type': 'chat_message', 'message': f'{user.username}: {message}'}
+		    self.room_group_name, {'type': 'chat_message', 'message': f'{user.nomePerfil}: {message}'}
 		)
 
 	def disconnect(self, close_code):

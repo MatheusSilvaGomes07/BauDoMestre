@@ -1,5 +1,5 @@
 {% extends 'base.html' %} 
-{% block title %} Chat Room {% endblock title %}
+{% block title %} {{ campanha.nomeCampanha }} chat {% endblock title %}
 {% block content %}
 <div>
     <a href="{% url 'index' %}">home</a>
@@ -9,9 +9,9 @@
   
   <div id="chat-log" style="border:1px solid;width:500px;height:400px;">
   
-  {% if messages %}
-    {% for message in messages %}
-    <p>{{ message.author }}: {{ message.content }}</p>
+  {% if mensagem %}
+    {% for mensagem in mensagens %}
+    <p>{{ mensagem.autor }}: {{ mensagem.conteudo }}</p>
     {% endfor %}
   {% endif %}
   
