@@ -7,9 +7,44 @@
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ formPerfil.as_p }}
+
+    <div>
+    {{ formPerfil.fotoConta.label_tag }}
+    {{ formPerfil.fotoConta }}
+    </div>
+
+    <div>
+    {% if formPerfil.fotoConta.initial %}
+    <img src="{{ formPerfil.fotoConta.initial }}" alt="Foto de perfil atual" height="250" width="250">
+    {% endif %}
+    </div>
+
+    <div>
+    {{ formPerfil.idade.label_tag }}
+    {{ formPerfil.idade }}
+    </div>
+
+    <div>
+    {{ formPerfil.descricao.label_tag }}
+    {{ formPerfil.descricao }}
+    </div>
+
+    <div>
+    {{ formPerfil.tipo_sessao.label_tag }}
+    {{ formPerfil.tipo_sessao }}
+    </div>
+
+    <div>
+    {{ formPerfil.tipo_player.label_tag }}
+    {{ formPerfil.tipo_player }}
+    </div>  
+
+    <div>
+    {{ formPerfil.sistema_rpg.label_tag }}
+    {{ formPerfil.sistema_rpg }}
+    </div>
+
     <button type="submit">Editar</button>
 </form>
 
-    
 {% endblock conteudo %}

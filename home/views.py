@@ -6,6 +6,23 @@ from django.db.models import Q
 from functools import wraps
 from chat.models import Mensagem, Grupo
 from random import randint
+import os
+
+#Renomear imagem de perfil
+def renomear_imagem_de_perfil(usuario):
+    perfil = Perfil.objects.get(nomePerfil=usuario)
+    nome_usuario = usuario.username
+    caminho_antigo = perfil.fotoConta.path
+    caminho_destino = f'static/img/fotoUser/{nome_usuario}.png'
+
+    try:
+        os.rename(caminho_antigo, caminho_destino)
+    except Exception as e:
+        print(f"Erro ao renomear a imagem de perfil: {e}")
+    else:
+        perfil.fotoConta = caminho_destino
+        perfil.save()
+
 
 # Decorator manual feito para impedir que não mestres entrem no link pela url
 def jogadores_permitidos(required_types):
@@ -118,10 +135,15 @@ def editarconta(request):
     if request.method == 'POST':
         formPerfil = PerfilForm(request.POST, request.FILES, instance=perfil)
         if formPerfil.is_valid():
+            # Verifique se 'fotoConta' foi enviado no formulário
             if 'fotoConta' in request.FILES:
-                perfil.fotoConta = request.FILES['fotoConta']
+                nova_foto = formPerfil.cleaned_data.get('fotoConta', None)
+                if nova_foto:
+                    perfil.fotoConta = nova_foto
+                    renomear_imagem_de_perfil(request.user)
             formPerfil.save()
             return redirect('usuario')
+
     else:
         formPerfil = PerfilForm(instance=perfil)
 

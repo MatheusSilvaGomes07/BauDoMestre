@@ -5,7 +5,6 @@ from .models import DnD, OrdemParanormal, Tormenta, CallOfCthulhu
 from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
 @login_required
 def index(request):
     user = request.user
@@ -25,7 +24,7 @@ def criacao_char(request):
             dnd = formDnD.save(commit=False)
             dnd.nomePerfil = request.user
             dnd.save()
-            return redirect('meus_personagens')  # Redirecione para a página de listagem de produtos
+            return redirect('meus_personagens')
     else:
         formDnD = DnDForm()
     
@@ -58,8 +57,6 @@ def criacao_char(request):
             return redirect('meus_personagens')
     else:
          formCoC = CallOfCthulhuForm()
-        
-
     
 
     return render(request, 'meus_personagens/criacao_char.html', {'dnd': formDnD, 'ordem': formOrdem, 'tormenta': formTormenta, 'coc7e': formCoC })
@@ -84,6 +81,7 @@ def detail_charOrdemParanormal(request, id):
     else:
          return HttpResponse("Você não tem permissão para visualizar este perfil.")
     
+@login_required
 def detail_charTormenta(request, id):
     personagem = get_object_or_404(Tormenta, pk=id)
     user = request.user
@@ -93,6 +91,7 @@ def detail_charTormenta(request, id):
     else:
          return HttpResponse("Você não tem permissão para visualizar este perfil.")
 
+@login_required
 def detail_charCoC(request, id):
     personagem = get_object_or_404(CallOfCthulhu, pk=id)
     user = request.user

@@ -30,7 +30,7 @@ class Perfil(models.Model):
         ('Outros', 'Outros'),
     )
 
-    fotoConta = models.ImageField(upload_to='static/img/fotoUser', null=True)
+    fotoConta = models.ImageField(upload_to='static/img/fotoUser')
     tipo_sessao = models.CharField(max_length=20, choices=SESSION_CHOICES, null=True)
     tipo_player = models.CharField(max_length=20, choices=PLAYER_TYPE_CHOICES, null=True)
     descricao = models.TextField(max_length=256, null=True)

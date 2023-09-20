@@ -37,16 +37,9 @@ class PerfilForm(forms.ModelForm):
 
         nova_foto = self.cleaned_data.get('fotoConta', None)
         if nova_foto:
-            nome_usuario = perfil.nomePerfil.username
-            caminho_destino = f'static/img/fotoUser/{nome_usuario}.png'
-            
-            try:
-                with open(caminho_destino, 'wb') as destino:
-                    for chunk in nova_foto.chunks():
-                        destino.write(chunk)
-            except Exception as e:
-                print(f"Erro ao salvar a nova foto: {e}")
-            else:
-                perfil.fotoConta = caminho_destino
-        perfil.save()
+            perfil.fotoConta = nova_foto
+
+        if commit:
+            perfil.save()
+
         return perfil
