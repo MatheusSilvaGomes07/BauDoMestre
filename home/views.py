@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Campanha, Perfil
@@ -7,21 +8,31 @@ from functools import wraps
 from chat.models import Mensagem, Grupo
 from random import randint
 import os
+import shutil
 
 #Renomear imagem de perfil
-def renomear_imagem_de_perfil(usuario):
-    perfil = Perfil.objects.get(nomePerfil=usuario)
-    nome_usuario = usuario.username
-    caminho_antigo = perfil.fotoConta.path
-    caminho_destino = f'static/img/fotoUser/{nome_usuario}.png'
 
-    try:
-        os.rename(caminho_antigo, caminho_destino)
-    except Exception as e:
-        print(f"Erro ao renomear a imagem de perfil: {e}")
-    else:
-        perfil.fotoConta = caminho_destino
-        perfil.save()
+def renomear_foto_perfil(nome_de_conta, nova_foto):
+    # Obtém o nome do arquivo original da nova foto
+    nome_original = nova_foto.name
+
+    # Obtém a extensão do arquivo original
+    extensao = os.path.splitext(nome_original)[1]
+
+    # Constrói o novo nome de arquivo com base no nome da conta e a extensão do arquivo original
+    novo_nome_arquivo = f"{nome_de_conta}{extensao}"
+
+    # Obtém o diretório de destino onde a foto deve ser movida
+    destino = os.path.join(settings.MEDIA_ROOT, 'static', 'img', 'fotoUser', novo_nome_arquivo)
+
+    # Salva a nova foto com o novo nome no diretório de destino usando shutil
+    with open(nova_foto.path, 'rb') as origem_arquivo:
+        with open(destino, 'wb+') as destino_arquivo:
+            shutil.copyfileobj(origem_arquivo, destino_arquivo)
+
+    # Retorna o novo nome do arquivo para atualizar o campo 'fotoConta' no modelo Perfil
+    return novo_nome_arquivo
+
 
 
 # Decorator manual feito para impedir que não mestres entrem no link pela url
@@ -135,12 +146,12 @@ def editarconta(request):
     if request.method == 'POST':
         formPerfil = PerfilForm(request.POST, request.FILES, instance=perfil)
         if formPerfil.is_valid():
-            # Verifique se 'fotoConta' foi enviado no formulário
             if 'fotoConta' in request.FILES:
                 nova_foto = formPerfil.cleaned_data.get('fotoConta', None)
                 if nova_foto:
                     perfil.fotoConta = nova_foto
-                    renomear_imagem_de_perfil(request.user)
+                    novo_nome_arquivo = renomear_foto_perfil(request.user.username, nova_foto)
+                    perfil.fotoConta.name = os.path.join('static', 'img', 'fotoUser', novo_nome_arquivo)
             formPerfil.save()
             return redirect('usuario')
 
