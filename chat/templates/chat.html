@@ -1,8 +1,9 @@
-{% extends 'base.html' %} 
-{% block title %} {{ campanha.nomeCampanha }} chat {% endblock title %}
-{% block content %}
+{% extends 'principal/base.html' %} 
+
+{% block conteudo %}
 <div>
     <a href="{% url 'index' %}">home</a>
+    <a href="{% url 'buscarmesa' %}">Voltar ao Mural</a> <br> <br>
   </div>
   
   <br>
@@ -14,6 +15,8 @@
     <p>{{ mensagem.autor }}: {{ mensagem.conteudo }}</p>
     {% endfor %}
   {% endif %}
+
+  <title> chat </title>
   
   </div>
   
@@ -46,4 +49,4 @@
   
   </script>
 
-{% endblock content %}
+{% endblock conteudo %}
