@@ -35,33 +35,40 @@
     <div class="atributo">
         <label>FORÇA</label>
         {{ dnd.forca }}
+        <label id="mod_forca">0</label>
     </div>
 
     <div class="atributo">
         <label>DEXTREZA</label>
         {{ dnd.dex }}
+        <label id="mod_dex">0</label>
     </div>
 
     <div class="atributo">
         <label>CONSTITUIÇÃO</label>
         {{ dnd.const }}
+        <label id="mod_const">0</label>
     </div>
 
     <div class="atributo">
         <label>INTELIGÊNCIA</label>
         {{ dnd.int }}
+        <label id="mod_int">0</label>
     </div>
 
     <div class="atributo">
         <label>SABEDORIA</label>
         {{ dnd.sab }}
+        <label id="mod_sab">0</label>
     </div>
 
     <div class="atributo">
         <label>CARISMA</label>
         {{ dnd.carisma }}
+        <label id="mod_car">0</label>
     </div>
 </div>
+
 
 <br>
 
@@ -75,25 +82,33 @@
 <!-- Saving Throws -->
 <div class="salvaguarda_box">
     {{ dnd.forcaSalvaguarda }}
+    <label id="salva_for">0</label>
     <label>Força</label>
 
     {{ dnd.dexSalvaguarda }}
+    <label id="salva_dex">0</label>
     <label>Dextreza</label>
 
     {{ dnd.constSalvaguarda }}
+    <label id="salva_const">0</label>
     <label>Constituição</label>
 
     {{ dnd.intSalvaguarda }}
+    <label id="salva_int">0</label>
     <label>Inteligência</label>
 
     {{ dnd.sabSalvaguarda }}
+    <label id="salva_sab">0</label>
     <label>Sabedoria</label>
 
     {{ dnd.carismaSalvaguarda }}
+    <label id="salva_car">0</label>
     <label>Carisma</label>
+
 </div>
 
 <br>
+
 
 <!-- Perícias -->
 <div class="pericias">
@@ -408,26 +423,229 @@
 <button type="submit">Salvar</button>
 </form>
 
-
-
-
 <script>
-    
+    var bonusProficiencia = 0;
+    var modForca = 0;
+    var modDex = 0;
+    var modConst = 0;
+    var modInt = 0;
+    var modSab = 0;
+    var modCar = 0;
+
+        //Bonus Proficiencia
     const nivel = document.getElementById('id_nivel');
     const bonusProf = document.getElementById('bonusProf');
 
     nivel.addEventListener('input', function() {
-        // Atualiza o conteúdo do parágrafo com o valor inserido no input
+    
        const valorNivel = parseInt(nivel.value);
+       bonusProf.textContent = valorNivel;
 
-        bonus = Math.floor(2+((valorNivel - 1) /4))
+        bonusProficiencia = Math.floor(2+((valorNivel - 1) /4));
 
         if(valorNivel != null && !isNaN(valorNivel)) {
-            bonusProf.textContent = bonus;
+            bonusProf.textContent = bonusProficiencia;
+            calcularSalvaguardas();
         } else {
             bonusProf.textContent = 0;
+            bonusProficiencia = 0;
         }
         
 
     });
+
+    //Calculando mods
+    const forca = document.getElementById('id_forca');
+    const forcaMod = document.getElementById('mod_forca');
+
+    forca.addEventListener('input', function() {
+    
+    const valorForca = parseInt(forca.value);
+
+    
+     modForca = Math.floor((valorForca - 10) / 2);
+
+
+     if(valorForca != null && !isNaN(valorForca)) {
+        forcaMod.textContent = modForca;
+        calcularSalvaguardas();
+     } else {
+        forcaMod.textContent = 0;
+        modForca = 0;
+     }
+    });
+
+    const dex = document.getElementById('id_dex');
+    const dexMod = document.getElementById('mod_dex');
+
+    dex.addEventListener('input', function() {
+    
+    const valorDex = parseInt(dex.value);
+
+    
+     modDex = Math.floor((valorDex - 10) / 2);
+
+
+     if(valorDex != null && !isNaN(valorDex)) {
+        dexMod.textContent = modDex;
+        calcularSalvaguardas();
+     } else {
+        dexMod.textContent = 0;
+        modDex = 0;
+     }
+    });
+
+    const cons = document.getElementById('id_const');
+    const constMod = document.getElementById('mod_const');
+
+    cons.addEventListener('input', function() {
+    
+    const valorConst = parseInt(cons.value);
+
+    
+    modConst = Math.floor((valorConst - 10) / 2);
+
+
+     if(valorConst != null && !isNaN(valorConst)) {
+        constMod.textContent = modConst;
+        calcularSalvaguardas();
+     } else {
+        constMod.textContent = 0;
+        modConst = 0;
+     }
+    });
+
+    const inte = document.getElementById('id_int');
+    const intMod = document.getElementById('mod_int');
+
+    inte.addEventListener('input', function() {
+    
+    const valorInt = parseInt(inte.value);
+
+    
+     modInt = Math.floor((valorInt - 10) / 2);
+
+
+     if(valorInt != null && !isNaN(valorInt)) {
+        intMod.textContent = modInt;
+        calcularSalvaguardas();
+     } else {
+        intMod.textContent = 0;
+        modInt = 0;
+     }
+    });
+
+
+    const sab = document.getElementById('id_sab');
+    const sabMod = document.getElementById('mod_sab');
+
+    sab.addEventListener('input', function() {
+    
+    const valorSab = parseInt(sab.value);
+
+    
+     modSab = Math.floor((valorSab - 10) / 2);
+
+
+     if(valorSab != null && !isNaN(valorSab)) {
+        sabMod.textContent = modSab;
+        calcularSalvaguardas();
+     } else {
+        sabMod.textContent = 0;
+        modSab = 0
+     }
+    });
+
+    const car = document.getElementById('id_carisma');
+    const carMod = document.getElementById('mod_car');
+
+    car.addEventListener('input', function() {
+    
+    const valorCar = parseInt(car.value);
+
+    
+     modCar = Math.floor((valorCar - 10) / 2);
+
+
+     if(valorCar != null && !isNaN(valorCar)) {
+        carMod.textContent = modCar;
+        calcularSalvaguardas();
+     } else {
+        carMod.textContent = 0;
+        modCar = 0;
+     }
+    });
+
+
+
+    const checkFor = document.getElementById('id_forcaSalvaguarda');
+    const checkDex = document.getElementById('id_dexSalvaguarda');
+    const checkConst = document.getElementById('id_constSalvaguarda');
+    const checkInt = document.getElementById('id_intSalvaguarda');
+    const checkSab = document.getElementById('id_sabSalvaguarda');
+    const checkCar = document.getElementById('id_carismaSalvaguarda');
+
+
+    function calcularSalvaguardas(){
+        const modSalvaFor = document.getElementById('salva_for');
+        const modSalvaDex = document.getElementById('salva_dex');
+        const modSalvaConst = document.getElementById('salva_const');
+        const modSalvaInt = document.getElementById('salva_int');
+        const modSalvaSab = document.getElementById('salva_sab');
+        const modSalvaCar = document.getElementById('salva_car');
+
+
+        //Força
+        if(checkFor.checked){
+            modSalvaFor.textContent = modForca + bonusProficiencia;
+        } else {
+            modSalvaFor.textContent = modForca;
+        }
+
+        //Destreza
+        if(checkDex.checked){
+            modSalvaDex.textContent = modDex + bonusProficiencia;
+        } else {
+            modSalvaDex.textContent = modDex;
+        }
+
+        //Constituição
+        if(checkConst.checked){
+            modSalvaConst.textContent = modConst + bonusProficiencia;
+        } else {
+            modSalvaConst.textContent = modConst;
+        }
+
+        //Inteligência
+        if(checkInt.checked){
+            modSalvaInt.textContent = modInt + bonusProficiencia;
+        } else {
+            modSalvaInt.textContent = modInt;
+        }
+
+        //Sabedoria
+        if(checkSab.checked){
+            modSalvaSab.textContent = modSab + bonusProficiencia;
+        } else {
+            modSalvaSab.textContent = modSab;
+        }
+
+        //Carisma
+        if(checkCar.checked){
+            modSalvaCar.textContent = modCar + bonusProficiencia;
+        } else {
+            modSalvaCar.textContent = modCar;
+        }
+    }
+
+    checkFor.addEventListener("change", calcularSalvaguardas);
+    checkDex.addEventListener("change", calcularSalvaguardas);
+    checkConst.addEventListener("change", calcularSalvaguardas);
+    checkInt.addEventListener("change", calcularSalvaguardas);
+    checkSab.addEventListener("change", calcularSalvaguardas);
+    checkCar.addEventListener("change", calcularSalvaguardas);
+
+    calcularSalvaguardas();
 </script>
+
+

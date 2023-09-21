@@ -69,7 +69,7 @@ def detail_charDnD(request, id):
     if user == personagem.nomePerfil or user.is_staff:
         return render(request, 'meus_personagens/detail_char_dnd.html', {'personagem': personagem})
     else:
-         return HttpResponse("Você não tem permissão para visualizar este perfil.")
+         return redirect('meus_personagens')
     
 @login_required
 def detail_charOrdemParanormal(request, id):
@@ -79,7 +79,7 @@ def detail_charOrdemParanormal(request, id):
     if user == personagem.nomePerfil or user.is_staff:
         return render(request, 'meus_personagens/detail_char_ordem.html', {'personagem': personagem})
     else:
-         return HttpResponse("Você não tem permissão para visualizar este perfil.")
+         return redirect('meus_personagens')
     
 @login_required
 def detail_charTormenta(request, id):
@@ -89,7 +89,7 @@ def detail_charTormenta(request, id):
     if user == personagem.nomePerfil or user.is_staff:
         return render(request, 'meus_personagens/detail_char_tormenta.html', {'personagem': personagem})
     else:
-         return HttpResponse("Você não tem permissão para visualizar este perfil.")
+         return redirect('meus_personagens')
 
 @login_required
 def detail_charCoC(request, id):
@@ -99,4 +99,4 @@ def detail_charCoC(request, id):
     if user == personagem.nomePerfil or user.is_staff:
         return render(request, 'meus_personagens/detail_char_coc.html', {'personagem': personagem})
     else:
-         return HttpResponse("Você não tem permissão para visualizar este perfil.")
+         return redirect('meus_personagens')

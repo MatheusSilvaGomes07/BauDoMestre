@@ -29,12 +29,12 @@ class DnD(Personagem):
     xp = models.IntegerField(validators=[MinValueValidator(0)], blank=True, null=True)
 
     #Atributos
-    forca = models.IntegerField(default=0)
-    dex = models.IntegerField(default=0)
-    const = models.IntegerField(default=0)
-    int = models.IntegerField(default=0)
-    sab = models.IntegerField(default=0)
-    carisma = models.IntegerField(default=0)
+    forca = models.IntegerField(default=10)
+    dex = models.IntegerField(default=10)
+    const = models.IntegerField(default=10)
+    int = models.IntegerField(default=10)
+    sab = models.IntegerField(default=10)
+    carisma = models.IntegerField(default=10)
 
     inspiracao = models.BooleanField(default=False)
 
