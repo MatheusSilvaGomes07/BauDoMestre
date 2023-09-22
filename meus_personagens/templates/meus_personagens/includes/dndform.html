@@ -115,112 +115,112 @@
 
     <div class="pericia">
         {{ dnd.acrobacia }}
-        <label>10</label>
+        <label id="mod_acrobacia">0</label>
         <label>Acrobacia(Dex)</label>
     </div>
     
 
     <div class="pericia">
         {{ dnd.adestrarAnimais }}
-        <label>10</label>
+        <label id="mod_adestrarAnimais">0</label>
         <label>Adestrar Animais(Sab)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.arcana }}
-        <label>10</label>
+        <label id="mod_arcana">0</label>
         <label>Arcana(Int)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.atletismo }}
-        <label>10</label>
+        <label id="mod_atletismo">0</label>
         <label>Atletismo(For)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.enganacao }}
-        <label>10</label>
+        <label id="mod_enganacao">0</label>
         <label>Enganação(Car)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.historia }}
-        <label>10</label>
+        <label id="mod_historia">0</label>
         <label>Historia(Int)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.intuicao }}
-        <label>10</label>
+        <label id="mod_intuicao">0</label>
         <label>Intuição(Sab)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.intimidacao }}
-        <label>10</label>
+        <label id="mod_intimidacao">0</label>
         <label>Intimidação(Car)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.investigacao }}
-        <label>10</label>
+        <label id="mod_investigacao">0</label>
         <label>Investigação(Int)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.medicina }}
-        <label>10</label>
+        <label id="mod_medicina">0</label>
         <label>Medicina(Sab)</label>
     </div>
 
 
     <div class="pericia">
         {{ dnd.natureza }}
-        <label>10</label>
+        <label id="mod_natruza">0</label>
         <label>Natureza(Int)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.percepcao }}
-        <label>10</label>
+        <label id="mod_percepcao">0</label>
         <label>Percepção(Sab)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.atuacao }}
-        <label>10</label>
+        <label id="mod_atuacao">0</label>
         <label>Atuação(Car)</label>
     </div>
     
 
     <div class="pericia">
         {{ dnd.persuasao }}
-        <label>10</label>
+        <label id="mod_persuasao">0</label>
         <label>Persuasão(Car)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.religiao }}
-        <label>10</label>
+        <label id="mod_religiao">0</label>
         <label>Religião(Int)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.prestigitacao }}
-        <label>10</label>
+        <label id="mod_prestigitacao">0</label>
         <label>Prestigitação(Dex)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.furtividade }}
-        <label>10</label>
+        <label id="mod_furtividade">0</label>
         <label>Furtividade(Dex)</label>
     </div>
 
     <div class="pericia">
         {{ dnd.sobrevivencia }}
-        <label>10</label>
+        <label id="mod_sobrevivencia">0</label>
         <label>Sobrevivência(Sab)</label>
     </div>
 
@@ -446,6 +446,7 @@
         if(valorNivel != null && !isNaN(valorNivel)) {
             bonusProf.textContent = bonusProficiencia;
             calcularSalvaguardas();
+            calcularProficiencias()
         } else {
             bonusProf.textContent = 0;
             bonusProficiencia = 0;
@@ -469,6 +470,7 @@
      if(valorForca != null && !isNaN(valorForca)) {
         forcaMod.textContent = modForca;
         calcularSalvaguardas();
+        calcularProficiencias()
      } else {
         forcaMod.textContent = 0;
         modForca = 0;
@@ -489,6 +491,7 @@
      if(valorDex != null && !isNaN(valorDex)) {
         dexMod.textContent = modDex;
         calcularSalvaguardas();
+        calcularProficiencias()
      } else {
         dexMod.textContent = 0;
         modDex = 0;
@@ -509,6 +512,7 @@
      if(valorConst != null && !isNaN(valorConst)) {
         constMod.textContent = modConst;
         calcularSalvaguardas();
+        calcularProficiencias()
      } else {
         constMod.textContent = 0;
         modConst = 0;
@@ -529,6 +533,7 @@
      if(valorInt != null && !isNaN(valorInt)) {
         intMod.textContent = modInt;
         calcularSalvaguardas();
+        calcularProficiencias()
      } else {
         intMod.textContent = 0;
         modInt = 0;
@@ -550,6 +555,7 @@
      if(valorSab != null && !isNaN(valorSab)) {
         sabMod.textContent = modSab;
         calcularSalvaguardas();
+        calcularProficiencias()
      } else {
         sabMod.textContent = 0;
         modSab = 0
@@ -570,6 +576,7 @@
      if(valorCar != null && !isNaN(valorCar)) {
         carMod.textContent = modCar;
         calcularSalvaguardas();
+        calcularProficiencias()
      } else {
         carMod.textContent = 0;
         modCar = 0;
@@ -638,6 +645,65 @@
         }
     }
 
+
+    const acrobacia = document.getElementById('id_acrobacia');
+    const adestrarAnimais = document.getElementById('id_adestrarAnimais');
+    const arcana = document.getElementById('id_arcana');
+    const atletismo = document.getElementById('id_atletismo');
+    const enganacao = document.getElementById('id_enganacao');
+    const historia = document.getElementById('id_historia');
+    const intuicao = document.getElementById('id_intuicao');
+    const intimidacao = document.getElementById('id_intimidacao');
+    const investigacao = document.getElementById('id_investigacao');
+    const medicina = document.getElementById('id_medicina');
+    const natureza = document.getElementById('id_natureza');
+    const percepcao = document.getElementById('id_percepcao');
+    const atuacao = document.getElementById('id_atuacao');
+    const persuasao = document.getElementById('id_persuasao');
+    const religiao = document.getElementById('id_religiao');
+    const prestigitacao = document.getElementById('id_prestigitacao');
+    const furtividade = document.getElementById('id_furtividade');
+    const sobrevivencia = document.getElementById('id_sobrevivencia');
+
+
+    function calcularProficiencias(){
+        const modAcrobacia = document.getElementById('mod_acrobacia');
+        const modAdestrarAnimais = document.getElementById('mod_adestrarAnimais');
+
+
+        if(acrobacia.checked){
+            modAcrobacia.textContent = modDex + bonusProficiencia;
+        } else {
+            modAcrobacia.textContent = modDex;
+        }
+
+        if(adestrarAnimais.checked){
+            modAdestrarAnimais.textContent = modSab + bonusProficiencia;
+        } else {
+            modAdestrarAnimais.textContent = modSab;
+        }
+    }
+
+    acrobacia.addEventListener("change", calcularProficiencias);
+    adestrarAnimais.addEventListener("change", calcularProficiencias);
+    arcana.addEventListener("change", calcularProficiencias);
+    atletismo.addEventListener("change", calcularProficiencias);
+    enganacao.addEventListener("change", calcularProficiencias);
+    historia.addEventListener("change", calcularProficiencias);
+    intuicao.addEventListener("change", calcularProficiencias);
+    intimidacao.addEventListener("change", calcularProficiencias);
+    investigacao.addEventListener("change", calcularProficiencias);
+    medicina.addEventListener("change", calcularProficiencias);
+    natureza.addEventListener("change", calcularProficiencias);
+    percepcao.addEventListener("change", calcularProficiencias);
+    atuacao.addEventListener("change", calcularProficiencias);
+    persuasao.addEventListener("change", calcularProficiencias);
+    religiao.addEventListener("change", calcularProficiencias);
+    prestigitacao.addEventListener("change", calcularProficiencias);
+    furtividade.addEventListener("change", calcularProficiencias);
+    sobrevivencia.addEventListener("change", calcularProficiencias);
+
+
     checkFor.addEventListener("change", calcularSalvaguardas);
     checkDex.addEventListener("change", calcularSalvaguardas);
     checkConst.addEventListener("change", calcularSalvaguardas);
@@ -646,6 +712,7 @@
     checkCar.addEventListener("change", calcularSalvaguardas);
 
     calcularSalvaguardas();
+    calcularProficiencias()
 </script>
 
 
