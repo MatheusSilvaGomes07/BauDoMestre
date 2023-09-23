@@ -7,7 +7,7 @@ from .models import Grupo, Mensagem
 @login_required
 def Novo_grupo(request):
     u = request.user
-    new = Grupo.objects.create()
+    new = Grupo.objects.create(criador=u)
     new.membros.add(u)
     new.save()
     print("Novo grupo criado com sucesso:", new.uuid) 
@@ -44,6 +44,13 @@ def Abrir_chat(request, uuid):
 
 @login_required
 def Remover_grupo(request, uuid):
-	u = request.user
-	Grupo.objects.get(uuid=uuid).delete()
-	return redirect('buscarmesa')
+    u = request.user
+    grupo = Grupo.objects.get(uuid=uuid)
+    
+    # Verifique se o usuário atual é o criador do grupo
+    if grupo.criador != u:
+        return HttpResponseForbidden('Você não tem permissão para excluir este grupo.')
+    
+    grupo.delete()
+    return redirect('buscarmesa')
+
