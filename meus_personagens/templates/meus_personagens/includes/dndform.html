@@ -243,8 +243,8 @@
     {{ dnd.ca }}
     <label>Classe de Armadura</label>
     
-    <label style="background-color: gray;">5</label>
-    <label style="background-color: gray;">Iniciativa</label>
+    <label id="iniciativa">0</label>
+    <label>Iniciativa</label>
 
     {{ dnd.movi }}
     <label>Movimentação</label>
@@ -490,6 +490,8 @@
 
      if(valorDex != null && !isNaN(valorDex)) {
         dexMod.textContent = modDex;
+        const iniciativa = document.getElementById('iniciativa');
+        iniciativa.textContent = modDex;
         calcularSalvaguardas();
         calcularProficiencias()
      } else {
@@ -594,6 +596,7 @@
 
 
     function calcularSalvaguardas(){
+        
         const modSalvaFor = document.getElementById('salva_for');
         const modSalvaDex = document.getElementById('salva_dex');
         const modSalvaConst = document.getElementById('salva_const');
@@ -669,18 +672,131 @@
     function calcularProficiencias(){
         const modAcrobacia = document.getElementById('mod_acrobacia');
         const modAdestrarAnimais = document.getElementById('mod_adestrarAnimais');
+        const modArcana = document.getElementById('mod_arcana');
+        const modAtletismo = document.getElementById('mod_atletismo');
+        const modEnganacao = document.getElementById('mod_enganacao');
+        const modHistoria = document.getElementById('mod_historia');
+        const modIntuicao = document.getElementById('mod_intuicao');
+        const modIntimidacao = document.getElementById('mod_intimidacao');
+        const modInvestigacao = document.getElementById('mod_investigacao');
+        const modMedicina = document.getElementById('mod_medicina');
+        const modNatureza = document.getElementById('mod_natruza');
+        const modPercepcao = document.getElementById('mod_percepcao');
+        const modAtuacao = document.getElementById('mod_atuacao');
+        const modPersuasao = document.getElementById('mod_persuasao');
+        const modReligiao = document.getElementById('mod_religiao');
+        const modPrestigitacao = document.getElementById('mod_prestigitacao');
+        const modFurtividade = document.getElementById('mod_furtividade');
+        const modSobrevivencia = document.getElementById('mod_sobrevivencia');
 
 
+        //Acrobacia
         if(acrobacia.checked){
             modAcrobacia.textContent = modDex + bonusProficiencia;
         } else {
             modAcrobacia.textContent = modDex;
         }
-
+        //Adestrar Animais
         if(adestrarAnimais.checked){
             modAdestrarAnimais.textContent = modSab + bonusProficiencia;
         } else {
             modAdestrarAnimais.textContent = modSab;
+        }
+        // Arcana
+        if(arcana.checked){
+            modArcana.textContent = modInt + bonusProficiencia;
+        } else {
+            modArcana.textContent = modInt;
+        }
+        //Atletismo
+        if(atletismo.checked){
+            modAtletismo.textContent = modForca + bonusProficiencia;
+        } else {
+            modAtletismo.textContent = modForca;
+        }
+        //Enganação
+        if(enganacao.checked){
+            modEnganacao.textContent = modCar + bonusProficiencia;
+        } else {
+            modEnganacao.textContent = modCar;
+        }
+        //Historia
+        if(historia.checked){
+            modHistoria.textContent = modInt + bonusProficiencia;
+        } else {
+            modHistoria.textContent = modInt;
+        }
+        //Intuição
+        if(intuicao.checked){
+            modIntuicao.textContent = modSab + bonusProficiencia;
+        } else {
+            modIntuicao.textContent = modSab;
+        }
+        //Intimidação
+        if(intimidacao.checked){
+            modIntimidacao.textContent = modCar + bonusProficiencia;
+        } else {
+            modIntimidacao.textContent = modCar;
+        }
+        //Investigação
+        if(investigacao.checked){
+            modInvestigacao.textContent = modInt + bonusProficiencia;
+        } else {
+            modInvestigacao.textContent = modInt;
+        }
+        //Medicina
+        if(medicina.checked){
+            modMedicina.textContent = modSab + bonusProficiencia;
+        } else {
+            modMedicina.textContent = modSab;
+        }
+        //Natureza
+        if(natureza.checked){
+            modNatureza.textContent = modInt + bonusProficiencia;
+        } else {
+            modNatureza.textContent = modInt;
+        }
+        //Percepção
+        if(percepcao.checked){
+            modPercepcao.textContent = modSab + bonusProficiencia;
+        } else {
+            modPercepcao.textContent = modSab;
+        }
+        //Atuação
+        if(atuacao.checked){
+            modAtuacao.textContent = modCar + bonusProficiencia;
+        } else {
+            modAtuacao.textContent = modCar;
+        }
+        //Persuasão
+        if(persuasao.checked){
+            modPersuasao.textContent = modCar + bonusProficiencia;
+        } else {
+            modPersuasao.textContent = modCar;
+        }
+        //Religião
+        if(religiao.checked){
+            modReligiao.textContent = modInt + bonusProficiencia;
+        } else {
+            modReligiao.textContent = modInt;
+        }
+        //Prestigitação
+        if(prestigitacao.checked){
+            modPrestigitacao.textContent = modDex + bonusProficiencia;
+        } else {
+            modPrestigitacao.textContent = modDex;
+        }
+        //Furtividade
+        if(furtividade.checked){
+            modFurtividade.textContent = modDex + bonusProficiencia;
+        } else {
+            modFurtividade.textContent = modDex;
+        }
+        //Sobrevivencia
+        if(sobrevivencia.checked){
+            modSobrevivencia.textContent = modSab + bonusProficiencia;
+        } else {
+            modSobrevivencia.textContent = modSab;
         }
     }
 
