@@ -1,46 +1,136 @@
-{% extends "account/base.html" %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-{% load i18n %}
-{% load account socialaccount %}
+    <link rel="stylesheet" href="../../../static/css/global.css" />
+    <link rel="stylesheet" href="../../../static/css/cadastro.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;0,900;1,700&display=swap"
+    />
+  </head>
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+  <body id="register">
+    {% load i18n %}
+    {% load static %}
+    {% load account socialaccount %}
+    {% block content %}
 
-{% block content %}
 
-<h1>{% trans "Sign In" %}</h1>
+      <nav class="navbar">
+        <div class="site-logo flex">
+          <img class="bau-icon" alt="" src="../../../static/img/public/ba-do-mestre-23-4.svg"/>
+          <p>BAU DO MESTRE</p>
+        </div>
+        <div class="login-button flex">
+          <a href="{% url 'index' %}">
+            <div class="cadastro-inner">
+              <p>Home</p>
+            </div>
+          </a>
+          <a href="{% url 'account_signup' %}">
+            <div class="cadastro-inner">
+              <p>Cadastro</p>
+            </div>
+          </a>
+        </div>
+      </nav>
 
-{% get_providers as socialaccount_providers %}
+      <main class="register-box flex">
 
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+        <aside class="aside-register flex" id="login">
+          <h1>{% trans "Seja Bem Vindo!" %}</h1>
 
-<div class="socialaccount_ballot">
+          {% get_providers as socialaccount_providers %}
 
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
+          <div class="registers flex">
+            {% if socialaccount_providers %}
+              <p>{% blocktrans with site.name as site_name %}Please sign in with one
+              of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+              for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
-  <div class="login-or">{% trans 'or' %}</div>
+              <div class="socialaccount_ballot">
 
-</div>
+                <ul class="socialaccount_providers">
+                  {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                </ul>
 
-{% include "socialaccount/snippets/login_extra.html" %}
+                <div class="login-or">{% trans 'or' %}</div>
 
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
+              </div>
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
+              {% include "socialaccount/snippets/login_extra.html" %}
+
+              {% else %}
+              <p>{% blocktrans %}If you have not created an account yet, then please
+              <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+              {% endif %}
+
+              <form class="login" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                <ul class='errorlist'>
+                  {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {{ form.login }}
+                {{ form.password }}
+                {{ form.remember }}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+              </form>
+
+            <div class="username flex data-box">
+              <img class="vector-icon5" alt="" src="../../../static/img/public/vector4.svg" />
+              <div class="nome-de-usurio-container">
+                <input type="text" placeholder="Email">
+              </div>
+            </div>
+
+            <div class="senha flex data-box">
+              <img class="vector-icon7" alt="" src="../../../static/img/public/vector6.svg" />
+              <div class="nome-de-usurio-container">
+                <input type="text" placeholder="Senha">
+              </div>
+            </div>
+
+          <a href="">
+            <div class="cadastro-child flex">
+              <div class="confirmar">Confirmar</div>
+            </div>
+          </a>
+
+        </aside>
+
+        <aside class="aside-image flex">
+            <div class="a-batalha-final flex">
+              <p>
+                “A batalha final começa, e então... COMO ASSIM VOCÊ TIROU ERRO CRITICO
+                KARLOS?”
+              </div>
+            </p>
+          <img class="image-53-icon" alt="" src="../../../static/img/public/image-53@2x.png"/>
+        </aside>
+
+      </main>
+
+  </body>
+</html>
+
+
 
 {% endblock %}
+

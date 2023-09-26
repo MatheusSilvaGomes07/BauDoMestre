@@ -1,6 +1,14 @@
 from django import forms
 from .models import Campanha, Perfil
+from allauth.account.forms import SignupForm, LoginForm
 
+class CustomSignupForm(SignupForm):
+    pass
+
+class CustomLoginForm(LoginForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['login'].label = "Username"
 # Forms da Campanha
 class CampanhaForm(forms.ModelForm):
     class Meta:

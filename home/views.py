@@ -9,6 +9,17 @@ from chat.models import Mensagem, Grupo
 from random import randint
 import os
 import shutil
+from allauth.account.views import SignupView, LoginView
+from .forms import CustomSignupForm, CustomLoginForm
+
+class CustomSignupView(SignupView):
+    form_class = CustomSignupForm
+    def form_invalid(self, form):
+        # Reexibe o formulário com mensagens de erro
+        return self.render_to_response(self.get_context_data(form=form))
+
+class CustomLoginView(LoginView):
+    form_class = CustomLoginForm
 
 #Renomear imagem de perfil
 
@@ -72,7 +83,7 @@ def buscarmesa(request):
     genero_filtro = request.GET.get('genero')
     campanhas = Campanha.objects.all()
     grupos = Grupo.objects.all()
-    
+
 
     if sistema_busca:
         campanhas = campanhas.filter(
@@ -127,8 +138,8 @@ def criarCampanhas(request):
             return redirect('buscarmesa')
     else:
         form = CampanhaForm()
-    
-    return render(request, 'principal/criarMesas.html', {'form': form}) 
+
+    return render(request, 'principal/criarMesas.html', {'form': form})
 
 
 # view da conta do usuário logado
