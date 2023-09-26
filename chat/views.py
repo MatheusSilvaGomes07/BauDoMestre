@@ -37,9 +37,8 @@ def Abrir_chat(request, uuid):
 	grupo = Grupo.objects.get(uuid=uuid)
 	if request.user not in grupo.membros.all():
 		return HttpResponseForbidden('Not a member. Try another group.')
-	mensagens = grupo.mensagem_set.all()
-	sorted_messages = sorted(mensagens, key=lambda x: x.tempo)
-	return render(request, 'chat.html', context={'mensagens':sorted_messages, 'uuid': uuid})
+	mensagens = Mensagem.objects.filter(grupo=grupo).order_by('tempo')
+	return render(request, 'chat.html', context={'mensagens':mensagens, 'uuid': uuid})
 
 
 @login_required
@@ -47,7 +46,7 @@ def Remover_grupo(request, uuid):
     u = request.user
     grupo = Grupo.objects.get(uuid=uuid)
     
-    # Verifique se o usuário atual é o criador do grupo
+
     if grupo.criador != u:
         return HttpResponseForbidden('Você não tem permissão para excluir este grupo.')
     

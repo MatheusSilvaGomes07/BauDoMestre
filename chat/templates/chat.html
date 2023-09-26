@@ -10,12 +10,12 @@
   
   <div id="chat-log" style="border:1px solid;width:500px;height:400px;">
   
-  {% if mensagem %}
+  
     {% for mensagem in mensagens %}
-    <p>{{ mensagem.autor }}: {{ mensagem.conteudo }}</p>
+    <p>{{ mensagem.autor }}: ({{ mensagem.tempo}})</p>
+    <p>  {{ mensagem.conteudo }}</p>
     {% endfor %}
-  {% endif %}
-
+ 
   <title> chat </title>
   
   </div>
