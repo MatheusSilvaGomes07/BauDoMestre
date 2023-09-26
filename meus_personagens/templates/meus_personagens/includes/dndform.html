@@ -1,10 +1,11 @@
 {% load static %}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     <!-- Box inicial dos dados do personagem -->
 <div class="sheet_header">
+    {{ dnd.foto }}
     {{ dnd.nome.label_tag }}
     {{ dnd.nome }}
 

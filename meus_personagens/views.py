@@ -19,7 +19,7 @@ def index(request):
 @login_required
 def criacao_char(request):
     if request.method == 'POST':
-        formDnD = DnDForm(request.POST)
+        formDnD = DnDForm(request.POST, request.FILES)
         if formDnD.is_valid():
             dnd = formDnD.save(commit=False)
             dnd.nomePerfil = request.user
@@ -29,7 +29,7 @@ def criacao_char(request):
         formDnD = DnDForm()
     
     if request.method == 'POST':
-        formOrdem = OrdemParanormalForm(request.POST)
+        formOrdem = OrdemParanormalForm(request.POST, request.FILES)
         if formOrdem.is_valid():
             ordem = formOrdem.save(commit=False)
             ordem.nomePerfil = request.user
@@ -39,7 +39,7 @@ def criacao_char(request):
         formOrdem = OrdemParanormalForm()
 
     if request.method == 'POST':
-        formTormenta = TormentaForm(request.POST)
+        formTormenta = TormentaForm(request.POST, request.FILES)
         if formTormenta.is_valid():
             tormenta = formTormenta.save(commit=False)
             tormenta.nomePerfil = request.user
@@ -49,7 +49,7 @@ def criacao_char(request):
         formTormenta = TormentaForm()
 
     if request.method == 'POST':
-        formCoC = CallOfCthulhuForm(request.POST)
+        formCoC = CallOfCthulhuForm(request.POST, request.FILES)
         if formCoC.is_valid():
             CoC =  formCoC.save(commit=False)
             CoC.nomePerfil = request.user

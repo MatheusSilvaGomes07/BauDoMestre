@@ -21,6 +21,7 @@ class Personagem(models.Model):
 
 class DnD(Personagem):
     #Dados Iniciais
+    foto = models.ImageField(upload_to="images/dnd5e")
     classe = models.CharField(max_length=100)
     sub_classe = models.CharField(max_length=100, blank=True, null=True)
     nivel = models.IntegerField(validators=[MinValueValidator(1)])
@@ -200,6 +201,7 @@ class DnD(Personagem):
 
 
 class OrdemParanormal(Personagem):
+    foto = models.ImageField(upload_to="images/ordemParanormal")
 
     #Atributos
     agi = models.IntegerField(default=0)
@@ -410,6 +412,8 @@ class OrdemParanormal(Personagem):
 
 
 class Tormenta(Personagem):
+    foto = models.ImageField(upload_to="images/tormenta20")
+
     raca = models.CharField(max_length=100)
     origem = models.CharField(max_length=100, null=True, blank=True)
     classe = models.CharField(max_length=100)
@@ -641,6 +645,8 @@ class Tormenta(Personagem):
 
 
 class CallOfCthulhu(Personagem):
+    foto = models.ImageField(upload_to="images/coc1920")
+
     ocupacao = models.CharField(max_length=100)
     localNascimento = models.CharField(max_length=100, null=True, blank=True)
     pronome = models.CharField(max_length=10, null=True, blank=True)

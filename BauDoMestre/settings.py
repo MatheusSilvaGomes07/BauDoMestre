@@ -58,6 +58,7 @@ SITE_ID = 1
 
 
 MIDDLEWARE = [
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -144,3 +145,6 @@ STATICFILES_DIRS = ((os.path.join(BASE_DIR, 'static')), )
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/usuario'
+
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/user-media/"
