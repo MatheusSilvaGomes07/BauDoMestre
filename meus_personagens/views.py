@@ -3,8 +3,109 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import DnDForm, OrdemParanormalForm, TormentaForm, CallOfCthulhuForm
 from .models import DnD, OrdemParanormal, Tormenta, CallOfCthulhu
 from django.contrib.auth.decorators import login_required
+import os
 
+@login_required
+def edit_dnd(request, id):
+    personagem = get_object_or_404(DnD, pk=id)
+    user = request.user
+    foto_antiga = personagem.foto.name
 
+    if user == personagem.nomePerfil or user.is_staff:
+        if request.method == "POST":
+            form = DnDForm(request.POST, request.FILES, instance=personagem)
+            if form.is_valid():
+                if personagem.foto:
+                    
+
+                    caminho_arquivo_antigo = os.path.join('media', foto_antiga)
+
+                    os.remove(caminho_arquivo_antigo)
+                form.save()
+                return redirect('meus_personagens')
+        else:
+            form = DnDForm(instance=personagem)
+    else:
+         return redirect('meus_personagens')
+    
+    return render(request, 'meus_personagens/editCharacter/edit_char_dnd.html', {'dnd': form, 'personagem': personagem})
+
+@login_required
+def edit_ordem(request, id):
+    personagem = get_object_or_404(OrdemParanormal, pk=id)
+    user = request.user
+    foto_antiga = personagem.foto.name
+
+    if user == personagem.nomePerfil or user.is_staff:
+        if request.method == "POST":
+            form = OrdemParanormalForm(request.POST, request.FILES, instance=personagem)
+            if form.is_valid():
+                if personagem.foto:
+                    
+
+                    caminho_arquivo_antigo = os.path.join('media', foto_antiga)
+
+                    os.remove(caminho_arquivo_antigo)
+                form.save()
+                return redirect('meus_personagens')
+        else:
+            form = OrdemParanormalForm(instance=personagem)
+    else:
+         return redirect('meus_personagens')
+    
+    return render(request, 'meus_personagens/editCharacter/edit_char_ordem.html', {'ordem': form, 'personagem': personagem})
+
+@login_required
+def edit_tormenta20(request, id):
+    personagem = get_object_or_404(Tormenta, pk=id)
+    user = request.user
+    foto_antiga = personagem.foto.name
+
+    if user == personagem.nomePerfil or user.is_staff:
+        if request.method == "POST":
+            form = TormentaForm(request.POST, request.FILES, instance=personagem)
+            if form.is_valid():
+                if personagem.foto:
+                    
+
+                    caminho_arquivo_antigo = os.path.join('media', foto_antiga)
+
+                    os.remove(caminho_arquivo_antigo)
+                form.save()
+                return redirect('meus_personagens')
+        else:
+            form = TormentaForm(instance=personagem)
+    else:
+         return redirect('meus_personagens')
+    
+    return render(request, 'meus_personagens/editCharacter/edit_char_tormenta20.html', {'tormenta': form, 'personagem': personagem})
+
+@login_required
+def edit_coc1920(request, id):
+    personagem = get_object_or_404(CallOfCthulhu, pk=id)
+    user = request.user
+    foto_antiga = personagem.foto.name
+
+    if user == personagem.nomePerfil or user.is_staff:
+        if request.method == "POST":
+            form = CallOfCthulhuForm(request.POST, request.FILES, instance=personagem)
+            if form.is_valid():
+                if personagem.foto:
+                    
+
+                    caminho_arquivo_antigo = os.path.join('media', foto_antiga)
+
+                    os.remove(caminho_arquivo_antigo)
+                form.save()
+                return redirect('meus_personagens')
+        else:
+            form = CallOfCthulhuForm(instance=personagem)
+    else:
+         return redirect('meus_personagens')
+    
+    return render(request, 'meus_personagens/editCharacter/edit_char_coc1920.html', {'coc7e': form, 'personagem': personagem})
+
+            
 @login_required
 def index(request):
     user = request.user
@@ -67,7 +168,7 @@ def detail_charDnD(request, id):
     user = request.user
 
     if user == personagem.nomePerfil or user.is_staff:
-        return render(request, 'meus_personagens/detail_char_dnd.html', {'personagem': personagem})
+        return render(request, 'meus_personagens/detailCharacter/detail_char_dnd.html', {'personagem': personagem})
     else:
          return redirect('meus_personagens')
     
@@ -77,7 +178,7 @@ def detail_charOrdemParanormal(request, id):
     user = request.user
 
     if user == personagem.nomePerfil or user.is_staff:
-        return render(request, 'meus_personagens/detail_char_ordem.html', {'personagem': personagem})
+        return render(request, 'meus_personagens/detailCharacter/detail_char_ordem.html', {'personagem': personagem})
     else:
          return redirect('meus_personagens')
     
@@ -87,7 +188,7 @@ def detail_charTormenta(request, id):
     user = request.user
 
     if user == personagem.nomePerfil or user.is_staff:
-        return render(request, 'meus_personagens/detail_char_tormenta.html', {'personagem': personagem})
+        return render(request, 'meus_personagens/detailCharacter/detail_char_tormenta.html', {'personagem': personagem})
     else:
          return redirect('meus_personagens')
 
@@ -97,6 +198,6 @@ def detail_charCoC(request, id):
     user = request.user
 
     if user == personagem.nomePerfil or user.is_staff:
-        return render(request, 'meus_personagens/detail_char_coc.html', {'personagem': personagem})
+        return render(request, 'meus_personagens/detailCharacter/detail_char_coc.html', {'personagem': personagem})
     else:
          return redirect('meus_personagens')

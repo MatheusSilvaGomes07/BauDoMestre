@@ -5,9 +5,11 @@
 {% endblock %}
 
 {% block content %}
+<img src="{{ personagem.foto.url }}" alt="Foto do personagem" height="500px" width="600px">
+
     <h1>{{ personagem.nome }}</h1>
     <p>Nex: {{ personagem.nex }}%</p>
-    <img style="width: 10vw; height: 20vh;" src="{{ personagem.foto.url }}" alt="Foto do personagem">
+
     
     
 {% endblock%}

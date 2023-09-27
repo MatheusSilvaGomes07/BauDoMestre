@@ -8,12 +8,13 @@ class DnDForm(forms.ModelForm):
         model = DnD
         fields = '__all__'
         labels = {
-           #'classe': ''
+           #'foto': '',
         }
         widgets = {
             'inventario': forms.Textarea(attrs={'rows': 15, }) #'cols': 15
         }
         exclude = ['nomePerfil']
+        
         
 
 

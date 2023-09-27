@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block content %}
+<img src="{{ personagem.foto.url }}" alt="Foto do personagem" height="500px" width="600px">
+
     <h1>{{ personagem.nome }}</h1>
-    <p>Divindade {{ personagem.divindade }}</p>
+    <p>Vida: {{ personagem.vida }}</p>
 {% endblock%}

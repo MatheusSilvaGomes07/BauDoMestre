@@ -1,0 +1,15 @@
+{% extends 'meus_personagens/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Editar personagem
+{% endblock %}
+
+{% block content %}
+<label for="{{ form.foto.id_for_label }}">Imagem Atual:</label>
+    <br>
+    <img src="{{ personagem.foto.url }}" alt="{{ personagem.nome }}" width="200" height="200">
+    <br>
+    {% include "meus_personagens/includes/tormentaform.html"%}
+{% endblock %}
