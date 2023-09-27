@@ -2,6 +2,14 @@ body {
   margin: 0;
   line-height: normal;
 }
+p{
+  margin-bottom: 0 !important;
+}
+
+*, *:active {
+  text-decoration: none;
+  color: inherit;
+}
 
 :root {
   /* fonts */

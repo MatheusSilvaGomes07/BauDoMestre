@@ -1,15 +1,11 @@
-
-{% load static %}
-{% block conteudo %}
-
 <!DOCTYPE html>
 <html>
   <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" href="{% static "css/global.css" %}" />
-    <link rel="stylesheet" href="{% static "css/dashboard-otimized.css" %}" />
+    <link rel="stylesheet" href="../global.css" />
+    <link rel="stylesheet" href="./dashboard-otimized.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"
     />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
@@ -19,7 +15,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
 
   <body class="flex" id="dashboard-otimized">
@@ -28,7 +23,7 @@
       <nav class="flex">
         <div class="nav-buttons flex">
           <div class="nav-btn">
-            <a href="{% url 'index' %}">Geral</a>
+            <p>Geral</p>
           </div>
           <div class="nav-btn">
             <p>Personagens</p>
@@ -39,41 +34,31 @@
           <div class="nav-btn">
             <p>Configuração</p>
           </div>
-          {% if user.is_authenticated%}
-          {% else %}
-          <div class="nav-btn">
-            <a href="{% url 'account_signup' %}">Cadastre-se</a>
-          </div>
-          <div class="nav-btn">
-            <a href="{% url 'account_login' %}">Login</a>
-          </div>
-          {% endif %}
         </div>
-        <button
-        onclick="openSide()"><img class="navbar-icon" id="btn-ico" src="{% static "img/public/list-bold.svg" %}" alt=""></button>
-        <img class="navbar-icon" alt="" src="{% static "img/public/ba-do-mestre-23-4.svg" %}" />
+        <button onclick="openSide()"><img class="navbar-icon" id="btn-ico" src="../public/list-bold.svg" alt=""></button>
+        <img class="navbar-icon" alt="" src="../public/ba-do-mestre-23-4.svg" />
       </nav>
       <div id="sidebar" class="side-bar flex">
 
         <div class="side-rows flex">
-          <button onclick="closeSide()"> <img src="{% static "img/public/figma-icons/x-bold.svg" %}" alt=""></button>
+          <button onclick="closeSide()"> <img src="../public/figma-icons/x-bold.svg" alt=""></button>
           <div class="side-row flex">
-            <img src="{% static "img/public/figma-icons/home.png" %}" alt="Icon Home">
-            <a href="{% url 'index' %}">Geral</a>
-            <img src="{% static "img/public/downarrow-1-1@2x.png" %}" alt="">
+            <img src="../public/figma-icons/home.png" alt="Icon Home">
+            <p>Home</p>
+            <img src="../public/downarrow-1-1@2x.png" alt="">
           </div>
           <div class="side-row flex" id="inv">
-            <img src="{% static "img/public/figma-icons/home.png" %}" alt="Icon Home">
+            <img src="../public/figma-icons/home.png" alt="Icon Home">
             <p>Inventário</p>
-            <img src="{% static "img/public/downarrow-1-1@2x.png" %}" alt="">
+            <img src="../public/downarrow-1-1@2x.png" alt="">
           </div>
           <div class="side-row flex" id="qst">
-            <img src="{% static "img/public/figma-icons/home.png" %}" alt="Icon Home">
+            <img src="../public/figma-icons/home.png" alt="Icon Home">
             <p>Mesas</p>
-            <img src="{% static "img/public/downarrow-1-1@2x.png" %}" alt="">
+            <img src="../public/downarrow-1-1@2x.png" alt="">
           </div>
           <div class="side-row flex" id="cfg">
-            <img src="{% static "img/public/figma-icons/gear.png" %}" alt="Icon Home">
+            <img src="../public/figma-icons/gear.png" alt="Icon Home">
             <p>Configuração</p>
           </div>
         </div>
@@ -84,7 +69,7 @@
           </div>
           <p>2 de 5 GB Usados</p>
           <div class="user flex">
-            <img src="{% static "img/public/figma-icons/leo.png" %}" alt="">
+            <img src="../public/figma-icons/leo.png" alt="">
             <div class="user-desc flex">
               <p>Leonardo Paschoa</p>
               <p>leopasbraga@gmail.com</p>
@@ -104,91 +89,75 @@
 
         </div>
         <div class="icons-list flex">
-          <img src="{% static "img/public/figma-icons/dice.svg" %}" alt="">
-          <img src="{% static "img/public/figma-icons/map.svg" %}" alt="">
-          <img src="{% static "img/public/figma-icons/dragon.svg" %}" alt="">
-          <img src="{% static "img/public/figma-icons/headphones.svg" %}" alt="">
-          <img src="{% static "img/public/figma-icons/image.svg" %}" alt="">
-          <img src="{% static "img/public/figma-icons/doc.svg" %}" alt="">
+          <img src="../public/figma-icons/dice.svg" alt="">
+          <img src="../public/figma-icons/map.svg" alt="">
+          <img src="../public/figma-icons/dragon.svg" alt="">
+          <img src="../public/figma-icons/headphones.svg" alt="">
+          <img src="../public/figma-icons/image.svg" alt="">
+          <img src="../public/figma-icons/doc.svg" alt="">
         </div>
         <p class="qual-a-aventura">Qual a aventura de hoje?</p>
         <p class="encontre-histrias-incrveis">Encontre histórias incríveis</p>
 
-        <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-2@2x.png" %}" />
+        <img class="down-arrow-1-2" alt="" src="../public/downarrow-1-2@2x.png" />
       </div>
     </main>
 
     <div class="quests">
       <div class="quests1 flex">
         <h3>Quests</h3>
-        <a href="{% url 'criarCampanhas' %}"><img class="vector-icon12" alt="" src="{% static "img/public/vector11.svg" %}" /></a>
+        <img class="vector-icon12" alt="" src="../public/vector11.svg" />
       </div>
 
       <div class="mesas flex">
-        {% for campanha in campanhas %}
-          <tr>
-             <div class="vector-group flex">
-			  <div class="frame-child3 flex">
-				<img class="image-49-icon" alt="" src="{% static "img/public/image-49@2x.png" %}" />
-				<td class="the-dragoon-hunters">{{ campanha.nomeCampanha }}</td>
-			  </div>
-			  <div class="text-box flex">
-				<p class="lorem-ipsum-dolor3">
-          <td>{{ campanha.descricaoCampanha }}</td>
-        </p>
+        <div class="vector-group">
+          <div class="frame-child3 flex">
+            <img class="image-49-icon" alt="" src="../public/image-49@2x.png" />
+            <p class="the-dragoon-hunters">The Dragoon Hunters</p>
+          </div>
+          <div class="text-box flex">
+            <p class="lorem-ipsum-dolor3" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at
+            tincidunt turpis. Vivamus felis nunc, feugiat in efficitur quis,
+            bibendum faucibus mauris. Nullam egestas ultricies urna. Maecenas
+            ornare a erat aliquam porta.</p>
 
-				<div class="icons flex">
-				  <div class="icon-box flex">
-					<img class="vector-icon" alt="" src="{% static "img/public/vector12.svg" %}"/>
-					<i class="type-text">
-            <td class="type-text">{{ campanha.ambienteCampanha }}</td>
-          </i>
-				  </div>
-				  <div class="icon-box flex">
-					<img class="vector-icon" alt="" src="{% static "img/public/vector13.svg" %}" />
-					<i class="type-text">
-            <td class="type-text">{{ campanha.generoRPG }}</td>
-          </i>
-				  </div>
-				  <div class="icon-box flex">
-					<img class="vector-icon" alt="" src="{% static "img/public/2662663967-dungeonsanddragonspng-11@2x.png" %}"/>
-					<i class="type-text">
-            <td class="type-text">{{ campanha.sistemaCampanha }}</td>
-          </i>
-				  </div>
-				</div>
-				<p class="grupo-56">
-          <td class="grupo-56">GRUPO: {{ campanha.numeroJogadores }}</td>
-        </p>
-			  </div>
-			  <div class="box-buttons flex">
-				<div class="frame-child7">
-				  <p class="button-text">Veja Mais...</p>
-				</div>
-				<div class="frame-child8">
-				  <p class="button-text jogar">JOGAR</p>
-				</div>
-			  </div>
-			</div>
-          </tr>
-{% endfor %}
-
-
-
+            <div class="icons flex">
+              <div class="icon-box flex">
+                <img class="vector-icon" alt="" src="../public/vector12.svg"/>
+                <i class="type-text">Campanha Online</i>
+              </div>
+              <div class="icon-box flex">
+                <img class="vector-icon" alt="" src="../public/vector13.svg" />
+                <i class="type-text">Fantasia Medieval</i>
+              </div>
+              <div class="icon-box flex">
+                <img class="vector-icon" alt="" src="../public/2662663967-dungeonsanddragonspng-11@2x.png"/>
+                <i class="type-text">Dungeons and Dragons 5E</i>
+              </div>
+            </div>
+            <p class="grupo-56">Grupo: 5/6</p>
+          </div>
+          <div class="box-buttons flex">
+            <div class="frame-child7">
+              <p class="button-text">Veja Mais...</p>
+            </div>
+            <div class="frame-child8">
+              <p class="button-text jogar">JOGAR</p>
+            </div>
+          </div>
+        </div>
       </div>
-
-
 
         <div class="button-child flex">
           <b class="veja-mais3">Veja Mais</b>
-        <img class="down-arrow-1-43" alt="" src="{% static "img/public/downarrow-1-42@2x.png" %}"/>
+        <img class="down-arrow-1-43" alt="" src="../public/downarrow-1-42@2x.png"/>
         </div>
     </div>
 
     <div class="personagens1 flex">
       <div class="character-header flex">
         <div class="personagens2">personagens</div>
-        <img class="vector-icon12" alt="" src="{% static "img/public/vector10.svg" %}" />
+        <img class="vector-icon12" alt="" src="../public/vector10.svg" />
       </div>
 
       <div class="char-carroussel flex">
@@ -223,7 +192,7 @@
               </div>
             </div>
             <div class="right-column flex">
-              <img class="frame-child6" alt="" src="{% static "img/public/vector-17.svg" %}" />
+              <img class="frame-child6" alt="" src="../public/vector-17.svg" />
               <div class="nivel3">
                 <span class="nivel-txt">
                   <p class="p">10</p>
@@ -234,8 +203,8 @@
           </div>
           <div class="frame-footer flex">
             <div class="footer-icons flex">
-              <img class="frame-icon3 footer-icon" alt="" src="{% static "img/public/frame1.svg" %}" />
-              <img class="dungeons-and-dragons-png-1-icon footer-icon" alt="" src="{% static "img/public/2662663967-dungeonsanddragonspng-1@2x.png" %}"/>
+              <img class="frame-icon3 footer-icon" alt="" src="../public/frame1.svg" />
+              <img class="dungeons-and-dragons-png-1-icon footer-icon" alt="" src="../public/2662663967-dungeonsanddragonspng-1@2x.png"/>
             </div>
             <div class="frame6 flex">
               <b class="abrir">ABRIR</b>
@@ -246,7 +215,7 @@
       <div class="button">
         <div class="button-child flex">
           <b class="veja-mais3">Veja Mais</b>
-          <img class="down-arrow-1-43" alt="" src="{% static "img/public/downarrow-1-42@2x.png" %}}"/>
+          <img class="down-arrow-1-43" alt="" src="../public/downarrow-1-42@2x.png"/>
       </div>
       </div>
     </div>
@@ -262,8 +231,3 @@ function closeSide(){
     document.getElementById("sidebar").style.left = "-500px"
 }
 </script>
-
-<table class="table">
-</table>
-
-{% endblock conteudo %}
