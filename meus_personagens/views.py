@@ -11,6 +11,7 @@ def edit_dnd(request, id):
     user = request.user
     foto_antiga = personagem.foto.name
 
+
     if user == personagem.nomePerfil or user.is_staff:
         if request.method == "POST":
             form = DnDForm(request.POST, request.FILES, instance=personagem)
@@ -19,8 +20,8 @@ def edit_dnd(request, id):
                     
 
                     caminho_arquivo_antigo = os.path.join('media', foto_antiga)
-
-                    os.remove(caminho_arquivo_antigo)
+                    if foto_antiga != personagem.foto:
+                        os.remove(caminho_arquivo_antigo)
                 form.save()
                 return redirect('meus_personagens')
         else:
@@ -45,7 +46,8 @@ def edit_ordem(request, id):
 
                     caminho_arquivo_antigo = os.path.join('media', foto_antiga)
 
-                    os.remove(caminho_arquivo_antigo)
+                    if foto_antiga != personagem.foto:
+                        os.remove(caminho_arquivo_antigo)
                 form.save()
                 return redirect('meus_personagens')
         else:
@@ -70,7 +72,8 @@ def edit_tormenta20(request, id):
 
                     caminho_arquivo_antigo = os.path.join('media', foto_antiga)
 
-                    os.remove(caminho_arquivo_antigo)
+                    if foto_antiga != personagem.foto:
+                        os.remove(caminho_arquivo_antigo)
                 form.save()
                 return redirect('meus_personagens')
         else:
@@ -95,7 +98,8 @@ def edit_coc1920(request, id):
 
                     caminho_arquivo_antigo = os.path.join('media', foto_antiga)
 
-                    os.remove(caminho_arquivo_antigo)
+                    if foto_antiga != personagem.foto:
+                        os.remove(caminho_arquivo_antigo)
                 form.save()
                 return redirect('meus_personagens')
         else:
