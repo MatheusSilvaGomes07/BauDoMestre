@@ -72,46 +72,40 @@
               {% include "socialaccount/snippets/login_extra.html" %}
 
               {% else %}
-              <p>{% blocktrans %}If you have not created an account yet, then please
-              <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+              <p id="login-register">{% blocktrans %}If you have not created an account yet, then please
+              <a href="{{ signup_url }}"><b>sign up</b></a> first.{% endblocktrans %}</p>
               {% endif %}
 
-              <form class="login" method="POST" action="{% url 'account_login' %}">
+              <form class="login signup flex" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 <ul class='errorlist'>
                   {% for error in form.non_field_errors %}
                     <li>{{ error }}</li>
                   {% endfor %}
                 </ul>
-                {{ form.login }}
-                {{ form.password }}
-                {{ form.remember }}
+
+                <div class="nome-de-usurio-container flex data-box">
+                  <img class="vector-icon5" src="{% static "img/public/vector4.svg" %}">
+                  {{ form.login }}
+                </div>
+
+                <div class="nome-de-usurio-container flex data-box">
+                  <img class="vector-icon5" src="{% static "img/public/vector6.svg" %}">
+                  {{ form.password }}
+                </div>
+
+                <div id="remember" class="nome-de-usurio-container flex">
+                  <p>Se manter conectado?</p>
+                  {{ form.remember }}
+                </div>
+                
+
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
                 <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-                <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+                <button class="cadastro-child confirmar primaryAction" type="submit">{% trans "Sign In" %}</button>
               </form>
-
-            <div class="username flex data-box">
-              <img class="vector-icon5" alt="" src="../../../static/img/public/vector4.svg" />
-              <div class="nome-de-usurio-container">
-                <input type="text" placeholder="Email">
-              </div>
-            </div>
-
-            <div class="senha flex data-box">
-              <img class="vector-icon7" alt="" src="../../../static/img/public/vector6.svg" />
-              <div class="nome-de-usurio-container">
-                <input type="text" placeholder="Senha">
-              </div>
-            </div>
-
-          <a href="">
-            <div class="cadastro-child flex">
-              <div class="confirmar">Confirmar</div>
-            </div>
-          </a>
 
         </aside>
 

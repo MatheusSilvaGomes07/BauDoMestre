@@ -44,34 +44,44 @@
           </ul>
 
           <div class="registers flex">
-
-            <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-              {% csrf_token %}
-              {% if form.errors %}
+            {% if form.errors %}
               {% for field in form %}
               {% for error in field.errors %}
               <div class="alert alert-error">
-            <span> {{error}} <span>
+                <span> {{error}} <span>
               </div>
               {% endfor %}
               {% endfor %}
               {% endif %}
-              {{ form.email }}
-              {{ form.username }}
-              {{ form.password1 }}
-              {{ form.password2 }}
+
+            <form class="signup flex" id="signup_form" method="post" action="{% url 'account_signup' %}">
+              {% csrf_token %}
+              <div class="nome-de-usurio-container flex data-box">
+                <img class="vector-icon5" src="{% static "img/public/vector5.svg" %}">
+                {{ form.email }}
+              </div>
+
+              <div class="nome-de-usurio-container flex data-box">
+                <img class="vector-icon5" src="{% static "img/public/vector4.svg" %}">
+                {{ form.username }}
+              </div>
+
+              <div class="nome-de-usurio-container flex data-box">
+                <img class="vector-icon5" src="{% static "img/public/vector7.svg" %}">
+                {{ form.password1 }}
+              </div>
+
+              <div class="nome-de-usurio-container flex data-box">
+                <img class="vector-icon5" src="{% static "img/public/vector7.svg" %}">
+                {{ form.password2 }}
+              </div>
+
               {% if redirect_field_value %}
               <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
               {% endif %}
-              <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+              <button class="cadastro-child confirmar" type="submit">{% trans "Sign Up" %} </button>
             </form>
           </div>
-
-          <a href="">
-            <div class="cadastro-child flex">
-              <div class="confirmar">Confirmar</div>
-            </div>
-          </a>
 
         </aside>
 
