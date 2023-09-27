@@ -6,9 +6,12 @@ p{
   margin-bottom: 0 !important;
 }
 
-*, *:active {
-  text-decoration: none;
-  color: inherit;
+*:active {
+  text-decoration: none !important;
+}
+
+*:active, a {
+  color: inherit !important;
 }
 
 :root {
