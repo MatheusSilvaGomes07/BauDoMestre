@@ -11,16 +11,16 @@
     <ul>
         <!-- Arrumar o ordem paranormal pois o link está sendo movido para ele também-->
         {% for personagem in dnd %}
-            <li><a href="{% url 'detail_char_dnd' personagem.id %}">{{ personagem.nome }}</a> &nbsp &nbsp&nbsp<strong><a href="{% url 'edit_dnd' personagem.id %}">Editar</a></strong></li>
+            <li><a href="{% url 'detail_char_dnd' personagem.id %}">{{ personagem.nome }}</a> &nbsp &nbsp&nbsp<strong><a href="{% url 'edit_dnd' personagem.id %}">Editar</a></strong> <a href="{% url 'deletar_char' 'dungeons&dragons' personagem.id %}">Deletar</a></li>
         {% endfor %}
         {% for personagem in ordem %}
-            <li><a href="{% url 'detail_char_ordem' personagem.id %}">{{ personagem.nome }}</a> &nbsp &nbsp&nbsp<strong><a href="{% url 'edit_ordem' personagem.id %}">Editar</a></strong></li>
+            <li><a href="{% url 'detail_char_ordem' personagem.id %}">{{ personagem.nome }}</a> &nbsp &nbsp&nbsp<strong><a href="{% url 'edit_ordem' personagem.id %}">Editar</a> <a href="{% url 'deletar_char' 'ordemparanormal' personagem.id %}">Deletar</a></strong></li>
         {% endfor %}
         {% for personagem in tormenta20 %}
-            <li><a href="{% url 'detail_char_tormenta' personagem.id %}">{{ personagem.nome }}</a> &nbsp &nbsp&nbsp<strong><a href="{% url 'edit_tormenta20' personagem.id %}">Editar</a></strong></li>
+            <li><a href="{% url 'detail_char_tormenta' personagem.id %}">{{ personagem.nome }}</a> &nbsp &nbsp&nbsp<strong><a href="{% url 'edit_tormenta20' personagem.id %}">Editar</a> <a href="{% url 'deletar_char' 'tormenta20' personagem.id %}">Deletar</a></strong></li>
         {% endfor %}
         {% for personagem in coc %}
-            <li><a href="{% url 'detail_char_coc' personagem.id %}">{{ personagem.nome }}</a> &nbsp &nbsp&nbsp<strong><a href="{% url 'edit_coc1920' personagem.id %}">Editar</a></strong></li>
+            <li><a href="{% url 'detail_char_coc' personagem.id %}">{{ personagem.nome }}</a> &nbsp &nbsp&nbsp<strong><a href="{% url 'edit_coc1920' personagem.id %}">Editar</a> <a href="{% url 'deletar_char' 'callofcthulhu' personagem.id %}">Deletar</a></strong></li>
         {% endfor %}
     </ul>
 {% endblock %}

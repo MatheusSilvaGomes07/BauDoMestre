@@ -109,7 +109,59 @@ def edit_coc1920(request, id):
     
     return render(request, 'meus_personagens/editCharacter/edit_char_coc1920.html', {'coc7e': form, 'personagem': personagem})
 
+@login_required
+def deletarChar(request, rpg, id):
+    user = request.user
+    
+    try:
+        #Delete DND
+        if rpg == 'dungeons&dragons':
+            personagem = get_object_or_404(DnD, pk=id)
+            if user == personagem.nomePerfil or user.is_staff:
+                if personagem.foto:
+                    os.remove(os.path.join('media', personagem.foto.name))
+                personagem.delete()
+                return redirect('meus_personagens')
+            else:
+                return redirect('meus_personagens')
             
+        #Delete Ordem Paranormal
+        if rpg == 'ordemparanormal':
+            personagem = get_object_or_404(OrdemParanormal, pk=id)
+            if user == personagem.nomePerfil or user.is_staff:
+                if personagem.foto:
+                    os.remove(os.path.join('media', personagem.foto.name))
+                personagem.delete()
+                return redirect('meus_personagens')
+            else:
+                return redirect('meus_personagens')
+            
+        #Delete Tormenta20
+        if rpg == 'tormenta20':
+            personagem = get_object_or_404(Tormenta, pk=id)
+            if user == personagem.nomePerfil or user.is_staff:
+                if personagem.foto:
+                    os.remove(os.path.join('media', personagem.foto.name))
+                personagem.delete()
+                return redirect('meus_personagens')
+            else:
+                return redirect('meus_personagens')
+            
+        #Delete Tormenta20
+        if rpg == 'callofcthulhu':
+            personagem = get_object_or_404(CallOfCthulhu, pk=id)
+            if user == personagem.nomePerfil or user.is_staff:
+                if personagem.foto:
+                    os.remove(os.path.join('media', personagem.foto.name))
+                personagem.delete()
+                return redirect('meus_personagens')
+            else:
+                return redirect('meus_personagens')
+    except Exception as e:
+        raise Http404(e)
+        
+               
+
 @login_required
 def index(request):
     user = request.user
@@ -119,6 +171,7 @@ def index(request):
     tormenta20 = Tormenta.objects.filter(nomePerfil=user)
     coc = CallOfCthulhu.objects.filter(nomePerfil=user)
 
+    
     return render(request, 'meus_personagens/index.html', { 'dnd': dnd, 'ordem': ordem, 'tormenta20': tormenta20, 'coc': coc })
 
 @login_required
