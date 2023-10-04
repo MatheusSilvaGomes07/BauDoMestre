@@ -1,4 +1,5 @@
 {% extends "principal/base.html" %}
+{% load static %}
 
 {% block conteudo %}
 <title>Edição de Perfil - Baú do Mestre</title>
@@ -15,7 +16,11 @@
 
     <div>
     {% if formPerfil.fotoConta.initial %}
-    <img src="{{ formPerfil.fotoConta.initial }}" alt="Foto de perfil atual" height="250" width="250">
+        {% if formPerfil.fotoConta.initial == 'Indefinido' %}
+            <img src="{% static "img/Ain.png" %}" alt="Foto do usuário {{ user }}" width="250" height="250">
+        {% else %}
+            <img src="{{ formPerfil.fotoConta.initial.url }}" alt="Foto de perfil atual" height="250" width="250">
+        {% endif %}
     {% endif %}
     </div>
 

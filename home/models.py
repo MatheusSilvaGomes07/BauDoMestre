@@ -30,7 +30,7 @@ class Perfil(models.Model):
         ('Outros', 'Outros'),
     )
 
-    fotoConta = models.ImageField(upload_to='static/img/fotoUser')
+    fotoConta = models.ImageField(upload_to='images/profilePictures')
     tipo_sessao = models.CharField(max_length=20, choices=SESSION_CHOICES, null=True)
     tipo_player = models.CharField(max_length=20, choices=PLAYER_TYPE_CHOICES, null=True)
     descricao = models.TextField(max_length=256, null=True)
@@ -67,7 +67,7 @@ class Campanha(models.Model):
     nomeCampanha = models.CharField(max_length=52, null=True)
     sistemaCampanha = models.CharField(max_length=100, choices=SISTEMAS_RPG_CHOICES, null=True)
     descricaoCampanha = models.TextField(max_length=256, null=True)
-    fotoCampanha = models.ImageField(upload_to='static/img/FotoCampanha/', null=True)
+    fotoCampanha = models.ImageField(upload_to='images/FotoCampanha/', null=True)
     ambienteCampanha = models.CharField(max_length=100, choices=AMBIENTES_RPG_CHOICES, null=True)
     numeroJogadores = models.IntegerField(null=True)
     diasSessao = models.CharField(max_length=52, null=True)
@@ -77,17 +77,17 @@ class Campanha(models.Model):
 @receiver(post_save, sender=User)
 def criar_perfil_usuario(sender, instance, created, **kwargs):
     if created and not Perfil.objects.filter(nomePerfil=instance).exists():
-        perfil = Perfil.objects.create(nomePerfil=instance, descricao='Indefinido', tipo_sessao='Indefinido', tipo_player='Indefinido', sistema_rpg='Indefinido', idade='0')
+        perfil = Perfil.objects.create(nomePerfil=instance, descricao='Indefinido', tipo_sessao='Indefinido', tipo_player='Indefinido', sistema_rpg='Indefinido', idade='0', fotoConta='Indefinido')
         
         # Cria a foto única para cada usuário
-        nome_usuario = instance.username
-        caminho_origem = 'static/img/Ain.png'
-        caminho_destino = f'static/img/fotoUser/{nome_usuario}.png'
+        # nome_usuario = instance.username
+        # caminho_origem = 'media/images/Ain.png'
+        # caminho_destino = f'images/profilePictures/{nome_usuario}.png'
         
-        try:
-            shutil.copyfile(caminho_origem, caminho_destino)
-        except FileNotFoundError:
-            print("Arquivo 'Ain.png' não encontrado.")
+        # try:
+        #     shutil.copyfile(caminho_origem, caminho_destino)
+        # except FileNotFoundError:
+        #     print("Arquivo 'Ain.png' não encontrado.")
 
-        perfil.fotoConta = caminho_destino
-        perfil.save()
+        # perfil.fotoConta = caminho_destino
+        # perfil.save()

@@ -153,16 +153,18 @@ def usuario(request):
 @login_required
 def editarconta(request):
     perfil, created = Perfil.objects.update_or_create(nomePerfil=request.user)
+    foto_antiga = perfil.fotoConta.name
 
     if request.method == 'POST':
         formPerfil = PerfilForm(request.POST, request.FILES, instance=perfil)
         if formPerfil.is_valid():
-            if 'fotoConta' in request.FILES:
-                nova_foto = formPerfil.cleaned_data.get('fotoConta', None)
-                if nova_foto:
-                    perfil.fotoConta = nova_foto
-                    novo_nome_arquivo = renomear_foto_perfil(request.user.username, nova_foto)
-                    perfil.fotoConta.name = os.path.join('static', 'img', 'fotoUser', novo_nome_arquivo)
+            if perfil.fotoConta:
+                caminho_arquivo_antigo = os.path.join('media', foto_antiga)
+                if foto_antiga != perfil.fotoConta:
+                    if foto_antiga == 'Indefinido':
+                        pass
+                    else:
+                        os.remove(caminho_arquivo_antigo)
             formPerfil.save()
             return redirect('usuario')
 

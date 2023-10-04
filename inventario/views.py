@@ -26,7 +26,7 @@ def mapas(request):
     else:
         form = PastaForm()
 
-    return render(request, 'inventario/mapas.html', {'form': form, 'pastas': pastas, 'div': div})
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div})
 
 @login_required
 def criaturas(request):
@@ -45,7 +45,65 @@ def criaturas(request):
     else:
         form = PastaForm()
 
-    return render(request, 'inventario/mapas.html', {'form': form, 'pastas': pastas, 'div': div})
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div})
+
+@login_required
+def documentos(request):
+    div = 'Documentos'
+    user = request.user
+    pastas = Pasta.objects.filter(owner=user, divisao='Documentos')
+    
+    if request.method == 'POST':
+        form = PastaForm(request.POST)
+        if form.is_valid():
+            validation = form.save(commit=False)
+            validation.owner = user
+            validation.divisao = 'Documentos'
+            validation.save()
+            return redirect('documentos')
+    else:
+        form = PastaForm()
+
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div})
+
+@login_required
+def imagens(request):
+    div = 'Imagens'
+    user = request.user
+    pastas = Pasta.objects.filter(owner=user, divisao='Imagens')
+    
+    if request.method == 'POST':
+        form = PastaForm(request.POST)
+        if form.is_valid():
+            validation = form.save(commit=False)
+            validation.owner = user
+            validation.divisao = 'Imagens'
+            validation.save()
+            return redirect('imagens')
+    else:
+        form = PastaForm()
+
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div})
+
+@login_required
+def musicas(request):
+    div = 'Musicas'
+    user = request.user
+    pastas = Pasta.objects.filter(owner=user, divisao='Musicas')
+    
+    if request.method == 'POST':
+        form = PastaForm(request.POST)
+        if form.is_valid():
+            validation = form.save(commit=False)
+            validation.owner = user
+            validation.divisao = 'Musicas'
+            validation.save()
+            return redirect('musicas')
+    else:
+        form = PastaForm()
+
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div})
+
 
 @login_required
 def visualizar_pasta(request, pasta):
