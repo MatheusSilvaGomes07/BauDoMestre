@@ -28,6 +28,7 @@ CHANNEL_LAYERS = {
 # Application definition
 
 INSTALLED_APPS = [
+    'inventario',
     'daphne',
     'django.contrib.admin',
     'django.contrib.auth',

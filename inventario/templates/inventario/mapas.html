@@ -1,0 +1,18 @@
+{% extends 'inventario/base.html' %}
+
+{% block content %}
+<h1>{{ div }}</h1>
+
+<ul>
+{% for pasta in pastas %}
+        <li><a href=" {% url "visualizar_pasta" pasta.nome %}">{{pasta.nome}}</a> <a href=" {% url "deletar" pasta.id %}">Deletar</a></li>
+{% endfor%}
+</ul>
+
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Criar</button>
+</form>
+
+{% endblock%}

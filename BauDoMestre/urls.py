@@ -11,7 +11,8 @@ urlpatterns = [
     path('accounts/signup/', CustomSignupView.as_view(), name='custom_signup'),
     path('accounts/login/', CustomLoginView.as_view(), name='custom_login'),
     path('meus-personagens/', include('meus_personagens.urls')),
-    path('chat/', include('chat.urls'))
+    path('chat/', include('chat.urls')),
+    path('inventario/', include('inventario.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'home.views.handler404'
