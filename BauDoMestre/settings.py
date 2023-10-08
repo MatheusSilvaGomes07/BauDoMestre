@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'allauth',
     'chat',
     'meus_personagens',
+    'SistAmizade',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
