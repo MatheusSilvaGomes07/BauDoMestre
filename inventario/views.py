@@ -114,10 +114,10 @@ def visualizar_pasta(request, pasta):
     if request.method == 'POST':
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
-            validation = form.save(commit=False)
-            validation.owner = user
-            validation.pasta = pastas
-            validation.save()
+            files = form.cleaned_data["file"]
+            for f in files:
+                arquivo = File(file=f, owner=user, pasta=pastas)
+                arquivo.save()
             return redirect('visualizar_pasta', pasta)
     else:
         form = FileForm()
