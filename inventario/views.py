@@ -106,7 +106,7 @@ def musicas(request):
 
 
 @login_required
-def visualizar_pasta(request, pasta):
+def visualizar_pasta(request, div, pasta):
     user = request.user
     pastas = Pasta.objects.get(nome=pasta, owner=user)
     files = File.objects.filter(owner=user, pasta=pastas.id)
