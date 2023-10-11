@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 import os
 from inventario.forms import PastaForm, FileForm
 from inventario.models import Pasta, File
+from django.contrib import messages
+import magic
 
 @login_required
 def index(request):
@@ -125,29 +127,43 @@ def musicas(request):
     return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
 
 
+
 @login_required
 def visualizar_pasta(request, div, pasta):
+    
     user = request.user
     pastas = Pasta.objects.get(nome=pasta, owner=user, divisao=div)
     files = File.objects.filter(owner=user, pasta=pastas.id)
     base_name = ''
+    mime = magic.Magic()
+    mensagem = True
+    
 
     if request.method == 'POST':
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
             files = form.cleaned_data["file"]
+
             for f in files:
                 base_name, extension = os.path.splitext(str(f))
-                arquivo = File(file=f, owner=user, pasta=pastas, nome=base_name)
-                arquivo.save()
+                file_type = mime.from_buffer(f.read(1024))
+
+                if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type:
+                    arquivo = File(file=f, owner=user, pasta=pastas, nome=base_name)
+                    arquivo.save()
+                else:
+                    mensagem = False
+    
+
+                
             return redirect('visualizar_pasta', div, pasta)
     else:
         form = FileForm()
-
+    print(mensagem)
     return render(request, 'inventario/visualizar_pasta.html', {'files': files, 'form': form})
 
 @login_required
-def deletar(request, id):
+def deletar_pasta(request, id):
     
      
     delete = get_object_or_404(Pasta, id=id)

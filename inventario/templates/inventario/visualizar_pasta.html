@@ -2,6 +2,11 @@
 
 {% block content %}
 <h1>Visualizar Pasta</h1>
+{% if messages %}
+    {% for message in messages %}
+      <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+{% endif %}
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}

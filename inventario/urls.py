@@ -9,6 +9,6 @@ urlpatterns = [
     path("imagens", views.imagens, name="imagens"),
     path("musicas", views.musicas, name="musicas"),
     path("<str:div>/<str:pasta>", views.visualizar_pasta, name="visualizar_pasta"),
-    path("mapas/deletar/<int:id>", views.deletar, name="deletar"),
+    path("pasta/deletar/<int:id>", views.deletar_pasta, name="deletar_pasta"),
 
 ]
