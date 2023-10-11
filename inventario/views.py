@@ -13,112 +13,134 @@ def index(request):
 def mapas(request):
     div = 'Mapas'
     user = request.user
-    pastas = Pasta.objects.filter(owner=user, divisao='Mapas')
+    pastas = Pasta.objects.filter(owner=user, divisao=div)
+    mensagem = ''
+    
     
     if request.method == 'POST':
         form = PastaForm(request.POST)
         if form.is_valid():
             validation = form.save(commit=False)
-            validation.owner = user
-            validation.divisao = 'Mapas'
-            validation.save()
-            return redirect('mapas')
+            if Pasta.objects.filter(owner=user, divisao=div, nome=validation.nome).exists():
+                mensagem = "Não é possível criar pastas com o mesmo nome"
+            else:
+                validation.owner = user
+                validation.divisao = div
+                validation.save()
+                return redirect('mapas')
     else:
         form = PastaForm()
 
-    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div})
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
 
 @login_required
 def criaturas(request):
     div = 'Criaturas'
     user = request.user
-    pastas = Pasta.objects.filter(owner=user, divisao='Criaturas')
-    
+    pastas = Pasta.objects.filter(owner=user, divisao=div)
+    mensagem = ''
+
     if request.method == 'POST':
         form = PastaForm(request.POST)
         if form.is_valid():
             validation = form.save(commit=False)
-            validation.owner = user
-            validation.divisao = 'Criaturas'
-            validation.save()
-            return redirect('criaturas')
+            if Pasta.objects.filter(owner=user, divisao=div, nome=validation.nome).exists():
+                mensagem = "Não é possível criar pastas com o mesmo nome"
+            else:
+                validation.owner = user
+                validation.divisao = div
+                validation.save()
+                return redirect('criaturas')
     else:
         form = PastaForm()
 
-    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div})
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem':mensagem})
 
 @login_required
 def documentos(request):
     div = 'Documentos'
     user = request.user
-    pastas = Pasta.objects.filter(owner=user, divisao='Documentos')
-    
+    pastas = Pasta.objects.filter(owner=user, divisao=div)
+    mensagem = ''
+
     if request.method == 'POST':
         form = PastaForm(request.POST)
         if form.is_valid():
             validation = form.save(commit=False)
-            validation.owner = user
-            validation.divisao = 'Documentos'
-            validation.save()
-            return redirect('documentos')
+            if Pasta.objects.filter(owner=user, divisao=div, nome=validation.nome).exists():
+                mensagem = "Não é possível criar pastas com o mesmo nome"
+            else:
+                validation.owner = user
+                validation.divisao = div
+                validation.save()
+                return redirect('documentos')
     else:
         form = PastaForm()
 
-    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div})
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
 
 @login_required
 def imagens(request):
     div = 'Imagens'
     user = request.user
-    pastas = Pasta.objects.filter(owner=user, divisao='Imagens')
+    pastas = Pasta.objects.filter(owner=user, divisao=div)
+    mensagem = ''
     
     if request.method == 'POST':
         form = PastaForm(request.POST)
         if form.is_valid():
             validation = form.save(commit=False)
-            validation.owner = user
-            validation.divisao = 'Imagens'
-            validation.save()
-            return redirect('imagens')
+            if Pasta.objects.filter(owner=user, divisao=div, nome=validation.nome).exists():
+                mensagem = "Não é possível criar pastas com o mesmo nome"
+            else:
+                validation.owner = user
+                validation.divisao = div
+                validation.save()
+                return redirect('imagens')
     else:
         form = PastaForm()
 
-    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div})
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
 
 @login_required
 def musicas(request):
     div = 'Musicas'
     user = request.user
-    pastas = Pasta.objects.filter(owner=user, divisao='Musicas')
-    
+    pastas = Pasta.objects.filter(owner=user, divisao=div)
+    mensagem = ''
     if request.method == 'POST':
         form = PastaForm(request.POST)
         if form.is_valid():
             validation = form.save(commit=False)
-            validation.owner = user
-            validation.divisao = 'Musicas'
-            validation.save()
-            return redirect('musicas')
+            if Pasta.objects.filter(owner=user, divisao=div, nome=validation.nome).exists():
+                mensagem = "Não é possível criar pastas com o mesmo nome"
+            else:
+                validation.owner = user
+                validation.divisao = div
+                validation.save()
+                return redirect('musicas')
     else:
         form = PastaForm()
 
-    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div})
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
 
 
 @login_required
 def visualizar_pasta(request, div, pasta):
     user = request.user
-    pastas = Pasta.objects.get(nome=pasta, owner=user)
+    pastas = Pasta.objects.get(nome=pasta, owner=user, divisao=div)
     files = File.objects.filter(owner=user, pasta=pastas.id)
+    base_name = ''
 
     if request.method == 'POST':
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
             files = form.cleaned_data["file"]
             for f in files:
-                arquivo = File(file=f, owner=user, pasta=pastas)
+                base_name, extension = os.path.splitext(str(f))
+                arquivo = File(file=f, owner=user, pasta=pastas, nome=base_name)
                 arquivo.save()
-            return redirect('visualizar_pasta', pasta)
+            return redirect('visualizar_pasta', div, pasta)
     else:
         form = FileForm()
 

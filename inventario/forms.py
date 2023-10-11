@@ -22,7 +22,7 @@ class FileForm(forms.ModelForm):
     class Meta:
         model = File
         fields = '__all__'
-        exclude = ['owner', 'pasta']
+        exclude = ['owner', 'pasta', 'nome']
     file = MultipleFileField()
 
 class PastaForm(forms.ModelForm):

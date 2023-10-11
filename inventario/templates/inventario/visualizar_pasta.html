@@ -5,10 +5,9 @@
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.file }}<br>
     <button type="submit">Enviar</button>
 </form>
-
 {% for file in files %}
     <img src="{{ file.file.url }}" height="200px" width="150px">
     <!-- <a href="{{ file.file.url }}">Testando</a> -->

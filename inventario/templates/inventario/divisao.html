@@ -12,6 +12,7 @@
 <form method="post" action="">
     {% csrf_token %}
     {{ form.as_p }}
+    <p>{{ mensagem }}</p>
     <button type="submit">Criar</button>
 </form>
 
