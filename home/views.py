@@ -11,6 +11,7 @@ import os
 import shutil
 from allauth.account.views import SignupView, LoginView
 from .forms import CustomSignupForm, CustomLoginForm
+from django.contrib import messages
 
 class CustomSignupView(SignupView):
     form_class = CustomSignupForm
@@ -20,6 +21,8 @@ class CustomSignupView(SignupView):
 
 class CustomLoginView(LoginView):
     form_class = CustomLoginForm
+    
+    
 
 #Renomear imagem de perfil
 

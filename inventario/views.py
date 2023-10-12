@@ -126,8 +126,42 @@ def musicas(request):
 
     return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
 
-
-
+def verificar_extensao(div, file_type, request):
+    if div == "Mapas":
+        if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type:
+            return True
+        else:
+            messages.error(request, "A divisão de mapas só aceita documentos de imagem, GIFs e PDFs")
+            return False
+        
+    if div == "Criaturas":
+        if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type or 'Microsoft Word' in file_type or 'RAR archive' in file_type:
+             return True
+        else:
+            messages.error(request, "Foi identificado um possível arquivo malicioso ou que não seja possível seu envio, tente enviar novamente")
+            return False
+        
+    if div == "Documentos":
+        if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type or 'Microsoft Word' in file_type or 'RAR archive' in file_type:
+             return True
+        else:
+            messages.error(request, "Foi identificado um possível arquivo malicioso ou que não seja possível seu envio, tente enviar novamente")
+            return False
+        
+    if div == "Imagens":
+        if 'image' in file_type or 'GIF image':
+             return True
+        else:
+            messages.error(request, "A divisão de imagens só aceita arquivos de imagens e GIFs")
+            return False
+        
+    if div == "Musicas":
+        if 'audio' in file_type:
+             return True
+        else:
+            messages.error(request, "A divisão de músicas só aceita arquivos de áudios")
+            return False
+        
 @login_required
 def visualizar_pasta(request, div, pasta):
     
@@ -136,8 +170,6 @@ def visualizar_pasta(request, div, pasta):
     files = File.objects.filter(owner=user, pasta=pastas.id)
     base_name = ''
     mime = magic.Magic()
-    mensagem = True
-    
 
     if request.method == 'POST':
         form = FileForm(request.POST, request.FILES)
@@ -148,18 +180,15 @@ def visualizar_pasta(request, div, pasta):
                 base_name, extension = os.path.splitext(str(f))
                 file_type = mime.from_buffer(f.read(1024))
 
-                if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type:
+                
+                if verificar_extensao(div, file_type, request):
                     arquivo = File(file=f, owner=user, pasta=pastas, nome=base_name)
                     arquivo.save()
-                else:
-                    mensagem = False
-    
 
                 
             return redirect('visualizar_pasta', div, pasta)
     else:
         form = FileForm()
-    print(mensagem)
     return render(request, 'inventario/visualizar_pasta.html', {'files': files, 'form': form})
 
 @login_required
