@@ -10,5 +10,7 @@ urlpatterns = [
     path("musicas", views.musicas, name="musicas"),
     path("<str:div>/<str:pasta>", views.visualizar_pasta, name="visualizar_pasta"),
     path("pasta/deletar/<int:id>", views.deletar_pasta, name="deletar_pasta"),
+    path("arquivo/deletar/<int:id>/<str:div>/<int:id_pasta>", views.deletar_arquivo, name="deletar_arquivo"),
+
 
 ]

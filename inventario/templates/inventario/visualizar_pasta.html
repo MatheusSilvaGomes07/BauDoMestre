@@ -2,6 +2,7 @@
 
 {% block content %}
 <h1>Visualizar Pasta</h1>
+
 {% if messages %}
     {% for message in messages %}
       <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
@@ -14,9 +15,11 @@
     <button type="submit">Enviar</button>
 </form>
 {% for file in files %}
+    <a href="{% url 'deletar_arquivo' file.id div file.pasta_id %}">Deletar</a>
     <img src="{{ file.file.url }}" height="200px" width="150px">
     <!-- <a href="{{ file.file.url }}">Testando</a> -->
     <p>Nome: {{ file.nome }}</p>
+    
 {% endfor %}
 
 {% endblock%}

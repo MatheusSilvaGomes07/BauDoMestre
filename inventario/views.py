@@ -5,6 +5,7 @@ from inventario.forms import PastaForm, FileForm
 from inventario.models import Pasta, File
 from django.contrib import messages
 import magic
+from datetime import datetime
 
 @login_required
 def index(request):
@@ -189,14 +190,32 @@ def visualizar_pasta(request, div, pasta):
             return redirect('visualizar_pasta', div, pasta)
     else:
         form = FileForm()
-    return render(request, 'inventario/visualizar_pasta.html', {'files': files, 'form': form})
+    return render(request, 'inventario/visualizar_pasta.html', {'files': files, 'form': form, 'div': div})
+
+@login_required
+def deletar_arquivo(request, id, div, id_pasta):
+    pasta = Pasta.objects.get(id=id_pasta)
+    user = request.user
+
+    if user == pasta.owner or user.is_staff:
+        delete = get_object_or_404(File, id=id)
+        delete.delete()
+
+    return redirect('visualizar_pasta', div, pasta.nome)
+
 
 @login_required
 def deletar_pasta(request, id):
+    pasta_owner = Pasta.objects.get(id=id).owner
+    user = request.user
     
-     
-    delete = get_object_or_404(Pasta, id=id)
-    divisao = delete.divisao
-    
-    delete.delete()
-    return redirect(divisao.lower())
+
+    if user == pasta_owner or user.is_staff:
+        delete = get_object_or_404(Pasta, id=id)
+        divisao = delete.divisao
+        delete.delete()
+
+        return redirect(divisao.lower())
+    else:
+        return redirect('divisoes')
+
