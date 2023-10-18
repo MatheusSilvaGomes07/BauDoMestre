@@ -10,6 +10,12 @@
     <p>{{ perfil.tipo_player }}</p>
     <p>{{ perfil.tipo_sessao }}</p>
     <p>{{ perfil.descricao }}</p>
+
+    
+  
+        <a href="{% url 'enviar_solicitacao' perfil.nomePerfil.id %}">Enviar Pedido de Amizade</a>
+    
+   
     
     <a href='{% url 'index' %}'>Voltar a tela inicial</a>
 

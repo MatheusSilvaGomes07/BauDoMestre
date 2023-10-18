@@ -12,3 +12,14 @@ class SolicitacaoAmizade(models.Model):
 
     def __str__(self):
         return f"{self.de_usuario.username} -> {self.para_usuario.username}"
+    
+class Amigo(models.Model):
+    usuario = models.ForeignKey(User, related_name='amigos', on_delete=models.CASCADE)
+    amigo = models.ForeignKey(User, related_name='amigos_de', on_delete=models.CASCADE)
+    data_criacao = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('usuario', 'amigo')
+
+    def __str__(self):
+        return f"{self.usuario.username} -> {self.amigo.username}"
