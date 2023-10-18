@@ -203,6 +203,26 @@ def deletar_arquivo(request, id, div, id_pasta):
 
     return redirect('visualizar_pasta', div, pasta.nome)
 
+@login_required
+def edit_pasta(request, id_pasta):
+    pasta = get_object_or_404(Pasta, pk=id_pasta)
+    user = request.user
+
+    if user == pasta.owner or user.is_staff():
+        if request.method == 'POST':
+            form = PastaForm(request.POST, instance=pasta)
+            if form.is_valid():
+                form.save()
+                return redirect('divisoes')
+        else:
+            form = PastaForm(instance=pasta)
+    else:
+        return redirect('divisoes')
+
+    return render(request, 'inventario/divisao.html', {'form': form})
+
+
+
 
 @login_required
 def deletar_pasta(request, id):

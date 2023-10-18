@@ -5,7 +5,11 @@
 
 <ul>
 {% for pasta in pastas %}
-        <li><a href=" {% url "visualizar_pasta" div pasta.nome %}">{{pasta.nome}}</a> <a href=" {% url "deletar_pasta" pasta.id %}">Deletar</a></li>
+        <li>
+            <a href=" {% url "visualizar_pasta" div pasta.nome %}">{{pasta.nome}}</a> 
+            <a href=" {% url "deletar_pasta" pasta.id %}">Deletar</a>
+            <a href=" {% url "editar_pasta" pasta.id %}">Edit</a>
+        </li>
 {% endfor%}
 </ul>
 
