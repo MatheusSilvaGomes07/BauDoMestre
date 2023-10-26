@@ -10,10 +10,6 @@ p{
   text-decoration: none !important;
 }
 
-*:active, a {
-  color: inherit !important;
-}
-
 :root {
   /* fonts */
   --body: Raleway;
