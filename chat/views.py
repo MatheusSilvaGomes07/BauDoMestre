@@ -36,7 +36,7 @@ def Sair_grupo(request, uuid):
 def Abrir_chat(request, uuid):
 	grupo = Grupo.objects.get(uuid=uuid)
 	if request.user not in grupo.membros.all():
-		return HttpResponseForbidden('Not a member. Try another group.')
+		return HttpResponseForbidden('não é um membro')
 	mensagens = Mensagem.objects.filter(grupo=grupo).order_by('tempo')
 	return render(request, 'chat.html', context={'mensagens':mensagens, 'uuid': uuid})
 

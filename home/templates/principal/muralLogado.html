@@ -93,7 +93,7 @@
     {% if request.user in grupo.membros.all %}
       <a href="{% url 'Abrir_chat' uuid=grupo.uuid %}">abrir</a>
       <a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">sair</a>
-      {% if perfil.tipo_player == "Ambos" or perfil.tipo_player == "Mestre" %}
+      {% if user == grupo.criador%}
       <a href="{% url 'Remover_grupo' uuid=grupo.uuid %}">excluir</a>
     {% endif %}
     {% else %}
