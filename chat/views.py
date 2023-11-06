@@ -7,7 +7,7 @@ from .models import Grupo, Mensagem
 @login_required
 def Novo_grupo(request):
     u = request.user
-    new = Grupo.objects.create(criador=u)
+    new = Grupo.objects.create(criador=u, publico=True)
     new.membros.add(u)
     new.save()
     print("Novo grupo criado com sucesso:", new.uuid) 
