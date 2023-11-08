@@ -1,5 +1,5 @@
 from django.http import HttpResponseForbidden
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import SolicitacaoAmizade, Amigo
 from django.contrib.auth.models import User
 from chat.models import Grupo, Mensagem
@@ -28,13 +28,9 @@ def listar_amigos(request):
 
 def enviar_solicitacao(request, user_id):
     para_usuario = User.objects.get(pk=user_id)
-    solicitacao, criada = SolicitacaoAmizade.objects.get_or_create(de_usuario=request.user, para_usuario=para_usuario)
-
-    if criada:
-        return redirect('listar_amigos')
-    else:
-       
-        return redirect('listar_amigos')
+    solicitacao = SolicitacaoAmizade(de_usuario=request.user, para_usuario=para_usuario)
+    solicitacao.save()
+    return redirect('listar_amigos')
 
 def listar_solicitacoes(request):
     solicitacoes_recebidas = SolicitacaoAmizade.objects.filter(para_usuario=request.user, aceita=False)
@@ -45,7 +41,7 @@ def aceitar_solicitacao(request, solicitacao_id):
     solicitacao.aceita = True
     solicitacao.save()
 
-    grupo_chat, _ = Grupo.objects.get_or_create(criador=solicitacao.de_usuario)
+    grupo_chat, _ = Grupo.objects.get_or_create(criador=solicitacao.de_usuario, publico=False)
     grupo_chat.membros.add(solicitacao.de_usuario, solicitacao.para_usuario)
     grupo_chat.save()
     
@@ -78,7 +74,16 @@ def Abrir_chat_Amigo(request, user_id):
         return HttpResponseForbidden('Você não é amigo desse usuário.')
 
     mensagens = Mensagem.objects.filter(grupo=grupo).order_by('tempo')
-    return render(request, 'chat.html', context={'mensagens': mensagens, 'uuid': grupo.uuid})
+    return render(request, 'chat-privado.html', context={'mensagens': mensagens, 'uuid': grupo.uuid})
+
+def excluir_mensagem_priv(request, mensagem_id):
+    mensagem = get_object_or_404(Mensagem, pk=mensagem_id)
+
+    if mensagem.autor == request.user:
+        mensagem.delete()
+
+    return redirect('Abrir_chat_privado', user_id=mensagem.grupo.membros.exclude(id=request.user.id).first().id)
+
 
     
   

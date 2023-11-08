@@ -9,7 +9,7 @@ class Grupo(models.Model):
 	uuid = models.UUIDField(default=uuid4, editable=False)
 	membros = models.ManyToManyField(User)
 	criador = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='grupos_criados')
-	publico = models.BooleanField(default=True)
+	publico = models.BooleanField(default=False)
 
 	def adicionar_user(request, user):
 		self.membros.add(user)

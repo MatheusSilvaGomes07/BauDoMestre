@@ -6,6 +6,7 @@ from .forms import CampanhaForm, PerfilForm
 from django.db.models import Q
 from functools import wraps
 from chat.models import Mensagem, Grupo
+from SistAmizade.models import Amigo
 from random import randint
 import os
 import shutil
@@ -124,8 +125,10 @@ def search_user(request):
 @login_required
 def exibir_perfil(request, perfil_slug):
     perfil = get_object_or_404(Perfil, slug=perfil_slug)
-    return render(request, 'principal/exibir_perfil.html', {'perfil': perfil})
-
+    is_self = perfil.nomePerfil == request.user
+    is_amigo = not is_self and Amigo.objects.filter(usuario=request.user, amigo=perfil.nomePerfil).exists()
+    
+    return render(request, 'principal/exibir_perfil.html', {'perfil': perfil, 'is_amigo': is_amigo, 'is_self': is_self})
 
 # view da criação de campanhas que também é protegida por um decorator que só permite a entrada de "Mestre" e "Ambos"
 @login_required
@@ -175,3 +178,10 @@ def editarconta(request):
         formPerfil = PerfilForm(instance=perfil)
 
     return render(request, 'principal/editarPerfil.html', {'formPerfil': formPerfil})
+
+@login_required
+def is_amigo(request, perfil_slug):
+    perfil = get_object_or_404(Perfil, slug=perfil_slug)
+    amigo = Perfil.objects.get(nomePerfil=request.user)
+    is_amigo = amigo.amigo_set.filter(nomePerfil=perfil.nomePerfil).exists()
+    return is_amigo

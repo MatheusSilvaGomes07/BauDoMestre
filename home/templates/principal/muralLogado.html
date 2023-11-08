@@ -93,7 +93,7 @@
     <div id="{{ grupo.uuid }}">
         <li><a>{{ grupo.uuid }}</a></li>
         {% if request.user in grupo.membros.all %}
-            <a href="{% url 'Abrir_chat' uuid=grupo.uuid %}">Abrir</a>
+            <a href="{% url 'Abrir_chat_pub' uuid=grupo.uuid %}">Abrir</a>
             <a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a>
             {% if user == grupo.criador %}
                 <a href="{% url 'Remover_grupo' uuid=grupo.uuid %}">Excluir</a>

@@ -12,11 +12,16 @@
     <p>{{ perfil.descricao }}</p>
 
     
-  
-        <a href="{% url 'enviar_solicitacao' perfil.nomePerfil.id %}">Enviar Pedido de Amizade</a>
+    {% if not is_self %}
+        {% if is_amigo %}
+            <a href="{% url 'remover_amigo' perfil.nomePerfil.id %}">Desfazer Amizade</a>
+        {% else %}
+            <a href="{% url 'enviar_solicitacao' perfil.nomePerfil.id %}">Enviar Pedido de Amizade</a>
+        {% endif %}
+    {% endif %}
+
     
-   
-    
+
     <a href='{% url 'index' %}'>Voltar a tela inicial</a>
 
 {% endblock conteudo %}

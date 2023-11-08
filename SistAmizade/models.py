@@ -7,11 +7,9 @@ class SolicitacaoAmizade(models.Model):
     aceita = models.BooleanField(default=False)
     criada_em = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        unique_together = ('de_usuario', 'para_usuario')
-
     def __str__(self):
         return f"{self.de_usuario.username} -> {self.para_usuario.username}"
+
     
 class Amigo(models.Model):
     usuario = models.ForeignKey(User, related_name='amigos', on_delete=models.CASCADE)

@@ -2,8 +2,7 @@
 
 {% block conteudo %}
 <div>
-    <a href="{% url 'index' %}">home</a>
-    <a href="{% url 'buscarmesa' %}">Voltar ao Mural</a> <br> <br>
+    <a href="{% url 'listar_amigos' %}">Voltar a lista de amigos</a>
   </div>
   
   <br>
@@ -15,7 +14,7 @@
     <p>{{ mensagem.autor }}: ({{ mensagem.tempo}})</p>
     <p>  {{ mensagem.conteudo }}</p>
     {% if mensagem.autor == user %}
-        <a href="{% url 'excluir_mensagem_pub' mensagem.id %}">Excluir</a>
+        <a href="{% url 'excluir_mensagem' mensagem.id %}">Excluir</a>
     {% endif %}
     {% endfor %}
  
