@@ -86,27 +86,23 @@ def buscarmesa(request):
     ambiente_filtro = request.GET.get('ambiente')
     genero_filtro = request.GET.get('genero')
     campanhas = Campanha.objects.all()
-    grupos = Grupo.objects.all()
-
 
     if sistema_busca:
-        campanhas = campanhas.filter(
-            Q(nomeCampanha__icontains=sistema_busca)
-        )
+        campanhas = campanhas.filter(Q(nomeCampanha__icontains=sistema_busca))
     if sistema_filtro:
-        campanhas = campanhas.filter(
-            Q(sistemaCampanha__icontains=sistema_filtro)
-        )
+        campanhas = campanhas.filter(Q(sistemaCampanha__icontains=sistema_filtro))
     if ambiente_filtro:
-        campanhas = campanhas.filter(
-            Q(ambienteCampanha__icontains=ambiente_filtro)
-        )
+        campanhas = campanhas.filter(Q(ambienteCampanha__icontains=ambiente_filtro))
     if genero_filtro:
-        campanhas = campanhas.filter(
-            Q(generoRPG__icontains=genero_filtro)
-        )
+        campanhas = campanhas.filter(Q(generoRPG__icontains=genero_filtro))
 
-    return render(request, 'principal/muralLogado.html', {'campanhas': campanhas, 'perfil': perfil, 'grupos': grupos})
+    campanhas_e_grupos = {}
+    for campanha in campanhas:
+        grupos = campanha.chats.all()
+        campanhas_e_grupos[campanha] = grupos
+
+    return render(request, 'principal/muralLogado.html', {'campanhas_e_grupos': campanhas_e_grupos, 'perfil': perfil})
+
 
 
 # view da busca de usuários
@@ -141,6 +137,12 @@ def criarCampanhas(request):
             perfil_mestre = get_object_or_404(Perfil, nomePerfil=request.user)
             campanha.nomeMestre = perfil_mestre
             campanha.save()
+            
+            # Cria um novo chat (grupo) associado à campanha
+            novo_grupo = Grupo.objects.create(criador=request.user, publico=True, campanha=campanha)
+            novo_grupo.membros.add(request.user)
+            novo_grupo.save()
+
             return redirect('buscarmesa')
     else:
         form = CampanhaForm()

@@ -1,6 +1,7 @@
 from django.db import models
 from uuid import uuid4
 from django.contrib.auth import get_user_model
+from home.models import Campanha
 
 
 User = get_user_model()
@@ -10,6 +11,7 @@ class Grupo(models.Model):
 	membros = models.ManyToManyField(User)
 	criador = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='grupos_criados')
 	publico = models.BooleanField(default=False)
+	campanha = models.ForeignKey(Campanha, on_delete=models.CASCADE, related_name='chats', null=True)
 
 	def adicionar_user(request, user):
 		self.membros.add(user)

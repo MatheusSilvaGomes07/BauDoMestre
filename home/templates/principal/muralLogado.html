@@ -39,7 +39,7 @@
     <button type="submit">Buscar</button>
 </form>
 
-{% if campanhas %}
+{% if campanhas_e_grupos.items %}
 {% else %}
     <p>Nenhuma campanha encontrada.</p>
 {% endif %}
@@ -71,7 +71,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for campanha in campanhas %}
+        {% for campanha, grupos in campanhas_e_grupos.items %}
         <tr>
             <td><img src="{{ campanha.fotoCampanha.url }}" alt="Foto da Campanha" width="150" height="100"></td>
             <td>{{ campanha.nomeCampanha }}</td>
@@ -82,27 +82,25 @@
             <td>{{ campanha.numeroJogadores }}</td>
             <td>{{ campanha.diasSessao }}</td>
             <td>{{ campanha.generoRPG }}</td>
-            </tr>
+            <td>
+                {% for grupo in grupos %}
+                    <div id="{{ grupo.uuid }}">
+                        <li><a>Chat da Campanha</a></li>
+                        {% if request.user in grupo.membros.all %}
+                            <a href="{% url 'Abrir_chat_pub' uuid=grupo.uuid %}">Abrir</a>
+                            <a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a>
+                            {% if user == grupo.criador %}
+                                <a href="{% url 'Remover_grupo' uuid=grupo.uuid %}">Excluir</a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{% url 'Entrar_grupo' uuid=grupo.uuid %}">Entrar</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>
-
-
-{% for grupo in grupos %}
-    {% if grupo.publico %}
-    <div id="{{ grupo.uuid }}">
-        <li><a>{{ grupo.uuid }}</a></li>
-        {% if request.user in grupo.membros.all %}
-            <a href="{% url 'Abrir_chat_pub' uuid=grupo.uuid %}">Abrir</a>
-            <a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a>
-            {% if user == grupo.criador %}
-                <a href="{% url 'Remover_grupo' uuid=grupo.uuid %}">Excluir</a>
-            {% endif %}
-        {% else %}
-            <a href="{% url 'Entrar_grupo' uuid=grupo.uuid %}">Entrar</a>
-        {% endif %}
-    </div>
-    {% endif %}
-{% endfor %}
 
 {% endblock conteudo %}
