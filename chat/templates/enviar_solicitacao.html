@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Enviar Solicitação de Entrada</h1>
+  <form method="post">
+    {% csrf_token %}
+    <label for="mensagem">Mensagem:</label>
+    <textarea id="mensagem" name="mensagem" rows="4" cols="50"></textarea><br>
+    <button type="submit">Enviar Solicitação</button>
+  </form>
+  <a href="{% url 'buscarmesa' %}">Voltar</a>
+{% endblock %}

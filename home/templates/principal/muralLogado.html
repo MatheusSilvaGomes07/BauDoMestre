@@ -93,7 +93,7 @@
                                 <a href="{% url 'Remover_grupo' uuid=grupo.uuid %}">Excluir</a>
                             {% endif %}
                         {% else %}
-                            <a href="{% url 'Entrar_grupo' uuid=grupo.uuid %}">Entrar</a>
+                            <a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}">Enviar Solicitação</a>
                         {% endif %}
                     </div>
                 {% endfor %}

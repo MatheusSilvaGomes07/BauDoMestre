@@ -154,7 +154,9 @@ def criarCampanhas(request):
 @login_required
 def usuario(request):
     perfil = Perfil.objects.get(nomePerfil=request.user)
-    return render(request, 'principal/user.html', {'perfil': perfil})
+    campanha = Campanha.objects.filter(nomeMestre=perfil).first()
+
+    return render(request, 'principal/user.html', {'perfil': perfil, 'campanha': campanha})
 
 
 # view da edição de conta do usuário

@@ -1,7 +1,7 @@
 from django.db import models
 from uuid import uuid4
 from django.contrib.auth import get_user_model
-from home.models import Campanha
+from home.models import Campanha, Perfil
 
 
 User = get_user_model()
@@ -29,3 +29,10 @@ class Mensagem(models.Model):
 	tempo = models.DateTimeField(auto_now_add=True)
 	conteudo = models.TextField()
 	grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE)
+
+
+
+class SolicitacaoEntrada(models.Model):
+    de_usuario = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name='solicitacoes_enviadas_campanha')
+    para_campanha = models.ForeignKey(Campanha, on_delete=models.CASCADE, related_name='solicitacoes_entrada')
+    status = models.CharField(max_length=20, default='Pendente')

@@ -1,0 +1,13 @@
+<!-- principal/gerenciar_solicitacoes.html -->
+{% extends "principal/base.html" %}
+{% block conteudo %}
+  <h1>Gerenciar Solicitações de Entrada</h1>
+  {% for solicitacao in solicitacoes %}
+    <p>{{ solicitacao.de_usuario.nomePerfil.username }} solicitou entrada para a campanha {{solicitacao.para_campanha.nomeCampanha}}</p>
+    <a href="{% url 'recusar_solicitacao_camp' solicitacao.id %}">Aceitar</a>
+    <a href="{% url 'recusar_solicitacao_camp' solicitacao.id %}">Recusar</a>
+    {% comment "Adicione logs para depuração" %}
+    {{ solicitacao.de_usuario.nomePerfil.username }} - {{ solicitacao.para_campanha.nomeCampanha }}
+    {% endcomment %}
+  {% endfor %}
+{% endblock conteudo %}

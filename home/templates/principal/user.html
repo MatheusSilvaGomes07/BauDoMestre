@@ -31,6 +31,15 @@
 <a href="{% url 'listar_solicitacoes' %}">Ver solicitações</a><br> <br>
 
 
+
+{% if campanha.id %}
+  <a href="{% url 'gerenciar_solicitacoes' campanha_id=campanha.id %}">Gerenciar solicitações de entrada</a>
+{% else %}
+  <!-- Lida com o caso em que não há campanha associada à solicitação -->
+  Não há campanha associada
+{% endif %}
+
+
 <br> <br>
 
 <a href="{% url 'meus_personagens' %}">Meus personagens</a>  <br> <br>

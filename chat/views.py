@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
-from .models import Grupo, Mensagem
+from home.models import Campanha, Perfil
+from .models import Grupo, Mensagem, SolicitacaoEntrada
 
 
 @login_required
@@ -66,5 +67,61 @@ def excluir_mensagem_pub(request, mensagem_id):
 
     return HttpResponseForbidden("Você não tem permissão para excluir esta mensagem.")
 
+def gerenciar_solicitacoes(request, campanha_id=None):
+    if campanha_id:
+        # Recupera a campanha com base no campanha_id
+        campanha = Campanha.objects.get(pk=campanha_id)
+
+        # Verifica se o usuário autenticado é o mestre da campanha
+        if campanha.nomeMestre.nomePerfil != request.user:
+            return redirect('buscarmesa')
+
+        # Recupera as solicitações de entrada relacionadas à campanha
+        solicitacoes = SolicitacaoEntrada.objects.filter(para_campanha=campanha)
+    else:
+        # Caso não haja um campanha_id, listamos todas as solicitações de entrada
+        solicitacoes = SolicitacaoEntrada.objects.all()
+
+    context = {
+        'campanha': campanha if campanha_id else None,
+        'solicitacoes': solicitacoes,
+    }
+
+    return render(request, 'principal/gerenciar_solicitacoes.html', context)
 
 
+def enviar_solicitacao(request, campanha_id):
+    campanha = Campanha.objects.get(pk=campanha_id)
+    de_usuario = Perfil.objects.get(nomePerfil=request.user)
+    
+    
+    if de_usuario:
+        solicitacao = SolicitacaoEntrada.objects.create(
+            de_usuario=de_usuario,
+            para_campanha=campanha,
+            status='Pendente'
+        )
+        return redirect('buscarmesa')
+    else:
+         return HttpResponseForbidden("Perfil não existe ou foi apagado")
+
+    
+from django.http import Http404
+
+def aceitar_solicitacao_camp(request, solicitacao_id):
+    try:
+        solicitacao = SolicitacaoEntrada.objects.get(pk=solicitacao_id)
+        solicitacao.status = 'Aceita'
+        solicitacao.save()
+        return redirect('buscarmesa')
+    except SolicitacaoEntrada.DoesNotExist:
+        raise Http404("Solicitação não encontrada")
+
+def recusar_solicitacao_camp(request, solicitacao_id):
+    try:
+        solicitacao = SolicitacaoEntrada.objects.get(pk=solicitacao_id)
+        solicitacao.status = 'Recusada'
+        solicitacao.save()
+        return redirect('buscarmesa')
+    except SolicitacaoEntrada.DoesNotExist:
+        raise Http404("Solicitação não encontrada")
