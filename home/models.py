@@ -7,6 +7,7 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 
 
+
 # Model do Perfil do usuário
 class Perfil(models.Model):
     nomePerfil = models.ForeignKey(User, on_delete=models.CASCADE)

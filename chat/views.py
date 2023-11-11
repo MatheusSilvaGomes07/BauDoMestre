@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponseForbidden
+from django.http import Http404, HttpResponseForbidden, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from home.models import Campanha, Perfil
 from .models import Grupo, Mensagem, SolicitacaoEntrada
@@ -15,13 +15,6 @@ def Novo_grupo(request):
     return redirect('criarCampanhas')
 
 
-@login_required
-def Entrar_grupo(request, uuid):
-	u = request.user
-	gp = Grupo.objects.get(uuid=uuid)
-	gp.membros.add(u)
-	gp.save()
-	return redirect('buscarmesa')
 
 
 @login_required
@@ -105,18 +98,17 @@ def enviar_solicitacao(request, campanha_id):
     else:
          return HttpResponseForbidden("Perfil não existe ou foi apagado")
 
-    
-from django.http import Http404
 
 def aceitar_solicitacao_camp(request, solicitacao_id):
     try:
         solicitacao = SolicitacaoEntrada.objects.get(pk=solicitacao_id)
-        solicitacao.status = 'Aceita'
-        solicitacao.save()
+        solicitacao.aceitar_solicitacao()
         return redirect('buscarmesa')
-    except SolicitacaoEntrada.DoesNotExist:
-        raise Http404("Solicitação não encontrada")
 
+    except SolicitacaoEntrada.DoesNotExist:
+        return HttpResponseNotFound("Solicitação não encontrada")
+
+    
 def recusar_solicitacao_camp(request, solicitacao_id):
     try:
         solicitacao = SolicitacaoEntrada.objects.get(pk=solicitacao_id)
@@ -125,3 +117,5 @@ def recusar_solicitacao_camp(request, solicitacao_id):
         return redirect('buscarmesa')
     except SolicitacaoEntrada.DoesNotExist:
         raise Http404("Solicitação não encontrada")
+    
+    
