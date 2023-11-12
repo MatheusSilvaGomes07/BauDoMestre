@@ -75,141 +75,130 @@ nav button {
   margin: .5rem 1rem 0 0;
 }
 
-.side-bar{
-  width: 20rem;
+
+.sidebar-dashboard {
+  background: linear-gradient(171deg, #000, rgb(51 51 51));
+  width: 340px;
   height: 100vh;
-  position: fixed;
-  left: -500px;
-  background: linear-gradient(161deg, #000 5.86%, rgb(53 51 51 / 82%) 161.77%), #FFF;
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-white);
+  font-family: var(--body);
+  justify-content: space-between;
   flex-direction: column;
-  align-self: start;
+  left: -500px;
+  position: fixed;
   transition: .2s;
-  z-index: 9999;
 }
 
-.side-bar button {
+.sidebar-dashboard > button {
   all: unset;
   align-self: start;
-  padding: 0 0 0 1rem;
+  margin: 18px 0 0 18px;
 }
 
-.side-bar button img{
-  width: 3.5rem;
-}
-
-.side-rows {
+.sidebar-body {
   width: 100%;
-  height: 55%;
   flex-direction: column;
-  justify-content: normal;
-  gap: .8rem;
-  padding-top: 1rem;
+  height: 60%;
+  justify-content: space-between;
 }
 
-.side-rows .side-row > * {
-  font-size: clamp(25px, 1.7vw, 64px);
-  font-weight: bold;
+.sidebar-body-upper {
+  height: 15.5rem;
+  justify-content: space-between;
 }
 
-.side-row {
-  width: 85%;
-  padding: .5rem;
-  border-radius: 15px;
-  border: 1px solid #360000;
-  background: linear-gradient(90deg, #8C0000 -99.19%, rgba(140, 0, 0, 0.00) 131.79%);
-  justify-content: normal;
-  gap: 2rem;
+.sidebar-body-lower {
+  height: 6rem;
+  justify-content: space-between;
 }
 
-#inv {
-  gap: 1.6rem;
-}
-
-#inv p {
-  padding-right: .1rem;
-}
-
-#qst p {
-  padding-right: 2.1rem;
-}
-
-.side-row p {
-  padding-right: 2.3rem;
-}
-
-.side-row img {
-  width: 2.3rem;
-}
-
-#inv {
-  border: 1px solid #9C4E5E;
-  background: linear-gradient(90deg, #CC667C  -99.19%, rgba(140, 0, 0, 0.00) 131.79%);
-}
-
-#qst {
-  border: 1px solid #3B0D16;
-  background: linear-gradient(90deg, #23040A  -99.19%, rgba(140, 0, 0, 0.00) 131.79%);
-}
-
-#cfg {
-  border: none;
-  background: none;
-}
-
-.side-foot{
+.sidebar-body-upper, .sidebar-body-lower {
   flex-direction: column;
-  justify-content: normal;
-  align-items: start;
-  height: 30%;
   width: 100%;
-  border: 1px solid #414040;
-  background: linear-gradient(250deg, #8C0000 -101.63%, rgba(18, 17, 17, 0.10) 94.83%, rgba(70, 67, 67, 0.20) 99.85%);
 }
 
-.side-foot .storage-row{
-  width: 75%;
-  border-radius: 5px;
-  height: 5px;
-  background-color: white;
-  margin-left: 1rem;
-}
-
-.side-foot .storage-row .storage-usage {
-  width: 45%;
-  background-color: #A8233C;
-  height: 100%;
-  border-radius: 5px;
-}
-
-.side-foot p {
-  font-family: 'Inter', sans-serif;
-  padding: 1rem 0 .5rem 1rem;
-  font-size: var(--header-12-size);
-  font-weight: 500;
-}
-
-.side-foot p:nth-of-type(2){
-  font-size: clamp(18px, 1vw, 64px);
-  font-weight: 100;
-  padding: .5rem 0 .5rem 1rem;
-}
-
-.side-foot .user {
+.side-boxes {
+  cursor: pointer;
   width: 90%;
-  align-self: center;
-  justify-content: normal;
-  padding-top: 15%;
-  gap: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.side-foot .user .user-desc {
+.sidebar-subtitle  {
+  width: 40%;
+
+}
+.down-arrow-1-2 {
+  height: 39px;
+  margin-left: 26%;
+}
+
+.sidebar-icon {
+  height: 32px;
+}
+
+.sidebar-dashboard-child {
+  border-top: 1px solid #525252;
+  width: 100%;
+  height: 1px;
+}
+
+.sidebar-footer {
+  background: linear-gradient(250.06deg,#8c0000,rgba(18, 17, 17, 0.1) 97.51%,rgba(70, 68, 68, 0.2));
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  font-size: var(--font-size-sm);
   flex-direction: column;
   align-items: start;
+  justify-content: space-evenly;
 }
 
-.side-foot .user-desc p{
-  padding: 0;
-  font-size: clamp(18px, 1vw, 64px);
+.sidebar-footer > * {
+  margin-left: 5%;
+}
+
+.armazenamento {
+  font-size: var(--font-size-lg);
+}
+
+.rectangle-div {
+  border-radius: 3px;
+  background-color: #d9d9d9;
+  width: 190px;
+  height: 5px;
+}
+
+.frame-child1 {
+  border-radius: var(--br-8xs) 0 0 var(--br-8xs);
+  background-color: var(--mudbase);
+  width: 120px;
+  height: 5px;
+}
+
+.gb-de-9 {
+  font-family: var(--font-inter);
+}
+
+.image-50-icon {
+  height: 49px;
+}
+
+.frame2 {
+  position: absolute;
+  top: 19px;
+  left: 17px;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.sidebar-profile {
+  width: 61%;
+  justify-content: space-between;
 }
 
 /*End Header*/

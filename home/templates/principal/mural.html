@@ -53,50 +53,84 @@
         onclick="openSide()"><img class="navbar-icon" id="btn-ico" src="{% static "img/public/list-bold.svg" %}" alt=""></button>
         <img class="navbar-icon" alt="" src="{% static "img/public/ba-do-mestre-23-4.svg" %}" />
       </nav>
-      <div id="sidebar" class="side-bar flex">
+      <div id="sidebar" class="sidebar-dashboard flex">
+        <button onclick="closeSide()"><img alt="" src="{% static "img/public/frame5.svg" %}"/></button>
 
-        <div class="side-rows flex">
-          <button onclick="closeSide()"> <img src="{% static "img/public/figma-icons/x-bold.svg" %}" alt=""></button>
-          <div class="side-row flex">
-            <img src="{% static "img/public/figma-icons/home.png" %}" alt="Icon Home">
-            <a href="{% url 'index' %}">Geral</a>
+        <div class="sidebar-body flex">
+
+          <div class="sidebar-body-upper flex">
+
+            <div class="side-boxes" id="homeContainer">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/silhuetadeiconedecasa-1@2x.png" %}"/>
+              <b class="sidebar-subtitle">Home</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
+            <div class="side-boxes" id="campanhasContainer">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/d20-2@2x.png" %} " />
+              <b class="sidebar-subtitle">Campanhas</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
+            <div class="side-boxes" id="personagensContainer">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/capacete-2@2x.png" %}" />
+              <b class="sidebar-subtitle">Personagens</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
+            <div class="side-boxes" id="inventarioContainer">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/backpack-1@2x.png" %}" />
+              <b class="sidebar-subtitle">Inventário</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
+            <div class="side-boxes" id="socialContainer">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/people-1@2x.png" %}" />
+              <b class="sidebar-subtitle">Social</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
           </div>
-          <div class="side-row flex" id="inv">
-            <img src="{% static "img/public/figma-icons/home.png" %}" alt="Icon Home">
-            <p>Inventário</p>
-          </div>
-          <div class="side-row flex" id="qst">
-            <img src="{% static "img/public/figma-icons/home.png" %}" alt="Icon Home">
-            <p>Mesas</p>
-          </div>
-          <div class="side-row flex" id="cfg">
-            <img src="{% static "img/public/figma-icons/gear.png" %}" alt="Icon Home">
-            <a href="{% url 'account_signup' %}">Cadastre-se</a>
-          </div>
-          <div class="side-row flex" id="cfg">
-            <img src="{% static "img/public/figma-icons/gear.png" %}" alt="Icon Home">
-            <a href="{% url 'account_login' %}">Login</a>
-          </div>
-          <div class="side-row flex" id="cfg">
-            <img src="{% static "img/public/figma-icons/gear.png" %}" alt="Icon Home">
-            <p>Configuração</p>
+
+          <div class="sidebar-body-lower flex">
+
+            <div class="side-boxes" id="configuraesContainer">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/frame4.svg" %}" />
+              <b class="sidebar-subtitle">Perfil</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
+            <div class="side-boxes">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/frame3.svg" %}" />
+              <b class="sidebar-subtitle">Logout</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
           </div>
         </div>
-        <div class="side-foot flex">
-          <p>Armazenamento</p>
-          <div class="storage-row">
-            <div class="storage-usage"></div>
+
+        <div class="sidebar-dashboard-child"></div>
+
+        <div class="sidebar-footer flex">
+          <b class="armazenamento">Armazenamento</b>
+
+          <div class="rectangle-div">
+            <div class="frame-child1"></div>
           </div>
-          <p>2 de 5 GB Usados</p>
-          <div class="user flex">
-            <img src="{% static "img/public/figma-icons/leo.png" %}" alt="">
-            <div class="user-desc flex">
-              <p>Leonardo Paschoa</p>
-              <p>leopasbraga@gmail.com</p>
+
+          <div class="gb-de-9">5 GB de 9 usados</div>
+
+          <div class="sidebar-profile flex">
+            <img class="image-50-icon" alt="" src="{% static "img/public/image-50@2x.png" %}" />
+            <div class="profile-name">
+              <b class="leonardo-paschoa">Leonardo Paschoa</b>
+              <p class="meuemailgmailcom">meuemail@gmail.com</p>
             </div>
           </div>
+
         </div>
       </div>
+
       <div class="dashboard-otimized-item flex">
         <div class="info-box">
 
