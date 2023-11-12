@@ -28,16 +28,16 @@
       <nav class="flex">
         <div class="nav-buttons flex">
           <div class="nav-btn">
-            <a href="{% url 'index' %}">Geral</a>
+            <a href="{% url 'index' %}">Home</a>
           </div>
           <div class="nav-btn">
-            <p>Personagens</p>
+            <p>Inventário</p>
           </div>
           <div class="nav-btn">
-            <p>Mesas</p>
+            <p>Campanhas</p>
           </div>
           <div class="nav-btn">
-            <p>Configuração</p>
+            <p>Social</p>
           </div>
           {% if user.is_authenticated%}
           {% else %}
@@ -143,23 +143,20 @@
 
         </div>
         <div class="icons-list flex">
-          <img src="{% static "img/public/figma-icons/dice.svg" %}" alt="">
-          <img src="{% static "img/public/figma-icons/map.svg" %}" alt="">
-          <img src="{% static "img/public/figma-icons/dragon.svg" %}" alt="">
-          <img src="{% static "img/public/figma-icons/headphones.svg" %}" alt="">
-          <img src="{% static "img/public/figma-icons/image.svg" %}" alt="">
-          <img src="{% static "img/public/figma-icons/doc.svg" %}" alt="">
+          <img src="{% static "img/public/figma-icons/dice2.png" %}" alt="">
+          <img src="{% static "img/public/figma-icons/backpack-fill.svg" %}" alt="">
+          <img src="{% static "img/public/figma-icons/users.svg" %}" alt="">
         </div>
         <p class="qual-a-aventura">Qual a aventura de hoje?</p>
         <p class="encontre-histrias-incrveis">Encontre histórias incríveis</p>
 
-        <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-2@2x.png" %}" />
+        <img class="down-arrow-1-2" style="margin-left: unset" alt="" src="{% static "img/public/downarrow-1-2@2x.png" %}" />
       </div>
     </main>
 
     <div class="quests">
       <div class="quests1 flex">
-        <h3>Quests</h3>
+        <h3 style="font-size: clamp(32px, 3vw, 148px) !important;">Quests</h3>
         <a href="{% url 'criarCampanhas' %}"><img class="vector-icon12" alt="" src="{% static "img/public/vector11.svg" %}" /></a>
       </div>
 

@@ -255,10 +255,6 @@ nav button {
   padding-top: 20vh;
 }
 
-.down-arrow-1-2{
-  width: 5.5vw;
-}
-
 /*Main end*/
 
 /*QUEST ELEMENTS*/
@@ -272,7 +268,7 @@ nav button {
   letter-spacing: -0.02em;
   font-family: var(--header-12);
   width: 100%;
-  font-size: clamp(32px, 3vw, 148px);
+  font-size: clamp(32px, 3vw, 148px) !important;
 }
 
 .vector-icon12 {
