@@ -5,7 +5,7 @@
 <title>Usuário - Baú do Mestre</title>
 <h1>Você está na tela de conta do usuário!</h1>
 
-<h1>Seja bem vindo, {{ user }}!<h1> <br> <br>
+<h1>Seja bem vindo, {{ user }}!<h1>
 
 <h2>Foto de usuário:</h2>
 {% if perfil.fotoConta == 'Indefinido' %}
@@ -33,7 +33,7 @@
 
 
 {% if campanha.id %}
-  <a href="{% url 'gerenciar_solicitacoes' campanha_id=campanha.id %}">Gerenciar solicitações de entrada</a>
+  <a href="{% url 'gerenciar_solicitacoes' %}">Gerenciar solicitações de entrada</a>
 {% else %}
   <!-- Lida com o caso em que não há campanha associada à solicitação -->
   Não há campanha associada

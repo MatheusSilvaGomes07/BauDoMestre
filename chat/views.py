@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404, HttpResponseForbidden, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
-from home.models import Campanha, Perfil
 from .models import Grupo, Mensagem, SolicitacaoEntrada
 
 
@@ -44,7 +43,13 @@ def Remover_grupo(request, uuid):
     if grupo.criador != u:
         return HttpResponseForbidden('Você não tem permissão para excluir este grupo.')
     
+    campanha = grupo.campanha
+    
     grupo.delete()
+    
+    if campanha:
+        campanha.delete()
+        
     return redirect('buscarmesa')
 
 @login_required
@@ -60,23 +65,27 @@ def excluir_mensagem_pub(request, mensagem_id):
 
     return HttpResponseForbidden("Você não tem permissão para excluir esta mensagem.")
 
+@login_required
 def gerenciar_solicitacoes(request, campanha_id=None):
+    from home.models import Campanha
+    campanhas_do_mestre = Campanha.objects.filter(nomeMestre__nomePerfil=request.user)
+    
     if campanha_id:
-        # Recupera a campanha com base no campanha_id
-        campanha = Campanha.objects.get(pk=campanha_id)
+        # Se campanha_id for fornecido, filtre apenas para a campanha específica
+        campanha = get_object_or_404(Campanha, pk=campanha_id)
 
         # Verifica se o usuário autenticado é o mestre da campanha
         if campanha.nomeMestre.nomePerfil != request.user:
             return redirect('buscarmesa')
 
-        # Recupera as solicitações de entrada relacionadas à campanha
         solicitacoes = SolicitacaoEntrada.objects.filter(para_campanha=campanha)
     else:
-        # Caso não haja um campanha_id, listamos todas as solicitações de entrada
-        solicitacoes = SolicitacaoEntrada.objects.all()
+        # Se não houver campanha_id, filtre as solicitações para todas as campanhas do mestre
+        solicitacoes = SolicitacaoEntrada.objects.filter(para_campanha__in=campanhas_do_mestre)
+        campanha = None
 
     context = {
-        'campanha': campanha if campanha_id else None,
+        'campanha': campanha,
         'solicitacoes': solicitacoes,
     }
 
@@ -84,6 +93,7 @@ def gerenciar_solicitacoes(request, campanha_id=None):
 
 
 def enviar_solicitacao(request, campanha_id):
+    from home.models import Campanha, Perfil
     campanha = Campanha.objects.get(pk=campanha_id)
     de_usuario = Perfil.objects.get(nomePerfil=request.user)
     
@@ -103,6 +113,10 @@ def aceitar_solicitacao_camp(request, solicitacao_id):
     try:
         solicitacao = SolicitacaoEntrada.objects.get(pk=solicitacao_id)
         solicitacao.aceitar_solicitacao()
+
+        # Adicione um print para verificar a campanha associada à solicitação
+        print(f"Campanha associada à solicitação: {solicitacao.para_campanha.nomeCampanha}")
+
         return redirect('buscarmesa')
 
     except SolicitacaoEntrada.DoesNotExist:
