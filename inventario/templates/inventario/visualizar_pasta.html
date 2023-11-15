@@ -17,7 +17,7 @@
 {% for file in files %}
     <a href="{% url 'deletar_arquivo' file.id div file.pasta_id %}">Deletar</a>
     <img src="{{ file.file.url }}" height="200px" width="150px">
-    <!-- <a href="{{ file.file.url }}">Testando</a> -->
+    <a href="{{ file.file.url }}">Baixar</a>
     <p>Nome: {{ file.nome }}</p>
     
 {% endfor %}

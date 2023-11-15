@@ -143,7 +143,8 @@ def verificar_extensao(div, file_type, request):
             return False
         
     if div == "Documentos":
-        if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type or 'Microsoft Word' in file_type or 'RAR archive' in file_type:
+        print(file_type)
+        if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type or 'Microsoft Word' in file_type or 'RAR archive' in file_type or 'Zip archive' in file_type:
              return True
         else:
             messages.error(request, "Foi identificado um possível arquivo malicioso ou que não seja possível seu envio, tente enviar novamente")
