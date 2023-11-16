@@ -1,0 +1,235 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="{% static "css/global-ia.css" %}" />
+    <link rel="stylesheet" href="{% static "css/responsivity.css" %}" />
+    <link rel="stylesheet" href="{% static 'css/index-ia.css' %}" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,700;1,400&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+  </head>
+
+  <body>
+    <div class="navbar1 flex">
+
+      <div class="left-box flex">
+        <img class="ba-do-mestre-23-4" alt="logo" src="{% static 'img/public/ba-do-mestre-23-4.svg' %}"/>
+        <p class="bau-do-mestre-container">BAU DO MESTRE</p>
+      </div>
+
+      <div class="buttons flex">
+        <div class="basic-buttons flex">
+          <div class=" nav-button">
+            <a href="{% url 'home' %}">Home</p>
+          </div>
+          <div class="nav-button">
+            <a href="{% url 'sobre-nos' %}">Sobre Nos</a>
+          </div>
+          <div class="nav-button">
+            <p>Campanhas</p>
+          </div>
+        </div>
+        <div class="login-button flex">
+          <div class="red-button flex">
+            <a href="{% url 'account_signup' %}" class="red-button-inn">cadastro</a>
+          </div>
+          <div class="red-button flex">
+            <a href="{% url 'account_login' %}" class="red-button-inn">Login</a>
+          </div>
+        </div>
+      </div>
+
+    <button onclick="openSide()"><img class="line-nav" src="../public/3_line.png" alt=""></button>
+  </div>
+
+  <div id="sidenav" class="flex">
+    <div class="sidenav-header flex">
+      <p class="bau-do-mestre-sidenav">BAU DO MESTRE</p>
+      <button onclick="closeSide()"><img  src="../public/close-x.svg" alt=""></button>
+    </div>
+    <div class="sidenav-body flex">
+      <div class=" nav-button">
+        <p>Home</p>
+      </div>
+      <div class="nav-button">
+        <p>Sobre Nos</p>
+      </div>
+      <div class="nav-button">
+        <p>Campanhas</p>
+      </div>
+      <div class="red-button flex">
+        <p>Cadastro</p>
+      </div>
+      <div class="red-button flex">
+        <p>Login</p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="start text-align flex">
+    <div class="start-child flex">
+
+      <div class="overlay"></div>
+
+      <p id="start-header" class="text-align">Um mundo de historias o aguarda</p>
+
+      <div id="start-row" class="flex">
+
+        <div class="start-btn text-align flex" id="loginContainer">
+          <a href={% url 'account_signup' %}>Comece sua jornada</a>
+        </div>
+
+        <p>Explore mundos incríveis, enfrente desafios épicos e compartilhe
+          momentos memoráveis com uma comunidade apaixonada por RPG de mesa!</p>
+
+      </div>
+    </div>
+
+    <div class="effecbar flex">
+      <div class="div-bar"></div>
+      <p class="por-meio-de">
+        Por meio de uma plataforma rápida e pratica, acesse campanhas
+        criadas pela comunidade dos jogadores de RPG, aonde você pode
+        participar e se aventurar. Encontre amigos, crie personagens, e
+        acima de tudo, se divirta!
+      </p>
+
+      <img class="down-arrow-1-1" alt="" src="../public/downarrow-1-1@2x.png"/>
+    </div>
+
+
+  </div>
+  <div class="public flex">
+    <div class="flex public-body">
+      <div class="public-header flex">
+        <div class="public-header-left-column flex">
+          <div class="aventuras-incriveis text-align">aventuras incriveis</div>
+          <div class="esperando-sua-participao text-align">Esperando sua participação</div>
+          <div class="public-header-footer flex">
+            <div class="faa-seu-cadastro">
+              Faça seu cadastro agora e tenha acesso a essa plataforma incrivel para
+              encontrar os melhores RPGs que existem
+            </div>
+            <div class="public-child"></div>
+          </div>
+        </div>
+        <div class="public-footer">
+          <div class="public-textbox flex">
+            <p class="jogue-como-quiser">JOGUE COMO QUISER</p>
+            <i class="e-onde-quiser">E onde quiser</i>
+            <p class="histrias-para-se">Histórias para se jogar online, ou até mesmo presencial.</p>
+            <div class="public-inner"></div>
+            <p class="encontre-campanhas-jogadores">
+            Encontre Campanhas, Jogadores e tudo o que você precisar para sua
+            aventura!</p>
+            </div>
+        </div>
+      </div>
+      <img class="dashboard-1-icon" alt="" src="../public/dashboard-1@2x.png"/>
+    </div>
+    <div class="public-end">
+      <div class="public-footer-box flex">
+        <div class="overlay public-image"></div>
+      </div>
+    </div>
+  </div>
+  <div class="rpgs flex">
+    <p class="seus-rpgs-favoritos">SEUS RPGS FAVORITOS</p>
+    <b class="esperando-para-serem">Esperando Para Serem Jogados</b>
+    <div class="rpgs1 flex">
+
+      <div class="column flex">
+        <img class="image-43-icon" alt="" src="../public/image-43@2x.png" />
+        <img class="image-44-icon" alt="" src="../public/image-44@2x.png" />
+      </div>
+
+      <div class="column flex">
+        <img class="image-45-icon" alt="" src="../public/image-45@2x.png" />
+        <img class="image-46-icon" alt="" src="../public/image-46@2x.png" />
+      </div>
+
+    </div>
+  </div>
+  <div class="explore flex">
+    <p class="explore-a-rede">explore a rede</p>
+    <div class="ranks flex">
+      <div id="rank" class="rank-box flex">
+        <img class="frame-icon" alt="" src="../public/frame.svg" />
+        <p class="participe-de-aventuas">participe de aventuras</p>
+        <div>
+          <b class="veja-mais" id="vejaMaisText">Veja Mais</b>
+          <div class="rank-child"></div>
+        </div>
+      </div>
+      <div id="rank1" class="rank-box flex">
+        <img class="frame-icon" alt="" src="../public/frame1.svg" />
+        <p class="crie-sua-conta">crie sua conta</p>
+        <div>
+          <b class="veja-mais" id="vejaMaisText1">Veja Mais</b>
+          <div class="rank-child"></div>
+        </div>
+      </div>
+      <div id="rank2" class="rank-box flex">
+        <img class="frame-icon" alt="" src="../public/frame2.svg" />
+        <p class="fale-conosco">fale conosco</p>
+        <div>
+          <b class="veja-mais">Veja Mais</b>
+          <div class="rank-inner"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer flex">
+    <div class="footer-left-column flex">
+      <div class="upper flex">
+        <img class="ba-do-mestre-23-5" alt="" src="../public/ba-do-mestre-23-5.svg"/>
+        <p class="levando-a-magia">Levando a magia do RPG para todos</p>
+      </div>
+      <div class="bau-do-mestre1">Bau do Mestre</div>
+    </div>
+    <div class="footer-right-column flex">
+      <div class="footer-columns flex">
+        <div id="column1" class="footer-column flex">
+          <b class="o-bu-do">O Báu do Mestre</b>
+          <div class="o-bau">
+            <div class="a-plataforma" id="aPlataformaText">A Plataforma</div>
+            <div class="nossos-ideais" id="nossosIdeaisText">Nossos Ideais</div>
+            <div class="cadastro2" id="cadastroText2">Cadastro</div>
+          </div>
+        </div>
+        <div id="column2" class="footer-column flex">
+          <b class="sobre-ns">Sobre nós</b>
+          <div class="sobre-ns1">
+            <div class="nossa-equipe" id="nossaEquipeText">Nossa equipe</div>
+            <div class="contatos" id="contatosText">Contatos</div>
+          </div>
+        </div>
+        <div id="column3" class="footer-column flex">
+          <b class="servios">Serviços</b>
+          <div class="services">
+            <p class="suporte">Suporte</p>
+            <p class="cadastro1" id="cadastroText1">Cadastro</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="elipses flex">
+        <img class="footer-button" alt="" src="../public/phone.svg"/>
+        <img class="footer-button" alt="" src="../public/mail.svg" />
+        <img class="footer-button" alt="" src="../public/youtube.svg" />
+        <img class="footer-button" alt="" src="../public/twitter.svg"/>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

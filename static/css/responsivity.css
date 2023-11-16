@@ -1,0 +1,345 @@
+/*NAVBAR*/
+
+@media (max-width: 850px){
+
+    .bau-do-mestre-container, .buttons {
+        display: none !important;
+    }
+
+    .line-nav{
+        display: block !important;
+      }
+
+
+/*NAVBAR*/
+
+/* INDEX OVERALL MARGIN */
+
+.start {
+    margin-bottom: 5vh !important;
+}
+
+.down-arrow-1-1 {
+    margin-top: 3rem !important;
+}
+
+.public-header-footer {
+    justify-content: space-around !important;
+}
+
+.public-header-left-column {
+    padding: 0 !important;
+}
+
+/* INDEX OVERALL MARGIN */
+
+/*INDEX START*/
+
+.div-bar{
+    width: 75% !important;
+}
+
+/*INDEX START*/
+
+/* INDEX PUBLIC */
+
+.esperando-sua-participao{
+    width: 70% !important;
+}
+
+.public-header-footer{
+    padding: 4vh 0 !important;
+}
+
+.jogue-como-quiser {
+    width: 90% !important;
+}
+
+.public-child {
+    height: 8rem !important;
+}
+
+/* INDEX PUBLIC */
+
+/* INDEX RPG */
+
+.rpgs1{
+    flex-direction: column !important;
+    gap: 3rem !important;
+}
+
+/* INDEX RPG */
+
+/* INDEX EXPLORE */
+
+.ranks {
+    flex-direction: column !important;
+}
+
+.rank-box {
+    width: 80% !important;
+    gap: 2rem !important;
+    height: 23rem !important;
+    transition: .2s;
+}
+
+#rank:hover {
+    background: linear-gradient(121.15deg, #3b3939, rgba(7, 7, 7, 0.4)) !important;
+}
+
+#rank1:hover {
+    background: linear-gradient(139.37deg, #ff5050, rgba(73, 9, 9, 0.4)) !important;
+}
+
+#rank2:hover {
+    background: linear-gradient( 139.37deg, #fff, rgb(195 208 255 / 62%) 59.38% ) !important;
+}
+
+.rank-box p {
+    width: 48%;
+}
+
+.frame-icon {
+    width: 30%;
+}
+
+.rank-box div {
+    display: none !important;
+}
+
+/* INDEX EXPLORE */
+
+.footer {
+    height: 20rem !important;
+}
+
+.footer-button {
+    width: 3rem !important;
+  }
+
+.footer-column {
+    height: 15rem !important;
+}
+}
+
+
+
+@media (max-width: 600px) {
+
+    #start-row {
+        flex-direction: column-reverse !important;
+        gap: 2rem !important;
+    }
+
+    #start-row > p {
+        width: 80% !important;
+    }
+
+    .public-body {
+        flex-direction: column-reverse;
+    }
+
+    .dashboard-1-icon {
+        display: none !important;
+    }
+
+    .public-header {
+        width: 100% !important;
+    }
+
+    .public-header-left-column {
+        gap: 2rem !important;
+    }
+
+    .public-header-footer {
+        flex-direction: column;
+        gap: 2rem !important;
+    }
+
+    .public-child {
+        width: 50% !important;
+        height: 2px !important;
+    }
+
+    .histrias-para-se, .encontre-campanhas-jogadores {
+        width: 65% !important;
+    }
+
+/* FOOTER 600PX*/
+
+    .footer {
+        flex-direction: column !important;
+        gap: 3rem !important;
+        padding: 0 0 1rem 0 !important;
+        height: unset !important;
+    }
+
+    .footer-left-column {
+        width: 100%;
+        gap: 2rem;
+    }
+
+    .upper {
+        gap: 1.5rem !important;
+    }
+
+    .footer-right-column {
+        width: 100% !important;
+    }
+
+    .footer-columns {
+        align-self: center;
+    }
+
+    .footer-column {
+        height: 13rem !important;
+    }
+
+    /* INVENTORY START*/
+
+    .button-cover {
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+    .inv-button {
+        margin: 1.5rem 2.5vh !important;
+        width: 120px;
+    }
+
+    /* INVENTORY END*/
+
+/* FOOTER 600PX*/
+
+}
+
+@media(max-width: 720px) {
+
+    /*ABOUT START*/
+
+    .title {
+        font-size: clamp(24px, 10vw, 64px) !important;
+        width: 85%;
+    }
+
+    .navbar2 {
+        width: 90% !important;
+    }
+
+    .lorem-ipsum-dolor4 {
+        font-size: clamp(24px, 2vw, 32px) !important;
+    }
+
+    .start-leftcolumn {
+        width: 100% !important;
+        align-items: center !important;
+    }
+
+    .start-page {
+        height: unset !important;
+        margin-bottom: 5rem;
+    }
+
+    .start-page-icon {
+        display: none !important;
+    }
+
+    .start-columns {
+        position: unset !important;
+        flex-direction: column !important;
+        gap: 3rem;
+    }
+
+    .image-47-icon {
+        width: 80vw !important;
+    }
+
+    .start-page-inner {
+        width: 35% !important;
+        margin-top: 40% !important;
+    }
+
+    /*ABOUT START*/
+
+    /*ABOUT DIFF*/
+
+    .nosso-diferencial {
+        margin: 2rem !important;
+        gap: 2rem !important;
+    }
+
+    .nosso-diferencial1{
+        width: unset !important;
+    }
+
+    .lorem-ipsum-dolor {
+        font-size: clamp(18px, 2vw, 32px) !important;
+        width: 95% !important;
+    }
+
+    /*ABOUT DIFF*/
+
+
+    /*ABOUT TEAM*/
+
+    .team {
+        flex-direction: column !important;
+        gap: 2rem !important;
+    }
+
+    .nosso-time {
+        font-size: clamp(18px, 2vw, 32px) !important;
+
+        text-align: justify;
+    }
+
+    .conheca-nosso-time {
+        font-size: clamp(24px, 10vw, 64px) !important;
+    }
+
+    .our-team {
+        margin: 4rem 0 6rem 0 !important;
+        gap: 2rem !important;
+    }
+
+    .column {
+        gap: 4rem !important;
+    }
+
+    .rectangle-parent {
+        width: 65vw !important;
+    }
+
+    .n-1-icon {
+        width: 30vw !important;
+    }
+
+    /*ABOUT TEAM*/
+
+    /* INVENTORY START*/
+
+    .inventario {
+        margin: 2rem 0 1.5rem 2%;
+    }
+
+    .inventario-header {
+        gap: 5vh;
+    }
+
+    .inventario-header p {
+        width: 75%;
+    }
+
+    .button-cover {
+        width: 120px;
+        height: 120px ;
+    }
+
+    .inv-button {
+        margin: 2.2rem 3.5vh;
+    }
+
+    /* INVENTORY END*/
+
+}
+

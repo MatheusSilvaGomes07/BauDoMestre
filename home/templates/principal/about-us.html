@@ -1,0 +1,240 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="{% static "css/global-ia.css" %}" />
+    <link rel="stylesheet" href="{% static "css/responsivity.css" %}" />
+    <link rel="stylesheet" href="{% static 'css/about-us.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index-ia.css' %}" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,700;1,400&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+  </head>
+
+  <body>
+<div class="navbar1 flex">
+
+      <div class="left-box flex">
+        <img class="ba-do-mestre-23-4" alt="logo" src="{% static 'img/public/ba-do-mestre-23-4.svg' %}"/>
+        <p class="bau-do-mestre-container">BAU DO MESTRE</p>
+      </div>
+
+      <div class="buttons flex">
+        <div class="basic-buttons flex">
+          <div class=" nav-button">
+            <a href="{% url 'home' %}">Home</p>
+          </div>
+          <div class="nav-button">
+            <a href="{% url 'sobre-nos' %}">Sobre Nos</a>
+          </div>
+          <div class="nav-button">
+            <p>Campanhas</p>
+          </div>
+        </div>
+        <div class="login-button flex">
+          <div class="red-button flex">
+            <a href="{% url 'account_signup' %}" class="red-button-inn">cadastro</a>
+          </div>
+          <div class="red-button flex">
+            <a href="{% url 'account_login' %}" class="red-button-inn">Login</a>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="openSide()"><img class="line-nav" src="{% static 'img/public/3_line.png' %}" alt=""></button>
+    </div>
+
+    <div id="sidenav" class="flex">
+      <div class="sidenav-header flex">
+        <p class="bau-do-mestre-sidenav">BAU DO MESTRE</p>
+        <button onclick="closeSide()"><img  src="{% static 'img/public/close-x.svg' %}" alt=""></button>
+      </div>
+      <div class="sidenav-body flex">
+        <div class=" nav-button">
+          <p>Home</p>
+        </div>
+        <div class="nav-button">
+          <p>Sobre Nos</p>
+        </div>
+        <div class="nav-button">
+          <p>Campanhas</p>
+        </div>
+        <div class="red-button flex">
+          <p>Cadastro</p>
+        </div>
+        <div class="red-button flex">
+          <p>Login</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="start-page flex">
+      <div class="start-columns flex">
+        <div class="start-leftcolumn flex">
+          <p class="title" id="conectando-jogadores-a">
+            Conectando jogadores a aventuras
+          </p>
+          <div class="navbar2"></div>
+          <p class="lorem-ipsum-dolor4">
+            Levar aos jogadores aquilo que eles querem é o nosso principal objetivo
+          </p>
+        </div>
+
+      <div class="start-rightcolumn flex">
+          <img class="image-47-icon" alt="" src="{% static 'img/public/image-47@2x.png' %}" />
+          <img class="start-page-inner" alt="" src="{% static 'img/public/Ellipse-red.svg' %}" >
+      </div>
+      </div>
+      <img class="start-page-icon" alt="" src="{% static 'img/public/start-page.svg' %}"/>
+
+
+
+    </div>
+    <div class="nosso-diferencial flex">
+
+
+      <div class="nosso-diferencial1 title">Nosso diferencial</div>
+
+      <div class="diff-traits flex">
+
+        <div class="trait flex">
+          <div class="line-div"></div>
+          <b class="inovao">INOVAÇÃO</b>
+          <p class="lorem-ipsum-dolor">
+            Por meio de um serviço que não é apresentado a comunidade de RPG.
+            Buscamos fazer a diferença na sua experiencia
+          </p>
+        </div>
+
+        <div class="trait flex">
+          <div class="line-div"></div>
+          <b class="facilidade">FACILIDADE</b>
+          <p class="lorem-ipsum-dolor">
+            Com poucos cliques, participe de uma campanha que marcará sua vida.
+            E com mais alguns cliques, encontre amizades para todas as histórias
+          </p>
+        </div>
+
+        <div class="trait flex">
+          <div class="line-div "></div>
+          <b class="dedicao-ao-rpg">DEDICAÇÃO AO RPG</b>
+          <p class="lorem-ipsum-dolor">
+            Um dos nossos maiores objetivos é lhe trazer uma experiencia imersiva e facil, mantendo toda a cultura da comunidade de RPG de mesa
+          </p>
+        </div>
+
+        <div class="trait flex">
+          <div class="line-div "></div>
+          <b class="diversao">DIVERSÃO</b>
+          <p class="lorem-ipsum-dolor">
+            E acima de tudo, levar diversão a todos os jogadores e histórias, tornando sua experiencia mais divertida!
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="our-team flex">
+        <p class="conheca-nosso-time">conheca nosso time</p>
+        <p class="nosso-time">
+          Nosso time é composto por jogadores de RPG, motivados e criativos em
+          tornar esta comunidade maior ainda
+        </p>
+
+        <div class="team flex">
+
+          <div class="team-leftcolumn column flex">
+            <div class="rectangle-parent flex">
+              <img class="n-1-icon" alt="" src="{% static 'img/public/matheus.png' %}">
+              <div class="rectangle-div flex">
+                <b class="title-name">Matheus Silva Gomes</b>
+                <div class="title-function">
+                  Database Administrator & Back-End Dev
+                </div>
+              </div>
+              <img class="down-arrow-1-14" alt="" src="{% static 'img/public/downarrow-1-11@2x.png' %}"/>
+            </div>
+            <div class="rectangle-parent flex">
+              <img class="n-1-icon" alt="" src="{% static 'img/public/leonardo.png' %}"/>
+              <div class="rectangle-div flex">
+                <b class="title-name">Leonardo Paschoa Braga</b>
+                <div class="title-function">Designers & Front-End Dev</div>
+              </div>
+              <img class="down-arrow-1-14" alt="" src="{% static 'img/public/downarrow-1-11@2x.png' %}"/>
+            </div>
+          </div>
+
+          <div class="team-rightcolumn column flex">
+            <div class="rectangle-parent flex">
+              <img class="n-1-icon" alt="" src="{% static 'img/public/kaua.png' %}"/>
+              <div class="rectangle-div flex">
+                <b class="title-name">Kauã Oliveira de Souza</b>
+                <div class="title-function">Database Administrator & Back-End Dev</div>
+              </div>
+              <img class="down-arrow-1-14" alt="" src="{% static 'img/public/downarrow-1-11@2x.png' %}"/>
+            </div>
+            <div class="rectangle-parent flex">
+              <img class="n-1-icon" alt="" src="{% static 'img/public/lucas-1@2x.png' %}" />
+              <div class="rectangle-div flex">
+                <b class="title-name">Lucas Passos da Silva</b>
+                <div class="title-function">Designer & Back-End Dev</div>
+              </div>
+              <img class="down-arrow-1-14" alt="" src="{% static 'img/public/downarrow-1-11@2x.png' %}"/>
+            </div>
+          </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer flex">
+      <div class="footer-left-column flex">
+        <div class="upper flex">
+          <img class="ba-do-mestre-23-5" alt="" src="{% static 'img/public/ba-do-mestre-23-5.svg' %}"/>
+          <p class="levando-a-magia">Levando a magia do RPG para todos</p>
+        </div>
+        <div class="bau-do-mestre1">Bau do Mestre</div>
+      </div>
+      <div class="footer-right-column flex">
+        <div class="footer-columns flex">
+          <div id="column1" class="footer-column flex">
+            <b class="o-bu-do">O Báu do Mestre</b>
+            <div class="o-bau">
+              <div class="a-plataforma" id="aPlataformaText">A Plataforma</div>
+              <div class="nossos-ideais" id="nossosIdeaisText">Nossos Ideais</div>
+              <div class="cadastro2" id="cadastroText2">Cadastro</div>
+            </div>
+          </div>
+          <div id="column2" class="footer-column flex">
+            <b class="sobre-ns">Sobre nós</b>
+            <div class="sobre-ns1">
+              <div class="nossa-equipe" id="nossaEquipeText">Nossa equipe</div>
+              <div class="contatos" id="contatosText">Contatos</div>
+            </div>
+          </div>
+          <div id="column3" class="footer-column flex">
+            <b class="servios">Serviços</b>
+            <div class="services">
+              <p class="suporte">Suporte</p>
+              <p class="cadastro1" id="cadastroText1">Cadastro</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="elipses flex">
+          <img class="footer-button" alt="" src="{% static 'img/public/phone.svg' %}"/>
+          <img class="footer-button" alt="" src="{% static 'img/public/mail.svg' %}" />
+          <img class="footer-button" alt="" src="{% static 'img/public/youtube.svg' %}" />
+          <img class="footer-button" alt="" src="{% static 'img/public/twitter.svg' %}"/>
+        </div>
+
+      </div>
+    </div>
+</body>
+</html>

@@ -187,3 +187,9 @@ def is_amigo(request, perfil_slug):
     amigo = Perfil.objects.get(nomePerfil=request.user)
     is_amigo = amigo.amigo_set.filter(nomePerfil=perfil.nomePerfil).exists()
     return is_amigo
+
+def aboutus(request):
+    return render(request, 'principal/about-us.html')
+
+def home(request):
+    return render(request, 'principal/home-ia.html')
