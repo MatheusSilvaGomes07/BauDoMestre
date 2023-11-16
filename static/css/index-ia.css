@@ -46,6 +46,9 @@
 
 .red-button-inn {
   text-transform: uppercase;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
 }
 
 .line-nav{
@@ -108,6 +111,12 @@
 
 .nav-button {
   font-weight: bold;
+  text-decoration: unset;
+}
+
+.nav-button a {
+  text-decoration: none;
+  color: white;
 }
 
 .sidenav-body {
@@ -138,7 +147,7 @@
   background-repeat: no-repeat;
 }
 
-.start-child p, .start-child div {
+.start-child a, .start-child div {
   z-index: 8;
 }
 
@@ -178,10 +187,12 @@
   font-family: var(--header-12);
 }
 
-.start-btn > p {
+.start-btn > a {
   padding: 1.6rem 0;
   width: 75%;
   align-self: center;
+  text-decoration: none;
+  color: white;
 }
 
 .effecbar {
