@@ -7,6 +7,7 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 
 
+
 # Model do Perfil do usuário
 class Perfil(models.Model):
     nomePerfil = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -15,13 +16,11 @@ class Perfil(models.Model):
         ('Online', 'Online'),
         ('Presencial', 'Presencial'),
     )
-
     PLAYER_TYPE_CHOICES = (
         ('Mestre', 'Mestre'),
         ('Jogador', 'Jogador'),
         ('Ambos', 'Ambos'),
     )
-
     RPG_SYSTEM_CHOICES = (
         ('Dungeons & Dragons', 'Dungeons & Dragons'),
         ('Tormenta20', 'Tormenta20'),
@@ -29,7 +28,6 @@ class Perfil(models.Model):
         ('Call of Cthulhu', 'Call of Cthulhu'),
         ('Outros', 'Outros'),
     )
-
     fotoConta = models.ImageField(upload_to='images/profilePictures')
     tipo_sessao = models.CharField(max_length=20, choices=SESSION_CHOICES, null=True)
     tipo_player = models.CharField(max_length=20, choices=PLAYER_TYPE_CHOICES, null=True)
@@ -40,8 +38,6 @@ class Perfil(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nomePerfil.username)
         super(Perfil, self).save(*args, **kwargs)
-
-
 # Model das Campanhas
 class Campanha(models.Model):
     nomeMestre = models.ForeignKey(Perfil, on_delete=models.CASCADE)
@@ -73,6 +69,15 @@ class Campanha(models.Model):
     diasSessao = models.CharField(max_length=52, null=True)
     generoRPG = models.CharField(max_length=100, choices=GENERO_RPG_CHOICES, null=True)
 
+    def obter_grupo(self):
+        from chat.models import Grupo
+        # Retorna o grupo associado a esta campanha
+        try:
+            return self.chats.get()
+        except Grupo.DoesNotExist:
+            # Se o grupo não existir, retorne None ou crie um novo grupo aqui, se desejado
+            return None
+
 # Atualiza o perfil do usuário assim que a conta é criada
 @receiver(post_save, sender=User)
 def criar_perfil_usuario(sender, instance, created, **kwargs):
@@ -88,6 +93,5 @@ def criar_perfil_usuario(sender, instance, created, **kwargs):
         #     shutil.copyfile(caminho_origem, caminho_destino)
         # except FileNotFoundError:
         #     print("Arquivo 'Ain.png' não encontrado.")
-
         # perfil.fotoConta = caminho_destino
         # perfil.save()
