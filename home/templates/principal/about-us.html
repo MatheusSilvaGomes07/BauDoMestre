@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
   </head>
 
-  <body>
+  <body class="desktop">
 <div class="navbar1 flex">
 
       <div class="left-box flex">
@@ -31,9 +31,6 @@
           </div>
           <div class="nav-button">
             <a href="{% url 'sobre-nos' %}">Sobre Nos</a>
-          </div>
-          <div class="nav-button">
-            <p>Campanhas</p>
           </div>
         </div>
         <div class="login-button flex">
@@ -60,9 +57,6 @@
         </div>
         <div class="nav-button">
           <p>Sobre Nos</p>
-        </div>
-        <div class="nav-button">
-          <p>Campanhas</p>
         </div>
         <div class="red-button flex">
           <p>Cadastro</p>
@@ -238,3 +232,5 @@
     </div>
 </body>
 </html>
+
+<script src="{% static 'js/sidenav.js' %}"></script>
