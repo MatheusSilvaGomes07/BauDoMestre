@@ -5,7 +5,7 @@
 <title>Usuário - Baú do Mestre</title>
 <h1>Você está na tela de conta do usuário!</h1>
 
-<h1>Seja bem vindo, {{ user }}!<h1> <br> <br>
+<h1>Seja bem vindo, {{ user }}!<h1>
 
 <h2>Foto de usuário:</h2>
 {% if perfil.fotoConta == 'Indefinido' %}
@@ -29,6 +29,15 @@
 
 <a href="{% url 'listar_amigos' %}">Ver lista de amigos</a><br> <br>
 <a href="{% url 'listar_solicitacoes' %}">Ver solicitações</a><br> <br>
+
+
+
+{% if campanha.id %}
+  <a href="{% url 'gerenciar_solicitacoes' %}">Gerenciar solicitações de entrada</a>
+{% else %}
+  <!-- Lida com o caso em que não há campanha associada à solicitação -->
+  Não há campanha associada
+{% endif %}
 
 
 <br> <br>

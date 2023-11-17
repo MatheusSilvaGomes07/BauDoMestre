@@ -154,7 +154,9 @@ def criarCampanhas(request):
 @login_required
 def usuario(request):
     perfil = Perfil.objects.get(nomePerfil=request.user)
-    return render(request, 'principal/user.html', {'perfil': perfil})
+    campanha = Campanha.objects.filter(nomeMestre=perfil).first()
+
+    return render(request, 'principal/user.html', {'perfil': perfil, 'campanha': campanha})
 
 
 # view da edição de conta do usuário
@@ -187,6 +189,7 @@ def is_amigo(request, perfil_slug):
     amigo = Perfil.objects.get(nomePerfil=request.user)
     is_amigo = amigo.amigo_set.filter(nomePerfil=perfil.nomePerfil).exists()
     return is_amigo
+
 
 def aboutus(request):
     return render(request, 'principal/about-us.html')

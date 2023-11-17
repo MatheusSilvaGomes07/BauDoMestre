@@ -7,6 +7,7 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 
 
+
 # Model do Perfil do usuário
 class Perfil(models.Model):
     nomePerfil = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -72,6 +73,15 @@ class Campanha(models.Model):
     numeroJogadores = models.IntegerField(null=True)
     diasSessao = models.CharField(max_length=52, null=True)
     generoRPG = models.CharField(max_length=100, choices=GENERO_RPG_CHOICES, null=True)
+    
+    def obter_grupo(self):
+        from chat.models import Grupo
+        # Retorna o grupo associado a esta campanha
+        try:
+            return self.chats.get()
+        except Grupo.DoesNotExist:
+            # Se o grupo não existir, retorne None ou crie um novo grupo aqui, se desejado
+            return None
 
 # Atualiza o perfil do usuário assim que a conta é criada
 @receiver(post_save, sender=User)
@@ -91,3 +101,4 @@ def criar_perfil_usuario(sender, instance, created, **kwargs):
 
         # perfil.fotoConta = caminho_destino
         # perfil.save()
+
