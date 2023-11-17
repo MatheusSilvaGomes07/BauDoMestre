@@ -135,7 +135,6 @@
 }
 
 .start-child {
-  background-image: url(../public/edgelord-dragon-1@2x.png);
   backdrop-filter: blur(2px);
   mix-blend-mode: difference;
   width:100vw;
@@ -147,7 +146,7 @@
   background-repeat: no-repeat;
 }
 
-.start-child a, .start-child div {
+.start-child a, .start-child p, .start-child div {
   z-index: 8;
 }
 

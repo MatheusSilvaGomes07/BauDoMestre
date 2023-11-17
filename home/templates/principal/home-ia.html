@@ -46,13 +46,13 @@
         </div>
       </div>
 
-    <button onclick="openSide()"><img class="line-nav" src="../public/3_line.png" alt=""></button>
+    <button onclick="openSide()"><img class="line-nav" src="{% static 'img/public/3_line.png' %}" alt=""></button>
   </div>
 
   <div id="sidenav" class="flex">
     <div class="sidenav-header flex">
       <p class="bau-do-mestre-sidenav">BAU DO MESTRE</p>
-      <button onclick="closeSide()"><img  src="../public/close-x.svg" alt=""></button>
+      <button onclick="closeSide()"><img  src="{% static 'img/public/close-x.svg' %}" alt=""></button>
     </div>
     <div class="sidenav-body flex">
       <div class=" nav-button">
@@ -76,7 +76,7 @@
 
 
   <div class="start text-align flex">
-    <div class="start-child flex">
+    <div class="start-child flex"  style="background-image: url({% static "img/public/edgelord-dragon-1@2x.png" %}); ">
 
       <div class="overlay"></div>
 
@@ -134,7 +134,7 @@
             </div>
         </div>
       </div>
-      <img class="dashboard-1-icon" alt="" src="../public/dashboard-1@2x.png"/>
+      <img class="dashboard-1-icon" alt="" src="{% static 'img/public/dashboard-1@2x.png' %}"/>
     </div>
     <div class="public-end">
       <div class="public-footer-box flex">
@@ -148,13 +148,13 @@
     <div class="rpgs1 flex">
 
       <div class="column flex">
-        <img class="image-43-icon" alt="" src="../public/image-43@2x.png" />
-        <img class="image-44-icon" alt="" src="../public/image-44@2x.png" />
+        <img class="image-43-icon" alt="" src="{% static 'img/public/image-43@2x.png' %}" />
+        <img class="image-44-icon" alt="" src="{% static 'img/public/image-44@2x.png' %}" />
       </div>
 
       <div class="column flex">
-        <img class="image-45-icon" alt="" src="../public/image-45@2x.png" />
-        <img class="image-46-icon" alt="" src="../public/image-46@2x.png" />
+        <img class="image-45-icon" alt="" src="{% static 'img/public/image-45@2x.png' %}" />
+        <img class="image-46-icon" alt="" src="{% static 'img/public/image-46@2x.png' %}" />
       </div>
 
     </div>
@@ -163,7 +163,7 @@
     <p class="explore-a-rede">explore a rede</p>
     <div class="ranks flex">
       <div id="rank" class="rank-box flex">
-        <img class="frame-icon" alt="" src="../public/frame.svg" />
+        <img class="frame-icon" alt="" src="{% static 'img/public/frame.svg' %}" />
         <p class="participe-de-aventuas">participe de aventuras</p>
         <div>
           <b class="veja-mais" id="vejaMaisText">Veja Mais</b>
@@ -171,7 +171,7 @@
         </div>
       </div>
       <div id="rank1" class="rank-box flex">
-        <img class="frame-icon" alt="" src="../public/frame1.svg" />
+        <img class="frame-icon" alt="" src="{% static 'img/public/frame1.svg' %}" />
         <p class="crie-sua-conta">crie sua conta</p>
         <div>
           <b class="veja-mais" id="vejaMaisText1">Veja Mais</b>
@@ -179,7 +179,7 @@
         </div>
       </div>
       <div id="rank2" class="rank-box flex">
-        <img class="frame-icon" alt="" src="../public/frame2.svg" />
+        <img class="frame-icon" alt="" src="{% static 'img/public/frame2.svg' %}" />
         <p class="fale-conosco">fale conosco</p>
         <div>
           <b class="veja-mais">Veja Mais</b>
@@ -191,7 +191,7 @@
   <div class="footer flex">
     <div class="footer-left-column flex">
       <div class="upper flex">
-        <img class="ba-do-mestre-23-5" alt="" src="../public/ba-do-mestre-23-5.svg"/>
+        <img class="ba-do-mestre-23-5" alt="" src="{% static 'img/public/ba-do-mestre-23-5.svg' %}"/>
         <p class="levando-a-magia">Levando a magia do RPG para todos</p>
       </div>
       <div class="bau-do-mestre1">Bau do Mestre</div>
@@ -223,13 +223,15 @@
       </div>
 
       <div class="elipses flex">
-        <img class="footer-button" alt="" src="../public/phone.svg"/>
-        <img class="footer-button" alt="" src="../public/mail.svg" />
-        <img class="footer-button" alt="" src="../public/youtube.svg" />
-        <img class="footer-button" alt="" src="../public/twitter.svg"/>
+        <img class="footer-button" alt="" src="{% static 'img/public/phone.svg' %}"/>
+        <img class="footer-button" alt="" src="{% static 'img/public/mail.svg' %}" />
+        <img class="footer-button" alt="" src="{% static 'img/public/youtube.svg' %}" />
+        <img class="footer-button" alt="" src="{% static 'img/public/twitter.svg' %}"/>
       </div>
 
     </div>
   </div>
 </body>
 </html>
+
+<script src="{% static 'js/sidenav.js' %}"></script>
