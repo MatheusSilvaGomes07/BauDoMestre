@@ -23,6 +23,8 @@ class File(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     file = models.FileField(upload_to='uploads/')
     data = models.CharField(max_length=10, default=datetime.now().strftime('%d/%m/%Y'))
+    tamanho = models.IntegerField(default= 0)
+    extensao = models.CharField(max_length=10)
 
     def delete(self, *args, **kwargs):
         # Exclua todas as imagens associadas

@@ -1,0 +1,71 @@
+.inventrio {
+  position: relative;
+  background: linear-gradient(169deg, #000 35.32%, rgba(53, 51, 51, 0.50) 218.41%);
+  text-align: center;
+  font-size: var(--body-size);
+  color: var(--color-white);
+  font-family: var(--body);
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10vh;
+}
+
+.inventario-header {
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 10vh;
+  width: 100%;
+}
+
+.inventario-header h2 {
+  font-size: var(--font-size-9xl);
+  width: 75%;
+}
+
+.inventario-header > p {
+  width: 50%;
+  font-size: var(--font-size-4xl);
+}
+
+.inventario {
+  font-size: var(--font-size-45xl);
+  font-family: var(--header-12);
+  font-weight: unset;
+  align-self: start;
+  margin: 2rem 0 3rem 2%;
+}
+
+.inv-buttons {
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.inv-button {
+  margin: 2.2rem 6.5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-cover {
+  border-radius: var(--br-8xs);
+  background: linear-gradient(137deg, #F00 -58.3%, rgb(255 0 0 / 38%) 100.26%);
+  box-shadow: 5px 4px 4px rgba(0, 0, 0, 0.5) inset;
+  width: 180px;
+  height: 180px;
+  cursor: pointer;
+}
+
+.inner-icon {
+  width: 60%;
+  align-self: center;
+}
+
+.inv-button p {
+  letter-spacing: -0.02em;
+  line-height: 35px;
+  font-weight: 800;
+  margin-top: .5rem;
+  font-size: var(--title-13-size);
+}
+

@@ -9,8 +9,11 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="shortcut icon" href="{% static 'img/Ain.png' %}" type="image/x-icon">
     <title>{% block title %}{% endblock title %}</title>
+    {% block head %}
+    
+    {% endblock %}
 </head>
-<body>
+<body class="inventrio flex">
     
     {% if user.is_authenticated %}
     <nav>Navbar <a href="{% url 'account_logout' %}">Logout </a> <a href="{%url 'usuario' %}" style=>Perfil</a> <a href="{% url 'search_user' %}">Buscar Usuário</a></nav>

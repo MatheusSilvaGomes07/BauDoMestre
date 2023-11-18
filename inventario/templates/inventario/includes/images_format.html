@@ -1,0 +1,44 @@
+{% load static %}
+<div class="inventario-header flex">
+
+    <h1 class="inventario">{{ pasta }}</h1>
+
+    <h2>Envie quantos arquivos precisar!</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <div class="send-row flex">
+      <div class="send-bar flex">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.file }}
+            <div class="arq-button">
+            <p>ARQUIVO</p>
+            </div>
+        </div>
+            <button class="send-button flex" type="submit">Enviar</button>
+        </form>
+    </div>
+
+    
+        <div class="gallery flex">
+            {% for file in files %}
+                <div class="image-box">
+                    <div class="box">
+                        <img src="{{ file.file.url }}" alt="">
+                    </div>
+                        <p>{{ file.nome }}</p>
+                        <div class="manage">
+                        <a href="{{ file.file.url }}" download><img src="{% static "img/public/download.svg" %}" alt=""></a>
+                        <a href="{% url 'deletar_arquivo' file.id div file.pasta_id %}"><img src="{% static "img/public/thrash.svg" %}" alt=""></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    
+
+  </div>

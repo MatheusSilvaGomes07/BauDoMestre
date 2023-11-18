@@ -127,7 +127,7 @@ def musicas(request):
 
     return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
 
-def verificar_extensao(div, file_type, request):
+def verificar_extensao(div, file_type, request, tamanho):
     if div == "Mapas":
         if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type:
             return True
@@ -164,6 +164,10 @@ def verificar_extensao(div, file_type, request):
             messages.error(request, "A divisão de músicas só aceita arquivos de áudios")
             return False
         
+    if tamanho > 83886080:
+        messages.error(request, "Algum arquivo enviado era maior que 80MB, só é possível o envio de arquivos abaixo de 80MB")
+        return False     
+       
 @login_required
 def visualizar_pasta(request, div, pasta):
     
@@ -181,17 +185,19 @@ def visualizar_pasta(request, div, pasta):
             for f in files:
                 base_name, extension = os.path.splitext(str(f))
                 file_type = mime.from_buffer(f.read(1024))
+                tamanho = f.size
 
                 
-                if verificar_extensao(div, file_type, request):
-                    arquivo = File(file=f, owner=user, pasta=pastas, nome=base_name)
+
+                if verificar_extensao(div, file_type, request, tamanho):
+                    arquivo = File(file=f, owner=user, pasta=pastas, nome=base_name, tamanho=tamanho, extensao=extension)
                     arquivo.save()
 
                 
             return redirect('visualizar_pasta', div, pasta)
     else:
         form = FileForm()
-    return render(request, 'inventario/visualizar_pasta.html', {'files': files, 'form': form, 'div': div})
+    return render(request, 'inventario/visualizar_pasta.html', {'files': files, 'form': form, 'div': div, 'pasta':pasta})
 
 @login_required
 def deletar_arquivo(request, id, div, id_pasta):

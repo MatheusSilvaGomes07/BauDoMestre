@@ -1,0 +1,94 @@
+{% load static %}
+
+
+<div class="inventario-header flex">
+
+    <h1 class="inventario">{{ pasta }}</h1>
+
+    <h2>Envie quantos documentos quiser</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <div class="send-row flex">
+        <div class="send-bar flex">
+          <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.file }}
+              <div class="arq-button">
+              <p>ARQUIVO</p>
+              </div>
+          </div>
+              <button class="send-button flex" type="submit">Enviar</button>
+          </form>
+      </div>
+
+  <div class="directories flex">
+
+    <div class="directories-header flex">
+      <p>Nome</p>
+      <p>Data</p>
+      <p>Tamanho</p>
+    </div>
+
+    {% for file in files %}
+    <div class="directory-box">
+      <div class="directory flex">
+        <img src="{% static "img/public/doc.svg" %}" alt="">
+        <a href="{{ file.file.url }}" download><p class="inventory-item">{{ file.nome }}{{file.extensao}}</p></a>
+        <p class="inventory-item">{{ file.data }}</p>
+        <p id ="tamanho{{ forloop.counter }}" class="inventory-item">{{ file.tamanho }}</p>
+        <button onclick="OpenStats()" style="all: unset;"><img class="three-dots" src="{% static "img/public/three-dots.svg" %}" alt=""></button>
+        <a href="{% url 'deletar_arquivo' file.id div file.pasta_id %}"><img src="{% static "img/public/thrash.svg" %}" alt=""></a>
+      </div>
+      <div id="dot1" class="info-column flex">
+
+        <div class="data-column">
+          <p>{{ file.data }}</p>
+          <p>Data</p>
+        </div>
+
+        <div class="data-column">
+          <p id="tamanho{{ forloop.counter }}" class="inventory-item">123.43 KB</p>
+          <p>Tamanho</p>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+        var tamanhoEmBytes = {{ file.tamanho }};
+        var tamanhoEmKB = tamanhoEmBytes / 1024;
+
+        if (tamanhoEmKB >= 1024){
+            var tamanhoMB = tamanhoEmKB / 1024;
+
+            document.getElementById('tamanho' + {{ forloop.counter }}).innerText = tamanhoMB.toFixed(2) + 'MB';
+        } else {
+            document.getElementById('tamanho' + {{ forloop.counter }}).innerText = tamanhoEmKB.toFixed(2) + 'KB';
+        }
+
+        
+    </script>
+    {% endfor %}
+
+
+
+  </div>
+  </div>
+
+  <script>
+    function OpenStats() {
+      var dot1 = document.getElementById("dot1");
+
+      if (dot1.style.display === "flex") {
+          dot1.style.display = "none";
+      } else {
+          dot1.style.display = "flex";
+      }
+    }
+
+    </script>

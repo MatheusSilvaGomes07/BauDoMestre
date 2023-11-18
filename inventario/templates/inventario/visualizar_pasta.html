@@ -1,25 +1,27 @@
 {% extends 'inventario/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static "css/global-ia.css" %}" />
+    <link rel="stylesheet" href="{% static "css/inventario.css" %}" />
+    <link rel="stylesheet" href="{% static "css/responsivity.css" %}">
+    <link rel="stylesheet" href="{% static "css/inventory-childs.css" %}">
+    <link rel="stylesheet" href="{% static "css/image-display.css" %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,700;0,800;1,400&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
+{% endblock %}
+
+
 
 {% block content %}
-<h1>Visualizar Pasta</h1>
 
-{% if messages %}
-    {% for message in messages %}
-      <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-    {% endfor %}
+{% if div == 'Mapas' or div == 'Imagens' %}
+    {% include "inventario/includes/images_format.html" %}
+{% else %}
+    {% include "inventario/includes/file_format.html" %}
 {% endif %}
-
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.file }}<br>
-    <button type="submit">Enviar</button>
-</form>
-{% for file in files %}
-    <a href="{% url 'deletar_arquivo' file.id div file.pasta_id %}">Deletar</a>
-    <img src="{{ file.file.url }}" height="200px" width="150px">
-    <a href="{{ file.file.url }}">Baixar</a>
-    <p>Nome: {{ file.nome }}</p>
-    
-{% endfor %}
 
 {% endblock%}

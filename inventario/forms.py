@@ -22,12 +22,18 @@ class FileForm(forms.ModelForm):
     class Meta:
         model = File
         fields = '__all__'
-        exclude = ['owner', 'pasta', 'nome', 'data']
+        exclude = ['owner', 'pasta', 'nome', 'data', 'tamanho', 'extensao']
     file = MultipleFileField()
+
+    
 
 class PastaForm(forms.ModelForm):
     class Meta:
         model = Pasta
         fields = '__all__'
         exclude = ['owner', 'divisao']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nome'].widget.attrs['placeholder'] = 'Digite o nome da pasta'
 

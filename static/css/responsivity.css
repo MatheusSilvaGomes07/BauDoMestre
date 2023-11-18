@@ -1,5 +1,15 @@
 /*NAVBAR*/
 
+@media (max-width: 1164px){
+    .image-box .box {
+        width: 250px;
+    }
+
+    .gallery {
+        justify-content: space-around;
+    }
+}
+
 @media (max-width: 850px){
 
     .bau-do-mestre-container, .buttons {
@@ -122,97 +132,6 @@
 }
 }
 
-
-
-@media (max-width: 600px) {
-
-    #start-row {
-        flex-direction: column-reverse !important;
-        gap: 2rem !important;
-    }
-
-    #start-row > p {
-        width: 80% !important;
-    }
-
-    .public-body {
-        flex-direction: column-reverse;
-    }
-
-    .dashboard-1-icon {
-        display: none !important;
-    }
-
-    .public-header {
-        width: 100% !important;
-    }
-
-    .public-header-left-column {
-        gap: 2rem !important;
-    }
-
-    .public-header-footer {
-        flex-direction: column;
-        gap: 2rem !important;
-    }
-
-    .public-child {
-        width: 50% !important;
-        height: 2px !important;
-    }
-
-    .histrias-para-se, .encontre-campanhas-jogadores {
-        width: 65% !important;
-    }
-
-/* FOOTER 600PX*/
-
-    .footer {
-        flex-direction: column !important;
-        gap: 3rem !important;
-        padding: 0 0 1rem 0 !important;
-        height: unset !important;
-    }
-
-    .footer-left-column {
-        width: 100%;
-        gap: 2rem;
-    }
-
-    .upper {
-        gap: 1.5rem !important;
-    }
-
-    .footer-right-column {
-        width: 100% !important;
-    }
-
-    .footer-columns {
-        align-self: center;
-    }
-
-    .footer-column {
-        height: 13rem !important;
-    }
-
-    /* INVENTORY START*/
-
-    .button-cover {
-        width: 100px !important;
-        height: 100px !important;
-    }
-
-    .inv-button {
-        margin: 1.5rem 2.5vh !important;
-        width: 120px;
-    }
-
-    /* INVENTORY END*/
-
-/* FOOTER 600PX*/
-
-}
-
 @media(max-width: 720px) {
 
     /*ABOUT START*/
@@ -322,10 +241,6 @@
         margin: 2rem 0 1.5rem 2%;
     }
 
-    .inventario-header {
-        gap: 5vh;
-    }
-
     .inventario-header p {
         width: 75%;
     }
@@ -341,5 +256,137 @@
 
     /* INVENTORY END*/
 
+    .directories {
+        gap: 1rem;
+    }
+
+    /* .inventrio {
+        height: 100vh;
+    } */
+
+    .gallery {
+        justify-content: space-around;
+    }
+
+    .image-box .box {
+        width: 200px;
+    }
 }
 
+
+@media (max-width: 600px) {
+
+    #start-row {
+        flex-direction: column-reverse !important;
+        gap: 2rem !important;
+    }
+
+    #start-row > p {
+        width: 80% !important;
+    }
+
+    .public-body {
+        flex-direction: column-reverse;
+    }
+
+    .dashboard-1-icon {
+        display: none !important;
+    }
+
+    .public-header {
+        width: 100% !important;
+    }
+
+    .public-header-left-column {
+        gap: 2rem !important;
+    }
+
+    .public-header-footer {
+        flex-direction: column;
+        gap: 2rem !important;
+    }
+
+    .public-child {
+        width: 50% !important;
+        height: 2px !important;
+    }
+
+    .histrias-para-se, .encontre-campanhas-jogadores {
+        width: 65% !important;
+    }
+
+/* FOOTER 600PX*/
+
+    .footer {
+        flex-direction: column !important;
+        gap: 3rem !important;
+        padding: 0 0 1rem 0 !important;
+        height: unset !important;
+    }
+
+    .footer-left-column {
+        width: 100%;
+        gap: 2rem;
+    }
+
+    .upper {
+        gap: 1.5rem !important;
+    }
+
+    .footer-right-column {
+        width: 100% !important;
+    }
+
+    .footer-columns {
+        align-self: center;
+    }
+
+    .footer-column {
+        height: 13rem !important;
+    }
+
+    /* INVENTORY START*/
+
+    .button-cover {
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+    .inv-button {
+        margin: 1.5rem 2.5vh !important;
+        width: 120px;
+    }
+
+    /* INVENTORY END*/
+
+    .inventory-item:nth-of-type(2), .inventory-item:nth-of-type(3) {
+        display: none !important;
+    }
+
+    .inventory-item:nth-of-type(1) {
+        width: 70% !important;
+    }
+
+    .directories-header p:nth-of-type(2), .directories-header p:nth-of-type(3) {
+        display: none !important;
+    }
+
+    .three-dots {
+        display: inline-block !important;
+    }
+
+    .directory, .send-bar {
+        padding: 0.7rem 0.7rem !important;
+    }
+
+    .send-button {
+        padding: 1.2rem 0 !important;
+    }
+
+/* FOOTER 600PX*/
+
+.image-box .box {
+    width: 140px;
+}
+
+}

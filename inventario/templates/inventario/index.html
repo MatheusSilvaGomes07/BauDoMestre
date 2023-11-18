@@ -1,13 +1,87 @@
 {% extends 'inventario/base.html' %}
 {% load static %}
 
+{% block title %}
+    Inventario
+{% endblock %}
+
+{% block head %}
+<meta charset="utf-8" />
+
+    <link rel="stylesheet" href="{% static "css/global-ia.css" %}" />
+    <link rel="stylesheet" href="{% static "css/inventario.css" %}" />
+    <link rel="stylesheet" href="{% static "css/responsivity.css" %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,700;0,800;1,400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" />
+{% endblock %}
+
 {% block content %}
-    <h1>Inventario</h1>
+
+    <div class="inventario-header flex">
+
+        <h1 class="inventario">Inventario</h1>
+  
+        <h2>
+          Salve seus arquivos e use-os quando desejar
+        </h2>
+  
+        <p>
+          Crie subpastas e organize seus mapas, fichas, imagens documentons e
+          músicas para sua campanha ou personagem
+        </div>
+  
+      <div class="inv-buttons flex">
+  
+          <div class="inv-button">
+            <a href="{% url "mapas"  %}">
+              <div class="button-cover flex" id="rectangle3">
+                <img class="inner-icon" alt="" src="{% static 'img/public/map.svg' %}" />
+              </div>
+            </a>
+            <p>Mapas</p>
+          </div>
+  
+
+          <div class="inv-button">
+            <a href="{% url "criaturas"  %}">
+                <div class="button-cover flex" id="rectangle3">
+                <img class="inner-icon" alt="" src="{% static 'img/public/dragon.svg' %}" />
+                </div>
+            </a>
+            <p>Criaturas</p>
+          </div>
+  
+          <div class="inv-button">
+            <a href="{% url "imagens"  %}">
+                <div class="button-cover flex" id="rectangle1">
+                <img class="inner-icon" alt="" src="{% static 'img/public/images.svg' %}" />
+                </div>
+            </a>
+                <p>Imagens</p>
+          </div>
+  
+          <div class="inv-button">
+            <a href="{% url "documentos"  %}">
+                <div class="button-cover flex" id="rectangle2">
+                <img class="inner-icon" alt="" src="{% static 'img/public/doc.svg' %}" />
+                </div>
+            </a>
+            <p>Documentos</p>
+          </div>
+  
+          <div class="inv-button">
+            <a href="{% url "musicas"  %}">
+                <div class="button-cover flex" id="rectangle">
+                <img class="inner-icon" alt="" src="{% static 'img/public/headphones.svg' %}"/>
+                </div>
+            </a>
+            <p>Músicas</p>
+          </div>
+  
+        </div>
     
-    <a href="{% url "mapas"  %}">Mapas</a>
-    <a href="{% url "criaturas"  %}">Criaturas</a>
-    <a href="{% url "documentos"  %}">Documentos</a>
-    <a href="{% url "imagens"  %}">Imagens</a>
-    <a href="{% url "musicas"  %}">Musicas</a>
 
 {% endblock%}
