@@ -1,0 +1,30 @@
+.bem-vindo-jogador-container2 {
+    font-size: clamp(36px, 5vw, 96px);
+}
+
+
+
+h1 {
+    font-family: var(--header-12);
+    font-size: clamp(52px, 5vw, 96px);
+}
+
+h3 {
+    font-family: var(--subtitle-22);
+    letter-spacing: .8rem;
+}
+
+.character-sheet {
+    margin-top: 5rem;
+    width: 100%;
+}
+
+.character-sheet .character-header {
+    height: 100%;
+    width: 100%;
+}
+
+.character-sheet .background {
+    width: 100%;
+    height: 100%;
+}

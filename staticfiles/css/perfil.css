@@ -1,0 +1,300 @@
+body {
+  background: linear-gradient(169deg, #000 35.32%, rgba(53, 51, 51, 0.50) 218.41%);
+  font-size: var(--body-size);
+  color: var(--color-white);
+  font-family: var(--body);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body > div {
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.user-header {
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.user-body {
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: start;
+}
+
+.user-body b, .user-body .body-header b {
+  margin-top: 1.5vw;
+  font-size: var(--font-size-21xl);
+}
+
+.body-header div {
+  position: absolute;
+    width: 85%;
+    text-align: end;
+}
+
+.header-background {
+  width: 100%;
+}
+
+.header-body {
+  margin-top: -6vw;
+  z-index: 9;
+  width: 100%;
+}
+
+
+.rectangle-div {
+  height: 18vw;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.rectangle-div img {
+  width: 4%;
+  margin: 1.4rem;
+}
+
+.down-arrow-1-4 {
+  transform: rotate(180deg);
+}
+
+.ds-1-icon {
+  top: 0;
+  height: 19%;
+}
+
+.body-row {
+  justify-content: space-around;
+  align-items: end;
+}
+
+.body-name {
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-left: 1rem;
+}
+
+.body-name > b {
+  margin-top: 1rem;
+}
+
+#pencil {
+    width: 7vw;
+}
+
+#change-Image {
+  all: unset;
+  cursor: pointer;
+  position: absolute;
+  z-index: 10;
+}
+
+.grey-back {
+  width: 100%;
+    height: 100%;
+    background-color: gray;
+    border-radius: 125px;
+    opacity: 0.5;
+}
+
+#header-piece {
+  width: 68%;
+  justify-content: space-between;
+}
+
+
+.vector-icon {
+  max-width: 15%;
+  max-height: 15%;
+}
+
+.nvel-17 {
+  font-size: var(--font-size-4xl);
+  font-weight: 500;
+  margin-top: .2rem;
+}
+
+#change-age {
+  margin-top: .5rem;
+  border-radius: 15px;
+  background: linear-gradient(0deg, rgba(118, 13, 33, 0.50) 0%, rgba(118, 13, 33, 0.50) 100%), linear-gradient(169deg, #0E0E0E 35.32%, #353333 218.41%);
+}
+
+#change-age p {
+  padding: .5rem;
+}
+
+#change-age input {
+  all: unset;
+  width: 60px;
+}
+
+
+.adicionar {
+  all: unset;
+  display: flex;
+  border-radius: var(--br-xl);
+  background-color: rgba(118, 13, 33, 0.7);
+  border: 2px solid rgba(168, 35, 60, 0.7);
+  box-sizing: border-box;
+  width: 43%;
+  height: 8vw;
+  text-align: center;
+  font-size: var(--font-size-xl);
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+}
+
+.adicionar img, .adicionar p {
+  transition: .2s;
+}
+
+#edit {
+  width: 30%;
+}
+
+#gear {
+  height: 40%;
+}
+
+.middle-stats.flex, .adicionar {
+  margin-bottom: 2rem;
+  height: 8vw;
+  margin-right: 1rem;
+}
+
+.achieve {
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.achieve-num {
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.trophy-2-icon {
+  width: 3.5vw;
+}
+
+.create-group-button-2-1 {
+  height: 80%;
+}
+
+.user-body {
+  border-radius: var(--br-mini);
+  background-color: var(--darkred);
+  width: 90%;
+  padding: 1rem 0 5vw 0;
+  margin-bottom: 3vw;
+}
+
+#edit-desc {
+  width: 92%;
+    border-radius: 15px;
+    background: linear-gradient(0deg, rgba(118, 13, 33, 0.50) 0%, rgba(118, 13, 33, 0.50) 100%), linear-gradient(169deg, #0E0E0E 35.32%, #353333 218.41%);
+    padding: 2%;
+}
+
+#edit-desc .desc-text {
+  all: unset;
+  width: 100%;
+  height: 18vw;
+  font-size: clamp(10px, 2.5vw ,36px);;
+}
+
+.image-50-icon {
+  border-radius: var(--br-194xl);
+  width: 15vw;
+}
+.nome {
+  font-size: var(--subtitle-22-size);
+}
+
+.b {
+  font-size: var(--font-size-21xl);
+}
+
+.middle-column {
+  height: 7vw;
+  margin: 0 4vw;
+}
+
+
+.friendship {
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+
+#descrio {
+  font-size: var(--font-size-9xl);
+}
+
+.preferences {
+  width: 100%;
+  justify-content: center;
+  gap: 8vw;
+  margin-bottom: 2rem;
+  flex-direction: column;
+}
+
+.preference-stats {
+  width: 100%;
+  gap: 5rem;
+}
+
+.preference-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preference-stat img {
+  height: 9vw;
+  width: 11vw;
+}
+
+.preference-switch {
+  width: 100%;
+  text-align: center;
+}
+
+.preference-switch select {
+  all: unset;
+  width: 100%;
+  font-weight: bold;
+  background:  url(../public/caret-down.svg) no-repeat center right;
+  background-size: 20px 20px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.preference-switch select option {
+  color: black;
+}
+
+
+.dnd-2-icon {
+  height: 115px;
+}
+
+.frame5 {
+  font-size: var(--font-size-17xl);
+}
+
+.desc-text {
+  font-size: var(--font-size-29xl);
+  text-align: justify;
+  width: 90%;
+}

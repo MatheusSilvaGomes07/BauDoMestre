@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+p{
+  margin-bottom: 0 !important;
+}
+
+*:active {
+  text-decoration: none !important;
+}
+
+:root {
+  /* fonts */
+  --body: Raleway;
+  --header-12: "a Absolute Empire";
+  --subtitle-22: Merriweather;
+  --font-inherit: inherit;
+
+  /* font sizes */
+  --body-2-size: 14px;
+  --title-13-size: 16px;
+  --font-size-3xs: 10px;
+  --font-size-lgi: 19px;
+  --font-size-5xs: 8px;
+  --font-size-smi: 13px;
+  --font-size-xl: 20px;
+  --subtitle-23-size: 18px;
+  --subtitle-22-size: 24px;
+  --header-12-size: clamp(22px, 1vw, 64px);
+  --font-size-17xl: 36px;
+  --font-size-33xl: 52px;
+  --font-size-4xs: 9px;
+  --font-size-2xs: 11px;
+  --title-size: clamp(54px, 5vw, 96px);
+  --font-size-29xl: 48px;
+  --font-size-35xl: 54px;
+  --font-size-8xl: 27px;
+  --font-size-21xl: 40px;
+  --font-size-65xl: 84px;
+  --font-size-45xl: 64px;
+  --font-size-9xl: 28px;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-dimgray-100: #606060;
+  --color-dimgray-200: rgba(103, 103, 103, 0.5);
+  --color-darkred: #8c0000;
+  --color-limegreen-100: #00de3f;
+  --color-black: #000;
+  --dragonblood: #df0101;
+  --color-darkgray-100: #b4b4b4;
+  --color-darkgray-200: #a6a6a6;
+  --color-gainsboro-100: #d9d9d9;
+  --color-gainsboro-200: rgba(217, 217, 217, 0.1);
+  --mudbase: #a8233c;
+  --darkred: #760d21;
+  --color-gray: #161112;
+  --color-darkslategray: #393838;
+  --lightredwine: #cc667c;
+  --color-maroon: #4b0707;
+
+  /* Paddings */
+  --padding-lgi: 19px;
+
+  /* Border radiuses */
+  --br-3xs: 10px;
+  --br-194xl: 213px;
+  --br-xl: 20px;
+  --br-8xs: 5px;
+  --br-mini: 15px;
+  --br-10xs: 3px;
+  --br-16xl: 35px;
+  --br-61xl: 80px;
+  --br-31xl: 50px;
+}

@@ -1,0 +1,134 @@
+
+@media (max-width: 600px){
+
+    html, body {
+        height: 100%;
+    }
+}
+
+.send-row {
+    width: 90%;
+    justify-content: space-between;
+}
+
+.send-bar {
+    border-radius: 15px;
+    background: linear-gradient(120deg, #080808 -37.01%, rgba(53, 53, 53, 0.00) 165.9%), #767676;
+    width: 70%;
+    justify-content: space-between;
+    padding: 1.5rem 1rem;
+}
+
+.send-bar h4 {
+    color: #AAA;
+}
+
+.arq-button {
+    font-weight: 600;
+    border-radius: 15px;
+    background: linear-gradient(56deg, #8C0000 -6.37%, #1691DE 219.32%);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: .5rem;
+}
+
+.send-button {
+    border-radius: 15px;
+    background: var(--DarkRed, #760D21);
+    font-weight: 700;
+    width: 20%;
+    padding: 1.5rem 0;
+}
+
+.directories {
+    width: 85%;
+    justify-content: start;
+    flex-direction: column;
+    font-size: var(--header-12-size);
+    font-weight: 700;
+    gap: 2rem;
+    padding-bottom: 5%;
+}
+
+.directories .directories-header {
+        width: 100%;
+        justify-content: space-between;
+}
+
+.directories .directories-header p:nth-of-type(1) {
+    width: 15%;
+    margin-left: 3rem;
+}
+
+.directories .directories-header p:nth-of-type(2){
+    width: 37%;
+    margin-left: 3rem;
+}
+
+.directories .directories-header p:nth-of-type(3){
+    width: 33%;
+    text-align: start;
+}
+
+.directory-box {
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 15px;
+    background: linear-gradient(12deg, #080808 -37.01%, rgba(53, 53, 53, 0.00) 165.9%), #767676;
+}
+
+.directory {
+    justify-content: space-between;
+    padding: 2rem;
+
+}
+
+
+.data-column p:nth-of-type(2){
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.directory img {
+    width: 5%;
+}
+
+.inventory-item {
+    width: unset !important;
+}
+
+.info-column {
+    justify-content: space-around;
+    padding-bottom: 2rem;
+    display: none;
+}
+
+.data-column p {
+    width: unset !important;
+}
+
+.directories .directory p {
+    text-align: start;
+}
+
+.directories .directory p:nth-of-type(1){
+    width: 67%;
+}
+
+
+.directories .directory p:nth-of-type(3){
+    margin-left: 5%;
+    width: 15%;
+}
+
+.directories .directory img:nth-of-type(3){
+    margin-left: 3%;
+}
+
+.three-dots {
+    display: none;
+    transition: .2s;
+}
+
+.three-dots {
+    width: unset !important;
+}

@@ -186,6 +186,7 @@ def visualizar_pasta(request, div, pasta):
                 base_name, extension = os.path.splitext(str(f))
                 file_type = mime.from_buffer(f.read(1024))
                 tamanho = f.size
+                print(file_type)
 
                 
 
