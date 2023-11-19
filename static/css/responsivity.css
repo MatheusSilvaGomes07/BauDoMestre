@@ -389,4 +389,52 @@
     width: 140px;
 }
 
+.rectangle-div {
+    height: 21vw !important;
+}
+
+#header-piece {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    gap: 1rem;
+    width: 35% !important;
+    margin-right: 1rem;
+}
+
+.adicionar {
+    width: 11rem !important;
+    height: 3rem !important;
+}
+
+.header-body {
+    margin-top: -6vw !important;
+}
+
+.body-row {
+    justify-content: space-between !important;
+}
+
+
+
+.image-50-icon {
+    width: 20vw !important;
+}
+
+
+.middle-stats.flex, .adicionar {
+    margin-bottom: 0 !important;
+    height: 8vw;
+    margin-right: 0 !important;
+}
+
+.preference-stats {
+    gap: 2rem !important;
+}
+
+.preference-stat img {
+    height: 10vw !important;
+    width: 12vw !important;
+}
+
 }

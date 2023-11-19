@@ -1,6 +1,10 @@
 {% extends 'inventario/base.html' %}
 {% load static %}
 
+{% block title %}
+    {{ pasta }}
+{% endblock%}
+
 {% block head %}
     <link rel="stylesheet" href="{% static "css/global-ia.css" %}" />
     <link rel="stylesheet" href="{% static "css/inventario.css" %}" />

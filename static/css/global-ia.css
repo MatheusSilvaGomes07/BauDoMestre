@@ -34,6 +34,7 @@ button {
   --body: Raleway;
   --header-12: "a Absolute Empire";
   --font-merriweather: Merriweather;
+  --font-inter: Inter;
 
   /* font sizes */
   --font-size-8xl: clamp(14px, 2.3vw, 27px);
@@ -49,18 +50,19 @@ button {
   --title-size: clamp(64px, 3vw, 96px);
   --title-13-size: clamp(25px, 3vw, 36px);
   --font-size-9xl: clamp(24px, 5.4vw, 56px);
-  --subtitle-22-size: 24px;
-  --font-size-xl: 20px;
+  --subtitle-22-size: clamp(17px,1.7vw, 32px);
+  --font-size-xl: clamp(16px, 2.5vw, 32px);
   --font-size-4xl: clamp(17px,2vw,23px);
+  --font-size-29xl: clamp(15px, 2.5vw ,36px);
 
 
   /* Border radiuses */
   --br-xl: 20px;
   --br-8xs: 5px;
-  --br-xl: 20px;
-  --br-8xs: 5px;
   --br-3xs: 10px;
   --br-31xl: 50px;
+  --br-mini: 15px;
+  --br-194xl: 213px;
 
   /* Colors */
   --color-black: #000;
@@ -71,3 +73,4 @@ button {
   --lightredwine: #cc667c;
 
 }
+
