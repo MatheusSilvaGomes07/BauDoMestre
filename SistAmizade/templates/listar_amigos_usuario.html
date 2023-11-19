@@ -1,0 +1,11 @@
+{% extends 'principal/base.html' %}
+
+{% block conteudo %}
+    <h1>Lista de Amigos de {{ usuario.username }}</h1>
+    {% for amigo in amigos %}
+        {{ amigo.amigo.username }}<br>
+    {% empty %}
+        <p>Não há amigos para exibir.</p>
+    {% endfor %}
+    <a href='{% url 'index' %}'>Voltar à tela inicial</a>
+{% endblock conteudo %}
