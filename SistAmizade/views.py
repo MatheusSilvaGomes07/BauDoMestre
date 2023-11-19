@@ -1,4 +1,4 @@
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import SolicitacaoAmizade, Amigo
 from django.contrib.auth.models import User
@@ -18,6 +18,10 @@ def remover_amigo(request, user_id):
     Amigo.objects.filter(usuario=request.user, amigo=amigo).delete()    
     Amigo.objects.filter(usuario=amigo, amigo=request.user).delete()
 
+    solicitacao = SolicitacaoAmizade.objects.filter(de_usuario=request.user, para_usuario=amigo).first()
+    if solicitacao:
+        solicitacao.delete()
+
     return redirect('listar_amigos')
 
 
@@ -28,9 +32,26 @@ def listar_amigos(request):
 
 def enviar_solicitacao(request, user_id):
     para_usuario = User.objects.get(pk=user_id)
-    solicitacao = SolicitacaoAmizade(de_usuario=request.user, para_usuario=para_usuario)
-    solicitacao.save()
-    return redirect('listar_amigos')
+
+    # Verificar se já existe uma solicitação pendente
+    solicitacao_pendente = SolicitacaoAmizade.objects.filter(de_usuario=request.user, para_usuario=para_usuario, aceita=False).first()
+
+    if solicitacao_pendente:
+        # Se há uma solicitação pendente, você pode fornecer uma mensagem ou redirecionar para uma página informando ao usuário
+        # Exemplo de mensagem flash (requer 'messages' no seu settings.py)
+        return HttpResponseNotFound(request, f"Você já enviou uma solicitação de amizade para {para_usuario.username}. Aguarde a resposta do usuário.")
+        
+
+    # Se não houver uma solicitação pendente, crie uma nova
+    solicitacao, criada = SolicitacaoAmizade.objects.get_or_create(de_usuario=request.user, para_usuario=para_usuario)
+
+    # Verificar se a solicitação foi criada ou já existia
+    if criada:
+        return redirect('listar_amigos')
+    else:
+        # Tratar o caso em que a solicitação já existe (opcional)
+        # Por exemplo, exibir uma mensagem de erro
+        return redirect('listar_amigos')
 
 def listar_solicitacoes(request):
     solicitacoes_recebidas = SolicitacaoAmizade.objects.filter(para_usuario=request.user, aceita=False)
@@ -39,7 +60,7 @@ def listar_solicitacoes(request):
 def aceitar_solicitacao(request, solicitacao_id):
     solicitacao = SolicitacaoAmizade.objects.get(pk=solicitacao_id)
     solicitacao.aceita = True
-    solicitacao.save()
+    solicitacao.delete()
 
     grupo_chat, _ = Grupo.objects.get_or_create(criador=solicitacao.de_usuario, publico=False)
     grupo_chat.membros.add(solicitacao.de_usuario, solicitacao.para_usuario)

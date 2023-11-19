@@ -94,9 +94,9 @@
                             {% if user == grupo.criador %}
                                 <a href="{% url 'Remover_grupo' uuid=grupo.uuid %}">Excluir</a>
                             {% endif %}
-                        {% else %}
+                            {% else %}
                             <a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}">Enviar Solicitação</a>
-                        {% endif %}
+                            {% endif %}
                     </div>
                 {% endfor %}
             </td>

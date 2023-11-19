@@ -41,6 +41,9 @@ class Perfil(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nomePerfil.username)
         super(Perfil, self).save(*args, **kwargs)
+        
+    def solicitacao_pendente_para_usuario(self, outro_usuario):
+        return self.solicitacoes_enviadas.filter(para_usuario=outro_usuario, aceita=False).first()
 
 
 # Model das Campanhas

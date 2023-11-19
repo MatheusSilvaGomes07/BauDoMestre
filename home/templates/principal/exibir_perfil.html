@@ -13,15 +13,19 @@
 
     
     {% if not is_self %}
-        {% if is_amigo %}
-            <a href="{% url 'remover_amigo' perfil.nomePerfil.id %}">Desfazer Amizade</a>
-        {% else %}
+    {% if is_amigo %}
+        <a href="{% url 'remover_amigo' perfil.nomePerfil.id %}">Desfazer Amizade</a>
+    {% else %}
+        {% if not solicitacao_pendente %}
             <a href="{% url 'enviar_solicitacao' perfil.nomePerfil.id %}">Enviar Pedido de Amizade</a>
+        {% else %}
+            <p>Você já enviou uma solicitação de amizade. Aguarde a resposta do usuário.</p>
         {% endif %}
     {% endif %}
+{% endif %}
 
-    <a href="{% url 'listar_amigos_usuario' perfil.nomePerfil.id %}">Ver Amigos</a>
+<a href="{% url 'listar_amigos_usuario' perfil.nomePerfil.id %}">Ver Amigos</a>
+<a href='{% url 'index' %}'>Voltar à tela inicial</a>
 
-    <a href='{% url 'index' %}'>Voltar a tela inicial</a>
 
-{% endblock conteudo %}
+{%endblock conteudo%}
