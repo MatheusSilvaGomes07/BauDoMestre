@@ -5,7 +5,6 @@ from inventario.forms import PastaForm, FileForm
 from inventario.models import Pasta, File
 from django.contrib import messages
 import magic
-from datetime import datetime
 
 @login_required
 def index(request):
@@ -151,7 +150,7 @@ def verificar_extensao(div, file_type, request, tamanho):
             return False
         
     if div == "Imagens":
-        if 'image' in file_type or 'GIF image':
+        if 'image' in file_type or 'GIF image' in file_type:
              return True
         else:
             messages.error(request, "A divisão de imagens só aceita arquivos de imagens e GIFs")

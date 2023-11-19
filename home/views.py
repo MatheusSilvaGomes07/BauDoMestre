@@ -1,20 +1,17 @@
 from django.conf import settings
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
 from .models import Campanha, Perfil
 from .forms import CampanhaForm, PerfilForm
 from django.db.models import Q
 from functools import wraps
-from chat.models import Mensagem, Grupo
+from chat.models import Grupo
 from SistAmizade.models import Amigo, SolicitacaoAmizade
 from random import randint
 import os
 import shutil
 from allauth.account.views import SignupView, LoginView
 from .forms import CustomSignupForm, CustomLoginForm
-from django.contrib import messages
 
 class CustomSignupView(SignupView):
     form_class = CustomSignupForm
@@ -73,6 +70,7 @@ def handler404(request, exception):
 # view da home
 def index(request):
     return render(request, 'principal/home.html')
+
 
 # view do mural não logado
 def mural(request):
