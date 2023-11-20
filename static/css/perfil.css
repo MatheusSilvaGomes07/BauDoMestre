@@ -207,7 +207,7 @@ body > div {
     padding: 2%;
 }
 
-#edit-desc .desc-text {
+#id_descricao {
   all: unset;
   width: 100%;
   height: 18vw;
@@ -294,7 +294,7 @@ body > div {
   font-size: var(--font-size-17xl);
 }
 
-.desc-text {
+#id_descricao {
   font-size: var(--font-size-29xl);
   text-align: justify;
   width: 90%;

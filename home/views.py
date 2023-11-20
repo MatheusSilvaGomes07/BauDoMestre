@@ -130,11 +130,13 @@ def exibir_perfil(request, perfil_slug):
 
     solicitacao_pendente = None
 
+    quantidade_amigos = Amigo.objects.filter(usuario=perfil.nomePerfil).count()
+
     if not is_self:
         solicitacao_pendente = SolicitacaoAmizade.objects.filter(de_usuario=request.user, para_usuario=perfil.nomePerfil, aceita=False).first()
         
 
-    return render(request, 'principal/exibir_perfil.html', {'perfil': perfil, 'is_amigo': is_amigo, 'is_self': is_self, 'solicitacao_pendente': solicitacao_pendente})
+    return render(request, 'principal/exibir_perfil.html', {'perfil': perfil, 'is_amigo': is_amigo, 'is_self': is_self, 'solicitacao_pendente': solicitacao_pendente, 'quantidade_amigos': quantidade_amigos})
 
 # view da criação de campanhas que também é protegida por um decorator que só permite a entrada de "Mestre" e "Ambos"
 @login_required
@@ -166,7 +168,9 @@ def usuario(request):
     perfil = Perfil.objects.get(nomePerfil=request.user)
     campanha = Campanha.objects.filter(nomeMestre=perfil).first()
 
-    return render(request, 'principal/user.html', {'perfil': perfil, 'campanha': campanha})
+    quantidade_amigos = Amigo.objects.filter(usuario=request.user.id).count()
+
+    return render(request, 'principal/user.html', {'perfil': perfil, 'campanha': campanha, 'quantidade_amigos':quantidade_amigos})
 
 
 # view da edição de conta do usuário
@@ -192,7 +196,7 @@ def editarconta(request):
     else:
         formPerfil = PerfilForm(instance=perfil)
 
-    return render(request, 'principal/editarPerfil.html', {'formPerfil': formPerfil, 'user':user})
+    return render(request, 'principal/editarPerfil.html', {'formPerfil': formPerfil, 'user':user, 'perfil':perfil})
 
 @login_required
 def is_amigo(request, perfil_slug):

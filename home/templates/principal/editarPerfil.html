@@ -19,103 +19,131 @@
 
 {% block conteudo %}
 
+
 <div class="flex">
-    
-    <div class="user-header">
-      <div class="header-background">
-        <div class="rectangle-div flex">
-          <a href="{% url 'index'%}"><img class="down-arrow-1-4" alt="" src="{% static "img/public/caret.svg" %}"/></a>
-        <!--<img class="vector-icon" alt="" src="{% static "img/public/report.svg" %}" />-->
-        </div>
+  <div class="user-header">
+    <form style="all:unset" class="formulario" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+    <div class="header-background">
+      <div class="rectangle-div flex">
+        <a href="{% url 'usuario'%}"><img class="down-arrow-1-4" alt="" src="{% static "img/public/caret.svg" %}"/></a>
       </div>
+    </div>
 
-      <div class="header-body">
-        <form style="all:unset" class="formulario" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-        <div class="body-row flex">
-          <div class="body-name flex">
-            <div class="img-box flex">
-              <button id="change-Image">
-                <img id="pencil" src="{% static "img/public/pencil.svg" %}" alt=""></button>
-              <div class="grey-back flex">
+    <div class="header-body">
 
-                {% if formPerfil.fotoConta.initial %}
+      <div class="body-row flex">
+        <div class="body-name flex">
+          <div class="img-box flex">
+            <button id="change-Image"><img id="pencil" src="{% static "img/public/pencil.svg" %}" alt=""></button>
+            <div class="grey-back flex">
+              {% if formPerfil.fotoConta.initial %}
                     {% if formPerfil.fotoConta.initial == 'Indefinido' %}
                         <img class="image-50-icon" src="{% static "img/Ain.png" %}" alt="Foto do usuário {{ user }}" width="250" height="250">
                     {% else %}
                         <img class="image-50-icon" src="{{ formPerfil.fotoConta.initial.url }}" alt="Foto de perfil atual" height="250" width="250">
                     {% endif %}
                 {% endif %}
-
-              </div>
-            </div>
-            <b class="lucas-passos">{{user}}</b>
-            <p class="nvel-17">Nível: 01</p>
-            <div id="change-age" class="flex">
-              <p class="nvel-17">Idade: {{ formPerfil.idade }}</p>
             </div>
           </div>
-
-          <div class="flex" id="header-piece">
-            <div class="middle-stats flex">
-              <div class="achieve flex">
-                <div class="achieve-num flex">
-                  <b class="b">17</b>
-                  <img class="trophy-2-icon" alt="" src="../public/trophy-2.svg" />
-                </div>
-                <b class="conquistas">Conquistas</b>
-              </div>
-              <hr class="middle-column">
-              <div class="friendship flex">
-                <b class="b">22</b>
-                <b class="amizades">Amizades</b>
-              </div>
-            </div>
-            <button id="edit" class="adicionar flex">
-              <b id="editar" class="adicionar1">Encerrar</b>
-              <img id="gear" class="create-group-button-2-1" alt="" src="{% static "img/public/gear.svg" %}"/>
-            </button>
+          <b class="lucas-passos">{{user}}</b>
+         <!-- <p class="nvel-17">Nível: 01</p> -->
+          <div id="change-age" class="flex">
+            <p class="nvel-17">Idade:  {{ formPerfil.idade }}</p>
+            <input type="text">
           </div>
-
         </div>
-    </form>
+
+        <div class="flex" id="header-piece">
+          <div class="middle-stats flex">
+            <div class="achieve flex">
+              <div class="achieve-num flex">
+                <b class="b">--</b>
+                <img class="trophy-2-icon" alt="" src="{% static 'img/public/trophy-2.svg' %}" />
+              </div>
+              <b class="conquistas">Conquistas</b>
+            </div>
+            <hr class="middle-column">
+            <div class="friendship flex">
+              <!-- ATENÇÃO !!!!!!!!!!!!!!!! FAZER A REQUISIÇÃO DE AMIGOS !!!!!!!!!!!!!!!!!-->
+              <b class="b">22</b>
+              <b class="amizades">Amizades</b>
+            </div>
+          </div>
+
+         
+
+          <div id="edit" class="adicionar flex">
+            <button id="editar" class="adicionar1" style="color: white;" type="submit">Concluir</button>
+            <img id="gear" class="create-group-button-2-1" alt="" src="{% static "img/public/pencil.svg" %}"/>
+          </div>
+        </div>
+
       </div>
-    
+      
     </div>
+  </div>
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-
-    
-    {{ formPerfil.fotoConta }}
-
-
-    <div>
-    {{ formPerfil.idade.label_tag }}
-    {{ formPerfil.idade }}
+  <div class="user-body flex">
+    <div class="body-header flex">
+      <b>Descrição</b>
+      <div>
+        <img src="{% static "img/public/pencil.svg" %}" style="width: 4vw;" alt="">
+      </div>
     </div>
-
-    <div>
-    {{ formPerfil.descricao.label_tag }}
-    {{ formPerfil.descricao }}
+    <div id="edit-desc">
+      {{ formPerfil.descricao}}
     </div>
+  </div>
 
-    <div>
-    {{ formPerfil.tipo_sessao.label_tag }}
-    {{ formPerfil.tipo_sessao }}
-    </div>
+<div class="preferences flex">
 
-    <div>
-    {{ formPerfil.tipo_player.label_tag }}
-    {{ formPerfil.tipo_player }}
-    </div>  
+      <!--ATENÇÃOOOOOOOO PROVISÓRIO-->
+      {{ formPerfil.fotoConta }}
+      <b id="descrio">Preferencias</b>
+  
+      <div class="preference-stats flex">
+        <div class="preference-stat">
+          {% if perfil.tipo_sessao == "Online" %}
+            <img class="rss-2-icon" alt="Chats simbolizando estilo de jogo online" src="{% static "img/public/mesa-online.svg" %}" />
+          {% else %}
+            <img class="rss-2-icon" alt="Dados de 20 lados simbolizando estilo de jogo presencial" src="{% static "img/public/mesa-presencial.svg" %}" />
+          {% endif %}
+          <b class="mesa-virtual">{{ formPerfil.tipo_sessao }}</b>
+        </div>
+  
+        <div class="preference-stat">
+          {% if perfil.tipo_player == "Jogador" %}
+            <img class="ss-2-icon" alt="" src="{% static "img/public/player.svg" %}" />
+          {% elif perfil.tipo_player == "Mestre" %}
+          <img class="ss-2-icon" alt="" src="{% static "img/public/mestre.svg" %}" />
+          {% else %}
+            <img class="ss-2-icon" alt="" src="{% static "img/public/ambos.svg" %}" />
+          {% endif %}
+          
+          <b class="mestrejogador">{{ formPerfil.tipo_player }}</b>
+        </div>
+  
+        <div class="preference-stat">
+          {% if perfil.sistema_rpg == "Dungeons & Dragons"%}
+            <img class="dnd-2-icon" alt="Imagem representando Dungeon and Dragons" src="{% static "img/public/dnd.svg" %}" />
+          {% elif perfil.sistema_rpg == "Tormenta20" %}
+            <img class="dnd-2-icon" alt="Imagem representando Tormenta20" src="{% static "img/public/t20.svg" %}" />
+          {% elif perfil.sistema_rpg == "Call of Cthulhu" %}
+            <img class="dnd-2-icon" alt="Imagem representando Call of Cthulhu" src="{% static "img/public/coc.svg" %}" />
+          {% elif perfil.sistema_rpg == "Ordem Paranormal" %}
+            <img class="dnd-2-icon" alt="Imagem representando Ordem Paranormal" src="{% static "img/public/ordem.svg" %}" />
+          {% else %}
+            <img class="dnd-2-icon" alt="Imagem de um mapa representando Outros RPGs em geral" src="{% static "img/public/others.svg" %}" />
+          {% endif %}
+          <b class="dnd">{{ formPerfil.sistema_rpg }}</b>
+        </div>
+      </div>
 
-    <div>
-    {{ formPerfil.sistema_rpg.label_tag }}
-    {{ formPerfil.sistema_rpg }}
-    </div>
-
-    <button type="submit">Editar</button>
+</div>
 </form>
+    </div>
+    
+
 
 {% endblock conteudo %}

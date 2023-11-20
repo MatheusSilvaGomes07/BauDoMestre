@@ -39,7 +39,7 @@
             <img class="image-50-icon" alt="Foto do usuário {{ user }}"  src="{{ perfil.fotoConta.url }}" />
           {% endif %}
           <b class="nome">{{ user }}</b>
-          <p class="nvel-17">Nível: 01</p>
+          <!-- <p class="nvel-17">Nível: 01</p> -->
         </div>
 
         <div class="flex" id="header-piece">
@@ -54,7 +54,7 @@
             <hr class="middle-column">
             <div class="friendship flex">
               <!-- ATENÇÃO !!!!!!!!!!!!!!!! FAZER A REQUISIÇÃO DE AMIGOS !!!!!!!!!!!!!!!!!-->
-              <b class="b">22</b>
+              <b class="b">{{ quantidade_amigos }}</b>
               <a href="{% url 'listar_amigos' %}"><b class="amizades">Amizades</b></a>
             </div>
             <a href="{% url 'listar_solicitacoes' %}"><img src="{% static "img/public/friend-request.svg" %}" alt="" class="trophy-2-icon"></a>
@@ -120,11 +120,14 @@
       </div>
     </div>
 
+  
     {% if campanha.id %}
     <a href="{% url 'gerenciar_solicitacoes' %}"><img src="{% static "img/public/mesa-presencial.svg" %}" alt="" class="trophy-2-icon">Gerenciar solicitações da campanha</a>
-  {% else %}
+  
+  
+    {% else %}
     <!-- Lida com o caso em que não há campanha associada à solicitação -->
-    Não há campanhas associada a conta.
+    Não há campanha associada
   {% endif %}
   </div>
 </div>
