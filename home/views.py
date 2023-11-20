@@ -12,6 +12,7 @@ import os
 import shutil
 from allauth.account.views import SignupView, LoginView
 from .forms import CustomSignupForm, CustomLoginForm
+from django.contrib.auth.models import AnonymousUser
 
 class CustomSignupView(SignupView):
     form_class = CustomSignupForm
@@ -69,7 +70,10 @@ def handler404(request, exception):
 
 # view da home
 def index(request):
-    return render(request, 'principal/home.html')
+    if isinstance(request.user, AnonymousUser):
+        return render(request, 'principal/home-ia.html')
+    else:
+        return render(request, 'principal/home.html')
 
 
 # view do mural não logado
@@ -128,6 +132,7 @@ def exibir_perfil(request, perfil_slug):
 
     if not is_self:
         solicitacao_pendente = SolicitacaoAmizade.objects.filter(de_usuario=request.user, para_usuario=perfil.nomePerfil, aceita=False).first()
+        
 
     return render(request, 'principal/exibir_perfil.html', {'perfil': perfil, 'is_amigo': is_amigo, 'is_self': is_self, 'solicitacao_pendente': solicitacao_pendente})
 
@@ -167,6 +172,7 @@ def usuario(request):
 # view da edição de conta do usuário
 @login_required
 def editarconta(request):
+    user = request.user
     perfil, created = Perfil.objects.update_or_create(nomePerfil=request.user)
     foto_antiga = perfil.fotoConta.name
 
@@ -186,7 +192,7 @@ def editarconta(request):
     else:
         formPerfil = PerfilForm(instance=perfil)
 
-    return render(request, 'principal/editarPerfil.html', {'formPerfil': formPerfil})
+    return render(request, 'principal/editarPerfil.html', {'formPerfil': formPerfil, 'user':user})
 
 @login_required
 def is_amigo(request, perfil_slug):

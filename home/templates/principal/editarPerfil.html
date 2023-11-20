@@ -1,28 +1,94 @@
 {% extends "principal/base.html" %}
 {% load static %}
 
-{% block conteudo %}
+{% block head %}
+<link rel="stylesheet" href="{% static "css/global-ia.css" %}" />
+<link rel="stylesheet" href="{% static "css/responsivity.css" %}">
+<link rel="stylesheet" href="{% static "css/perfil.css" %}" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
 <title>Edição de Perfil - Baú do Mestre</title>
+<style>
+  .rectangle-div {
+    background: linear-gradient(61deg, #8c0000ab -6.5%, #1691ded6 193.06%), url({% static "img/public/Background.svg" %});
+  }
+</style>
+{% endblock %}
 
-<h1>Editar perfil do usuário</h1>
+{% block conteudo %}
+
+<div class="flex">
+    
+    <div class="user-header">
+      <div class="header-background">
+        <div class="rectangle-div flex">
+          <a href="{% url 'index'%}"><img class="down-arrow-1-4" alt="" src="{% static "img/public/caret.svg" %}"/></a>
+        <!--<img class="vector-icon" alt="" src="{% static "img/public/report.svg" %}" />-->
+        </div>
+      </div>
+
+      <div class="header-body">
+        <form style="all:unset" class="formulario" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="body-row flex">
+          <div class="body-name flex">
+            <div class="img-box flex">
+              <button id="change-Image">
+                <img id="pencil" src="{% static "img/public/pencil.svg" %}" alt=""></button>
+              <div class="grey-back flex">
+
+                {% if formPerfil.fotoConta.initial %}
+                    {% if formPerfil.fotoConta.initial == 'Indefinido' %}
+                        <img class="image-50-icon" src="{% static "img/Ain.png" %}" alt="Foto do usuário {{ user }}" width="250" height="250">
+                    {% else %}
+                        <img class="image-50-icon" src="{{ formPerfil.fotoConta.initial.url }}" alt="Foto de perfil atual" height="250" width="250">
+                    {% endif %}
+                {% endif %}
+
+              </div>
+            </div>
+            <b class="lucas-passos">{{user}}</b>
+            <p class="nvel-17">Nível: 01</p>
+            <div id="change-age" class="flex">
+              <p class="nvel-17">Idade: {{ formPerfil.idade }}</p>
+            </div>
+          </div>
+
+          <div class="flex" id="header-piece">
+            <div class="middle-stats flex">
+              <div class="achieve flex">
+                <div class="achieve-num flex">
+                  <b class="b">17</b>
+                  <img class="trophy-2-icon" alt="" src="../public/trophy-2.svg" />
+                </div>
+                <b class="conquistas">Conquistas</b>
+              </div>
+              <hr class="middle-column">
+              <div class="friendship flex">
+                <b class="b">22</b>
+                <b class="amizades">Amizades</b>
+              </div>
+            </div>
+            <button id="edit" class="adicionar flex">
+              <b id="editar" class="adicionar1">Encerrar</b>
+              <img id="gear" class="create-group-button-2-1" alt="" src="{% static "img/public/gear.svg" %}"/>
+            </button>
+          </div>
+
+        </div>
+    </form>
+      </div>
+    
+    </div>
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
-    <div>
-    {{ formPerfil.fotoConta.label_tag }}
+    
     {{ formPerfil.fotoConta }}
-    </div>
 
-    <div>
-    {% if formPerfil.fotoConta.initial %}
-        {% if formPerfil.fotoConta.initial == 'Indefinido' %}
-            <img src="{% static "img/Ain.png" %}" alt="Foto do usuário {{ user }}" width="250" height="250">
-        {% else %}
-            <img src="{{ formPerfil.fotoConta.initial.url }}" alt="Foto de perfil atual" height="250" width="250">
-        {% endif %}
-    {% endif %}
-    </div>
 
     <div>
     {{ formPerfil.idade.label_tag }}

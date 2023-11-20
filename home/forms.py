@@ -2,6 +2,12 @@ from django import forms
 from .models import Campanha, Perfil
 from allauth.account.forms import SignupForm, LoginForm
 
+from django import forms
+
+class FileInputWithoutClear(forms.ClearableFileInput):
+    template_name = 'principal/custom_file_input.html'
+
+
 class CustomSignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -33,12 +39,14 @@ class PerfilForm(forms.ModelForm):
         model = Perfil
         fields = ['fotoConta', 'idade', 'descricao', 'tipo_sessao', 'tipo_player', 'sistema_rpg']
         labels = {
-            'fotoConta': 'Insira a foto de usuário',
             'descricao': 'Descrição da conta:',
             'sistema_rpg': 'Sistema de RPG preferido:',
             'tipo_sessao': 'Tipo de sessão:',
             'tipo_player': 'Tipo de player:',
             'idade': 'Insira sua idade:'
+        } 
+        widgets = {
+            'fotoConta': FileInputWithoutClear,
         }
 
     # Upload da foto do usuário já alterando o nome da imagem
