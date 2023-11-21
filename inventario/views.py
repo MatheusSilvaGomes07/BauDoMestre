@@ -142,7 +142,7 @@ def verificar_extensao(div, file_type, request, tamanho):
             return False
         
     if div == "Documentos":
-        print(file_type)
+
         if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type or 'Microsoft Word' in file_type or 'RAR archive' in file_type or 'Zip archive' in file_type:
              return True
         else:
@@ -185,7 +185,7 @@ def visualizar_pasta(request, div, pasta):
                 base_name, extension = os.path.splitext(str(f))
                 file_type = mime.from_buffer(f.read(1024))
                 tamanho = f.size
-                print(file_type)
+
 
                 
 

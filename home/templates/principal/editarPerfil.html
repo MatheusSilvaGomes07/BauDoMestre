@@ -66,8 +66,8 @@
             <hr class="middle-column">
             <div class="friendship flex">
               <!-- ATENÇÃO !!!!!!!!!!!!!!!! FAZER A REQUISIÇÃO DE AMIGOS !!!!!!!!!!!!!!!!!-->
-              <b class="b">22</b>
-              <b class="amizades">Amizades</b>
+              <b class="b">{{ quantidade_amigos }}</b>
+              <b class="amizades"> <a href="{% url 'listar_amigos' %}">Amizades</a></b>
             </div>
           </div>
 
