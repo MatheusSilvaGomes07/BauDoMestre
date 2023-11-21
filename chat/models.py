@@ -36,6 +36,7 @@ class SolicitacaoEntrada(models.Model):
     de_usuario = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name='solicitacoes_enviadas_campanha')
     para_campanha = models.ForeignKey(Campanha, on_delete=models.CASCADE, related_name='solicitacoes_entrada')
     status = models.CharField(max_length=20, default='Pendente')
+    aceita = models.BooleanField(default=False)
     
     def aceitar_solicitacao(self):
         self.status = 'Aceita'

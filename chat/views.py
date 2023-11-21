@@ -68,21 +68,21 @@ def excluir_mensagem_pub(request, mensagem_id):
 @login_required
 def gerenciar_solicitacoes(request, campanha_id=None):
     from home.models import Campanha
+
+    campanha = None  # Defina campanha como None inicialmente
+
     campanhas_do_mestre = Campanha.objects.filter(nomeMestre__nomePerfil=request.user)
-    
+
     if campanha_id:
         # Se campanha_id for fornecido, filtre apenas para a campanha específica
         campanha = get_object_or_404(Campanha, pk=campanha_id)
-
-        # Verifica se o usuário autenticado é o mestre da campanha
-        if campanha.nomeMestre.nomePerfil != request.user:
-            return redirect('buscarmesa')
-
-        solicitacoes = SolicitacaoEntrada.objects.filter(para_campanha=campanha)
+        solicitacoes = SolicitacaoEntrada.objects.filter(para_campanha=campanha, aceita=False, status='Pendente')
     else:
         # Se não houver campanha_id, filtre as solicitações para todas as campanhas do mestre
-        solicitacoes = SolicitacaoEntrada.objects.filter(para_campanha__in=campanhas_do_mestre)
-        campanha = None
+        if campanha and campanha.nomeMestre.nomePerfil != request.user:
+            return redirect('buscarmesa')
+
+        solicitacoes = SolicitacaoEntrada.objects.filter(para_campanha__in=campanhas_do_mestre, aceita=False, status='Pendente')
 
     context = {
         'campanha': campanha,
@@ -96,17 +96,20 @@ def enviar_solicitacao(request, campanha_id):
     from home.models import Campanha, Perfil
     campanha = Campanha.objects.get(pk=campanha_id)
     de_usuario = Perfil.objects.get(nomePerfil=request.user)
+
+    # Verifica se já existe uma solicitação pendente
+    solicitacao_pendente = SolicitacaoEntrada.objects.filter(de_usuario=de_usuario, para_campanha=campanha, status='Pendente').first()
+
+    if solicitacao_pendente:
+        return HttpResponseForbidden("Você já possui uma solicitação pendente para esta campanha.")
+
+    solicitacao = SolicitacaoEntrada.objects.create(
+        de_usuario=de_usuario,
+        para_campanha=campanha,
+        status='Pendente'
+    )
     
-    
-    if de_usuario:
-        solicitacao = SolicitacaoEntrada.objects.create(
-            de_usuario=de_usuario,
-            para_campanha=campanha,
-            status='Pendente'
-        )
-        return redirect('buscarmesa')
-    else:
-         return HttpResponseForbidden("Perfil não existe ou foi apagado")
+    return redirect('buscarmesa')
 
 
 def aceitar_solicitacao_camp(request, solicitacao_id):
