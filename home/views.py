@@ -113,11 +113,13 @@ def buscarmesa(request):
 @login_required
 def search_user(request):
     conta_busca = request.GET.get('q')
+
     users = []
     if conta_busca:
         users = Perfil.objects.filter(
             Q(nomePerfil__username__icontains=conta_busca)
         )
+        
     return render(request, 'principal/buscaUser.html', {'users': users, 'busca_realizada': bool(conta_busca)})
 
 

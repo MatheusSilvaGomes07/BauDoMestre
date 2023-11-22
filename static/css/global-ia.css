@@ -2,6 +2,15 @@
   margin: 0;
 }
 
+*::-webkit-scrollbar {
+  width: 10px;
+  background-color: black;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #807f7f;
+}
+
 .flex {
   display: flex;
   align-items: center;
@@ -13,6 +22,12 @@ body {
   overflow-x: hidden;
 }
 
+.popup-overlay {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+}
 
 button {
   all: initial;
@@ -30,6 +45,7 @@ button {
 }
 
 :root {
+
   /* fonts */
   --body: Raleway;
   --header-12: "a Absolute Empire";
@@ -41,6 +57,12 @@ button {
   --font-size-21xl: clamp(20px, 3.4vw, 40px);
   --header-12-size: clamp(18px, 2.5vw, 32px);
   --font-size-lg: clamp(14px, 1.5vw, 18px);
+  --font-size-lgi: clamp(14px, 2vw, 32px);
+  --font-size-3xs: clamp(10px, 2vw, 24px);
+  --font-size-smi: clamp(13px, 1.5vw, 18px);
+  --font-size-5xs: clamp(8px, 1.8vw, 18px);
+  --title-size: 96px;
+  --font-size-mid: 17px;
   --font-size-5xl: clamp(12px, 2.3vw, 24px);
   --font-size-65xl: clamp(40px, 8vw, 84px);
   --font-size-45xl: clamp(24px, 6vw, 64px);
@@ -67,6 +89,8 @@ button {
   /* Colors */
   --color-black: #000;
   --color-white: #fff;
+  --color-darkred: #8c0000;
+  --color-limegreen-100: #00de3f;
   --dragonblood: #df0101;
   --mudbase: #a8233c;
   --darkred: #760d21;

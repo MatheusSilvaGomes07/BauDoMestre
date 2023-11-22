@@ -1,30 +1,83 @@
 {% extends "principal/base.html" %}
+{% load static %}
+
+{% block head %}
+<title> Buscar Usuários - Baú do Mestre</title>
+<link rel="stylesheet" href="{% static "css/global-ia.css" %}" />
+<link rel="stylesheet" href="{% static "css/responsivity.css" %}">
+<link rel="stylesheet" href="{% static "css/buscar-usuario.css" %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
+
+{% endblock %}
 
 {% block conteudo %}
-    <title>Buscar Usuário - Baú do Mestre</title>
+    <div class="amigos1">
+        <div class="flex" style="height: 100vh;">
+            <div class="add-area flex">
+      
+              <div class="add-contacts flex">
+                <a style="all: unset;" href="{% url 'index' %}"><img class="down-arrow-1-41" alt="" src="{% static 'img/public/downarrow-1-4@2x.png' %}" id="downArrow14"/></a>
+                <div id="amizades">ADICIONAR AMIGOS</div>
+              </div>
+      
+              <div class="searchbar2">
+                    <form class="searchbar-inner flex" action="{% url 'search_user' %}" method="get">
+                        <input type="text" name="q" class="pesquisar" placeholder="Digite o nome do usuário">
+                        <img class="magnifying-glass-1-icon1" alt="" src="{% static "img/public/magnifyingglass-11.svg" %}"/>
+                        <!--<input type="submit" value="Buscar">-->
+                    </form>
+              </div>
 
-    <h1>Resultados da busca de usuários</h1>
+            {% if busca_realizada %}
+                <div class="contact-list flex">
+                    {% if users %}
+                        {% for user in users %}
+                            {% if user.slug %}
+                                <div onclick="initMob()" class="amizade">
+                                    <div class="image-50-group">
+                                    {% if user.fotoConta == "Indefinido" %}
+                                        <img style="background-color: white;" class="contact-icon" alt="" src="{% static "img/ain.png" %}"/>
+                                    {% else %}
+                                        <img class="contact-icon" alt="" src="{{ user.fotoConta.url }}"/>
+                                    {% endif %}
+                                    
+                                </div>
+                                <div class="contact-write">
+                                    <a href="{% url 'exibir_perfil' perfil_slug=user.slug %}"><b>{{ user.nomePerfil.username }}</b></a>
+                                    <p class="e-a-mesa">{{ user.tipo_player}}(a)</p>
+                                </div>
+                               
+                                    <div class="addbutton flex">
+                                        <a class="flex" href="{% url 'exibir_perfil' perfil_slug=user.slug %}">
+                                        <img src="{% static 'img/public/add-player.svg' %}" alt="">
+                                        <p>Adicionar</p>
+                                        </a>
+                                    </div>
+                                
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="label flex">
+                            <p>Nenhum usuário encontrado.</p>
+                        </div>
+                    {% endif %}
 
-    <form action="{% url 'search_user' %}" method="get">
-        <input type="text" name="q" placeholder="Digite o nome do usuário">
-        <input type="submit" value="Buscar">
-    </form>
+                
+            
+                </div>
+            {% else %}
+                <div class="label flex">
+                    <b>Adicione um amigo e se divirta</b>
+                    <p>Para adicionar um amigo, basta colocar seu nome de usuário e clicar em adicionar</p>
+                </div>
+            {% endif %}
 
-    {% if busca_realizada %}
-        {% if users %}
-            <ul>
-                {% for user in users %}
-                    <li>
-                        {% if user.slug %}
-                            <a href="{% url 'exibir_perfil' perfil_slug=user.slug %}">{{ user.nomePerfil.username }}</a>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>Nenhum usuário encontrado.</p>
-        {% endif %}
-    {% endif %}
+          </div>
+          
+    </div>
 
-    <br><br> <a href="{% url 'index' %}">Voltar para a home</a>
 {% endblock %}

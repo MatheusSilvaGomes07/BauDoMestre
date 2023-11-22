@@ -1,5 +1,7 @@
 from django.http import HttpResponseForbidden, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
+
+from home.models import Perfil
 from .models import SolicitacaoAmizade, Amigo
 from django.contrib.auth.models import User
 from chat.models import Grupo, Mensagem
@@ -32,7 +34,7 @@ def listar_amigos(request):
 
 def enviar_solicitacao(request, user_id):
     para_usuario = User.objects.get(pk=user_id)
-
+    usuario = Perfil.objects.get(pk=user_id)
     # Verificar se já existe uma solicitação pendente
     solicitacao_pendente = SolicitacaoAmizade.objects.filter(de_usuario=request.user, para_usuario=para_usuario, aceita=False).first()
 
@@ -47,7 +49,7 @@ def enviar_solicitacao(request, user_id):
 
     # Verificar se a solicitação foi criada ou já existia
     if criada:
-        return redirect('listar_amigos')
+        return redirect('exibir_perfil', usuario.slug)
     else:
         # Tratar o caso em que a solicitação já existe (opcional)
         # Por exemplo, exibir uma mensagem de erro

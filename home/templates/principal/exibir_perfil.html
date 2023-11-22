@@ -33,7 +33,11 @@
 
         <div class="body-row flex">
           <div class="body-name flex">
-            <img class="image-50-icon" alt="Foto de usuário {{ perfil.nomePerfil.username }}" src="{{ perfil.fotoConta.url }}" />
+            {% if perfil.fotoConta != "Indefinido" %}
+              <img class="image-50-icon" alt="Foto de usuário {{ perfil.nomePerfil.username }}" src="{{ perfil.fotoConta.url }}" />
+            {% else %}
+              <img class="image-50-icon" alt="Foto de usuário {{ perfil.nomePerfil.username }}" src="{% static 'img/ain.png' %}" />
+            {% endif %}
             <b class="lucas-passos">{{ perfil.nomePerfil.username }}</b>
             <!-- <p class="nvel-17">Nível: 17</p> -->
           </div>
