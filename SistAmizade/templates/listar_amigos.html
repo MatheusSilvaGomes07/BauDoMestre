@@ -4,7 +4,7 @@
 
 <h1>Lista de amigos</h1>
 {% for amigo in amigos %}
-    {{ amigo.amigo.username }} <a href="{% url 'remover_amigo' amigo.amigo.id %}">Desfazer Amizade</a><br>
+<a href="{% url 'exibir_perfil' perfil_slug=amigo.amigo.username|lower %}">{{ amigo.amigo.username }}</a> <a href="{% url 'remover_amigo' amigo.amigo.id %}">Desfazer Amizade</a><br>
     <a href="{% url 'Abrir_chat_privado' amigo.amigo.id %}">Abrir Chat</a><br>
 {% endfor %}
 

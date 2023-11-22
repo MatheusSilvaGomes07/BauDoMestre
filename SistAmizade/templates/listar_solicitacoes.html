@@ -5,7 +5,7 @@
 <h1>Solicitações de Amizade Recebidas</h1>
 <ul>
     {% for solicitacao in solicitacoes_recebidas %}
-        <li>{{ solicitacao.de_usuario.username }} deseja ser seu amigo.
+        <li><a href="{% url 'exibir_perfil' perfil_slug=solicitacao.de_usuario.username|lower %}">{{ solicitacao.de_usuario.username }}</a> deseja ser seu amigo.
             <a href="{% url 'aceitar_solicitacao' solicitacao.id %}">Aceitar</a>
             <a href="{% url 'recusar_solicitacao' solicitacao.id %}">Recusar</a>
         </li>

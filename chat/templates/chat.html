@@ -12,7 +12,7 @@
   
   
     {% for mensagem in mensagens %}
-    <p>{{ mensagem.autor }}: ({{ mensagem.tempo}})</p>
+    <p><a href="{% url 'exibir_perfil' perfil_slug=mensagem.autor.username|lower %}">{{ mensagem.autor }}: ({{ mensagem.tempo}})</p> </a>
     <p>  {{ mensagem.conteudo }}</p>
     {% if mensagem.autor == user %}
         <a href="{% url 'excluir_mensagem_pub' mensagem.id %}">Excluir</a>

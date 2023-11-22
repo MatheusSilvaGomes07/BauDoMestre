@@ -3,7 +3,7 @@
   <h1>Gerenciar Solicitações de Entrada</h1>
   {% for solicitacao in solicitacoes %}
     {% if solicitacao.status == 'Pendente' %}
-      <p>{{ solicitacao.de_usuario.nomePerfil.username }} solicitou entrada para a campanha {{solicitacao.para_campanha.nomeCampanha}}</p>
+      <p><a href="{% url 'exibir_perfil' perfil_slug=solicitacao.de_usuario.nomePerfil.username|lower %}">{{ solicitacao.de_usuario.nomePerfil.username }}</a> solicitou entrada para a campanha {{solicitacao.para_campanha.nomeCampanha}}</p>
       <a href="{% url 'aceitar_solicitacao_camp' solicitacao.id %}">Aceitar</a>
       <a href="{% url 'recusar_solicitacao_camp' solicitacao.id %}">Recusar</a>
     {% endif %}

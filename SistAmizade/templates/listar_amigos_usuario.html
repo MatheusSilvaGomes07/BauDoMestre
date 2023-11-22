@@ -3,7 +3,7 @@
 {% block conteudo %}
     <h1>Lista de Amigos de {{ usuario.username }}</h1>
     {% for amigo in amigos %}
-        {{ amigo.amigo.username }}<br>
+    <a href="{% url 'exibir_perfil' perfil_slug=amigo.amigo.username|lower %}">{{ amigo.amigo.username }}<br></a>
     {% empty %}
         <p>Não há amigos para exibir.</p>
     {% endfor %}
