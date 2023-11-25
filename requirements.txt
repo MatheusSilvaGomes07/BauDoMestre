@@ -35,7 +35,6 @@ importlib-metadata==4.6.4
 incremental==22.10.0
 jeepney==0.7.1
 keyring==23.5.0
-language-selector==0.1
 launchpadlib==1.10.16
 lazr.restfulclient==0.14.4
 lazr.uri==1.0.6
