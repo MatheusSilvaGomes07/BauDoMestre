@@ -14,7 +14,6 @@ chardet==4.0.0
 charset-normalizer==3.1.0
 click==8.1.7
 colorama==0.4.6
-command-not-found==0.3
 constantly==15.1.0
 cryptography==40.0.2
 cupshelpers==1.0
