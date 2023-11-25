@@ -66,7 +66,7 @@ EMAIL_HOST_PASSWORD = 'ehzz nflg mrav skrc'
 SITE_ID = 1
 
 MIDDLEWARE = [
-    #'allauth.account.middleware.AccountMiddleware',
+    # 'allauth.account.middleware.AccountMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -77,6 +77,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'inventario.middleware.MaliciousFileCheckMiddleware',
 ]
+
+if DEBUG == True:
+    MIDDLEWARE = [
+        'allauth.account.middleware.AccountMiddleware',
+        'django.middleware.security.SecurityMiddleware',
+        'whitenoise.middleware.WhiteNoiseMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        'inventario.middleware.MaliciousFileCheckMiddleware',
+    ]
 
 ROOT_URLCONF = 'BauDoMestre.urls'
 
