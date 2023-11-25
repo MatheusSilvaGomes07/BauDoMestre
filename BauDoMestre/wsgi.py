@@ -1,4 +1,4 @@
-gunicorn myproject.wsgi:application --timeout 60"""
+"""
 WSGI config for BauDoMestre project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
