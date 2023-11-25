@@ -10,7 +10,16 @@ RUN apt-get update
 # Install dependencies
 RUN pip install --upgrade pip
 COPY ./requirements.txt /app/
-RUN pip install django django-allauth pillow channels channels-redis python-magic python-magic-bin whitenoise gunicorn
+RUN pip install gunicorn
+RUN pip install django 
+RUN pip install django-allauth 
+RUN pip install pillow 
+RUN pip install channels 
+RUN pip install channels-redis 
+RUN pip install python-magic 
+RUN pip install python-magic-bin 
+RUN pip install whitenoise 
+
 
 COPY . /app
 
