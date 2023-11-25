@@ -16,8 +16,7 @@ RUN pip install django-allauth
 RUN pip install pillow 
 RUN pip install channels 
 RUN pip install channels-redis 
-RUN pip install python-magic 
-RUN pip install python-magic-bin 
+RUN pip install python-magic
 RUN pip install whitenoise 
 
 
