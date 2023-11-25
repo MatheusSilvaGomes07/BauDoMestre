@@ -12,7 +12,6 @@ channels==4.0.0
 channels-redis==4.1.0
 chardet==4.0.0
 charset-normalizer==3.1.0
-chrome-gnome-shell==0.0.0
 click==8.1.7
 colorama==0.4.6
 command-not-found==0.3
@@ -107,7 +106,6 @@ txaio==23.1.1
 typing_extensions==4.5.0
 tzdata==2023.3
 ubuntu-advantage-tools==8001
-ubuntu-drivers-common==0.0.0
 ufw==0.36.1
 urllib3==2.0.2
 uvicorn==0.24.0.post1
@@ -116,7 +114,6 @@ wadllib==1.3.6
 whitenoise==6.6.0
 wsproto==1.2.0
 xdg==5
-xkit==0.0.0
 zipp==1.0.0
 zope.interface==6.0
 20.23.0
