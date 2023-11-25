@@ -6,7 +6,6 @@ autobahn==23.1.2
 Automat==22.10.0
 bcc==0.1.10
 blinker==1.4
-Brlapi==0.8.3
 certifi==2023.5.7
 cffi==1.15.1
 channels==4.0.0
