@@ -1,4 +1,3 @@
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -7,6 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
+    <link rel="shortcut icon" href="{% static 'img/Ain.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static "css/global-ia.css" %}" />
     <link rel="stylesheet" href="{% static "css/responsivity.css" %}" />
     <link rel="stylesheet" href="{% static 'css/index-ia.css' %}" />
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,700;1,400&display=swap"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+    <title>Baú do Mestre</title>
   </head>
 
   <body class="desktop">
@@ -158,7 +159,7 @@
     <div class="ranks flex">
       <div id="rank" class="rank-box flex">
         <img class="frame-icon" alt="" src="{% static 'img/public/frame.svg' %}" />
-        <p class="participe-de-aventuas">participe de aventuras</p>
+        <p class="participe-de-aventuas">Participe de aventuras</p>
         <div>
           <b class="veja-mais" id="vejaMaisText">Veja Mais</b>
           <div class="rank-child"></div>
@@ -166,17 +167,17 @@
       </div>
       <div id="rank1" class="rank-box flex">
         <img class="frame-icon" alt="" src="{% static 'img/public/frame1.svg' %}" />
-        <p class="crie-sua-conta">crie sua conta</p>
+        <p class="crie-sua-conta">Crie sua conta</p>
         <div>
-          <b class="veja-mais" id="vejaMaisText1">Veja Mais</b>
+          <b class="veja-mais" id="vejaMaisText1"><a href="{% url "account_signup" %}">Veja Mais</a></b>
           <div class="rank-child"></div>
         </div>
       </div>
       <div id="rank2" class="rank-box flex">
         <img class="frame-icon" alt="" src="{% static 'img/public/frame2.svg' %}" />
-        <p class="fale-conosco">fale conosco</p>
+        <p class="fale-conosco">Fale conosco</p>
         <div>
-          <b class="veja-mais">Veja Mais</b>
+          <b class="veja-mais"><a href="mailto:baudomestre.fatec@gmail.com" >Veja Mais</a></b>
           <div class="rank-inner"></div>
         </div>
       </div>
