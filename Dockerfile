@@ -15,4 +15,4 @@ RUN pip install -r requirements.txt
 COPY . /app
 
 # Use Uvicorn as the entrypoint
-ENTRYPOINT ["gunicorn", "BauDoMestre.wsgi:application"]
+ENTRYPOINT ["gunicorn", "BauDoMestre.wsgi"]
