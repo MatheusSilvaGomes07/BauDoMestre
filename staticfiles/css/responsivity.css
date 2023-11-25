@@ -1,3 +1,4 @@
+
 /*NAVBAR*/
 
 @media (max-width: 1164px){
@@ -415,12 +416,9 @@
     justify-content: space-between !important;
 }
 
-
-
 .image-50-icon {
     width: 20vw !important;
 }
-
 
 .middle-stats.flex, .adicionar {
     margin-bottom: 0 !important;
@@ -435,6 +433,89 @@
 .preference-stat img {
     height: 10vw !important;
     width: 12vw !important;
+}
+
+/*CHAT*/
+
+.amigos1 > div {
+    flex-direction: column;
+}
+
+.leftmessanger {
+    width: 100%;
+}
+
+.chatprivado {
+    display: none;
+    position: absolute;
+    width: 100%;
+    background-color: black !important;
+}
+
+.contacts-header .down-arrow-1-41 {
+    height: 40px;
+}
+
+.contacts-header #amizades {
+    font-size: var(--font-size-9xl);
+}
+
+.contacts-header .create-group-button-2-1 {
+    height: 40px;
+}
+
+.contact-write b {
+    font-size: var(--font-size-21xl);
+}
+
+.contact-write p {
+    font-size: var(--font-size-4xl);
+}
+
+.amizade .time {
+    font-size: var(--font-size-29xl);;
+}
+
+.header-text {
+    width: 70%;
+}
+
+.header-child {
+    padding-left: unset;
+    justify-content: space-evenly;
+    gap: unset;
+}
+
+.header-child > img {
+    display: initial !important;
+}
+
+.add-contacts {
+    gap: 15%;
+}
+
+.add-contacts #amizades {
+    font-size: var(--font-size-9xl);
+}
+
+.add-area .contact-list {
+    width: 95%;
+}
+
+.contact-icon {
+    width: clamp(20px, 14vw, 400px);
+}
+
+.contact-write {
+    width: 50%;
+}
+
+.addbutton {
+    width: 30%;
+}
+
+.addbutton img {
+    width: 1.3rem;
 }
 
 }

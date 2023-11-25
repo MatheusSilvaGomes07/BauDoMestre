@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% comment %} <title>Baú do Mestre</title> {% endcomment %}
-    <link rel="shortcut icon" href="{% static 'img/Ain.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'img/ain.png' %}" type="image/x-icon">
     {% block head %}
     
     {% endblock %}
@@ -19,6 +19,7 @@
     {% else %}
     <nav>Navbar <a href="{% url 'account_signup' %}">Cadastre-se </a><a href="{% url 'account_login' %}">Login</a></nav>
     {% endif %}
+    
     {% block conteudo %}
     
     {% endblock conteudo %}

@@ -1,10 +1,12 @@
+{% load static %}
 {% load i18n %}
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="shortcut icon" href="{% static 'img/ain.png' %}" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block head_title %}{% endblock %}</title>
+    <title>{% block head_title %}{% endblock %} - Baú do Mestre</title>
     {% block extra_head %}
     {% endblock %}
   </head>
