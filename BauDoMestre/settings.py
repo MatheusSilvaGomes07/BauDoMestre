@@ -66,7 +66,7 @@ EMAIL_HOST_PASSWORD = 'ehzz nflg mrav skrc'
 SITE_ID = 1
 
 MIDDLEWARE = [
-    # 'allauth.account.middleware.AccountMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
