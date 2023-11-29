@@ -44,7 +44,7 @@ class PerfilForm(forms.ModelForm):
             'tipo_sessao': 'Tipo de sessão:',
             'tipo_player': 'Tipo de player:',
             'idade': 'Insira sua idade:'
-        } 
+        }
         widgets = {
             'fotoConta': FileInputWithoutClear,
         }

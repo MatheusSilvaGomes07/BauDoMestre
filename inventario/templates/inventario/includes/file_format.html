@@ -38,8 +38,10 @@
     {% for file in files %}
     <div class="directory-box">
       <div class="directory flex">
-        <img src="{% static "img/public/doc.svg" %}" alt="">
-        <a href="{{ file.file.url }}" download><p class="inventory-item">{{ file.nome }}{{file.extensao}}</p></a>
+        <div class="direc-a flex">
+          <img src="{% static "img/public/doc.svg" %}" alt="">
+          <a href="{{ file.file.url }}" download><p class="inventory-item">{{ file.nome }}{{file.extensao}}</p></a>
+        </div>
         <p class="inventory-item">{{ file.data }}</p>
         <p id ="tamanho{{ forloop.counter }}" class="inventory-item">{{ file.tamanho }}</p>
         <button onclick="OpenStats()" style="all: unset;"><img class="three-dots" src="{% static "img/public/three-dots.svg" %}" alt=""></button>

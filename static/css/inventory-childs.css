@@ -83,6 +83,19 @@ input#id_nome {
     padding: 2rem;
 }
 
+.direc-a {
+    justify-content: start;
+    width: 28%;
+}
+
+.direc-a a{
+    overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: white;
+      margin-left: .5rem;
+}
+
 
 .data-column p:nth-of-type(2){
     font-weight: 500;
@@ -91,6 +104,11 @@ input#id_nome {
 
 .directory img {
     width: 5%;
+    justify-content: space-between;
+}
+
+.direc-a img {
+    width: 15%;
 }
 
 .directory a img {

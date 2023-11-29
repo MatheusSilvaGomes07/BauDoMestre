@@ -37,7 +37,10 @@
       <div class="body-row flex">
         <div class="body-name flex">
           <div class="img-box flex">
-            <button id="change-Image"><img id="pencil" src="{% static "img/public/pencil.svg" %}" alt=""></button>
+            <label for="img-sent" id="change-Image">
+              <img id="pencil" src="{% static "img/public/pencil.svg" %}" alt="">
+              {{ formPerfil.fotoConta }}
+            </label>
             <div class="grey-back flex">
               {% if formPerfil.fotoConta.initial %}
                     {% if formPerfil.fotoConta.initial == 'Indefinido' %}
@@ -52,7 +55,6 @@
          <!-- <p class="nvel-17">Nível: 01</p> -->
           <div id="change-age" class="flex">
             <p class="nvel-17">Idade:  {{ formPerfil.idade }}</p>
-            <input type="text">
           </div>
         </div>
 
@@ -73,16 +75,16 @@
             </div>
           </div>
 
-         
 
-          <div id="edit" class="adicionar flex">
-            <button id="editar" class="adicionar1" style="color: white;" type="submit">Concluir</button>
-            <img id="gear" class="create-group-button-2-1" alt="" src="{% static "img/public/pencil.svg" %}"/>
+
+          <div id="edit-aft" class="adicionar flex">
+            <button id="editar" class="adicionar1" style="color: white; all: unset; font-weight: bold;" type="submit">Concluir</button>
+            <img id="gear" class="create-group-button-2-1" alt="" src="{% static "img/public/gear.svg" %}"/>
           </div>
         </div>
 
       </div>
-      
+
     </div>
   </div>
 
@@ -101,9 +103,8 @@
 <div class="preferences flex">
 
       <!--ATENÇÃOOOOOOOO PROVISÓRIO-->
-      {{ formPerfil.fotoConta }}
       <b id="descrio">Preferencias</b>
-  
+
       <div class="preference-stats flex">
         <div class="preference-stat">
           {% if perfil.tipo_sessao == "Online" %}
@@ -113,7 +114,7 @@
           {% endif %}
           <b class="mesa-virtual">{{ formPerfil.tipo_sessao }}</b>
         </div>
-  
+
         <div class="preference-stat">
           {% if perfil.tipo_player == "Jogador" %}
             <img class="ss-2-icon" alt="" src="{% static "img/public/player.svg" %}" />
@@ -122,10 +123,10 @@
           {% else %}
             <img class="ss-2-icon" alt="" src="{% static "img/public/ambos.svg" %}" />
           {% endif %}
-          
+
           <b class="mestrejogador">{{ formPerfil.tipo_player }}</b>
         </div>
-  
+
         <div class="preference-stat">
           {% if perfil.sistema_rpg == "Dungeons & Dragons"%}
             <img class="dnd-2-icon" alt="Imagem representando Dungeon and Dragons" src="{% static "img/public/dnd.svg" %}" />
@@ -145,7 +146,7 @@
 </div>
 </form>
     </div>
-    
+
 
 
 {% endblock conteudo %}

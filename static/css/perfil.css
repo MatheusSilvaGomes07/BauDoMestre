@@ -110,6 +110,10 @@ body > div {
   justify-content: space-between;
 }
 
+#header-piece #editar-bot {
+  all: unset;
+  width: 100%;
+}
 
 .vector-icon {
   max-width: 15%;
@@ -160,11 +164,19 @@ body > div {
 }
 
 #edit {
-  width: 30%;
+  width: 100%;
+}
+
+#edit-aft {
+  width: 32%;
 }
 
 #gear {
   height: 40%;
+}
+
+#img-sent {
+  display: none;
 }
 
 .middle-stats.flex, .adicionar {
@@ -217,6 +229,7 @@ body > div {
 .image-50-icon {
   border-radius: var(--br-194xl);
   width: 15vw;
+  height: 15vw;
 }
 .nome {
   font-size: var(--subtitle-22-size);
@@ -236,6 +249,10 @@ body > div {
   flex-direction: column;
   height: 100%;
   justify-content: space-around;
+}
+
+.friendship a {
+  color: white;
 }
 
 #descrio {
@@ -266,28 +283,32 @@ body > div {
   width: 11vw;
 }
 
-.preference-switch {
+.preference-stat b {
   width: 100%;
   text-align: center;
 }
 
-.preference-switch select {
+.preference-stat b select {
   all: unset;
   width: 100%;
   font-weight: bold;
-  background:  url(../public/caret-down.svg) no-repeat center right;
+  background:  url(../img/public/caret-down.svg) no-repeat center right;
   background-size: 20px 20px;
   padding-right: 20px;
   cursor: pointer;
 }
 
-.preference-switch select option {
+.preference-stat b select option {
   color: black;
 }
 
 
 .dnd-2-icon {
   height: 115px;
+}
+
+#id_sistema_rpg {
+  width: 70%;
 }
 
 .frame5 {
