@@ -90,6 +90,7 @@ def Abrir_chat_Amigo(request, user_id):
 
     aux = Perfil.objects.get(id=user_id)
 
+    
     chatPerfil = {
         'fotoConta': aux.fotoConta,
         'nome': amigo.username,
@@ -109,6 +110,13 @@ def Abrir_chat_Amigo(request, user_id):
         return HttpResponseForbidden('Você não é amigo desse usuário.')
 
     mensagens = Mensagem.objects.filter(grupo=grupo).order_by('tempo')
+
+    for teste in amigos:
+        ultimaMSG = Mensagem.objects.filter(grupo=teste.amigo.id).order_by('-id').first()
+        
+        if ultimaMSG:
+            teste.lastMessage = f'{ultimaMSG.autor}: {ultimaMSG.conteudo}'
+            teste.lastHour = ultimaMSG.tempo
 
     return render(request, 'chat-privado.html', context={'mensagens': mensagens, 'uuid': grupo.uuid, 'amigos': amigos, 'chatPerfil': chatPerfil})
 

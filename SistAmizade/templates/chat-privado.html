@@ -64,9 +64,9 @@
                 </div>
                 <div class="contact-write">
                     <b>{{ amigo.nomeAmigo }}</b>
-                    <p class="e-a-mesa">E a mesa? Vai fazer quando?</p>
+                    <p class="e-a-mesa">{{ amigo.lastMessage }}</p>
                 </div>
-                <p class="time">19:30</p>
+                <p class="time">{{ amigo.lastHour|date:"H:i" }}</p>
             </div>
             </a>
             {% endfor %}
@@ -148,15 +148,23 @@
     var chatSocket = new WebSocket(base_url);
     var chatLog;
 
+    window.onload = function () {
+        // Ajusta o scroll quando a página é completamente carregada
+        chatLog = document.querySelector('#chat-log');
+        if (chatLog) {
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+    };
+
     chatSocket.onmessage = function (event) {
         var parsed = JSON.parse(event.data);
         chatLog = document.querySelector('#chat-log');
 
         var messageData = parsed.message.split(':');
-        var autor = messageData[0].trim();
-        var conteudo = messageData[1].trim();
+        var author = messageData[0].trim();
+        var content = messageData[1].trim();
 
-        var isMyMessage = autor === "{{ user }}";
+        var isMyMessage = author === "{{ user }}";
 
         var messageBlock = document.createElement('div');
         messageBlock.className = isMyMessage ? 'my-text' : 'your-text';
@@ -172,7 +180,7 @@
 
         var msgBoxBlock = document.createElement('div');
         msgBoxBlock.className = 'msg-box';
-        msgBoxBlock.innerHTML = '<p style="white-space: pre-line;">' + conteudo + '</p>';
+        msgBoxBlock.innerHTML = '<p style="white-space: pre-line;">' + content + '</p>';
         flexMsgBlock.appendChild(msgBoxBlock);
 
         chatLog.appendChild(messageBlock);
@@ -180,14 +188,9 @@
         if (chatLog) {
             chatLog.scrollTop = chatLog.scrollHeight;
         }
-    };
 
-    window.onload = function () {
-        // Ajusta o scroll quando a página é completamente carregada
-        chatLog = document.querySelector('#chat-log');
-        if (chatLog) {
-            chatLog.scrollTop = chatLog.scrollHeight;
-        }
+        var friendId = author;
+        updateLastMessage(friendId, content, author);
     };
 
     document.querySelector('#chat-message-submit').onclick = function (e) {
@@ -201,6 +204,9 @@
         if (chatLog) {
             chatLog.scrollTop = chatLog.scrollHeight;
         }
+
+        var currentFriendId = "{{ chatPerfil.nome }}";
+        updateLastMessage(currentFriendId, message, "{{ user }}");
 
         messageInputDom.value = '';
     };
@@ -217,39 +223,42 @@
             textarea.style.height = Math.max(desiredHeight, minHeight) + 'px';
         }
     }
-
-    //function initMob() {
-        //var chat = document.getElementById("chat");
-
-        //if (chat.style.display == "none") {
-        //    chat.style.display = "initial";
-      //  } else {
-        //    chat.style.display = "none";
-      //  }
-   // }
-
-   function filterFriends() {
-    var input, filter, friends, friend, i, friendId;
-    input = document.getElementById("searchInput");
-    filter = input.value.toUpperCase();
-    friends = document.getElementsByClassName("amizade");
-
-    for (i = 0; i < friends.length; i++) {
-        friend = friends[i];
-        friendId = friend.id.toUpperCase();  // Obtém o ID e converte para maiúsculas
-
-        // Use o método includes() para verificar se o ID do amigo contém a string de filtro
-        if (friendId.includes(filter)) {
-            friend.style.display = "";
-        } else {
-            friend.style.display = "none";
+    function updateLastMessage(friendId, lastMessage, author, timestamp) {
+        var friendElement = document.getElementById(friendId);
+        if (friendElement) {
+            var lastMessageElement = friendElement.querySelector('.e-a-mesa');
+            var lastHourElement = friendElement.querySelector('.time');
+    
+            if (lastMessageElement) {
+                lastMessageElement.textContent = author + ': ' + lastMessage;
+            }
+    
+            if (lastHourElement && timestamp) {
+                lastHourElement.textContent = new Date(timestamp).toLocaleTimeString('pt-BR', { hour: 'numeric', minute: 'numeric' });
+            }
         }
     }
-}
 
-function goBack() {
-    window.history.back();
-}
+    function filterFriends() {
+        var input, filter, friends, friend, i, friendId;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        friends = document.getElementsByClassName("amizade");
+
+        for (i = 0; i < friends.length; i++) {
+            friend = friends[i];
+            friendId = friend.id.toUpperCase();
+
+            if (friendId.includes(filter)) {
+                friend.style.display = "";
+            } else {
+                friend.style.display = "none";
+            }
+        }
+    }
+
+    function goBack() {
+        window.history.back();
+    }
 </script>
-
 {% endblock conteudo %}
