@@ -23,7 +23,6 @@
   justify-content: space-between;
 }
 
-
 /*Start Header*/
 
 nav {
@@ -473,9 +472,6 @@ nav button {
 .character-header {
   justify-content: space-between;
   width: 100%;
-}
-
-.button {
 }
 
 .char-carroussel {

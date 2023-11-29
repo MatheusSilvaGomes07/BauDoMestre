@@ -1,16 +1,304 @@
-{% extends "principal/base.html" %}
-
+{% load static %}
 {% block conteudo %}
-    <title>Home - Baú do Mestre</title>
 
-    <h1>Seja bem vindo ao Baú do Mestre!</h1>
-    {% if user.is_authenticated %}
-    <a href="{% url 'buscarmesa' %}">Descubra campanhas incríveis</a> <br> <br>
-    <a href="{% url 'inventarioRedirect' %}">Inventário</a> <br> <br>
-    {% else %}
-    <a href="{% url 'mural' %}">Descubra campanhas incríveis</a> <br> <br>
-    {% endif %}
-    <a href="{% url 'account_signup' %}">Comece sua jornada</a> <br> <br>
-    
-    
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <title>Campanhas - Baú do Mestre</title>
+
+    <link rel="shortcut icon" href="{% static 'img/ain.png' %}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static "css/global.css" %}" />
+    <link rel="stylesheet" href="{% static "css/dashboard-otimized.css" %}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;0,900;1,700&display=swap"/>
+    <!-- <link rel="stylesheet" href="phosphoricons.com?weight=bold&size=32&color=faf9f9"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  </head>
+
+  <body class="flex" id="dashboard-otimized">
+
+    <main class="main-page flex">
+      <nav class="flex">
+        <div class="nav-buttons flex">
+          <div class="nav-btn">
+            <a href="{% url 'index' %}">Home</a>
+          </div>
+          <div class="nav-btn">
+            <p>Inventário</p>
+          </div>
+          <div class="nav-btn">
+            <p>Campanhas</p>
+          </div>
+          <div class="nav-btn">
+            <p>Social</p>
+          </div>
+          {% if user.is_authenticated%}
+          {% else %}
+          <div class="nav-btn">
+            <a href="{% url 'account_signup' %}">Cadastre-se</a>
+          </div>
+          <div class="nav-btn">
+            <a href="{% url 'account_login' %}">Login</a>
+          </div>
+          {% endif %}
+        </div>
+        <button
+        onclick="openSide()"><img class="navbar-icon" id="btn-ico" src="{% static "img/public/list-bold.svg" %}" alt=""></button>
+        <img class="navbar-icon" alt="" src="{% static "img/public/ba-do-mestre-23-4.svg" %}" />
+      </nav>
+      <div id="sidebar" class="sidebar-dashboard flex">
+        <button onclick="closeSide()"><img alt="" src="{% static "img/public/frame5.svg" %}"/></button>
+
+        <div class="sidebar-body flex">
+
+          <div class="sidebar-body-upper flex">
+
+            <div class="side-boxes" id="homeContainer">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/home.png" %}"/>
+              <b class="sidebar-subtitle">Home</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
+            <div class="side-boxes" id="campanhasContainer">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/d20-2@2x.png" %} " />
+              <b class="sidebar-subtitle">Campanhas</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
+            <div class="side-boxes" id="personagensContainer">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/capacete-2@2x.png" %}" />
+              <b class="sidebar-subtitle">Personagens</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
+            <div class="side-boxes" id="inventarioContainer">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/backpack-1@2x.png" %}" />
+              <b class="sidebar-subtitle">Inventário</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
+            <div class="side-boxes" id="socialContainer">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/people-1@2x.png" %}" />
+              <b class="sidebar-subtitle">Social</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
+          </div>
+
+          <div class="sidebar-body-lower flex">
+
+            <div class="side-boxes" id="configuraesContainer">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/frame4.svg" %}" />
+              <b class="sidebar-subtitle">Perfil</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
+            <div class="side-boxes">
+              <img class="sidebar-icon" alt="" src="{% static "img/public/frame3.svg" %}" />
+              <b class="sidebar-subtitle">Logout</b>
+              <img class="down-arrow-1-2" alt="" src="{% static "img/public/downarrow-1-3@2x.png" %}"/>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="sidebar-dashboard-child"></div>
+
+        <div class="sidebar-footer flex">
+          <b class="armazenamento">Armazenamento</b>
+
+          <div class="rectangle-div">
+            <div class="frame-child1"></div>
+          </div>
+
+          <div class="gb-de-9">5 GB de 9 usados</div>
+
+          <div class="sidebar-profile flex">
+            <img class="image-50-icon" alt="" src="{% static "img/public/image-50@2x.png" %}" />
+            <div class="profile-name">
+              <b class="leonardo-paschoa">Leonardo Paschoa</b>
+              <p class="meuemailgmailcom">meuemail@gmail.com</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="dashboard-otimized-item flex">
+        <div class="info-box">
+
+          <div class="bem-vindo-jogador-container2">
+            <span class="nivel-txt flex">
+              <span>BEM VINDO </span>
+              <span class="jogador1">JOGADOR</span>
+            </span>
+          </div>
+
+        </div>
+        <div class="icons-list flex">
+          <img src="{% static "img/public/figma-icons/dice2.png" %}" alt="">
+          <img src="{% static "img/public/figma-icons/backpack-fill.svg" %}" alt="">
+          <img src="{% static "img/public/figma-icons/users.svg" %}" alt="">
+        </div>
+        <p class="qual-a-aventura">Qual a aventura de hoje?</p>
+        <p class="encontre-histrias-incrveis">Encontre histórias incríveis</p>
+
+        <img class="down-arrow-1-2" style="margin-left: unset" alt="" src="{% static "img/public/downarrow-1-2@2x.png" %}" />
+      </div>
+    </main>
+
+    <div class="quests">
+      <div class="quests1 flex">
+        <h3 style="font-size: clamp(32px, 3vw, 148px) !important;">Quests</h3>
+        <a href="{% url 'criarCampanhas' %}"><img class="vector-icon12" alt="" src="{% static "img/public/vector11.svg" %}" /></a>
+      </div>
+
+      <div class="mesas flex">
+        {% for campanha in campanhas %}
+          <tr>
+             <div class="vector-group flex">
+			  <div class="frame-child3 flex">
+				  <img class="image-49-icon" alt="" src="{% static "img/public/image-49@2x.png" %}" />
+				  <p class="the-dragoon-hunters">{{ campanha.nomeCampanha }}</p>
+			  </div>
+			  <div class="text-box flex">
+				<p class="lorem-ipsum-dolor3">
+          <td>{{ campanha.descricaoCampanha }}</td>
+        </p>
+
+				<div class="icons flex">
+				  <div class="icon-box flex">
+					<img class="vector-icon" alt="" src="{% static "img/public/vector12.svg" %}"/>
+					<i class="type-text">
+            <td class="type-text">{{ campanha.ambienteCampanha }}</td>
+          </i>
+				  </div>
+				  <div class="icon-box flex">
+					<img class="vector-icon" alt="" src="{% static "img/public/vector13.svg" %}" />
+					<i class="type-text">
+            <td class="type-text">{{ campanha.generoRPG }}</td>
+          </i>
+				  </div>
+				  <div class="icon-box flex">
+					<img class="vector-icon" alt="" src="{% static "img/public/2662663967-dungeonsanddragonspng-11@2x.png" %}"/>
+					<i class="type-text">
+            <td class="type-text">{{ campanha.sistemaCampanha }}</td>
+          </i>
+				  </div>
+				</div>
+				<p class="grupo-56">
+          <td class="grupo-56">GRUPO: {{ campanha.numeroJogadores }}</td>
+        </p>
+			  </div>
+			  <div class="box-buttons flex">
+				<div class="frame-child7">
+				  <p class="button-text">Veja Mais...</p>
+				</div>
+				<div class="frame-child8">
+				  <p class="button-text jogar">JOGAR</p>
+				</div>
+			  </div>
+			</div>
+          </tr>
+{% endfor %}
+
+      </div>
+
+        <div class="button-child flex">
+          <b class="veja-mais3">Veja Mais</b>
+        <img class="down-arrow-1-43" alt="" src="{% static "img/public/downarrow-1-42@2x.png" %}"/>
+        </div>
+    </div>
+
+    <div class="personagens1 flex">
+      <div class="character-header flex">
+        <div class="personagens2">personagens</div>
+        <img class="vector-icon12" alt="" src="{% static "img/public/vector10.svg" %}" />
+      </div>
+
+      <div class="char-carroussel flex">
+        <div class="vector-parent">
+          <div class="frame-inner">
+            <div class="frame-child3 character-banner">
+              <p class="kharthaisen1 the-dragoon-hunters">Kharthaisen</p>
+            </div>
+          </div>
+          <p class="lorem-ipsum-dolor2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at
+            tincidunt turpis. Vivamus felis nunc, feugiat in efficitur quis,
+            bibendum faucibus mauris. Nullam egestas ultricies urna. Maecenas
+            ornare a erat aliquam porta.</p>
+          <div class="frame-body flex">
+            <div class="left-column">
+              <div class="main-caracteristics flex">
+                <div class="characteristic">
+                  <div class="char">Raça</div>
+                  <hr class="line-div">
+                  <p class="atr">Elfo</p>
+                </div>
+                <div class="characteristic">
+                  <div class="char">Alinhamento</div>
+                  <hr class="line-div">
+                  <p class="atr">Caótico Bom</p>
+                </div>
+                <div class="characteristic">
+                  <div class="char">Classe</div>
+                  <hr class="line-div">
+                  <p class="atr">Espadachim</p>
+                </div>
+              </div>
+            </div>
+            <div class="right-column flex">
+              <img class="frame-child6" alt="" src="{% static "img/public/vector-17.svg" %}" />
+              <div class="nivel3">
+                <span class="nivel-txt">
+                  <p class="p">10</p>
+                  <p class="nivel4">Nivel</p>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="frame-footer flex">
+            <div class="footer-icons flex">
+              <img class="frame-icon3 footer-icon" alt="" src="{% static "img/public/frame1.svg" %}" />
+              <img class="dungeons-and-dragons-png-1-icon footer-icon" alt="" src="{% static "img/public/2662663967-dungeonsanddragonspng-1@2x.png" %}"/>
+            </div>
+            <div class="frame6 flex">
+              <b class="abrir">ABRIR</b>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="button">
+        <div class="button-child flex">
+          <b class="veja-mais3">Veja Mais</b>
+          <img class="down-arrow-1-43" alt="" src="{% static "img/public/downarrow-1-42@2x.png" %}"/>
+      </div>
+      </div>
+    </div>
+
+  </body>
+</html>
+
+<script>
+  function openSide(){
+    document.getElementById("sidebar").style.left = "0"
+}
+function closeSide(){
+    document.getElementById("sidebar").style.left = "-500px"
+}
+</script>
+
+<table class="table">
+</table>
+
 {% endblock conteudo %}

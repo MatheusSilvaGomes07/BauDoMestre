@@ -73,7 +73,8 @@ def index(request):
     if isinstance(request.user, AnonymousUser):
         return render(request, 'principal/home-ia.html')
     else:
-        return render(request, 'principal/home.html')
+        campanhas = Campanha.objects.all()
+        return render(request, 'principal/home.html', {'campanhas': campanhas})
 
 
 # view do mural não logado
