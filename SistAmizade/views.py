@@ -88,6 +88,16 @@ def Abrir_chat_Amigo(request, user_id):
     amigo = User.objects.get(pk=user_id)
     amigos = Amigo.objects.filter(usuario=user)
 
+    aux = Perfil.objects.get(id=user_id)
+
+    chatPerfil = {
+        'fotoConta': aux.fotoConta,
+        'nome': amigo.username,
+        'tipoJogador': aux.tipo_player,
+        'slug': aux.slug
+    }
+
+
     grupo = Grupo.objects.filter(membros=user).filter(membros=amigo).first()
 
     if not grupo:
@@ -99,7 +109,8 @@ def Abrir_chat_Amigo(request, user_id):
         return HttpResponseForbidden('Você não é amigo desse usuário.')
 
     mensagens = Mensagem.objects.filter(grupo=grupo).order_by('tempo')
-    return render(request, 'chat-privado.html', context={'mensagens': mensagens, 'uuid': grupo.uuid, 'amigos': amigos})
+
+    return render(request, 'chat-privado.html', context={'mensagens': mensagens, 'uuid': grupo.uuid, 'amigos': amigos, 'chatPerfil': chatPerfil})
 
 def excluir_mensagem_priv(request, mensagem_id):
     mensagem = get_object_or_404(Mensagem, pk=mensagem_id)

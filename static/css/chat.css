@@ -338,8 +338,10 @@ body,
   background-color: #2d2d2d;
   border-radius: 15px;
   min-height: 84px;
-  max-height: 200px;
+  max-height: 84px;
   resize: none;
+  padding: 0.8rem;
+  font-size: 1.5rem;
 }
 
 .sent-elipse img {
@@ -501,3 +503,9 @@ body,
 
 .vector-icon {
 } */
+
+.contact-list a {
+  all: unset;
+  width: 100%;
+  cursor: pointer;
+}
