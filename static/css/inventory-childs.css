@@ -1,11 +1,4 @@
 
-@media (max-width: 600px){
-
-    html, body {
-        height: 100%;
-    }
-}
-
 .send-row {
     width: 90%;
     justify-content: space-between;
@@ -17,6 +10,11 @@
     width: 70%;
     justify-content: space-between;
     padding: 1.5rem 1rem;
+}
+
+input#id_nome {
+    all: unset !important;
+    text-align: start !important;
 }
 
 .send-bar h4 {
@@ -37,6 +35,10 @@
     font-weight: 700;
     width: 20%;
     padding: 1.5rem 0;
+    color: white;
+    text-align: center;
+    font-family: var(--body);
+    font-size: var(--font-size-xl);
 }
 
 .directories {
@@ -79,7 +81,6 @@
 .directory {
     justify-content: space-between;
     padding: 2rem;
-
 }
 
 
@@ -90,6 +91,20 @@
 
 .directory img {
     width: 5%;
+}
+
+.directory a img {
+    width: 100%;
+}
+
+.left-direct {
+    display: flex;
+    gap: 1.5rem;
+    width: 80%;
+}
+
+.left-direct a {
+    color: white;
 }
 
 .inventory-item {

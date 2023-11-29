@@ -17,8 +17,8 @@ def mapas(request):
     user = request.user
     pastas = Pasta.objects.filter(owner=user, divisao=div)
     mensagem = ''
-    
-    
+
+
     if request.method == 'POST':
         form = PastaForm(request.POST)
         if form.is_valid():
@@ -87,7 +87,7 @@ def imagens(request):
     user = request.user
     pastas = Pasta.objects.filter(owner=user, divisao=div)
     mensagem = ''
-    
+
     if request.method == 'POST':
         form = PastaForm(request.POST)
         if form.is_valid():
@@ -133,14 +133,14 @@ def verificar_extensao(div, file_type, request, tamanho):
         else:
             messages.error(request, "A divisão de mapas só aceita documentos de imagem, GIFs e PDFs")
             return False
-        
+
     if div == "Criaturas":
         if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type or 'Microsoft Word' in file_type or 'RAR archive' in file_type:
              return True
         else:
             messages.error(request, "Foi identificado um possível arquivo malicioso ou que não seja possível seu envio, tente enviar novamente")
             return False
-        
+
     if div == "Documentos":
 
         if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type or 'Microsoft Word' in file_type or 'RAR archive' in file_type or 'Zip archive' in file_type:
@@ -148,28 +148,29 @@ def verificar_extensao(div, file_type, request, tamanho):
         else:
             messages.error(request, "Foi identificado um possível arquivo malicioso ou que não seja possível seu envio, tente enviar novamente")
             return False
-        
+
     if div == "Imagens":
         if 'image' in file_type or 'GIF image' in file_type:
              return True
         else:
             messages.error(request, "A divisão de imagens só aceita arquivos de imagens e GIFs")
             return False
-        
+
     if div == "Musicas":
-        if 'audio' in file_type:
+        if 'audio' in file_type or 'text/plain' in file_type:
              return True
         else:
             messages.error(request, "A divisão de músicas só aceita arquivos de áudios")
             return False
-        
+
     if tamanho > 83886080:
         messages.error(request, "Algum arquivo enviado era maior que 80MB, só é possível o envio de arquivos abaixo de 80MB")
-        return False     
-       
+        return False
+
+
 @login_required
 def visualizar_pasta(request, div, pasta):
-    
+
     user = request.user
     pastas = Pasta.objects.get(nome=pasta, owner=user, divisao=div)
     files = File.objects.filter(owner=user, pasta=pastas.id)
@@ -185,15 +186,15 @@ def visualizar_pasta(request, div, pasta):
                 base_name, extension = os.path.splitext(str(f))
                 file_type = mime.from_buffer(f.read(1024))
                 tamanho = f.size
+                print(file_type)
 
 
-                
 
                 if verificar_extensao(div, file_type, request, tamanho):
                     arquivo = File(file=f, owner=user, pasta=pastas, nome=base_name, tamanho=tamanho, extensao=extension)
                     arquivo.save()
 
-                
+
             return redirect('visualizar_pasta', div, pasta)
     else:
         form = FileForm()
@@ -235,7 +236,7 @@ def edit_pasta(request, id_pasta):
 def deletar_pasta(request, id):
     pasta_owner = Pasta.objects.get(id=id).owner
     user = request.user
-    
+
 
     if user == pasta_owner or user.is_staff:
         delete = get_object_or_404(Pasta, id=id)

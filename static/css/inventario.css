@@ -1,6 +1,9 @@
+html {
+  background: #000
+}
+
 .inventrio {
   position: relative;
-  background: linear-gradient(169deg, #000 35.32%, rgba(53, 51, 51, 0.50) 218.41%);
   text-align: center;
   font-size: var(--body-size);
   color: var(--color-white);

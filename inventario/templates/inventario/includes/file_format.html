@@ -15,16 +15,17 @@
 
     <div class="send-row flex">
         <div class="send-bar flex">
+          <p>Selecione Arquivo</p>
           <form method="post" enctype="multipart/form-data">
               {% csrf_token %}
               {{ form.file }}
               <div class="arq-button">
-              <p>ARQUIVO</p>
+                <label for="id_file">ARQUIVO</label>
               </div>
           </div>
               <button class="send-button flex" type="submit">Enviar</button>
           </form>
-      </div>
+    </div>
 
   <div class="directories flex">
 
@@ -71,7 +72,7 @@
             document.getElementById('tamanho' + {{ forloop.counter }}).innerText = tamanhoEmKB.toFixed(2) + 'KB';
         }
 
-        
+
     </script>
     {% endfor %}
 
