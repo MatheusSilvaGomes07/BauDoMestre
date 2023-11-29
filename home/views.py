@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+
+from meus_personagens.models import CallOfCthulhu, DnD, OrdemParanormal, Tormenta
 from .models import Campanha, Perfil
 from .forms import CampanhaForm, PerfilForm
 from django.db.models import Q
@@ -73,8 +75,23 @@ def index(request):
     if isinstance(request.user, AnonymousUser):
         return render(request, 'principal/home-ia.html')
     else:
-        campanhas = Campanha.objects.all()
-        return render(request, 'principal/home.html', {'campanhas': campanhas})
+        user = request.user
+        fotoConta = Perfil.objects.get(id=user.id).fotoConta
+
+        dnd = DnD.objects.filter(nomePerfil=user)
+        ordem = OrdemParanormal.objects.filter(nomePerfil=user)
+        tormenta20 = Tormenta.objects.filter(nomePerfil=user)
+        coc = CallOfCthulhu.objects.filter(nomePerfil=user)
+
+        campanhas = Campanha.objects.filter(chats__membros=user)
+
+        for camp in campanhas:
+            uuid = Grupo.objects.get(campanha=camp.id)
+            if uuid:
+                camp.uuid = uuid.uuid
+
+
+        return render(request, 'principal/home.html', {'campanhas': campanhas, 'fotoConta': fotoConta, 'dnd': dnd, 'ordem': ordem, 'tormenta20': tormenta20, 'coc': coc,})
 
 
 # view do mural não logado

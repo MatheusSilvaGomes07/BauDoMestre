@@ -69,9 +69,8 @@ nav button {
 }
 
 .navbar-icon {
-  max-width: 6vw;
-  min-width: 5rem;
-  margin: .5rem 1rem 0 0;
+  width: 5rem;
+  margin: 0 1rem .8rem 0;
 }
 
 
@@ -301,7 +300,6 @@ nav button {
     letter-spacing: -0.02em;
     font-family: var(--subtitle-22);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url(../../static/img/public/rectangle-172@2x.png);
     background-position: center;
     background-repeat: no-repeat;
     padding: 3vh 2vw;
@@ -520,10 +518,6 @@ nav button {
   background: linear-gradient(161deg, #000 5.86%, rgb(53 51 51 / 82%) 161.77%), #FFF;
 }
 
-.character-banner {
-  background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url(../../static/img/public/rectangle-78@2x.png);
-}
-
 .abrir {
   letter-spacing: -0.02em;
   line-height: 20px;
@@ -669,11 +663,15 @@ nav button {
 }
 
 .vector-parent {
+  justify-content: space-between;
+  flex-direction: column;
+  display: flex;
   font-size: var(--title-13-size);
   stroke-width: 1px;
   border: solid 2px #FFF;
   background: linear-gradient(161deg, #000 5.86%, rgb(53 51 51 / 82%) 161.77%), #FFF;
   flex-shrink: 0;
+  height: 45rem;
 }
 
 .personagens-child,

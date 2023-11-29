@@ -126,7 +126,7 @@ def musicas(request):
 
     return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
 
-def verificar_extensao(div, file_type, request, tamanho):
+def verificar_extensao(div, file_type, request, tamanho, extension):
     if div == "Mapas":
         if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type:
             return True
@@ -157,7 +157,7 @@ def verificar_extensao(div, file_type, request, tamanho):
             return False
 
     if div == "Musicas":
-        if 'audio' in file_type or 'text/plain' in file_type:
+        if extension == '.mp3' or extension == '.wav' or extension == '.ogg':
              return True
         else:
             messages.error(request, "A divisão de músicas só aceita arquivos de áudios")
@@ -186,11 +186,10 @@ def visualizar_pasta(request, div, pasta):
                 base_name, extension = os.path.splitext(str(f))
                 file_type = mime.from_buffer(f.read(1024))
                 tamanho = f.size
-                print(file_type)
 
 
 
-                if verificar_extensao(div, file_type, request, tamanho):
+                if verificar_extensao(div, file_type, request, tamanho, extension):
                     arquivo = File(file=f, owner=user, pasta=pastas, nome=base_name, tamanho=tamanho, extensao=extension)
                     arquivo.save()
 

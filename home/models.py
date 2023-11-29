@@ -8,6 +8,8 @@ from django.utils.text import slugify
 
 
 
+
+
 # Model do Perfil do usuário
 class Perfil(models.Model):
     nomePerfil = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -44,7 +46,7 @@ class Perfil(models.Model):
         
     def solicitacao_pendente_para_usuario(self, outro_usuario):
         return self.solicitacoes_enviadas.filter(para_usuario=outro_usuario, aceita=False).first()
-
+    
 
 # Model das Campanhas
 class Campanha(models.Model):
