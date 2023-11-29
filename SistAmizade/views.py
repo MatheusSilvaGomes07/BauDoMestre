@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 def adicionar_amigo(request, user_id):
     amigo = User.objects.get(pk=user_id)
-    
+
     solicitacao, _ = SolicitacaoAmizade.objects.get_or_create(de_usuario=request.user, para_usuario=amigo)
     
     return redirect('listar_amigos')
@@ -29,6 +29,7 @@ def remover_amigo(request, user_id):
 
 def listar_amigos(request):
     amigos = Amigo.objects.filter(usuario=request.user)
+
     return render(request, 'listar_amigos.html', {'amigos': amigos})
 
 
@@ -85,6 +86,7 @@ def recusar_solicitacao(request, solicitacao_id):
 def Abrir_chat_Amigo(request, user_id):
     user = request.user
     amigo = User.objects.get(pk=user_id)
+    amigos = Amigo.objects.filter(usuario=user)
 
     grupo = Grupo.objects.filter(membros=user).filter(membros=amigo).first()
 
@@ -97,7 +99,7 @@ def Abrir_chat_Amigo(request, user_id):
         return HttpResponseForbidden('Você não é amigo desse usuário.')
 
     mensagens = Mensagem.objects.filter(grupo=grupo).order_by('tempo')
-    return render(request, 'chat-privado.html', context={'mensagens': mensagens, 'uuid': grupo.uuid})
+    return render(request, 'chat-privado.html', context={'mensagens': mensagens, 'uuid': grupo.uuid, 'amigos': amigos})
 
 def excluir_mensagem_priv(request, mensagem_id):
     mensagem = get_object_or_404(Mensagem, pk=mensagem_id)

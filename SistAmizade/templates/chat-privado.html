@@ -1,54 +1,205 @@
-{% extends 'principal/base.html' %} 
+{% extends 'principal/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/global-ia.css' %}" />
+<link rel="stylesheet" href="{% static 'css/chat.css' %}" />
+<link rel="stylesheet" href="{% static 'css/responsivity.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
+<style>
+    #chat-body {
+        background-image: url({% static "img/public/chat-background.svg" %});
+        height: 87%;
+        width: 100%;
+        background-size: 75%;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+    }
+</style>
+{% endblock %}
 
 {% block conteudo %}
-<div>
-    <a href="{% url 'listar_amigos' %}">Voltar a lista de amigos</a>
-  </div>
-  
-  <br>
-  
-  <div id="chat-log" style="border:1px solid;width:500px;height:400px;">
-  
-  
-    {% for mensagem in mensagens %}
-    <p><a href="{% url 'exibir_perfil' perfil_slug=mensagem.autor.username|lower %}">{{ mensagem.autor }}: ({{ mensagem.tempo}})</p> </a>
-    <p>  {{ mensagem.conteudo }}</p>
-    {% if mensagem.autor == user %}
-        <a href="{% url 'excluir_mensagem' mensagem.id %}">Excluir</a>
-    {% endif %}
-    {% endfor %}
- 
-  <title> chat </title>
-  
-  </div>
-  
-  <br>
-  <input id="chat-message-input" type="text" size="60" placeholder="Escrever mensagem">
-  <br>
-  <br>
-  
-  <input id="chat-message-submit" type="button" value="Enviar">
-  
-  <script>
-  
-  base_url =  'ws://' + window.location.hostname + ':' + window.location.port + '/ws/open_chat/' + "{{ uuid }}" + '/';
-  
-  chatSocket = new WebSocket(base_url);
-  
-  chatSocket.onmessage = function(event){
-      let parsed = JSON.parse(event.data);
-      document.querySelector('#chat-log').innerHTML += '<p>' + parsed.message + '</p>';
-  }
-  
-  document.querySelector('#chat-message-submit').onclick = function(e) {
-      const messageInputDom = document.querySelector('#chat-message-input');
-          const message = messageInputDom.value;
-          chatSocket.send(JSON.stringify({
-          'message': message
-          }));
-      messageInputDom.value = '';
-      };
-  
-  </script>
+<div class="flex" style="height: 100vh;">
+    <div class="leftmessanger flex">
+
+        <div class="contacts-header flex">
+            <img class="down-arrow-1-41" alt="" src="{% static 'img/public/downarrow-1-4@2x.png'%}" id="downArrow14"/>
+            <div id="amizades">AMIZADES</div>
+            <div class="contacts-header-icon flex">
+                <img class="create-group-button-2-1" alt="" src="{% static "img/public/addFriend.png" %}" id="createGroupButton21"/>
+            </div>
+        </div>
+
+        <div class="searchbar2">
+            <div class="searchbar-inner flex">
+                <input placeholder="Pesquisar" class="pesquisar"></input>
+                <div class="searchbar-child1 flex"/>
+                    <img class="magnifying-glass-1-icon1" alt="" src="{% static "img/public/magnifyingglass-11.svg" %}"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-list flex">
+            {% for amigo in amigos %}
+            <div onclick="initMob()" class="amizade">
+                <div class="image-50-group">
+                    <img class="image-50-icon1" alt="" src="{{ amigo.fotoConta.url }}"/>
+                </div>
+                <div class="contact-write">
+                    <b>{{ amigo.nomeAmigo }}</b>
+                    <p class="e-a-mesa">E a mesa? Vai fazer quando?</p>
+                </div>
+                <p class="time">19:30</p>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+    <div id="chat" class="chatprivado flex">
+        <div class="header1">
+
+            <div class="header-child flex">
+
+                <div class="image-50-parent3 flex">
+                    <img class="image-50-icon6" alt="" src="{% static 'img/ain.png '%}"/>
+                </div>
+
+                <div class="header-text">
+                    <b class="lucas-passos3">Lucas Passos</b>
+                    <p class="online">Online</p>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div id="chat-body">
+
+            <div id="chat-log" class="text-area flex">
+
+                {% for mensagem in mensagens %}
+                    {% if mensagem.autor == user %}
+                        <div class="my-text">
+                            <div class="hour">
+                                <p>19:35</p>
+                            </div>
+                            <div class="flex msg">
+                                <div class="msg-box">
+                                    <p>{{ mensagem.conteudo }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="your-text">
+                            <div class="hour">
+                                <p>19:35</p>
+                            </div>
+                            <div class="msg flex">
+                                <div class="msg-box">
+                                    <p>{{ mensagem.conteudo }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="sent-bar flex">
+                <div id="sent" class="flex">
+                    <input id="chat-message-input" type="text" size="60" placeholder="Escrever mensagem">
+                    <input id="chat-message-submit" type="button" value="Enviar">
+                    <button class="sent-elipse flex">
+                        <img src="../public/paper-plane.svg" alt="">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    base_url = 'ws://' + window.location.hostname + ':' + window.location.port + '/ws/open_chat/' + "{{ uuid }}" + '/';
+
+    chatSocket = new WebSocket(base_url);
+
+    chatSocket.onmessage = function (event) {
+        let parsed = JSON.parse(event.data);
+        let chatLog = document.querySelector('#chat-log');
+
+        // Adiciona a mensagem recebida ao log de chat
+       
+
+        // Adiciona a mensagem ao bloco correspondente no HTML
+        let messageData = parsed.message.split(':');
+        let autor = messageData[0].trim();
+        let conteudo = messageData[1].trim();
+
+        // Verifica se a mensagem é do usuário atual
+        let isMyMessage = autor === "{{ user }}";
+
+        let messageBlock = document.createElement('div');
+        messageBlock.className = isMyMessage ? 'my-text' : 'your-text';
+
+        let hourBlock = document.createElement('div');
+        hourBlock.className = 'hour';
+        hourBlock.innerHTML = '<p>19:35</p>';
+        messageBlock.appendChild(hourBlock);
+
+        let flexMsgBlock = document.createElement('div');
+        flexMsgBlock.className = 'flex msg';
+        messageBlock.appendChild(flexMsgBlock);
+
+        let msgBoxBlock = document.createElement('div');
+        msgBoxBlock.className = 'msg-box';
+        msgBoxBlock.innerHTML = '<p>' + conteudo + '</p>';
+        flexMsgBlock.appendChild(msgBoxBlock);
+
+        chatLog.appendChild(messageBlock);
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function (e) {
+        const messageInputDom = document.querySelector('#chat-message-input');
+        const message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }));
+        messageInputDom.value = '';
+    };
+
+    function autoResize() {
+        // Obtém o elemento textarea
+        const textarea = document.getElementById('auto-resize-textarea');
+    
+        // Configura as alturas mínima e máxima
+        const minHeight = 50;
+        const maxHeight = 200;
+    
+        // Calcula a altura desejada, limitando à altura máxima
+        const desiredHeight = Math.min(textarea.scrollHeight, maxHeight);
+    
+        // Se o conteúdo estiver vazio, define a altura mínima
+        if (textarea.value.trim() === '') {
+          textarea.style.height = minHeight + 'px';
+        } else {
+          // Define a altura do textarea para a altura desejada ou a altura mínima, o que for maior
+          textarea.style.height = Math.max(desiredHeight, minHeight) + 'px';
+        }
+      }
+
+    function initMob() {
+        var chat = document.getElementById("chat");
+
+        if (chat.style.display == "none") {
+            chat.style.display = "initial";
+        } else {
+            chat.style.display = "none";
+        }
+    }
+</script>
 
 {% endblock conteudo %}
