@@ -13,6 +13,7 @@ class Grupo(models.Model):
     criador = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='grupos_criados')
     publico = models.BooleanField(default=False)
     campanha = models.ForeignKey(Campanha, on_delete=models.CASCADE, related_name='chats', null=True)
+    uuid_pers = models.CharField(max_length=10, default= None, blank=True, null=True)
 
     def adicionar_usuario_ao_grupo(self, user):
         if user not in self.membros.all():

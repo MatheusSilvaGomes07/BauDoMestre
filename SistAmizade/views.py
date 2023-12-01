@@ -65,7 +65,9 @@ def aceitar_solicitacao(request, solicitacao_id):
     solicitacao.aceita = True
     solicitacao.delete()
 
-    grupo_chat, _ = Grupo.objects.get_or_create(criador=solicitacao.de_usuario, publico=False)
+    grupo_id = f"{solicitacao.de_usuario.id}_{solicitacao.para_usuario.id}"
+
+    grupo_chat, _ = Grupo.objects.get_or_create(criador=solicitacao.de_usuario, uuid_pers=grupo_id, publico=False)
     grupo_chat.membros.add(solicitacao.de_usuario, solicitacao.para_usuario)
     grupo_chat.save()
     
@@ -112,7 +114,17 @@ def Abrir_chat_Amigo(request, user_id):
     mensagens = Mensagem.objects.filter(grupo=grupo).order_by('tempo')
 
     for teste in amigos:
-        ultimaMSG = Mensagem.objects.filter(grupo=teste.amigo.id).order_by('-id').first()
+        
+        combinacao1 = f'{teste.amigo.id}_{user.id}'
+        combinacao2 = f'{user.id}_{teste.amigo.id}'
+
+        try:
+            gp = Grupo.objects.get(uuid_pers = combinacao1)
+        except:
+            gp = Grupo.objects.get(uuid_pers = combinacao2)
+
+
+        ultimaMSG = Mensagem.objects.filter(grupo=gp).order_by('-id').first()
         
         if ultimaMSG:
             teste.lastMessage = f'{ultimaMSG.autor}: {ultimaMSG.conteudo}'

@@ -59,7 +59,7 @@
         <button
         onclick="openSide()"><img class="navbar-icon" id="btn-ico" src="{% static "img/public/list-bold.svg" %}" alt=""></button>
         {% if fotoConta != "Indefinido" %}
-        <a href="{% url 'usuario' %}"><img style="border-radius: 100%;" class="navbar-icon" alt="" src="{{ fotoConta.url }}" /></a>
+        <a style="cursor: pointer;" href="{% url 'usuario' %}"><img style="border-radius: 100%;" class="navbar-icon" alt="" src="{{ fotoConta.url }}" /></a>
         {% else %}
             <a style="all: unset;" href="{% url 'usuario' %}"><img style="border-radius: 100%;" class="navbar-icon" alt="" src="{% static "img/ain.png" %}" /></a>
         {% endif %}
