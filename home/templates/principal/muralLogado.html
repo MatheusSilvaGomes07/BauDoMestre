@@ -82,6 +82,7 @@
             <td>{{ campanha.numeroJogadores }}</td>
             <td>{{ campanha.diasSessao }}</td>
             <td>{{ campanha.generoRPG }}</td>
+            <td><a href="{% url 'detalhes_campanha' campanha.id %}">Detalhes</a></td>
             <td>
                 {% for grupo in grupos %}
                     <div id="{{ grupo.uuid }}">

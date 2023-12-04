@@ -61,7 +61,7 @@
         {% if fotoConta != "Indefinido" %}
         <a style="cursor: pointer;" href="{% url 'usuario' %}"><img style="border-radius: 100%;" class="navbar-icon" alt="" src="{{ fotoConta.url }}" /></a>
         {% else %}
-            <a style="all: unset;" href="{% url 'usuario' %}"><img style="border-radius: 100%;" class="navbar-icon" alt="" src="{% static "img/ain.png" %}" /></a>
+            <a style="all: unset; cursor: pointer;" href="{% url 'usuario' %}"><img style="border-radius: 100%;" class="navbar-icon" alt="" src="{% static "img/ain.png" %}" /></a>
         {% endif %}
         
       </nav>

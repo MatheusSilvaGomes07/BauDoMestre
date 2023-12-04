@@ -94,11 +94,6 @@ def index(request):
         return render(request, 'principal/home.html', {'campanhas': campanhas, 'fotoConta': fotoConta, 'dnd': dnd, 'ordem': ordem, 'tormenta20': tormenta20, 'coc': coc,})
 
 
-# view do mural não logado
-def mural(request):
-    campanhas = Campanha.objects.all()
-    return render(request, 'principal/mural.html', {'campanhas': campanhas})
-
 # views do mural logado + buscar as mesas
 @login_required
 def buscarmesa(request):
@@ -125,7 +120,15 @@ def buscarmesa(request):
 
     return render(request, 'principal/muralLogado.html', {'campanhas_e_grupos': campanhas_e_grupos, 'perfil': perfil})
 
+@login_required
+def detalhes_campanha(request, id):
+    
+    campanha = Campanha.objects.get(id = id)
+    membros_id = Grupo.objects.filter(campanha=campanha.id).values_list('membros', flat=True)
 
+    membros = Perfil.objects.filter(nomePerfil__in=membros_id)
+
+    return render(request, 'principal/detalhesCampanha.html', {'campanha': campanha, 'membros': membros})
 
 # view da busca de usuários
 @login_required

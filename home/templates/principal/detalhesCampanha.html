@@ -1,0 +1,120 @@
+{% extends "principal/base.html" %}
+
+{% load static %}
+{% block head %}
+        <link rel="stylesheet" href="{% static "css/global-ia.css" %}"/>
+        <link rel="stylesheet" href="{% static "css/detalheCampanha.css"%}"/>
+        <link rel="stylesheet" href="{% static "css/responsivity.css" %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"/>
+{% endblock %}
+
+{% block conteudo %}
+    <div class="quests">
+
+      <div class="boto-parent flex">
+
+        <div class="quests-header flex">
+          <p class="the-dragoon-hunters">{{ campanha.nomeCampanha }}</p>
+        </div>
+
+        <div class="header flex">
+
+          <div class="header-leftcolumn flex">
+            <p class="lorem-ipsum-dolor">
+             {{ campanha.descricaoCampanha }}
+            </p>
+
+            <div class="tempo-de-sesso-container">
+              <p class="nivel-17-txt-container">Dias de sessão: {{ campanha.diasSessao }}</p>
+            </div>
+
+          </div>
+
+          <!--
+          <div id="hidden-status" style="display: none;" class="status flex">
+            <div class="icons flex">
+              <div id="theme" class="flex">
+                <img class="vector-icon1" alt="" src="./public/vector1.svg" />
+                <i class="fantasia-medieval">Fantasia Medieval</i>
+              </div>
+              <div id="system" class="flex">
+                <img class="dungeons-and-dragons-png-1-icon" alt="" src="./public/2662663967-dungeonsanddragonspng-1@2x.png"/>
+                <i class="dungeons-and-dragons">Dungeons and Dragons 5E</i>
+              </div>
+              <div id="enviroment" class="flex">
+                <img class="vector-icon" alt="" src="./public/vector.svg" />
+                <i class="campanha-online">Campanha Online</i>
+              </div>
+            </div>
+            <p id="group-tag">Grupo: 5/6</p>
+          </div>
+        -->
+
+          <div class="header-img flex">
+            <div class="header-item"></div>
+            <img class="header-child" alt="" src="{{ campanha.fotoCampanha.url }}"/>
+          </div>
+
+        </div>
+
+        <div class="status-row flex">
+          <div class="jogadores flex">
+            <b class="jogadores1">Jogadores</b>
+            <div class="players">
+                {% for membro in membros %}
+              <div class="jogador1 flex">
+                <div class="nome-usuario1 flex">
+
+                    {% if membro.fotoConta == "Indefinido" %}
+                        <img style="background-color: white;" class="player-icon" alt="" src="{% static 'img/ain.png' %}"/>
+                    {% else %}
+                        <img style="background-color: white;" class="player-icon" alt="" src="{{ membro.fotoConta.url }}"/>
+                    {% endif %}
+
+                  <div class="user-data flex">
+                    <b class="nome-do-usuario"><a style="all: unset; cursor: pointer;" href="{% url 'exibir_perfil' membro.slug %}">{{ membro.nomePerfil }}</a></b>
+                    <p>{{ membro.sistema_rpg }}</p>
+                  </div>
+                </div>
+                <div class="nome-ficha">
+                  <b class="mestre">{{ membro.tipo_player|upper }}</b>
+                </div>
+              </div>
+                {% endfor %}
+              
+            </div>
+          </div>
+          <div class="status flex">
+            <div class="icons flex">
+              <div id="theme" class="flex">
+                <!-- <img class="vector-icon1" alt="" src="./public/vector1.svg" /> -->
+                <i class="fantasia-medieval">{{ campanha.generoRPG }}</i>
+              </div>
+              <div id="system" class="flex">
+                <img class="dungeons-and-dragons-png-1-icon" alt="" src="./public/2662663967-dungeonsanddragonspng-1@2x.png"/>
+                <i class="dungeons-and-dragons">{{ campanha.sistemaCampanha }}</i>
+              </div>
+              <div id="enviroment" class="flex">
+                <img class="vector-icon" alt="" src="./public/vector.svg" />
+                <i class="campanha-online">Campanha Online</i>
+              </div>
+            </div>
+            <p id="group-tag">Grupo: 5/6</p>
+          </div>
+        </div>
+
+        <div class="boto flex">
+          <div class="boto-child flex">
+            <b class="jogar">JOGAR</b>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+{% endblock %}
