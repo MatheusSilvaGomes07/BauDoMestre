@@ -33,6 +33,7 @@ body {
 /**/
 
 .boto-parent {
+  padding-top: 10vh;
   flex-direction: column;
   gap: 5vw;
   height: 100%;

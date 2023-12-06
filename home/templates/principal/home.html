@@ -46,6 +46,9 @@
           <div class="nav-btn">
             <a style="all: unset;" href="{% url 'meus_personagens' %}"><p>Personagens</p></a>
           </div>
+          <div class="nav-btn">
+            <a style="all: unset;" href="{% url 'account_logout' %}"><p>Sair</p></a>
+          </div>
           {% if user.is_authenticated%}
           {% else %}
           <div class="nav-btn">

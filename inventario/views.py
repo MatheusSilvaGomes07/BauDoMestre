@@ -131,14 +131,14 @@ def verificar_extensao(div, file_type, request, tamanho, extension):
         if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type:
             return True
         else:
-            messages.error(request, "A divisão de mapas só aceita documentos de imagem, GIFs e PDFs")
+            messages.info(request, "A divisão de mapas só aceita documentos de imagem, GIFs e PDFs")
             return False
 
     if div == "Criaturas":
         if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type or 'Microsoft Word' in file_type or 'RAR archive' in file_type:
              return True
         else:
-            messages.error(request, "Foi identificado um possível arquivo malicioso ou que não seja possível seu envio, tente enviar novamente")
+            messages.info(request, "Foi identificado um possível arquivo malicioso ou que não seja possível seu envio, tente enviar novamente")
             return False
 
     if div == "Documentos":
@@ -146,25 +146,25 @@ def verificar_extensao(div, file_type, request, tamanho, extension):
         if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type or 'Microsoft Word' in file_type or 'RAR archive' in file_type or 'Zip archive' in file_type:
              return True
         else:
-            messages.error(request, "Foi identificado um possível arquivo malicioso ou que não seja possível seu envio, tente enviar novamente")
+            messages.info(request, "Foi identificado um possível arquivo malicioso ou que não seja possível seu envio, tente enviar novamente")
             return False
 
     if div == "Imagens":
         if 'image' in file_type or 'GIF image' in file_type:
              return True
         else:
-            messages.error(request, "A divisão de imagens só aceita arquivos de imagens e GIFs")
+            messages.info(request, "A divisão de imagens só aceita arquivos de imagens e GIFs")
             return False
 
     if div == "Musicas":
         if extension == '.mp3' or extension == '.wav' or extension == '.ogg':
              return True
         else:
-            messages.error(request, "A divisão de músicas só aceita arquivos de áudios")
+            messages.info(request, "A divisão de músicas só aceita arquivos de áudios")
             return False
 
     if tamanho > 83886080:
-        messages.error(request, "Algum arquivo enviado era maior que 80MB, só é possível o envio de arquivos abaixo de 80MB")
+        messages.info(request, "Algum arquivo enviado era maior que 80MB, só é possível o envio de arquivos abaixo de 80MB")
         return False
 
 

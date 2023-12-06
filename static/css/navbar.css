@@ -1,0 +1,61 @@
+
+nav {
+    justify-content: start !important;
+    background-color: #00000061;
+    backdrop-filter: blur(5px);
+    width: 100%;
+    height: 101px;
+    position: fixed;
+}
+
+nav .nav-buttons {
+    text-align: center;
+  padding-left: 1.5rem;
+  gap: 1rem;
+}
+
+nav .nav-buttons .nav-btn {
+  font-size: clamp(22px, 1vw, 64px);
+  padding: .5rem;
+  width: 10rem;
+  border: 2px solid white;
+  border-radius: 35px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: .2s;
+}
+
+nav .nav-buttons .nav-btn:nth-of-type(1){
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+
+nav .nav-buttons .nav-btn:hover{
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+
+nav button {
+  all: unset;
+  cursor: pointer;
+  display: none;
+}
+
+.navbar-icon {
+  width: 5rem;
+  margin: 0 1rem .8rem 0;
+}
+
+
+@media (max-width: 1184px) {
+    nav .nav-buttons {
+      display: none ;
+    }
+  
+    nav button {
+      display: block;
+    }
+  }
+  

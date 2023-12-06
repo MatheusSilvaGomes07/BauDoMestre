@@ -7,7 +7,9 @@
 
     {% if messages %}
         {% for message in messages %}
-        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          {% if message.tags == 'info' %}
+            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          {% endif %}
         {% endfor %}
     {% endif %}
 
@@ -21,7 +23,7 @@
                   <label for="id_file">ARQUIVO</label>
                 </div>
             </div>
-                <button class="send-button flex" type="submit">Enviar</button>
+                <button style="cursor: pointer;" class="send-button flex" type="submit">Enviar</button>
             </form>
       </div>
 

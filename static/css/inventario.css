@@ -17,6 +17,7 @@ html {
   flex-direction: column;
   justify-content: space-around;
   gap: 10vh;
+  padding-top: 10vh;
   width: 100%;
 }
 
