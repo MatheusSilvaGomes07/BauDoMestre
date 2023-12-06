@@ -28,10 +28,11 @@ def Sair_grupo(request, uuid):
 @login_required
 def Abrir_chat_pub(request, uuid):
 	grupo = Grupo.objects.get(uuid=uuid)
+    
 	if request.user not in grupo.membros.all():
 		return HttpResponseForbidden('não é um membro')
 	mensagens = Mensagem.objects.filter(grupo=grupo).order_by('tempo')
-	return render(request, 'chat.html', context={'mensagens':mensagens, 'uuid': uuid})
+	return render(request, 'chat.html', context={'mensagens':mensagens, 'uuid': uuid, 'grupo': grupo})
 
 
 @login_required

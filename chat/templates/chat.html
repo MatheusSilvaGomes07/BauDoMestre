@@ -1,7 +1,7 @@
 {% extends 'principal/base.html' %} 
 {% load static %}
 
-{% block css_files %}
+{% block head %}
     <link rel="stylesheet" href="{% static 'css/global-ia.css' %}" />
     <link rel="stylesheet" href="{% static 'css/chat.css' %}" />
     <link rel="stylesheet" href="{% static 'css/responsivity.css' %}">
@@ -9,58 +9,202 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
+    <style>
+        #chat-body {
+            background-image: url({% static "img/public/chat-background.svg" %});
+            height: 87%;
+            width: 100%;
+            background-size: 75%;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+        }
+        nav {
+            display: none !important;
+        }
+        .chatprivado {
+            width: 100vw;
+        }
+        .down-arrow-1-41 {
+            padding-right: 1rem;
+            height: 2.5rem;
+            cursor: pointer;
+        }
+    </style>
 {% endblock %}
 
 {% block conteudo %}
-<div>
-    <a href="{% url 'index' %}">home</a>
-    <a href="{% url 'buscarmesa' %}">Voltar ao Mural</a> <br> <br>
-  </div>
-  
-  <br>
-  
-  <div id="chat-log" style="border:1px solid;width:500px;height:400px;">
-  
-  
-    {% for mensagem in mensagens %}
-    <p><a href="{% url 'exibir_perfil' perfil_slug=mensagem.autor.username|lower %}">{{ mensagem.autor }}: ({{ mensagem.tempo}})</p> </a>
-    <p>  {{ mensagem.conteudo }}</p>
-    {% if mensagem.autor == user %}
-        <a href="{% url 'excluir_mensagem_pub' mensagem.id %}">Excluir</a>
-    {% endif %}
-    {% endfor %}
- 
-  <title> chat </title>
-  
-  </div>
-  
-  <br>
-  <input id="chat-message-input" type="text" size="60" placeholder="Escrever mensagem">
-  <br>
-  <br>
-  
-  <input id="chat-message-submit" type="button" value="Enviar">
-  
-  <script>
-  
-  base_url =  'ws://' + window.location.hostname + ':' + window.location.port + '/ws/open_chat/' + "{{ uuid }}" + '/';
-  
-  chatSocket = new WebSocket(base_url);
-  
-  chatSocket.onmessage = function(event){
-      let parsed = JSON.parse(event.data);
-      document.querySelector('#chat-log').innerHTML += '<p>' + parsed.message + '</p>';
-  }
-  
-  document.querySelector('#chat-message-submit').onclick = function(e) {
-      const messageInputDom = document.querySelector('#chat-message-input');
-          const message = messageInputDom.value;
-          chatSocket.send(JSON.stringify({
-          'message': message
-          }));
-      messageInputDom.value = '';
-      };
-  
-  </script>
+<div class="flex" style="height: 100vh;">
+    <div id="chat" class="chatprivado flex">
+        <div class="header1">
+            <div class="header-child flex">
+                <div class="image-50-parent3 flex">
+                    <button style="all: unset;" onclick="goBack()">
+                        <img class="down-arrow-1-41" alt="" src="{% static 'img/public/downarrow-1-4@2x.png'%}" id="downArrow14"/>
+                    </button>
+                        <img class="image-50-icon6" alt="" src="{{ grupo.campanha.fotoCampanha.url }}"/>
 
+                </div>
+                <div class="header-text">
+                    <a style="all: unset; cursor: pointer;" href=""><b class="lucas-passos3">{{ grupo.campanha.nomeCampanha }}</b></a>
+                    <p class="online">{{ grupo.campanha.sistemaCampanha }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="chat-body">
+            <div id="chat-log" class="text-area flex">
+                {% for mensagem in mensagens %}
+                    {% if mensagem.autor == user %}
+                        <div class="my-text">
+                            <div class="hour">
+                                <p>{{ mensagem.tempo|date:"H:i - d/m" }}</p>
+                            </div>
+                            <div class="flex msg">
+                                <div class="msg-box">
+                                    <p style="white-space: pre-line;">{{ mensagem.conteudo }}</p>
+                                </div>
+                            </div>
+                            <div class="hour">
+                                <p>{{ mensagem.autor }}</p>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="your-text">
+                            <div class="hour">
+                                <p>{{ mensagem.tempo|date:"d/m - H:i" }}</p>
+                            </div>
+                            <div class="msg flex">
+                                <div class="msg-box">
+                                    <p style="white-space: pre-line;">{{ mensagem.conteudo }}</p>
+                                </div>
+                            </div>
+                            <div class="hour">
+                                <p>{{ mensagem.autor }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="sent-bar flex">
+                <div id="sent" class="flex">
+                    <textarea type="text" id="auto-resize-textarea" oninput="autoResize()" class="flex" name="" cols="0" rows="0"></textarea>
+                    <input id="chat-message-submit" type="button" value="Enviar">
+                    <button class="sent-elipse flex">
+                        <img src="{% static "img/public/paper-plane.svg" %}" alt="">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var base_url = 'ws://' + window.location.hostname + ':' + window.location.port + '/ws/open_chat/' + "{{ uuid }}" + '/';
+    var chatSocket = new WebSocket(base_url);
+    var chatLog;
+
+    window.onload = function () {
+        // Ajusta o scroll quando a página é completamente carregada
+        chatLog = document.querySelector('#chat-log');
+        if (chatLog) {
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+    };
+
+    chatSocket.onmessage = function (event) {
+        var parsed = JSON.parse(event.data);
+        chatLog = document.querySelector('#chat-log');
+
+        var messageData = parsed.message.split(':');
+        var author = messageData[0].trim();
+        var content = messageData[1].trim();
+
+        var isMyMessage = author === "{{ user }}";
+
+        var messageBlock = document.createElement('div');
+        messageBlock.className = isMyMessage ? 'my-text' : 'your-text';
+
+        var hourBlock = document.createElement('div');
+        hourBlock.className = 'hour';
+        hourBlock.innerHTML = '<p>' + new Date().toLocaleTimeString('pt-BR', { hour: 'numeric', minute: 'numeric' }) + '</p>';
+        messageBlock.appendChild(hourBlock);
+
+        var flexMsgBlock = document.createElement('div');
+        flexMsgBlock.className = 'flex msg';
+        messageBlock.appendChild(flexMsgBlock);
+
+        var msgBoxBlock = document.createElement('div');
+        msgBoxBlock.className = 'msg-box';
+        msgBoxBlock.innerHTML = '<p style="white-space: pre-line;">' + content + '</p>';
+        flexMsgBlock.appendChild(msgBoxBlock);
+
+        // Add the name below the message
+        var nameBlock = document.createElement('div');
+        nameBlock.className = 'hour';
+        nameBlock.innerHTML = '<p>' + author + '</p>';
+        messageBlock.appendChild(nameBlock);
+
+        chatLog.appendChild(messageBlock);
+
+        if (chatLog) {
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        var friendId = author;
+        updateLastMessage(friendId, content, author);
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function (e) {
+        var messageInputDom = document.querySelector('#auto-resize-textarea');
+        var message = messageInputDom.value;
+
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }));
+
+        if (chatLog) {
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        var currentFriendId = "{{ chatPerfil.nome }}";
+        updateLastMessage(currentFriendId, message, "{{ user }}");
+
+        messageInputDom.value = '';
+    };
+
+    function autoResize() {
+        var textarea = document.getElementById('auto-resize-textarea');
+        var minHeight = 50;
+        var maxHeight = 200;
+        var desiredHeight = Math.min(textarea.scrollHeight, maxHeight);
+
+        if (textarea.value.trim() === '') {
+            textarea.style.height = minHeight + 'px';
+        } else {
+            textarea.style.height = Math.max(desiredHeight, minHeight) + 'px';
+        }
+    }
+
+    function updateLastMessage(friendId, lastMessage, author, timestamp) {
+        var friendElement = document.getElementById(friendId);
+        if (friendElement) {
+            var lastMessageElement = friendElement.querySelector('.e-a-mesa');
+            var lastHourElement = friendElement.querySelector('.time');
+    
+            if (lastMessageElement) {
+                lastMessageElement.textContent = author + ': ' + lastMessage;
+            }
+    
+            if (lastHourElement && timestamp) {
+                lastHourElement.textContent = new Date(timestamp).toLocaleTimeString('pt-BR', { hour: 'numeric', minute: 'numeric' });
+            }
+        }
+    }
+
+    function goBack() {
+        window.history.back();
+    }
+</script>
 {% endblock conteudo %}
