@@ -90,10 +90,11 @@
             <div class="sent-bar flex">
                 <div id="sent" class="flex">
                     <textarea type="text" id="auto-resize-textarea" oninput="autoResize()" class="flex" name="" cols="0" rows="0"></textarea>
-                    <input id="chat-message-submit" type="button" value="Enviar">
-                    <button class="sent-elipse flex">
+    
+                    <button style="cursor: pointer;" id="chat-message-submit" type="button" value="Enviar" class="sent-elipse flex">
                         <img src="{% static "img/public/paper-plane.svg" %}" alt="">
                     </button>
+                </div>
                 </div>
             </div>
         </div>
