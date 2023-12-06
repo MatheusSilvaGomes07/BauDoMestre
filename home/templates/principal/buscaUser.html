@@ -18,10 +18,12 @@
         <div class="flex" style="height: 100vh;">
             <div class="add-area flex">
       
-              <div class="add-contacts flex">
-                <a style="all: unset;" href="{% url 'index' %}"><img class="down-arrow-1-41" alt="" src="{% static 'img/public/downarrow-1-4@2x.png' %}" id="downArrow14"/></a>
-                <div id="amizades">ADICIONAR AMIGOS</div>
-              </div>
+                <div class="add-contacts flex">
+                    <button style="all: unset;" onclick="goBack()">
+                        <img class="down-arrow-1-41" alt="" src="{% static 'img/public/downarrow-1-4@2x.png'%}" id="downArrow14"/>
+                    </button>
+                    <div id="amizades">ADICIONAR AMIGOS</div>
+                  </div>
       
               <div class="searchbar2">
                     <form class="searchbar-inner flex" action="{% url 'search_user' %}" method="get">
@@ -80,4 +82,9 @@
           
     </div>
 
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 {% endblock %}

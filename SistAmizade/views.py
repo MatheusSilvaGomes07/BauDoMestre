@@ -147,7 +147,7 @@ def excluir_mensagem_priv(request, mensagem_id):
 def listar_amigos_usuario(request, user_id):
     usuario = User.objects.get(pk=user_id)
     amigos = Amigo.objects.filter(usuario=usuario)
-
+    
     return render(request, 'listar_amigos_usuario.html', {'usuario': usuario, 'amigos': amigos})
 
     

@@ -25,7 +25,7 @@
   <div class="user-header">
     <div class="header-background">
       <div class="rectangle-div flex">
-        <a href="{% url 'index'%}"><img class="down-arrow-1-4" alt="" src="{% static "img/public/caret.svg" %}"/></a>
+        <a style="all: unset;" href="{% url 'index'%}"><img class="down-arrow-1-4" alt="" src="{% static "img/public/caret.svg" %}"/></a>
       <!--<img class="vector-icon" alt="" src="{% static "img/public/report.svg" %}" />-->
       </div>
     </div>
@@ -134,5 +134,11 @@
   {% endif %}
   </div>
 </div>
+
+<script>
+      function goBack() {
+        window.history.back();
+    }
+</script>
 
 {% endblock conteudo %}

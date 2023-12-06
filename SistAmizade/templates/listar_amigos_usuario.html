@@ -1,11 +1,87 @@
 {% extends 'principal/base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Amigos de {{ usuario.username }}</title>
+<link rel="stylesheet" href="{% static "css/global-ia.css" %}" />
+<link rel="stylesheet" href="{% static "css/responsivity.css" %}">
+<link rel="stylesheet" href="{% static "css/buscar-usuario.css" %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Absolute+Empire:wght@400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
+{% endblock %}
 
 {% block conteudo %}
-    <h1>Lista de Amigos de {{ usuario.username }}</h1>
-    {% for amigo in amigos %}
-    <a href="{% url 'exibir_perfil' perfil_slug=amigo.amigo.username|lower %}">{{ amigo.amigo.username }}<br></a>
-    {% empty %}
-        <p>Não há amigos para exibir.</p>
-    {% endfor %}
-    <a href='{% url 'index' %}'>Voltar à tela inicial</a>
+<div class="amigos1">
+    <div class="flex" style="height: 100vh;">
+        <div class="add-area flex">
+  
+          <div class="add-contacts flex">
+            <button style="all: unset;" onclick="goBack()">
+                <img class="down-arrow-1-41" alt="" src="{% static 'img/public/downarrow-1-4@2x.png'%}" id="downArrow14"/>
+            </button>
+            <div id="amizades">AMIGOS DE {{ usuario.username|upper }}</div>
+          </div>
+  
+          <div class="searchbar2">
+                <div class="searchbar-inner flex">
+                    <input type="text" id="searchInput" class="pesquisar" placeholder="Digite o nome do usuário" oninput="filterFriends()">
+                    <img class="magnifying-glass-1-icon1" alt="" src="{% static "img/public/magnifyingglass-11.svg" %}"/>
+                </div>
+          </div>
+
+          <div class="contact-list flex">
+            {% for amigo in amigos %}
+                <div class="amizade">
+                    <div class="image-50-group">
+                        {% if amigo.fotoConta == "Indefinido" %}
+                            <img style="background: white;" class="contact-icon" alt="" src="{% static "img/Ain.png" %}"/>
+                        {% else %}
+                            <img style="background: white;" class="contact-icon" alt="" src="{{ amigo.fotoConta.url }}"/>
+                        {% endif %}
+                    </div>
+                    <div class="contact-write">
+                        <b><a class="amz" href="{% url 'exibir_perfil' amigo.slug %}">{{ amigo.amigo.username }}</a></b>
+                    </div>
+                    <div class="addbutton flex">
+                        <a class="flex" href="{% url 'exibir_perfil' amigo.slug %}">
+                            <img src="{% static 'img/public/add-player.svg' %}" alt="">
+                            <p>Adicionar</p>
+                        </a>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="label flex">
+                    <h2>Nenhum amigo encontrado</h2>
+                </div>
+            {% endfor %}
+          </div>
+      </div>
+</div>
+
+
+<script>
+    function filterFriends() {
+        var input, filter, friends, friend, i, friendUsername;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        friends = document.getElementsByClassName("amizade");
+
+        for (i = 0; i < friends.length; i++) {
+            friend = friends[i];
+            friendUsername = friend.querySelector(".amz").textContent.toUpperCase();
+
+            if (friendUsername.includes(filter)) {
+                friend.style.display = "";
+            } else {
+                friend.style.display = "none";
+            }
+        }
+    }
+
+    function goBack() {
+        window.history.back();
+    }
+</script>
 {% endblock conteudo %}
