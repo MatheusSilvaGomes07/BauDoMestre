@@ -1,22 +1,83 @@
 {% extends "principal/base.html" %}
+{% load static %}
 
 {% block head %}
+<link rel="stylesheet" href="{% static 'css/global-ia.css' %}" />
+<link rel="stylesheet" href="{% static 'css/buscar-usuario.css'%}" />
+<link rel="stylesheet" href="{% static 'css/responsivity.css'%}">
 <style>
 nav {
   display: none !important;
+}
+.mesa {
+  width: 100%;
+  display: flex;
+  align-itens: center;
+  justify-content: center
 }
 </style>
 {% endblock %}
 
 {% block conteudo %}
-  <h1>Gerenciar Solicitações de Entrada</h1>
-  {% for solicitacao in solicitacoes %}
-    {% if solicitacao.status == 'Pendente' %}
-      <p><a href="{% url 'exibir_perfil' perfil_slug=solicitacao.de_usuario.nomePerfil.username|lower %}">{{ solicitacao.de_usuario.nomePerfil.username }}</a> solicitou entrada para a campanha {{solicitacao.para_campanha.nomeCampanha}}</p>
-      <a href="{% url 'aceitar_solicitacao_camp' solicitacao.id %}">Aceitar</a>
-      <a href="{% url 'recusar_solicitacao_camp' solicitacao.id %}">Recusar</a>
-    {% endif %}
-  {% empty %}
-    <p>Nenhuma solicitação recebida.</p>
-  {% endfor %}
+<div class="amigos1">
+<div class="flex" style="height: 100vh;">
+  <div class="add-area flex">
+
+    <div class="add-contacts flex">
+      <button style="all: unset;" onclick="goBack()">
+        <img class="down-arrow-1-41" alt="" src="{% static 'img/public/downarrow-1-4@2x.png'%}" id="downArrow14"/>
+      </button>
+      <div id="amizades">SOLICITAÇÕES DE CAMPANHA</div>
+    </div>
+
+    <div class="contact-list flex">
+
+      {% for solicitacao in solicitacoes %}
+        {% if solicitacao.status == 'Pendente' %}
+        <div onclick="initMob()" class="amizade">
+          <div class="image-50-group">
+            {% if solicitacao.de_usuario.fotoConta == "Indefinido" %}
+              <img style="background-color: white;" class="contact-icon" alt="" src="{% static 'img/ain.png' %}"/>
+            {% else %}
+            <img class="contact-icon" alt="" src="{{ solicitacao.de_usuario.fotoConta.url }}"/>
+            {% endif %}
+          </div>
+          <div class="contact-write">
+            <b><a href="{% url 'exibir_perfil' solicitacao.de_usuario.slug %}">{{ solicitacao.de_usuario.nomePerfil.username }}</a></b>
+            <p class="e-a-mesa">{{ solicitacao.de_usuario.tipo_player }}</p>
+          </div>
+          <div class='mesa'>
+            <p>Campanha: {{ solicitacao.para_campanha.nomeCampanha }}</p>
+          </div>
+          <div class="addbutton flex">
+            <a class="flex" href="{% url 'aceitar_solicitacao_camp' solicitacao.id %}">
+            <img src="{% static 'img/public/add-player.svg' %}" alt="">
+            <p>Aceitar</p>
+            </a>
+          </div>
+          <div class="addbutton flex">
+            <a class="flex" href="{% url 'recusar_solicitacao_camp' solicitacao.id %}">
+            <img style="height: 80%; width: 18%;" src="{% static 'img/public/reject.svg' %}" alt="">
+            <p>Recusar</p>
+            </a>
+          </div>
+        </div>
+        {% endif %}
+        {% empty %}
+          <p>Nenhuma solicitação recebida.</p>
+      {% endfor%}
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script>
+  function goBack() {
+    window.history.back();
+}
+
+</script>
+
+
 {% endblock conteudo %}
