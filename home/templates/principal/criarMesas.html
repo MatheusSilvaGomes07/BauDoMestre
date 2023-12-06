@@ -1,31 +1,95 @@
 {% extends 'principal/base.html' %}
+{% load static %}
 {% block head %}
+<link rel="stylesheet" href="{% static 'css/global-ia.css' %}" />
+<link rel="stylesheet" href="{% static 'css/criar_campanha.css' %}" />
+<link rel="stylesheet" href="{% static "css/responsivity.css" %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
 <style>
 nav {
     display: none !important;
 }
 </style>
+<title>Crie sua campanha! - Baú do Mestre</title>
 {% endblock %}
 
 {% block conteudo %}
-<title>Crie sua campanha! - Baú do Mestre</title>
 
-<h1>Você está na tela de criação de mesas!</h1>
-<title>Criar Mesas - Baú do Mestre</title>
+<div id="go-back" class="flex">
+    
+    <img src="{% static 'img/public/caret.svg' %}" alt="" style="transform: scaleX(-1);">
+    <a style="all: unset; cursor: pointer;" href="{% url 'buscarmesa' %}"><p>Voltar</p></a>
+    
+    
+  </div>
 
-<a href="{% url 'index' %}">Voltar a tela inicial</a> <br> <br>
+  <h1>Crie uma nova aventura</h1>
 
-<br> <br>
-
-<h1>Criar Campanha</h1>
-
-
-
-<form method="POST" enctype="multipart/form-data">
+  <form style="all: unset; display: flex; flex-direction: column;" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Criar</button>
+  <div class="campaign-box">
+    <div class="campaign-head flex">
+        <input required type="text" name="nomeCampanha" placeholder="{{ form.nomeCampanha.label }}">
+    </div>
+
+    <div class="filters">
+
+      <div class="filter-box flex">
+        <div class="filter">
+          <img src="{% static 'img/public/pencil.svg' %}" alt="">
+          {{ form.sistemaCampanha }}
+        </div>
+        <div class="filter">
+            <img src="{% static 'img/public/pencil.svg' %}" alt="">
+            {{ form.ambienteCampanha }}
+        </div>
+        <div class="filter">
+            <img src="{% static 'img/public/pencil.svg' %}" alt="">
+            {{ form.generoRPG }}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  
+  <div class="image-box flex">
+    <h1>Imagem</h1>
+    <div class="image-sent">
+      <button>
+        {{ form.fotoCampanha }}
+       <!-- <h3>Arquivo</h3>-->
+      </button>
+    
+    </div>
+  </div>
+
+  <div class="detail-box">
+    <h3>Detalhes</h3>
+
+    <textarea required type="text" class="detail-textbox" placeholder="Sua descrição" name="descricaoCampanha"></textarea>
+  </div>
+
+  <div class="session-data flex">
+
+    <div class="session-time flex">
+      <h3>Dias de Sessão:</h3>
+      <input required type="text" name="diasSessao"></input>
+    </div>
+
+    <div class="session-group flex">
+      <h3>N° player:</h3>
+      <input required type="text" name="numeroJogadores"></input>
+    </div>
+
+  </div>
+
+  <button type="submit" class="create">
+    <h3>Criar</h3>
+  </button>
 </form>
-
-
 {% endblock conteudo %}

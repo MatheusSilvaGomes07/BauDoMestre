@@ -1,0 +1,229 @@
+body {
+  position: relative;
+  width: 100%;
+  text-align: justify;
+  font-size: var(--font-size-smi);
+  color: var(--color-white);
+  font-family: var(--body);
+  background: linear-gradient(169deg, #000 35.32%, rgba(53, 51, 51, 0.50) 218.41%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#go-back {
+  font-family: var(--font-inter);
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 1rem 2rem 1rem 2rem;
+  justify-content: start;
+  gap: 1rem;
+}
+
+h1 {
+  font-family: var(--header-12);
+  font-weight: normal;
+  margin: 10% 2% 10% 3%;
+  text-align: center;
+  font-size: clamp(2rem, 6vw, 4rem);
+}
+
+.campaign-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6vw;
+  margin-bottom: 8vw;
+}
+
+.campaign-head {
+  height: 4rem;
+  width: 95%;
+  gap: 5%;
+  justify-content: center;
+}
+
+.campaign-head input{
+  all: unset;
+  border-radius: 15px;
+background: linear-gradient(120deg, #080808 -37.01%, rgba(53, 53, 53, 0.00) 165.9%), #767676;
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+width:  90%;
+height: 6vw;
+font-size: var(--font-size-17xl);
+padding:  1rem 1.5rem 1rem 1.5rem  ;
+font-weight: bold;
+}
+
+.campaign-head input::placeholder {
+  color: white;
+  font-weight: lighter;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 90%;
+}
+
+.filters h4 {
+  font-size: 1.5rem;
+}
+
+.filter {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.filter img {
+  width: 12vw;
+  height: 12vw;
+}
+
+.filter-box {
+  justify-content: space-between;
+  text-align: center;
+}
+
+.filter-box select {
+  all: unset;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  width: 95%;
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 1.8rem);
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  background: linear-gradient(0deg, #A8233C 0%, #A8233C 100%), linear-gradient(169deg, #0E0E0E 35.32%, #353333 218.41%);
+}
+
+.filter-box option {
+  color: black;
+}
+
+.image-box {
+  width: 90%;
+  border-radius: 5px;
+background: linear-gradient(260deg, #380E17 13.87%, #6B303D 85.53%, rgba(199, 84, 110, 0.69) 99.32%);
+box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+align-self: center;
+justify-content: space-around;
+height: 18rem;
+margin-bottom: 4vw;
+}
+
+.image-box h1 {
+  font-family: var(--body);
+  font-weight: bold;
+}
+
+.image-box button {
+  all: unset;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 5px;
+background: #A8233C;
+height: 6rem;
+font-size: var(--font-size-9xl);
+}
+
+.image-sent{
+  width: 40%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.detail-box{
+  width: 90%;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detail-box h3 {
+  font-size: 34px;
+}
+
+.detail-textbox {
+  border-radius: 15px;
+background: #FFF;
+box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+width: 95%;
+height: 12rem;
+padding: .5rem;
+font-family: var(--body);
+font-weight: 500;
+line-height: 2rem;
+align-self: center;
+text-align: justify;
+resize: none;
+margin-bottom: 2vw;
+font-size: clamp(16px, 1.8vw, 18px);;
+}
+
+.session-data {
+  width: 90%;
+  justify-content: space-between;
+  align-self: center;
+  margin-bottom: 6vw;
+}
+
+.session-data div {
+  gap: 1rem;
+}
+
+.session-data input{
+  all: unset;
+  border-radius: 15px;
+  background: linear-gradient(120deg, #080808 -37.01%, rgba(53, 53, 53, 0.00) 165.9%), #767676;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+font-size: 1.8rem;
+text-align: center;
+padding:  1rem 1.5rem 1rem 1.5rem  ;
+font-weight: bold;
+}
+
+.session-data h3 {
+    font-size: var(--font-size-17xl);
+}
+
+.session-time {
+  width: 55vw;
+}
+
+.session-time input {
+  width: 14vw;
+  height: 3vw;
+}
+
+.session-group {
+  width: 26vw;
+}
+
+.session-group input {
+  width: 8vw;
+  height: 3vw;
+}
+
+.create {
+  all: unset;
+  cursor: pointer;
+  border-radius: 5px;
+  background: var(--MudBase, #A8233C);
+  width: 28vw;
+  height: 12vw;
+  text-align: center;
+  align-self: center;
+  margin: 4vw;
+  font-size: var(--font-size-45xl);
+}
