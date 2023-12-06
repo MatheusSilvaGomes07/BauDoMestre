@@ -1,18 +1,75 @@
-{% extends 'principal/base.html' %}
+{% extends "principal/base.html" %}
 {% load static %}
 
 {% block head %}
+<link rel="stylesheet" href="{% static 'css/global-ia.css' %}" />
+<link rel="stylesheet" href="{% static 'css/buscar-usuario.css'%}" />
+<link rel="stylesheet" href="{% static 'css/responsivity.css'%}">
 <style>
-    nav {
-        display: none !important;
-    }
+nav {
+  display: none !important;
+}
+.mesa {
+  width: 100%;
+  display: flex;
+  align-itens: center;
+  justify-content: center
+}
 </style>
+<title>Solicitações de amizade</title>
 {% endblock %}
-{% block conteudo %}
 
-<h1>Solicitações de Amizade Recebidas</h1>
-<ul>
-    {% for solicitacao in solicitacoes_recebidas %}
+{% block conteudo %}
+<div class="amigos1">
+<div class="flex" style="height: 100vh;">
+  <div class="add-area flex">
+
+    <div class="add-contacts flex">
+      <button style="all: unset;" onclick="goBack()">
+        <img class="down-arrow-1-41" alt="" src="{% static 'img/public/downarrow-1-4@2x.png'%}" id="downArrow14"/>
+      </button>
+      <div id="amizades">SOLICITAÇÕES DE AMIZADE</div>
+    </div>
+
+    <div class="contact-list flex">
+
+      {% for solicitacao in solicitacoes_recebidas %}
+        <div onclick="initMob()" class="amizade">
+          <div class="image-50-group">
+            {% if solicitacao.perfil.fotoConta == "Indefinido" %}
+              <img style="background-color: white;" class="contact-icon" alt="" src="{% static 'img/ain.png' %}"/>
+            {% else %}
+            <img class="contact-icon" alt="" src="{{ solicitacao.perfil.fotoConta.url }}"/>
+            {% endif %}
+          </div>
+          <div class="contact-write">
+            <b><a href="{% url 'exibir_perfil' solicitacao.perfil.slug %}">{{ solicitacao.perfil.nomePerfil }}</a></b>
+            <p class="e-a-mesa">{{ solicitacao.perfil.tipo_player }}</p>
+          </div>
+
+          <div class="addbutton flex">
+            <a class="flex" href="{% url 'aceitar_solicitacao' solicitacao.id %}">
+            <img src="{% static 'img/public/add-player.svg' %}" alt="">
+            <p>Aceitar</p>
+            </a>
+          </div>
+          <div class="addbutton flex">
+            <a class="flex" href="{% url 'recusar_solicitacao' solicitacao.id %}">
+            <img style="height: 80%; width: 11%;" src="{% static 'img/public/reject.svg' %}" alt="">
+            <p>Recusar</p>
+            </a>
+          </div>
+        </div>
+        {% empty %}
+          <p>Nenhuma solicitação recebida.</p>
+      {% endfor%}
+    </div>
+
+  </div>
+</div>
+</div>
+
+{% for solicitacao in solicitacoes_recebidas %}
         <li><a href="{% url 'exibir_perfil' perfil_slug=solicitacao.de_usuario.username|lower %}">{{ solicitacao.de_usuario.username }}</a> deseja ser seu amigo.
             <a href="{% url 'aceitar_solicitacao' solicitacao.id %}">Aceitar</a>
             <a href="{% url 'recusar_solicitacao' solicitacao.id %}">Recusar</a>
@@ -20,7 +77,13 @@
     {% empty %}
         <li>Nenhuma solicitação de amizade recebida.</li>
     {% endfor %}
-</ul>
+
+<script>
+  function goBack() {
+    window.history.back();
+}
+
+</script>
 
 
 {% endblock conteudo %}

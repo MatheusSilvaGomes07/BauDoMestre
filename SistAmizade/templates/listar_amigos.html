@@ -90,7 +90,7 @@
         
           </div>
 
-          <img onclick="initMob()" src="../public/close-x.svg" style="display: none;" alt="">
+
         </div>
 
 
@@ -141,13 +141,13 @@ function goBack() {
 }
 </script>
 
-<h1>Lista de amigos</h1>
-{% for amigo in amigos %}
-
+{% comment "" %}
 <a href="{% url 'exibir_perfil' perfil_slug=amigo.slug %}">{{ amigo.amigo.username }}</a> <a href="{% url 'remover_amigo' amigo.amigo.id %}">Desfazer Amizade</a><br>
-    <a href="{% url 'Abrir_chat_privado' amigo.amigo.id %}">Abrir Chat</a><br>
-{% endfor %}
+        <a href="{% url 'Abrir_chat_privado' amigo.amigo.id %}">Abrir Chat</a><br>
+{% endcomment %}
 
+
+    
 
 
 {% endblock conteudo %}

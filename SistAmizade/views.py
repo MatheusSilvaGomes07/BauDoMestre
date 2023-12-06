@@ -61,6 +61,14 @@ def enviar_solicitacao(request, user_id):
 
 def listar_solicitacoes(request):
     solicitacoes_recebidas = SolicitacaoAmizade.objects.filter(para_usuario=request.user, aceita=False)
+    
+    for soli in solicitacoes_recebidas:
+        perfil = Perfil.objects.get(id=soli.de_usuario.id)
+
+        soli.perfil = perfil
+
+        print(soli.perfil)
+        
     return render(request, 'listar_solicitacoes.html', {'solicitacoes_recebidas': solicitacoes_recebidas})
 
 def aceitar_solicitacao(request, solicitacao_id):
