@@ -1,76 +1,121 @@
-body {
+* {
   margin: 0;
-  line-height: normal;
-}
-p{
-  margin-bottom: 0 !important;
 }
 
-*:active {
-  text-decoration: none !important;
+*::-webkit-scrollbar {
+  width: 10px;
+  background-color: black;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #807f7f;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.popup-overlay {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+}
+
+button {
+  all: initial;
+}
+
+.desktop {
+  position: relative;
+  background-color: var(--color-black);
+  text-align: center;
+  font-size: var(--header-12-size);
+  color: var(--color-white);
+  font-family: var(--body);
+  display: flex;
+  flex-direction: column;
 }
 
 :root {
+
   /* fonts */
   --body: Raleway;
   --header-12: "a Absolute Empire";
-  --subtitle-22: Merriweather;
-  --font-inherit: inherit;
+  --font-merriweather: Merriweather;
+  --font-inter: Inter;
+
 
   /* font sizes */
-  --body-2-size: 14px;
-  --title-13-size: 16px;
-  --font-size-3xs: 10px;
-  --font-size-lgi: 19px;
-  --font-size-5xs: 8px;
-  --font-size-smi: 13px;
-  --font-size-xl: 20px;
-  --subtitle-23-size: 18px;
-  --subtitle-22-size: 24px;
-  --header-12-size: clamp(22px, 1vw, 64px);
-  --font-size-17xl: 36px;
+  --font-size-37xl: 56px;
+  --font-size-46xl: 65px;
+  --font-size-27xl: 46px;
+  --font-size-60xl: 79px;
+  --font-size-43xl: 62px;
+  --font-size-34xl: 53px;
+  --font-size-105xl: 124px;
+  --font-size-16xl: 35px;
+  --font-size-18xl: 37px;
+  --font-size-121xl: 140px;
+  --font-size-26xl: 45px;
+  --font-size-31xl: 50px;
+  --font-size-86xl: 105px;
   --font-size-33xl: 52px;
-  --font-size-4xs: 9px;
-  --font-size-2xs: 11px;
-  --title-size: clamp(54px, 5vw, 96px);
-  --font-size-29xl: 48px;
-  --font-size-35xl: 54px;
-  --font-size-8xl: 27px;
-  --font-size-21xl: 40px;
-  --font-size-65xl: 84px;
-  --font-size-45xl: 64px;
-  --font-size-9xl: 28px;
+  --font-size-38xl: 57px;
+  --font-size-8xl: clamp(14px, 2.3vw, 27px);
+  --font-size-21xl: clamp(20px, 3.4vw, 40px);
+  --header-12-size: clamp(18px, 2.5vw, 32px);
+  --font-size-lg: clamp(14px, 1.5vw, 18px);
+  --font-size-lgi: clamp(14px, 2vw, 32px);
+  --font-size-3xs: clamp(10px, 2vw, 24px);
+  --font-size-smi: clamp(13px, 1.5vw, 18px);
+  --font-size-5xs: clamp(8px, 1.8vw, 18px);
+  --title-size: 96px;
+  --font-size-mid: 17px;
+  --font-size-5xl: clamp(12px, 2.3vw, 24px);
+  --font-size-65xl: clamp(40px, 8vw, 84px);
+  --font-size-45xl: clamp(24px, 6vw, 64px);
+  --font-size-sm: clamp(14px, 1.2vw, 18px);
+  --body-size: clamp(14px, 2vw, 32px);
+  --font-size-17xl: clamp(12px, 2.5vw ,36px);
+  --title-size: clamp(64px, 3vw, 96px);
+  --title-13-size: clamp(24px, 3vw, 36px);
+  --font-size-9xl: clamp(24px, 5.4vw, 56px);
+  --subtitle-22-size: clamp(17px,1.7vw, 32px);
+  --font-size-xl: clamp(16px, 2.5vw, 32px);
+  --font-size-4xl: clamp(17px,2vw,23px);
+  --font-size-29xl: clamp(15px, 2.5vw ,36px);
 
-  /* Colors */
-  --color-white: #fff;
-  --color-dimgray-100: #606060;
-  --color-dimgray-200: rgba(103, 103, 103, 0.5);
-  --color-darkred: #8c0000;
-  --color-limegreen-100: #00de3f;
-  --color-black: #000;
-  --dragonblood: #df0101;
-  --color-darkgray-100: #b4b4b4;
-  --color-darkgray-200: #a6a6a6;
-  --color-gainsboro-100: #d9d9d9;
-  --color-gainsboro-200: rgba(217, 217, 217, 0.1);
-  --mudbase: #a8233c;
-  --darkred: #760d21;
-  --color-gray: #161112;
-  --color-darkslategray: #393838;
-  --lightredwine: #cc667c;
-  --color-maroon: #4b0707;
-
-  /* Paddings */
-  --padding-lgi: 19px;
 
   /* Border radiuses */
-  --br-3xs: 10px;
-  --br-194xl: 213px;
   --br-xl: 20px;
   --br-8xs: 5px;
-  --br-mini: 15px;
-  --br-10xs: 3px;
-  --br-16xl: 35px;
-  --br-61xl: 80px;
+  --br-3xs: 10px;
   --br-31xl: 50px;
+  --br-mini: 15px;
+  --br-194xl: 213px;
+
+  /* Colors */
+
+  --color-red-100: #ff0000;
+  --dragonblood: #df0101;
+  --color-white: #fff;
+  --color-darkred: #8c0000;
+  --color-silver-100: #c9c9c9;
+  --color-gainsboro: #d9d9d9;
+  --color-black: #000;
+  --color-darkgray: #a6a6a6;
+  --mudbase: #a8233c;
+  --darkred: #760d21;
+  --color-limegreen-100: #00de3f;
+  --lightredwine: #cc667c;
+
 }
+

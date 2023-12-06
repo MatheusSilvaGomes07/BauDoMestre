@@ -7,7 +7,7 @@ from .models import Campanha, Perfil
 from .forms import CampanhaForm, PerfilForm
 from django.db.models import Q
 from functools import wraps
-from chat.models import Grupo
+from chat.models import Grupo, SolicitacaoEntrada
 from SistAmizade.models import Amigo, SolicitacaoAmizade
 from random import randint
 import os
@@ -115,8 +115,16 @@ def buscarmesa(request):
 
     campanhas_e_grupos = {}
     for campanha in campanhas:
+        
+
+
         grupos = campanha.chats.all()
+        for grupo in grupos:
+            envioSolicitacao = '1' if bool(SolicitacaoEntrada.objects.filter(de_usuario = request.user.id, para_campanha = campanha.id, status='Pendente')) else '0'
+
+            grupo.envioSolicitacao = envioSolicitacao
         campanhas_e_grupos[campanha] = grupos
+
 
     return render(request, 'principal/muralLogado.html', {'campanhas_e_grupos': campanhas_e_grupos, 'perfil': perfil})
 

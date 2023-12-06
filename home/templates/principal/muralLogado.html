@@ -1,109 +1,169 @@
-{% extends 'principal/base.html' %}
+{% extends "principal/base.html" %}
+
+{% load static %}
+{% block head%}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} <title>Baú do Mestre</title> {% endcomment %}
+    <link rel="shortcut icon" href="{% static 'img/ain.png' %}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static "css/global-ia.css" %}" />
+    <link rel="stylesheet" href="{% static "css/campanhas_mural.css" %}" />
+    <link rel="stylesheet" href="{% static "css/responsivity.css" %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
+
+    <style>
+        .filter-box select {
+            all: unset;
+            background-color: white;
+            font-size: var(--font-inter);
+            color: black;
+            font-weight: bold;
+            width: 95%;
+            background: white url({% static 'img/public/caret-down-black.svg' %}) no-repeat left;
+            background-position: 3% 50%;
+            background-size: 2vw;
+            font-size: clamp(1rem, 2vw, 2rem);
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            text-align: end;
+            padding-right: 10px;
+          }
+    </style>
+{% endblock %}
 
 {% block conteudo %}
 
-<h1>Você está na tela de Mural!</h1>
-<title>Mural - Baú do Mestre</title>
+    <h1>Campanhas</h1>
+    <form style="all: unset;" method="GET" class="search-form">
+        <div class="searchbar">
+        <div class="search-head flex">
+            <input type="text" name="q" placeholder="Buscar por nome da campanha">
+            <button type="submit">
+            <p>Buscar</p>
+            </button>
+        </div>
 
-<a href='{% url 'index' %}'>Voltar a tela inicial</a> <br> <br>
+        <div class="filters">
+            <div style="justify-content: space-between;" class='flex'>
+                <h4>Filtros</h4>
 
-<form method="GET" class="search-form">
-    <input type="text" name="q" placeholder="Buscar por nome da campanha">
-    <label for="sistema">Sistema:</label>
-    <select name="sistema" id="sistema">
-        <option value="">Todos</option>
-        <option value="Dungeons & Dragons">Dungeons & Dragons</option>
-        <option value="Ordem Paranormal">Ordem Paranormal</option>
-        <option value="Tormenta20">Tormenta20</option>
-        <option value="Call of Cthulu">Call of Cthulu</option>
-        <option value="Outro">Outro</option>
-    </select>
-    <label for="ambiente">Ambiente:</label>
-    <select name="ambiente" id="ambiente">
-        <option value="">Todos</option>
-        <option value="Online">Online</option>
-        <option value="Presencial">Presencial</option>
-    </select>
-    <label for="genero">Gênero:</label>
-    <select name="genero" id="genero">
-        <option value="">Todos</option>
-        <option value="Aventura">Aventura</option>
-        <option value="Comédia">Comédia</option>
-        <option value="Drama">Drama</option>
-        <option value="Fantasia">Fantasia</option>
-        <option value="Histórico">Histórico</option>
-        <option value="Mistério">Mistério</option>
-        <option value="Suspense">Suspense</option>
-        <option value="Terror">Terror</option>
-    </select>
-    <button type="submit">Buscar</button>
-</form>
+                {% if perfil.tipo_player == "Ambos" or perfil.tipo_player == "Mestre" %}
+                <a style="all: unset; cursor: pointer; text-decoration: none; color: white; font-weight: bold; font-size: 1.4rem;" href="{% url 'criarCampanhas' %}">Crie suas próprias mesas</a>
+                {% endif %}
+            </div>
+            <div class="filter-box flex">
+            <div class="filter">
+                <h3>Sistema</h3>
+                <select name="sistema" id="sistema">
+                    <option value="">Todos</option>
+                    <option value="Dungeons & Dragons">Dungeons & Dragons</option>
+                    <option value="Ordem Paranormal">Ordem Paranormal</option>
+                    <option value="Tormenta20">Tormenta20</option>
+                    <option value="Call of Cthulu">Call of Cthulu</option>
+                    <option value="Outro">Outro</option>
+                </select>
+            </div>
+            <div class="filter">
+                <h3>Ambiente</h3>
+                <select name="ambiente" id="ambiente">
+                    <option value="">Todos</option>
+                    <option value="Online">Online</option>
+                    <option value="Presencial">Presencial</option>
+                </select>
+            </div>
+            <div class="filter">
+                <h3>Gênero</h3>
+                <select name="genero" id="genero">
+                    <option value="">Todos</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Comédia">Comédia</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Fantasia">Fantasia</option>
+                    <option value="Histórico">Histórico</option>
+                    <option value="Mistério">Mistério</option>
+                    <option value="Suspense">Suspense</option>
+                    <option value="Terror">Terror</option>
+                </select>
+            </div>
+            </div>
 
-{% if campanhas_e_grupos.items %}
-{% else %}
-    <p>Nenhuma campanha encontrada.</p>
-{% endif %}
+        </div>
 
+        </div>
+    </form>
 
-{% if perfil.tipo_player == "Ambos" or perfil.tipo_player == "Mestre" %}
-<a href="{% url 'criarCampanhas' %}">Crie suas próprias mesas</a>
-{% endif %}
+  
 
+    <div class="quests">
+        
+        {% if campanhas_e_grupos.items %}
+            {% else %}
+            <br>
+                <h2>Nenhuma campanha encontrada.</h2>
+        {% endif %}
 
-{% comment %} <a href="{% url 'criarCampanhas' %}">Crie suas próprias mesas</a> {% endcomment %}
-
-<br> <br>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Foto</th>
-            <th>Nome da Campanha</th>
-            <th>Mestre</th>
-            <th>Sistema</th>
-            <th>Descrição</th>
-            <th>Ambiente</th>
-            <th>Número de Jogadores</th>
-            <th>Dias de Sessão</th>
-            <th>Gênero</th>
-        </tr>
-    </thead>
-    <tbody>
         {% for campanha, grupos in campanhas_e_grupos.items %}
-        <tr>
-            <td><img src="{{ campanha.fotoCampanha.url }}" alt="Foto da Campanha" width="150" height="100"></td>
-            <td>{{ campanha.nomeCampanha }}</td>
-            <td><a href="{% url 'exibir_perfil' perfil_slug=campanha.nomeMestre.slug %}">{{ campanha.nomeMestre.nomePerfil.username }}</a></td>
-            <td>{{ campanha.sistemaCampanha }}</td>
-            <td>{{ campanha.descricaoCampanha }}</td>
-            <td>{{ campanha.ambienteCampanha }}</td>
-            <td>{{ campanha.numeroJogadores }}</td>
-            <td>{{ campanha.diasSessao }}</td>
-            <td>{{ campanha.generoRPG }}</td>
-            <td><a href="{% url 'detalhes_campanha' campanha.id %}">Detalhes</a></td>
-            <td>
-                {% for grupo in grupos %}
+            <div class="quest">
+
+                <div class="quest-header flex">
+
+                <img src="{{ campanha.fotoCampanha.url }}" alt="">
+                <div class="quest-info">
+                    <h3><a href="{% url 'detalhes_campanha' campanha.id %}">{{ campanha.nomeCampanha }}</a></h3>
+                    <h4>Mestre: <a href="{% url 'exibir_perfil' perfil_slug=campanha.nomeMestre.slug %}">{{ campanha.nomeMestre.nomePerfil.username }}</a></h4>
+                    <h4>Sistema: <strong>{{ campanha.sistemaCampanha }}</strong></h4>
+                </div>
+
+                </div>
+
+                <p id="text">{{ campanha.descricaoCampanha }}</p>
+
+                <div class="quest-footer flex">
+                <div class="stats-tags flex">
+                    <div class="gender">
+                    <p>{{ campanha.generoRPG }}</p>
+                    </div>
+                    <div class="envy">
+                    <p>{{ campanha.ambienteCampanha }}</p>
+                    </div>
+                    <div class="qnt">
+                    <p>Max player: {{ campanha.numeroJogadores }}</p>
+                    </div>
+                </div>
+
+                <div class="play">
+                    {% for grupo in grupos %}
                     <div id="{{ grupo.uuid }}">
-                        <li><a>Chat da Campanha</a></li>
                         {% if request.user in grupo.membros.all %}
                             <a href="{% url 'Abrir_chat_pub' uuid=grupo.uuid %}">Abrir</a>
                             {% if user != grupo.criador %}
+                            /
                             <a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a>
                             {% endif %}
                             {% if user == grupo.criador %}
+                                /
                                 <a href="{% url 'Remover_grupo' uuid=grupo.uuid %}">Excluir</a>
                             {% endif %}
                             {% else %}
-                            <a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}">Enviar Solicitação</a>
+                            {% if grupo.envioSolicitacao == '0' %}
+                                <a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}">Jogar</a>
+                            {% else %}
+                            <p>Solicitção enviada</p>
+                            {% endif %}
                             {% endif %}
                     </div>
                 {% endfor %}
-            </td>
-        </tr>
+                </div>
+                </div>
+            </div>
         {% endfor %}
-    </tbody>
-</table>
 
-{% endblock conteudo %}
+    </div>
+    
+{% endblock %}

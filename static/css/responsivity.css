@@ -242,6 +242,10 @@
         margin: 2rem 0 1.5rem 2%;
     }
 
+    .inventario-header p {
+        width: 75%;
+    }
+
     .button-cover {
         width: 120px;
         height: 120px ;
@@ -267,6 +271,125 @@
 
     .image-box .box {
         width: 200px;
+    }
+
+    /*CAMPANHAS*/
+
+    .header {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 7vw;
+    }
+
+    .quests-header {
+        padding: 1rem 0;
+    }
+
+    .the-dragoon-hunters {
+        font-size: var(--font-size-9xl);
+    }
+
+    .image-49-icon {
+        width: clamp(50px, 10vw, 125px);
+    }
+
+    .header-item{
+        height: 30vw;
+        width: 80%;
+    }
+
+    .header-child {
+        height: 30vw;
+        width: 100%;
+    }
+
+    .header-img {
+        align-self: center;
+        width: 80%;
+    }
+
+    .status {
+        display: none;
+        gap: 2rem;
+    }
+
+    #hidden-status {
+        display: flex !important;
+    }
+
+    .status {
+        width: 80%;
+    }
+
+    .icons {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .icons img {
+        width: clamp(30px, 12vw, 100px);
+    }
+
+    .icons i {
+        width: 85%;
+        text-align: center;
+        font-size: var(--font-size-xl);
+    }
+
+    .header-leftcolumn {
+        width: 90%;
+    }
+
+    .header-leftcolumn .lorem-ipsum-dolor {
+        width: 90% !important;
+        align-self: center;
+        height: 30vh;
+    }
+
+    .header-leftcolumn div {
+        margin-left: 2.2%;
+    }
+
+    .nivel-17-txt-container {
+        font-size: var(--title-13-size);
+    }
+
+    .status-row {
+        justify-content: center;
+    }
+
+    .jogadores {
+        margin: unset;
+        width: 95%;
+    }
+
+    .jogadores1 {
+        font-size: var(--font-size-9xl);
+    }
+
+    .boto {
+        padding: 0 0 2rem 0;
+    }
+
+    .players {
+        height: 40vw;
+    }
+
+    .boto-child {
+        width: 95%;
+        height: 70px;
+    }
+
+    .jogar {
+        font-size: 32px;
+    }
+
+    .mestre {
+        font-size: var(--font-size-21xl);
+    }
+
+    .nome-do-usuario {
+        font-size: var(--font-size-4xl);
     }
 }
 
@@ -364,10 +487,6 @@
         width: 70% !important;
     }
 
-    .directory .inventory-item:nth-of-type(1) {
-        display: none !important;
-    }
-
     .directories-header p:nth-of-type(2), .directories-header p:nth-of-type(3) {
         display: none !important;
     }
@@ -418,17 +537,12 @@
 
 .image-50-icon {
     width: 20vw !important;
-    height: 20vw !important;
 }
 
 .middle-stats.flex, .adicionar {
     margin-bottom: 0 !important;
     height: 8vw;
     margin-right: 0 !important;
-}
-
-#header-piece #editar-bot {
-    width: initial !important   ;
 }
 
 .preference-stats {
@@ -523,4 +637,30 @@
     width: 1.3rem;
 }
 
+}
+
+@media (max-width: 520px) {
+    .quest #text {
+        width: 90%;
+    }
+
+    .stats-tags {
+        width: 63%;
+    }
+
+    .play {
+        padding: .8rem 1rem;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .quests-header {
+        gap: 0;
+        justify-content: space-around;
+    }
+
+    .the-dragoon-hunters{
+        width: 55%;
+    }
 }
