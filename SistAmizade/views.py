@@ -29,6 +29,9 @@ def remover_amigo(request, user_id):
 
 def listar_amigos(request):
     amigos = Amigo.objects.filter(usuario=request.user)
+    
+    for amigo in amigos:
+        print(amigo.fotoConta)
 
     return render(request, 'listar_amigos.html', {'amigos': amigos})
 

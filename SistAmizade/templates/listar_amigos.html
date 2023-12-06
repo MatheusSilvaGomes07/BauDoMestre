@@ -1,6 +1,142 @@
 {% extends 'principal/base.html' %}
+{% load static %}
 
-{%block conteudo%}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/global-ia.css' %}" />
+<link rel="stylesheet" href="{% static 'css/chat.css' %}" />
+<link rel="stylesheet" href="{% static 'css/responsivity.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
+<style>
+    #chat-body {
+        background-image: url({% static "img/public/chat-background.svg" %});
+        height: 87%;
+        width: 100%;
+        background-size: 75%;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+    }
+</style>
+<title>Lista de amigos</title>
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="flex" style="height: 100vh;">
+    <div class="leftmessanger flex">
+
+        <div class="contacts-header flex">
+            <button style="all: unset;" onclick="goBack()">
+                <img class="down-arrow-1-41" alt="" src="{% static 'img/public/downarrow-1-4@2x.png'%}" id="downArrow14"/>
+            </button>
+
+            <div id="amizades">AMIZADES</div>
+            <div class="contacts-header-icon flex">
+                <a href="{% url 'search_user' %}">
+                    <img class="create-group-button-2-1" alt="" src="{% static "img/public/addFriend.png" %}" id="createGroupButton21"/>
+                </a>
+            </div>
+        </div>
+
+      <div class="searchbar2">
+        <div class="searchbar-inner flex">
+            <input id="searchInput" placeholder="Pesquisar" class="pesquisar" oninput="filterFriends()"></input>
+            <div class="searchbar-child1 flex"/>
+                <img class="magnifying-glass-1-icon1" alt="" src="{% static "img/public/magnifyingglass-11.svg" %}"/>
+            </div>
+        </div>
+    </div>
+
+      <div class="contact-list flex">
+        {% for amigo in amigos %}
+            <a href="{% url 'Abrir_chat_privado' amigo.amigo.id %}">
+            <div onclick="initMob()" class="amizade">
+            <div class="image-50-group">
+                {% if amigo.fotoConta == "Indefinido" %}
+                    <img style="background-color: white;" class="image-50-icon1" alt="" src="{% static 'img/Ain.png' %}"/>
+                {% else %}
+                    <img class="image-50-icon1" alt="" src="{{ amigo.fotoConta.url }}"/>
+                {% endif %}
+                
+            </div>
+            <div class="contact-write">
+                <b>{{ amigo.amigo.username }}</b>
+                <!--<p class="e-a-mesa">E a mesa? Vai fazer quando?</p>-->
+            </div>
+            <!--<p class="time">19:30</p>-->
+            </div>
+        </a>
+        {% endfor %}
+
+      </div>
+
+    </div>
+    <div id="chat" class="chatprivado flex">
+      <div class="header1">
+
+        <div class="header-child flex">
+
+          <div class="image-50-parent3 flex">
+            <img class="image-50-icon6" alt="" src="../public/image-506@2x.png"/>
+          </div>
+
+          <div class="header-text">
+        
+          </div>
+
+          <img onclick="initMob()" src="../public/close-x.svg" style="display: none;" alt="">
+        </div>
+
+
+      </div>
+
+      <div id="chat-body">
+
+        <div class="text-area flex">
+
+        </div>
+
+        <div class="sent-bar flex">
+            <div id="sent" class="flex">
+                <textarea type="text" id="auto-resize-textarea" oninput="autoResize()" class="flex" name="" cols="0" rows="0"></textarea>
+                
+                <input id="chat-message-submit" type="button" value="Enviar">
+
+                <button class="sent-elipse flex">
+                    <img src="{% static "img/public/paper-plane.svg" %}" alt="">
+                </button>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<script>
+  function filterFriends() {
+    var input, filter, friends, friend, i, friendId;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    friends = document.getElementsByClassName("amizade");
+
+    for (i = 0; i < friends.length; i++) {
+        friend = friends[i];
+        friendId = friend.id.toUpperCase();
+
+        if (friendId.includes(filter)) {
+            friend.style.display = "";
+        } else {
+            friend.style.display = "none";
+        }
+    }
+}
+
+function goBack() {
+    window.history.back();
+}
+</script>
 
 <h1>Lista de amigos</h1>
 {% for amigo in amigos %}
@@ -11,4 +147,4 @@
 
 
 
-{%endblock conteudo%}
+{% endblock conteudo %}
