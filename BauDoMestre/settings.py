@@ -49,6 +49,9 @@ INSTALLED_APPS = [
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 LOGIN_REDIRECT_URL = '/usuario'
 
@@ -59,9 +62,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'baudomestre.fatec@gmail.com'
 EMAIL_HOST_PASSWORD = 'ehzz nflg mrav skrc'
 
-# AUTHENTICATION_BACKENDS = [
-#     'allauth.account.auth_backends.AuthenticationBackend',
-# ]
 
 SITE_ID = 1
 
