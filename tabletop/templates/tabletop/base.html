@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabletop</title>
+    <style>
+        /* Estilos para o tabletop e objetos */
+#table {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    border: 1px solid black;
+}
+
+.object {
+    position: absolute;
+    cursor: move;
+}
+
+/* Estilos para o formulário de upload */
+#uploadForm {
+    margin-top: 20px;
+}
+
+#uploadForm input[type="file"] {
+    margin-right: 10px;
+}
+
+#uploadForm button {
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
