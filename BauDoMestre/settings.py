@@ -16,7 +16,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [('localhost', 6379)],
+            "hosts": [('20.253.72.234', 6379)],
             "capacity": 1000,
         },
     },
@@ -66,7 +66,6 @@ EMAIL_HOST_PASSWORD = 'ehzz nflg mrav skrc'
 SITE_ID = 1
 
 MIDDLEWARE = [
-    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
