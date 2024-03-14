@@ -17,7 +17,7 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
             "hosts": [('20.253.72.234', 6379)],
-            "capacity": 1000,
+            "capacity": 10000,
         },
     },
 }
@@ -75,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'inventario.middleware.MaliciousFileCheckMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 
