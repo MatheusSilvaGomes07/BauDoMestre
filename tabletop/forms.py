@@ -1,8 +1,12 @@
-# forms.py
 from django import forms
-from .models import Object
+from .models import Map, Token
 
-class ObjectForm(forms.ModelForm):
+class MapForm(forms.ModelForm):
     class Meta:
-        model = Object
-        fields = ['name','image']
+        model = Map
+        fields = ['name', 'background_image']
+
+class TokenForm(forms.ModelForm):
+    class Meta:
+        model = Token
+        fields = ['image']

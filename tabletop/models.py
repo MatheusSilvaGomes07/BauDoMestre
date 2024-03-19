@@ -1,8 +1,11 @@
-# models.py
 from django.db import models
 
-class Object(models.Model):
+class Map(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='objects/', null=True, blank=True)
+    background_image = models.ImageField(upload_to='maps/', null=True, blank=True)
+
+class Token(models.Model):
+    map = models.ForeignKey(Map, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='tokens/')
     position_x = models.IntegerField(default=0)
     position_y = models.IntegerField(default=0)

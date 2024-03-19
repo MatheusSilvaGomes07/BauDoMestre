@@ -1,9 +1,10 @@
-# urls.py
 from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.tabletop_view, name='tabletop_view'),
-    path('update_object_position/', views.update_object_position, name='update_object_position'),
-    path('delete_all_images/', views.delete_all_images, name='delete_all_images'),
+    path('create/', views.create_map, name='create_map'),
+    path('<int:map_id>/', views.enter_map, name='enter_map'),
+    path('upload_token/', views.upload_token, name='upload_token'),
+    path('<int:map_id>/update_token_position/', views.update_token_position, name='update_token_position'),
+    path('delete_all_tokens/', views.delete_all_images, name='delete_all_tokens'),
 ]

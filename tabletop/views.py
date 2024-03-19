@@ -1,50 +1,66 @@
 # views.py
 from django.shortcuts import render, redirect
 from django.http import HttpResponseNotAllowed, JsonResponse
-from .models import Object
-from .forms import ObjectForm
+from .models import Token, Map, Token
+from .forms import TokenForm, MapForm, TokenForm
 from django.views.decorators.csrf import csrf_exempt
 
-def tabletop_view(request):
+# Função para criar um novo mapa
+def create_map(request):
     if request.method == 'POST':
-        form = ObjectForm(request.POST, request.FILES)
+        form = MapForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('tabletop_view')  # Redirecionamento após o envio bem-sucedido
+            return redirect('create_map')
     else:
-        form = ObjectForm()
+        form = MapForm()
     
-    objects = Object.objects.all()
-    return render(request, 'tabletop/tabletop.html', {'objects': objects, 'form': form})
+    maps = Map.objects.all()
+    return render(request, 'tabletop/create_map.html', {'form': form, 'maps': maps})
 
-@csrf_exempt
-def update_object_position(request):
+# Função para entrar em um mapa existente
+def enter_map(request, map_id):
+    map_instance = Map.objects.get(id=map_id)
+    tokens = Token.objects.filter(map_id=map_id)
+    return render(request, 'tabletop/enter_map.html', {'map': map_instance, 'tokens': tokens})
+
+# Função para fazer upload de um token para um mapa específico
+def upload_token(request):
     if request.method == 'POST':
-        # Receba os dados enviados pela solicitação AJAX
-        object_id = request.POST.get('object_id')
+        form = TokenForm(request.POST, request.FILES)
+        if form.is_valid():
+            token = form.save(commit=False)
+            token.map_id = request.POST.get('map_id')  # Adiciona o ID do mapa ao token
+            token.save()
+            return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Formulário inválido'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Método de requisição inválido'})
+
+# Função para atualizar a posição de um token
+@csrf_exempt
+def update_token_position(request, map_id):
+    if request.method == 'POST':
+        token_id = request.POST.get('token_id')
         position_x = request.POST.get('position_x')
         position_y = request.POST.get('position_y')
 
         try:
-            # Obtenha o objeto correspondente do banco de dados
-            obj = Object.objects.get(id=object_id)
-            # Atualize as coordenadas do objeto
-            obj.position_x = position_x
-            obj.position_y = position_y
-            obj.save()
+            token = Token.objects.get(id=token_id)
+            token.position_x = position_x
+            token.position_y = position_y
+            token.save()
             return JsonResponse({'status': 'success'})
-        except Object.DoesNotExist:
-            return JsonResponse({'status': 'error', 'message': 'Object not found'})
+        except Token.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Token not found'})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
-    
 
+# Função para excluir todas as imagens
 def delete_all_images(request):
     if request.method == 'POST':
-        # Exclua todas as imagens do banco de dados
-        Object.objects.all().delete()
-        # Redirecione de volta para a página inicial
-        return redirect('tabletop_view')
+        Token.objects.all().delete()
+        return redirect('create_map')  # Redireciona de volta para a página de criação de mapa
     else:
-        # Se o método não for POST, retorne uma resposta de método não permitido
         return HttpResponseNotAllowed(['POST'])
