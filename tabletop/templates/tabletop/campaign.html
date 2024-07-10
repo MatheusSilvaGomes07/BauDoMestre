@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const campaignId = {{ campaign_id }};
+        const socket = new WebSocket(`ws://${window.location.host}/ws/tabletop/${campaignId}/`);
+
+        socket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            if (data.action === 'load_map') {
+                loadMap(data.map_id);
+            }
+        };
+
+        function loadMap(mapId) {
+            $.get(`/tabletop/map/${mapId}/`, function(data) {
+                $('#map-container').html(data);
+            });
+        }
+
+        function selectMap(mapId) {
+            socket.send(JSON.stringify({
+                'action': 'load_map',
+                'map_id': mapId
+            }));
+        }
+    </script>
+</head>
+<body>
+    <h1>Campaign Maps</h1>
+    <ul>
+        {% for map in maps %}
+            <li><a href="#" onclick="selectMap({{ map.id }})">{{ map.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <div id="map-container">
+        <!-- Loaded map will be inserted here -->
+    </div>
+</body>
+</html>

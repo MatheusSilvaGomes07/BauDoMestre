@@ -1,0 +1,30 @@
+<div id="map">
+    <h2>{{ map.name }}</h2>
+    <img src="{{ map.image.url }}" alt="{{ map.name }}">
+    <div id="tokens">
+        {% for token in tokens %}
+            <div class="token" data-id="{{ token.id }}" style="left: {{ token.position_x }}px; top: {{ token.position_y }}px;">
+                <img src="{{ token.image.url }}" alt="Token">
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $(".token").draggable({
+            stop: function(event, ui) {
+                var tokenId = $(this).data("id");
+                var position = ui.position;
+                $.ajax({
+                    url: `/tabletop/token/${tokenId}/move/`,
+                    method: 'POST',
+                    data: {
+                        'position_x': position.left,
+                        'position_y': position.top,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    }
+                });
+            }
+        });
+    });
+</script>

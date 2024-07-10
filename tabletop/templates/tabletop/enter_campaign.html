@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Campanha: {{ campanha.nomeCampanha }}</title>
+</head>
+<body>
+    <h1>Campanha: {{ campanha.nomeCampanha }}</h1>
+    <h2>Mapa Atual: {{ current_map.name }}</h2>
+    <img src="{{ current_map.background_image.url }}" alt="{{ current_map.name }}">
+    
+    <h3>Mapas</h3>
+    <ul>
+        {% for map in maps %}
+            <li>{{ map.name }}</li>
+        {% endfor %}
+    </ul>
+    
+    <h3>Tokens</h3>
+    <ul>
+        {% for token in tokens %}
+            <li>{{ token.nome }} - Posição: ({{ token.posicao_x }}, {{ token.posicao_y }})</li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        const campanhaId = "{{ campanha.id }}";
+        const wsUrl = `ws://${window.location.host}/ws/tabletop/${campanhaId}/`;
+
+        const socket = new WebSocket(wsUrl);
+
+        socket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            if (data.type === 'update_token_position') {
+                console.log(`Token ${data.token_id} updated to position (${data.position_x}, ${data.position_y})`);
+            } else if (data.type === 'change_map') {
+                console.log(`Map changed to ${data.map_name}`);
+            }
+        };
+
+        socket.onclose = function(event) {
+            console.error('WebSocket closed unexpectedly');
+        };
+    </script>
+</body>
+</html>
