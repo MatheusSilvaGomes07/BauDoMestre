@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campaign</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
     <script>
         const campaignId = {{ campaign_id }};
         const socket = new WebSocket(`ws://${window.location.host}/ws/tabletop/${campaignId}/`);
@@ -13,12 +14,15 @@
             const data = JSON.parse(e.data);
             if (data.action === 'load_map') {
                 loadMap(data.map_id);
+            } else if (data.action === 'move_token') {
+                moveToken(data.token_id, data.position_x, data.position_y);
             }
         };
 
         function loadMap(mapId) {
             $.get(`/tabletop/map/${mapId}/`, function(data) {
                 $('#map-container').html(data);
+                initializeDraggableTokens();
             });
         }
 
@@ -28,6 +32,41 @@
                 'map_id': mapId
             }));
         }
+
+        function initializeDraggableTokens() {
+            $(".token").draggable({
+                stop: function(event, ui) {
+                    var tokenId = $(this).data("id");
+                    var position = ui.position;
+                    $.ajax({
+                        url: `/tabletop/token/${tokenId}/move/`,
+                        method: 'POST',
+                        data: {
+                            'position_x': position.left,
+                            'position_y': position.top,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        success: function() {
+                            socket.send(JSON.stringify({
+                                'action': 'move_token',
+                                'token_id': tokenId,
+                                'position_x': position.left,
+                                'position_y': position.top
+                            }));
+                        }
+                    });
+                }
+            });
+        }
+
+        function moveToken(tokenId, positionX, positionY) {
+            const token = $(`.token[data-id=${tokenId}]`);
+            token.css({ left: `${positionX}px`, top: `${positionY}px` });
+        }
+
+        $(document).ready(function() {
+            initializeDraggableTokens();
+        });
     </script>
 </head>
 <body>
