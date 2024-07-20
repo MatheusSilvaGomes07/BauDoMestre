@@ -130,13 +130,16 @@ def buscarmesa(request):
 
 @login_required
 def detalhes_campanha(request, id):
-    
-    campanha = Campanha.objects.get(id = id)
+    campanha = get_object_or_404(Campanha, id=id)
+    mestre = campanha.nomeMestre
     membros_id = Grupo.objects.filter(campanha=campanha.id).values_list('membros', flat=True)
+    membros = Perfil.objects.filter(nomePerfil__in=membros_id).exclude(id=mestre.id)
 
-    membros = Perfil.objects.filter(nomePerfil__in=membros_id)
-
-    return render(request, 'principal/detalhesCampanha.html', {'campanha': campanha, 'membros': membros})
+    return render(request, 'principal/detalhesCampanha.html', {
+        'campanha': campanha,
+        'mestre': mestre,
+        'membros': membros,
+    })
 
 # view da busca de usuários
 @login_required

@@ -70,19 +70,19 @@ def excluir_mensagem_pub(request, mensagem_id):
 def gerenciar_solicitacoes(request, campanha_id=None):
     from home.models import Campanha
 
-    campanha = None  # Defina campanha como None inicialmente
+    campanha = None  # Inicialmente defina campanha como None
 
+    # Obtenha todas as campanhas do mestre (usuário atual)
     campanhas_do_mestre = Campanha.objects.filter(nomeMestre__nomePerfil=request.user)
 
     if campanha_id:
         # Se campanha_id for fornecido, filtre apenas para a campanha específica
         campanha = get_object_or_404(Campanha, pk=campanha_id)
+        if campanha.nomeMestre.nomePerfil != request.user:
+            return HttpResponseForbidden('Você não tem permissão para gerenciar solicitações desta campanha.')
         solicitacoes = SolicitacaoEntrada.objects.filter(para_campanha=campanha, aceita=False, status='Pendente')
     else:
         # Se não houver campanha_id, filtre as solicitações para todas as campanhas do mestre
-        if campanha and campanha.nomeMestre.nomePerfil != request.user:
-            return redirect('buscarmesa')
-
         solicitacoes = SolicitacaoEntrada.objects.filter(para_campanha__in=campanhas_do_mestre, aceita=False, status='Pendente')
 
     context = {
