@@ -133,7 +133,7 @@ def detalhes_campanha(request, id):
     campanha = get_object_or_404(Campanha, id=id)
     mestre = campanha.nomeMestre
     membros_id = Grupo.objects.filter(campanha=campanha.id).values_list('membros', flat=True)
-    membros = Perfil.objects.filter(nomePerfil__in=membros_id).exclude(id=mestre.id)
+    membros = Perfil.objects.filter(nomePerfil__in=membros_id)
 
     return render(request, 'principal/detalhesCampanha.html', {
         'campanha': campanha,

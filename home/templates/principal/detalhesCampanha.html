@@ -50,22 +50,6 @@
                     <b class="jogadores1">Jogadores</b>
                     <div class="players">
                         
-                        <div class="jogador1 flex">
-                            <div class="nome-usuario1 flex">
-                                {% if mestre.fotoConta == "Indefinido" %}
-                                    <img style="background-color: white;" class="player-icon" alt="" src="{% static 'img/ain.png' %}"/>
-                                {% else %}
-                                    <img style="background-color: white;" class="player-icon" alt="" src="{{ mestre.fotoConta.url }}"/>
-                                {% endif %}
-                                <div class="user-data flex">
-                                    <b class="nome-do-usuario"><a style="all: unset; cursor: pointer;" href="{% url 'exibir_perfil' mestre.slug %}">{{ mestre.nomePerfil }}</a></b>
-                                    <p>{{ mestre.sistema_rpg }}</p>
-                                </div>
-                            </div>
-                            <div class="nome-ficha">
-                                <b class="mestre">MESTRE</b>
-                            </div>
-                        </div>
 
                         {% for membro in membros %}
                             <div class="jogador1 flex">
@@ -77,14 +61,18 @@
                                     {% endif %}
                                     <div class="user-data flex">
                                         <b class="nome-do-usuario"><a style="all: unset; cursor: pointer;" href="{% url 'exibir_perfil' membro.slug %}">{{ membro.nomePerfil }}</a></b>
-                                        <p>{{ membro.sistema_rpg }}</p>
+                                        <p>{{ membro.tipo_sessao }}</p>
                                     </div>
                                 </div>
                                 <div class="nome-ficha">
+                                    {% if membro.id == mestre.id %}
+                                    <b class="mestre">MESTRE</b>
+                                    {% else %}
                                     <b class="mestre">JOGADOR</b>
+                                    {% endif %}
                                 </div>
                             </div>
-                        {% endfor %}
+                        {% endfor %} 
                         
                     </div>
                 </div>
@@ -102,7 +90,7 @@
                             <i class="campanha-online">Campanha Online</i>
                         </div>
                     </div>
-                    <p id="group-tag">Grupo: {{ membros.count|add:1 }}/{{ campanha.numeroJogadores }}</p>
+                    <p id="group-tag">Grupo: {{ membros.count }}/{{ campanha.numeroJogadores }}</p>
                 </div>
             </div>
 
