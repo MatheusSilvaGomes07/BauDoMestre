@@ -17,4 +17,5 @@ urlpatterns = [
     path('home/', views.home, name='home' ),
     path('inventario/', index, name='inventarioRedirect'),
     path('campanha/<int:campanha_id>/excluir-jogador/<int:jogador_id>/', excluir_jogador, name='excluir_jogador'),
+    path('campanha/excluir/<int:campanha_id>/', views.excluir_campanha, name='excluir_campanha'),
 ]

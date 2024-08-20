@@ -155,6 +155,13 @@ def excluir_jogador(request, campanha_id, jogador_id):
     
     return redirect('detalhes_campanha', id=campanha_id)
 
+@login_required
+@apenas_mestre
+def excluir_campanha(request, campanha_id):
+    campanha = get_object_or_404(Campanha, id=campanha_id)
+    campanha.delete()
+    return redirect('buscarmesa')
+
 
 @login_required
 def detalhes_campanha(request, id):

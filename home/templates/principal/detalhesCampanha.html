@@ -71,10 +71,10 @@
                                     <b class="mestre">MESTRE</b>
                                         {% else %}
                                             {% if user == mestre.nomePerfil %}
-                                                <div class="excluir-membro">
+                                                <div class="nome-ficha">
                                                     <form method="post" action="{% url 'excluir_jogador' campanha.id membro.id %}">
                                                     {% csrf_token %}
-                                                    <button type="submit" class="mestre">Excluir</button>
+                                                    <button type="submit" class="mestre" style="cursor: pointer;">Excluir</button>
                                                     </form>
                                                 </div>
                                             {% else %}
@@ -110,9 +110,28 @@
                 <div class="boto-child flex">
                     <b class="jogar">JOGAR</b>
                 </div>
-               
             </div>
+            {% if user == mestre.nomePerfil %}
+            <div class="boto flex">
+                <div class="boto-child flex">
+                    <form id="form-excluir-campanha" method="post" action="{% url 'excluir_campanha' campanha.id %}">
+                        {% csrf_token %}
+                        <button style="cursor: pointer;" type="button" class="jogar" onclick="confirmarExclusao()">Excluir Mesa</button>
+                    </form>
+                </div>
+            </div>
+        {% endif %}        
         </div>
 
+
     </div>
+
+<script>
+    function confirmarExclusao() {
+        if (confirm("Tem certeza de que deseja excluir esta campanha?")) {
+            document.getElementById("form-excluir-campanha").submit();
+        }
+    }
+</script>
+        
 {% endblock %}

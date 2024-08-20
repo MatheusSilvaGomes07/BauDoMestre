@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
-    <title>Buscar mesa</title>
+    <title>Buscar mesa - Baú do Mestre</title>
     <style>
         .filter-box select {
             all: unset;
@@ -155,7 +155,7 @@
                             {% if grupo.envioSolicitacao == '0' %}
                                 <a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}">Jogar</a>
                             {% else %}
-                            <p>Solicitção enviada</p>
+                            <p>Solicitação enviada</p>
                             {% endif %}
                             {% endif %}
                     </div>
