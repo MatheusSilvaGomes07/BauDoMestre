@@ -2,6 +2,7 @@
 
 {% load static %}
 {% block head %}
+    <title>Detalhes da Campanha - Baú do Mestre</title>
     <link rel="stylesheet" href="{% static "css/global-ia.css" %}"/>
     <link rel="stylesheet" href="{% static "css/detalheCampanha.css"%}"/>
     <link rel="stylesheet" href="{% static "css/responsivity.css" %}">
@@ -12,6 +13,7 @@
 {% endblock %}
 
 {% block conteudo %}
+
     <div class="quests">
 
         <div class="boto-parent flex">
@@ -23,7 +25,7 @@
 
             {% if user == campanha.nomeMestre.nomePerfil %}
             <a href="{% url 'gerenciar_solicitacoes_campanha' campanha.id %}" class="botao-gerenciar-solicitacoes">Gerenciar Solicitações</a>
-        {% endif %}
+            {% endif %}
 
             <div class="header flex">
 
@@ -67,10 +69,20 @@
                                 <div class="nome-ficha">
                                     {% if membro.id == mestre.id %}
                                     <b class="mestre">MESTRE</b>
-                                    {% else %}
-                                    <b class="mestre">JOGADOR</b>
+                                        {% else %}
+                                            {% if user == mestre.nomePerfil %}
+                                                <div class="excluir-membro">
+                                                    <form method="post" action="{% url 'excluir_jogador' campanha.id membro.id %}">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="mestre">Excluir</button>
+                                                    </form>
+                                                </div>
+                                            {% else %}
+                                        <b class="mestre">JOGADOR</b>
+                                        {% endif %}
                                     {% endif %}
                                 </div>
+                                
                             </div>
                         {% endfor %} 
                         

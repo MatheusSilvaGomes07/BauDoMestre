@@ -4,7 +4,7 @@ from .models import Grupo
 
 @admin.register(Grupo)
 class GrupoADM(admin.ModelAdmin):
-    list_display = ('')
+    # list_display = ('')
     ('uuid')
     ('membros')
 

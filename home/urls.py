@@ -1,6 +1,7 @@
 from . import views
 from django.urls import path
 from inventario.views import index
+from .views import excluir_jogador
 
 urlpatterns = [
     path('', views.index, name = 'index'),
@@ -14,5 +15,6 @@ urlpatterns = [
     path('usuario/<slug:perfil_slug>/', views.exibir_perfil, name='exibir_perfil'),
     path('sobre-nos/', views.aboutus, name='sobre-nos' ),
     path('home/', views.home, name='home' ),
-    path('inventario/', index, name='inventarioRedirect')
+    path('inventario/', index, name='inventarioRedirect'),
+    path('campanha/<int:campanha_id>/excluir-jogador/<int:jogador_id>/', excluir_jogador, name='excluir_jogador'),
 ]

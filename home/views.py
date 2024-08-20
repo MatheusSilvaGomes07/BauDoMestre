@@ -1,11 +1,13 @@
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
+from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 
 from meus_personagens.models import CallOfCthulhu, DnD, OrdemParanormal, Tormenta
 from .models import Campanha, Perfil
-from .forms import CampanhaForm, PerfilForm
-from django.db.models import Q
+from .forms import CampanhaForm, PerfilForm, CustomSignupForm, CustomLoginForm
 from functools import wraps
 from chat.models import Grupo, SolicitacaoEntrada
 from SistAmizade.models import Amigo, SolicitacaoAmizade
@@ -13,8 +15,6 @@ from random import randint
 import os
 import shutil
 from allauth.account.views import SignupView, LoginView
-from .forms import CustomSignupForm, CustomLoginForm
-from django.contrib.auth.models import AnonymousUser
 
 class CustomSignupView(SignupView):
     form_class = CustomSignupForm
@@ -25,7 +25,21 @@ class CustomSignupView(SignupView):
 class CustomLoginView(LoginView):
     form_class = CustomLoginForm
     
+
+
+def apenas_mestre(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        campanha = get_object_or_404(Campanha, id=kwargs['campanha_id'])
+        perfil = Perfil.objects.get(nomePerfil=request.user)
+        
+        if campanha.nomeMestre == perfil:
+            return view_func(request, *args, **kwargs)
+        else:
+            raise PermissionDenied("Você não tem permissão para realizar esta ação.")
     
+    return _wrapped_view
+
 
 #Renomear imagem de perfil
 
@@ -127,6 +141,20 @@ def buscarmesa(request):
 
 
     return render(request, 'principal/muralLogado.html', {'campanhas_e_grupos': campanhas_e_grupos, 'perfil': perfil})
+
+@login_required
+@apenas_mestre
+def excluir_jogador(request, campanha_id, jogador_id):
+    campanha = get_object_or_404(Campanha, id=campanha_id)
+    jogador = get_object_or_404(Perfil, id=jogador_id)
+    
+    grupo = Grupo.objects.get(campanha=campanha)
+    
+    # Remover o jogador do grupo da campanha
+    grupo.membros.remove(jogador.nomePerfil)
+    
+    return redirect('detalhes_campanha', id=campanha_id)
+
 
 @login_required
 def detalhes_campanha(request, id):
