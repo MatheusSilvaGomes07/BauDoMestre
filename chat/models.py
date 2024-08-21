@@ -40,6 +40,10 @@ class SolicitacaoEntrada(models.Model):
     aceita = models.BooleanField(default=False)
     
     def aceitar_solicitacao(self):
+        # Verificar se a campanha já atingiu o número máximo de jogadores
+        if self.para_campanha.chats.first().membros.count() >= self.para_campanha.numeroJogadores:
+            raise ValueError(f"A campanha {self.para_campanha.nomeCampanha} já atingiu o número máximo de jogadores.")
+        
         self.status = 'Aceita'
         self.save()
 
@@ -51,10 +55,7 @@ class SolicitacaoEntrada(models.Model):
 
         if grupo:
             grupo.adicionar_usuario_ao_grupo(self.de_usuario.nomePerfil)
-
-            # Adicione prints para verificar o fluxo
             print(f"Grupo associado à campanha: {grupo.uuid}")
             print(f"Usuário a ser adicionado: {self.de_usuario.nomePerfil}")
         else:
-            # Adicione um print para indicar que a campanha não tem um grupo associado
             print(f"A campanha {campanha.nomeCampanha} não tem um grupo associado.")

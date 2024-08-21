@@ -166,5 +166,56 @@
         {% endfor %}
 
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.play a').forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault(); // Previne o comportamento padrão do link
+                    const url = this.getAttribute('href');
+        
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRFToken': getCookie('csrftoken') // Adiciona o token CSRF para segurança
+                        },
+                        body: new URLSearchParams({
+                            'csrfmiddlewaretoken': getCookie('csrftoken') // Inclui o token CSRF no corpo da requisição
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'error') {
+                            window.alert(data.message);
+                        } else if (data.status === 'success') {
+                            window.alert(data.message);
+                            location.reload(); // Recarrega a página para atualizar o estado
+                        }
+                    })
+                    .catch(error => {
+                        window.alert('Ocorreu um erro ao enviar a solicitação.');
+                        console.error('Error:', error);
+                    });
+                });
+            });
+        });
+        
+        // Função para obter o valor do cookie CSRF
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        </script>
     
 {% endblock %}

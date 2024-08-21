@@ -1,7 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import Http404, HttpResponseForbidden, HttpResponseNotFound
+from django.http import Http404, HttpResponseForbidden, HttpResponseNotFound, JsonResponse
 from django.contrib.auth.decorators import login_required
+from home.models import Campanha, Perfil
 from .models import Grupo, Mensagem, SolicitacaoEntrada
+
 
 
 @login_required
@@ -93,38 +95,44 @@ def gerenciar_solicitacoes(request, campanha_id=None):
     return render(request, 'principal/gerenciar_solicitacoes.html', context)
 
 
+
 def enviar_solicitacao(request, campanha_id):
-    from home.models import Campanha, Perfil
-    campanha = Campanha.objects.get(pk=campanha_id)
-    de_usuario = Perfil.objects.get(nomePerfil=request.user)
+    if request.method == 'POST':
+        campanha = Campanha.objects.get(pk=campanha_id)
+        de_usuario = Perfil.objects.get(nomePerfil=request.user)
 
-    # Verifica se já existe uma solicitação pendente
-    solicitacao_pendente = SolicitacaoEntrada.objects.filter(de_usuario=de_usuario, para_campanha=campanha, status='Pendente').first()
+        # Verificar se a campanha já atingiu o número máximo de jogadores
+        if campanha.chats.first().membros.count() >= campanha.numeroJogadores:
+            return JsonResponse({'status': 'error', 'message': 'A campanha já atingiu o número máximo de jogadores.'})
 
-    if solicitacao_pendente:
-        return HttpResponseForbidden("Você já possui uma solicitação pendente para esta campanha.")
+        # Verifica se já existe uma solicitação pendente
+        solicitacao_pendente = SolicitacaoEntrada.objects.filter(de_usuario=de_usuario, para_campanha=campanha, status='Pendente').first()
 
-    solicitacao = SolicitacaoEntrada.objects.create(
-        de_usuario=de_usuario,
-        para_campanha=campanha,
-        status='Pendente'
-    )
-    
-    return redirect('buscarmesa')
+        if solicitacao_pendente:
+            return JsonResponse({'status': 'error', 'message': 'Você já possui uma solicitação pendente para esta campanha.'})
+
+        solicitacao = SolicitacaoEntrada.objects.create(
+            de_usuario=de_usuario,
+            para_campanha=campanha,
+            status='Pendente'
+        )
+
+        return JsonResponse({'status': 'success', 'message': 'Solicitação enviada com sucesso.'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Método não permitido.'})
+
 
 
 def aceitar_solicitacao_camp(request, solicitacao_id):
     try:
         solicitacao = SolicitacaoEntrada.objects.get(pk=solicitacao_id)
         solicitacao.aceitar_solicitacao()
-
-        # Adicione um print para verificar a campanha associada à solicitação
-        print(f"Campanha associada à solicitação: {solicitacao.para_campanha.nomeCampanha}")
-
         return redirect('buscarmesa')
-
     except SolicitacaoEntrada.DoesNotExist:
         return HttpResponseNotFound("Solicitação não encontrada")
+    except ValueError as e:
+        # Lida com a situação em que a campanha já está cheia
+        return HttpResponseForbidden(str(e))
 
     
 def recusar_solicitacao_camp(request, solicitacao_id):
