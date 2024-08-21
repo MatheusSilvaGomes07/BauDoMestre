@@ -127,6 +127,9 @@ def musicas(request):
     return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
 
 def verificar_extensao(div, file_type, request, tamanho, extension):
+    # Convertendo a extensão para minúsculas para garantir a comparação consistente
+    extension = extension.lower()
+
     if div == "Mapas":
         if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type:
             return True
@@ -135,37 +138,42 @@ def verificar_extensao(div, file_type, request, tamanho, extension):
             return False
 
     if div == "Criaturas":
-        if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type or 'Microsoft Word' in file_type or 'RAR archive' in file_type:
-             return True
+        if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type or 'Microsoft Word' in file_type or 'RAR archive' in file_type or 'Zip archive' in file_type :
+            return True
         else:
             messages.info(request, "Foi identificado um possível arquivo malicioso ou que não seja possível seu envio, tente enviar novamente")
             return False
 
     if div == "Documentos":
-
         if 'image' in file_type or 'PDF document' in file_type or 'GIF image' in file_type or 'Microsoft Word' in file_type or 'RAR archive' in file_type or 'Zip archive' in file_type:
-             return True
+            return True
         else:
             messages.info(request, "Foi identificado um possível arquivo malicioso ou que não seja possível seu envio, tente enviar novamente")
             return False
 
     if div == "Imagens":
         if 'image' in file_type or 'GIF image' in file_type:
-             return True
+            return True
         else:
             messages.info(request, "A divisão de imagens só aceita arquivos de imagens e GIFs")
             return False
 
     if div == "Musicas":
-        if extension == '.mp3' or extension == '.wav' or extension == '.ogg':
-             return True
+        # Verifica a extensão diretamente, sem depender do tipo MIME
+        if extension in ['.mp3', '.wav', '.ogg']:
+            return True
         else:
             messages.info(request, "A divisão de músicas só aceita arquivos de áudios")
             return False
 
-    if tamanho > 83886080:
+    if tamanho > 83886080:  # 80MB
         messages.info(request, "Algum arquivo enviado era maior que 80MB, só é possível o envio de arquivos abaixo de 80MB")
         return False
+
+    # Caso não se enquadre em nenhuma das divisões
+    messages.info(request, "Tipo de arquivo não permitido.")
+    return False
+
 
 
 @login_required
