@@ -123,6 +123,7 @@ def enviar_solicitacao(request, campanha_id):
 
 
 
+
 def aceitar_solicitacao_camp(request, solicitacao_id):
     try:
         solicitacao = SolicitacaoEntrada.objects.get(pk=solicitacao_id)

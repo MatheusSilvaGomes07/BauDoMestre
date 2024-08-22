@@ -153,7 +153,7 @@
                             {% endif %}
                             {% else %}
                             {% if grupo.envioSolicitacao == '0' %}
-                                <a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}">Jogar</a>
+                            <a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a>
                             {% else %}
                             <p>Solicitação enviada</p>
                             {% endif %}
@@ -168,10 +168,11 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.play a').forEach(function(link) {
+            document.querySelectorAll('.solicitar-jogo').forEach(function(link) {
                 link.addEventListener('click', function(event) {
                     event.preventDefault(); // Previne o comportamento padrão do link
                     const url = this.getAttribute('href');
+                    const button = this; // Referência ao botão clicado
         
                     fetch(url, {
                         method: 'POST',
@@ -189,8 +190,10 @@
                         if (data.status === 'error') {
                             window.alert(data.message);
                         } else if (data.status === 'success') {
-                            window.alert(data.message);
-                            location.reload(); // Recarrega a página para atualizar o estado
+                            // Atualiza o DOM para mostrar "Abrir", "Sair" ou "Excluir" com base no status
+                            button.textContent = 'Solicitação enviada';
+                            
+                            button.classList.remove('solicitar-jogo'); // Remove a classe para evitar outro clique
                         }
                     })
                     .catch(error => {
@@ -199,23 +202,23 @@
                     });
                 });
             });
-        });
         
-        // Função para obter o valor do cookie CSRF
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
+            // Função para obter o valor do cookie CSRF
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
                     }
                 }
+                return cookieValue;
             }
-            return cookieValue;
-        }
+        });
         </script>
     
 {% endblock %}

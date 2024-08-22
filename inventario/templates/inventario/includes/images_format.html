@@ -49,7 +49,7 @@
                    
                         <div class="manage">
                         <a href="{{ file.file.url }}" download><img src="{% static "img/public/download.svg" %}" alt=""></a>
-                        <a href="{% url 'deletar_arquivo' file.id div file.pasta_id %}"><img src="{% static "img/public/thrash.svg" %}" alt=""></a>
+                        <a href="{% url 'deletar_arquivo' file.id div file.pasta_id %}"><img src="{% static "img/public/thrash.svg" %}" alt="" ></a>
                     </div>
                 </div>
             {% endfor %}
