@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .membro_decorator import user_in_group
 
-#@user_in_group
+@user_in_group
 #SE NÃO FOR MEMBRO DA CAMPANHA, É REDIRECIONADO PARA O BUSCAR MESA
 def enter_campaign(request, campaign_id):
     maps = Map.objects.filter(campanha_id=campaign_id)
