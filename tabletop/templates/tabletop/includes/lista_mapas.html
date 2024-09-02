@@ -1,0 +1,18 @@
+<ul>
+    {% for map in maps %}
+        <li><a href="#" onclick="selectMap({{ map.id }})">{{ map.name }}</a> <a href="{% url 'deletar_mapa' campaign_id map.id%}" class="delete-link">     Deletar</a></li>
+    {% endfor %}
+</ul>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteLinks = document.querySelectorAll('.delete-link');
+        deleteLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                if (!confirm('Tem certeza de que deseja deletar este mapa?')) {
+                    event.preventDefault();  // Impede o link de seguir para o URL
+                }
+            });
+        });
+    });
+</script>

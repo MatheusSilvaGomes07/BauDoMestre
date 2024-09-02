@@ -9,7 +9,7 @@
     <script>
         const campaignId = {{ campaign_id }};
         const socket = new WebSocket(`ws://${window.location.host}/ws/tabletop/${campaignId}/`);
-
+    
         socket.onmessage = function(e) {
             const data = JSON.parse(e.data);
             if (data.action === 'load_map') {
@@ -18,33 +18,31 @@
                 moveToken(data.token_id, data.position_x, data.position_y);
             }
         };
-
+    
         function loadMap(mapId) {
             $.get(`/tabletop/map/${mapId}/`, function(data) {
                 $('#map-container').html(data);
                 initializeDraggableTokens();
             });
         }
-
+    
         function selectMap(mapId) {
             socket.send(JSON.stringify({
                 'action': 'load_map',
                 'map_id': mapId
             }));
         }
-
+    
         function initializeDraggableTokens() {
             $(".token").draggable({
-                containment: "#map img",  // Restringe o movimento ao tamanho da imagem do mapa
+                containment: "#map img",
                 drag: function(event, ui) {
                     var tokenId = $(this).data("id");
                     var position = ui.position;
-        
-                    // Arredonda as posições para valores inteiros
+    
                     var positionX = Math.round(position.left);
                     var positionY = Math.round(position.top);
-        
-                    // Atualiza a posição do token em tempo real
+    
                     socket.send(JSON.stringify({
                         'action': 'move_token',
                         'token_id': tokenId,
@@ -55,12 +53,10 @@
                 stop: function(event, ui) {
                     var tokenId = $(this).data("id");
                     var position = ui.position;
-        
-                    // Arredonda as posições para valores inteiros
+    
                     var positionX = Math.round(position.left);
                     var positionY = Math.round(position.top);
-        
-                    // Envia a posição final do token ao servidor
+    
                     $.ajax({
                         url: `/tabletop/token/${tokenId}/move/`,
                         method: 'POST',
@@ -70,7 +66,6 @@
                             'csrfmiddlewaretoken': '{{ csrf_token }}'
                         },
                         success: function() {
-                            // Envia a atualização final via WebSocket
                             socket.send(JSON.stringify({
                                 'action': 'move_token',
                                 'token_id': tokenId,
@@ -82,24 +77,24 @@
                 }
             });
         }
-
+    
         function moveToken(tokenId, positionX, positionY) {
             const token = $(`.token[data-id=${tokenId}]`);
             token.css({ left: `${positionX}px`, top: `${positionY}px` });
         }
-
+    
         $(document).ready(function() {
             initializeDraggableTokens();
         });
     </script>
 </head>
 <body>
+    {% if is_mestre %}
+    {% include "tabletop/includes/mapa_form.html" %}
     <h1>Campaign Maps</h1>
-    <ul>
-        {% for map in maps %}
-            <li><a href="#" onclick="selectMap({{ map.id }})">{{ map.name }}</a></li>
-        {% endfor %}
-    </ul>
+    
+        {% include "tabletop/includes/lista_mapas.html" %}
+    {% endif %}
     <div id="map-container">
         <!-- Loaded map will be inserted here -->
     </div>

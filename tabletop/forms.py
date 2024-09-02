@@ -4,7 +4,7 @@ from .models import Map, Token
 class MapForm(forms.ModelForm):
     class Meta:
         model = Map
-        fields = ['name', 'background_image']
+        fields = ['name', 'image']
 
 class TokenForm(forms.ModelForm):
     class Meta:
