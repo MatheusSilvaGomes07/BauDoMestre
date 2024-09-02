@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .membro_decorator import user_in_group
 from .mestre_decorator import is_mestre
-from .forms import MapForm
+from .forms import MapForm, TokenForm
 from home.models import Campanha
 
 @user_in_group
@@ -14,6 +14,7 @@ from home.models import Campanha
 def enter_campaign(request, campaign_id, is_mestre):
     maps = Map.objects.filter(campanha_id=campaign_id)
     form = MapForm()
+    tokenForm = TokenForm()
     if is_mestre:
         if request.method == "POST":
             form = MapForm(request.POST, request.FILES)
@@ -22,7 +23,13 @@ def enter_campaign(request, campaign_id, is_mestre):
                 mapa.campanha_id = get_object_or_404(Campanha, id=campaign_id)
                 mapa.save()
                 return redirect('enter_campaign', campaign_id)
-        return render(request, 'tabletop/campaign.html', {'maps': maps, 'campaign_id': campaign_id, 'is_mestre': is_mestre, 'form': form})
+        return render(request, 'tabletop/campaign.html', {
+            'maps': maps, 
+            'campaign_id': campaign_id, 
+            'is_mestre': is_mestre, 
+            'form': form, 
+            'tokenForm': tokenForm
+        })
     return render(request, 'tabletop/campaign.html', {'maps': maps, 'campaign_id': campaign_id, 'is_mestre': is_mestre})
 
 @login_required
@@ -56,3 +63,16 @@ def deletar_mapa(request, campaign_id, map_id, is_mestre):
 
     return redirect('enter_campaign', campaign_id)
         
+def upload_token(request, map_id):
+    mapa = get_object_or_404(Map, id=map_id)
+    campanha_id = mapa.campanha_id.id
+
+    formToken = TokenForm(request.POST, request.FILES)
+    if formToken.is_valid():
+        token = formToken.save(commit=False)
+        token.map = mapa
+        token.position_x = 372
+        token.position_y = -487
+        token.save()
+
+    return redirect ('enter_campaign', campanha_id)
