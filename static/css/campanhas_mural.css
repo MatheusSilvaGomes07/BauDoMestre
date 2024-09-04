@@ -1,18 +1,46 @@
 body {
-  position: relative;
-  width: 100%;
   text-align: justify;
   font-size: var(--font-size-smi);
   color: var(--color-white);
   font-family: var(--body);
-  background: linear-gradient(169deg, #000 35.32%, rgba(53, 51, 51, 0.50) 218.41%);
-  min-height: 100vh;
+  background: black;
+  display: flex;
+  flex-direction: column;
 }
 
-h1 {
-  font-family: var(--header-12);
-  font-weight: normal;
-  margin: 3% 2% 3% 3%;
+nav {
+  position: relative;
+}
+
+.mural-banner {
+  background: linear-gradient(0.75turn, #000000, #5B5C84);
+}
+
+.mural-banner .mural-leftColumn {
+  gap: 3.5rem;
+  padding: 2rem 0 2rem 2rem;
+}
+
+.mural-banner .mural-leftColumn h1 {
+  font-size: 85px;
+}
+
+.mural-banner .mural-leftColumn h3 {
+  font-size: 36px;
+  width: 90%;
+}
+
+.filter-box {
+  background-color: #011126;
+  width: 93%;
+  border-radius: 15px;
+  align-self: center;
+}
+
+.filter-box select {
+  all: unset;
+  background-color: white;
+  color: black;
 }
 
 .searchbar {

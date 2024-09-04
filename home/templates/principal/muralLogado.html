@@ -16,31 +16,59 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
     <title>Buscar mesa - Baú do Mestre</title>
-    <style>
-        .filter-box select {
-            all: unset;
-            background-color: white;
-            font-size: var(--font-inter);
-            color: black;
-            font-weight: bold;
-            width: 95%;
-            background: white url({% static 'img/public/caret-down-black.svg' %}) no-repeat left;
-            background-position: 3% 50%;
-            background-size: 2vw;
-            font-size: clamp(1rem, 2vw, 2rem);
-            height: 3.5rem;
-            display: flex;
-            align-items: center;
-            text-align: end;
-            padding-right: 10px;
-          }
-    </style>
 {% endblock %}
 
 {% block conteudo %}
 
-    <br><br><br>
-    <h1>Campanhas</h1>
+    <div class="mural-banner flex space-between">
+        <div class="mural-leftColumn flex flex-column">
+            <h1>Campanhas</h1>
+            <h3>Procure pela campanha certa para você!</h3>
+            <h3>Há: <strong>1557 Campanhas</strong> Disponíveis</h3>
+        </div>
+
+        <img src="{% static "img/muralDragon.svg" %}" alt="">
+    </div>
+
+    <div class="filter-box flex">
+        <div class="filter-sys">
+            <h3>Sistema</h3>
+            <select name="sistema" id="sistema">
+                <option value="">Todos</option>
+                <option value="Dungeons & Dragons">Dungeons & Dragons</option>
+                <option value="Ordem Paranormal">Ordem Paranormal</option>
+                <option value="Tormenta20">Tormenta20</option>
+                <option value="Call of Cthulu">Call of Cthulu</option>
+                <option value="Outro">Outro</option>
+            </select>
+        </div>
+
+        <div class="filter-env">
+            <h3>Ambiente</h3>
+            <select name="ambiente" id="ambiente">
+                <option value="">Todos</option>
+                <option value="Online">Online</option>
+                <option value="Presencial">Presencial</option>
+            </select>
+        </div>
+
+        <div class="filter-gen">
+            <h3>Gênero</h3>
+            <select name="genero" id="genero">
+                <option value="">Todos</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Comédia">Comédia</option>
+                <option value="Drama">Drama</option>
+                <option value="Fantasia">Fantasia</option>
+                <option value="Histórico">Histórico</option>
+                <option value="Mistério">Mistério</option>
+                <option value="Suspense">Suspense</option>
+                <option value="Terror">Terror</option>
+            </select>
+        </div>
+
+    </div>
+
     <form style="all: unset;" method="GET" class="search-form">
         <div class="searchbar">
         <div class="search-head flex">
@@ -61,36 +89,15 @@
             <div class="filter-box flex">
             <div class="filter">
                 <h3>Sistema</h3>
-                <select name="sistema" id="sistema">
-                    <option value="">Todos</option>
-                    <option value="Dungeons & Dragons">Dungeons & Dragons</option>
-                    <option value="Ordem Paranormal">Ordem Paranormal</option>
-                    <option value="Tormenta20">Tormenta20</option>
-                    <option value="Call of Cthulu">Call of Cthulu</option>
-                    <option value="Outro">Outro</option>
-                </select>
+
             </div>
             <div class="filter">
                 <h3>Ambiente</h3>
-                <select name="ambiente" id="ambiente">
-                    <option value="">Todos</option>
-                    <option value="Online">Online</option>
-                    <option value="Presencial">Presencial</option>
-                </select>
+
             </div>
             <div class="filter">
                 <h3>Gênero</h3>
-                <select name="genero" id="genero">
-                    <option value="">Todos</option>
-                    <option value="Aventura">Aventura</option>
-                    <option value="Comédia">Comédia</option>
-                    <option value="Drama">Drama</option>
-                    <option value="Fantasia">Fantasia</option>
-                    <option value="Histórico">Histórico</option>
-                    <option value="Mistério">Mistério</option>
-                    <option value="Suspense">Suspense</option>
-                    <option value="Terror">Terror</option>
-                </select>
+
             </div>
             </div>
 
@@ -99,10 +106,10 @@
         </div>
     </form>
 
-  
+
 
     <div class="quests">
-        
+
         {% if campanhas_e_grupos.items %}
             {% else %}
             <br>
@@ -173,7 +180,7 @@
                     event.preventDefault(); // Previne o comportamento padrão do link
                     const url = this.getAttribute('href');
                     const button = this; // Referência ao botão clicado
-        
+
                     fetch(url, {
                         method: 'POST',
                         headers: {
@@ -192,7 +199,7 @@
                         } else if (data.status === 'success') {
                             // Atualiza o DOM para mostrar "Abrir", "Sair" ou "Excluir" com base no status
                             button.textContent = 'Solicitação enviada';
-                            
+
                             button.classList.remove('solicitar-jogo'); // Remove a classe para evitar outro clique
                         }
                     })
@@ -202,7 +209,7 @@
                     });
                 });
             });
-        
+
             // Função para obter o valor do cookie CSRF
             function getCookie(name) {
                 let cookieValue = null;
@@ -220,5 +227,5 @@
             }
         });
         </script>
-    
+
 {% endblock %}

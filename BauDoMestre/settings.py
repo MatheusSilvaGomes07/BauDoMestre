@@ -75,7 +75,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'inventario.middleware.MaliciousFileCheckMiddleware',
-    
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 
