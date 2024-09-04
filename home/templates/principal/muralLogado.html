@@ -31,7 +31,7 @@
     </div>
 
     <div class="filter-box flex">
-        <div class="filter-sys">
+        <div class="filter-selec">
             <h3>Sistema</h3>
             <select name="sistema" id="sistema">
                 <option value="">Todos</option>
@@ -43,7 +43,9 @@
             </select>
         </div>
 
-        <div class="filter-env">
+        <div class="vertical-row"></div>
+
+        <div class="filter-selec">
             <h3>Ambiente</h3>
             <select name="ambiente" id="ambiente">
                 <option value="">Todos</option>
@@ -52,7 +54,9 @@
             </select>
         </div>
 
-        <div class="filter-gen">
+        <div class="vertical-row"></div>
+
+        <div class="filter-selec">
             <h3>Gênero</h3>
             <select name="genero" id="genero">
                 <option value="">Todos</option>
@@ -66,7 +70,6 @@
                 <option value="Terror">Terror</option>
             </select>
         </div>
-
     </div>
 
     <form style="all: unset;" method="GET" class="search-form">
@@ -86,21 +89,6 @@
                 <a style="all: unset; cursor: pointer; text-decoration: none; color: white; font-weight: bold; font-size: 1.4rem;" href="{% url 'criarCampanhas' %}">Crie suas próprias mesas</a>
                 {% endif %}
             </div>
-            <div class="filter-box flex">
-            <div class="filter">
-                <h3>Sistema</h3>
-
-            </div>
-            <div class="filter">
-                <h3>Ambiente</h3>
-
-            </div>
-            <div class="filter">
-                <h3>Gênero</h3>
-
-            </div>
-            </div>
-
         </div>
 
         </div>

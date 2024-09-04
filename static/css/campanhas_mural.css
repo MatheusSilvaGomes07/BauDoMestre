@@ -35,6 +35,7 @@ nav {
   width: 93%;
   border-radius: 15px;
   align-self: center;
+  padding: 1.8rem;
 }
 
 .filter-box select {
@@ -42,6 +43,20 @@ nav {
   background-color: white;
   color: black;
 }
+
+.filter-selec {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 30%;
+}
+
+.vertical-row {
+  width: 5px;
+  background-color: white;
+}
+
+
 
 .searchbar {
   display: flex;
