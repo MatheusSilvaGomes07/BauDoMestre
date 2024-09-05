@@ -53,10 +53,10 @@ button {
 :root {
   /* fonts */
   --staat: "Staatliches";
-  --garute: "Garute";
-  --valverde: "Valverde";
-  --Swis: "Swis721 BlkCn BT";
-  --SwisLight: "Swis721 WGL4 BT";
+  --poppins: "Poppins";
+  --pt: "PT Serif";
+  --Inter: "Inter";
+  --Alata: "Alata";
 
   /* font sizes */
   --title-82: 82px;
@@ -95,7 +95,7 @@ h4 {
 
 p, h3, h4{
   margin-bottom: 0 !important;
-  font-family: var(--garute);
+  font-family: var(--poppins);
   color: white;
 }
 
