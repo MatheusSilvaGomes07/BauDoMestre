@@ -163,6 +163,10 @@ nav {
 .quest .quest-header .desc-bar {
   position: absolute;
   bottom: 0;
+  width: 98%;
+  justify-content: end;
+  gap: 5px;
+  background: linear-gradient(270deg, #201353 0%, #55090F 59%, #D00000 100%);
 }
 
 .quest a {

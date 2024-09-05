@@ -105,7 +105,7 @@
             <div class="quest">
 
                 <div class="quest-header flex-column" style="background-image: url({{ campanha.fotoCampanha.url }});">
-                    <div class="desc-bar">
+                    <div class="desc-bar flex">
                         <div class="enviroment-box">
                             <p>{{ campanha.ambienteCampanha }}</p>
                         </div>
@@ -118,7 +118,7 @@
 
                 <div class="quest-body">
                     <div class="quest-title flex">
-                        <a href="{% url 'detalhes_campanha' campanha.id %}"></a>
+                        <a href="{% url 'detalhes_campanha' campanha.id %}">{{ campanha.nomeCampanha }}</a>
                         <button>
                             <p>Jogar</p>
                         </button>
