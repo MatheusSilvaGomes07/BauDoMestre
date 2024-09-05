@@ -83,19 +83,15 @@
         </div>
 
         <div class="create-quest">
-            <button>
-                <h4>Criar Campanha</h4>
-            </button>
+            {% if perfil.tipo_player == "Ambos" or perfil.tipo_player == "Mestre" %}
+                <button onclick="window.location.href = '{% url 'criarCampanhas' %}';">
+                    <h4>Criar Campanha</h4>
+                </button>
+            {% endif %}
         </div>
     </div>
 
-    <div style="justify-content: space-between;" class='flex'>
-        {% if perfil.tipo_player == "Ambos" or perfil.tipo_player == "Mestre" %}
-        <a style="all: unset; cursor: pointer; text-decoration: none; color: white; font-weight: bold; font-size: 1.4rem;" href="{% url 'criarCampanhas' %}">Crie suas próprias mesas</a>
-        {% endif %}
-    </div>
-
-
+    <div class="horizontal-row"></div>
 
     <div class="quests">
 
@@ -108,20 +104,54 @@
         {% for campanha, grupos in campanhas_e_grupos.items %}
             <div class="quest">
 
-                <div class="quest-header flex">
+                <div class="quest-header flex-column" style="background-image: url({{ campanha.fotoCampanha.url }});">
+                    <div class="desc-bar">
+                        <div class="enviroment-box">
+                            <p>{{ campanha.ambienteCampanha }}</p>
+                        </div>
 
-                <img src="{{ campanha.fotoCampanha.url }}" alt="">
-                <div class="quest-info">
-                    <h3><a href="{% url 'detalhes_campanha' campanha.id %}">{{ campanha.nomeCampanha }}</a></h3>
-                    <h4>Mestre: <a href="{% url 'exibir_perfil' perfil_slug=campanha.nomeMestre.slug %}">{{ campanha.nomeMestre.nomePerfil.username }}</a></h4>
-                    <h4>Sistema: <strong>{{ campanha.sistemaCampanha }}</strong></h4>
+                        <div class="genre-box">
+                            <p>{{ campanha.generoRPG }}</p>
+                        </div>
+                    </div>
                 </div>
 
+                <div class="quest-body">
+                    <div class="quest-title flex">
+                        <a href="{% url 'detalhes_campanha' campanha.id %}"></a>
+                        <button>
+                            <p>Jogar</p>
+                        </button>
+                    </div>
+
+                    <div class="divison-row"></div>
+
+                    <div class="quest-desc">
+                        <p id="text">{{ campanha.descricaoCampanha }}</p>
+
+                        <div class="quest-tags">
+                            <div class="tag">
+                                <p>{{ campanha.sistemaCampanha }}</p>
+                            </div>
+
+                            <div class="tag">
+                                <p>{{ campanha.numeroJogadores }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <p id="text">{{ campanha.descricaoCampanha }}</p>
+                <!-- <div class="quest-header flex">
+                    <div class="quest-info">
+                        <h3><a href="{% url 'detalhes_campanha' campanha.id %}">{{ campanha.nomeCampanha }}</a></h3>
+                        <h4>Mestre: <a href="{% url 'exibir_perfil' perfil_slug=campanha.nomeMestre.slug %}">{{ campanha.nomeMestre.nomePerfil.username }}</a></h4>
+                        <h4>Sistema: <strong>{{ campanha.sistemaCampanha }}</strong></h4>
+                    </div>
+                </div> -->
 
-                <div class="quest-footer flex">
+                <!-- <p id="text">{{ campanha.descricaoCampanha }}</p> -->
+
+                <!-- <div class="quest-footer flex">
                 <div class="stats-tags flex">
                     <div class="gender">
                     <p>{{ campanha.generoRPG }}</p>
@@ -132,31 +162,34 @@
                     <div class="qnt">
                     <p>Max player: {{ campanha.numeroJogadores }}</p>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="play">
+                <!-- <div class="play">
                     {% for grupo in grupos %}
                     <div id="{{ grupo.uuid }}">
                         {% if request.user in grupo.membros.all %}
                             <a href="{% url 'Abrir_chat_pub' uuid=grupo.uuid %}">Abrir</a>
                             {% if user != grupo.criador %}
-                            /
-                            <a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a>
+                                /
+                                <a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a>
                             {% endif %}
+
                             {% if user == grupo.criador %}
                                 /
                                 <a href="{% url 'Remover_grupo' uuid=grupo.uuid %}">Excluir</a>
                             {% endif %}
+
                             {% else %}
-                            {% if grupo.envioSolicitacao == '0' %}
-                            <a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a>
-                            {% else %}
-                            <p>Solicitação enviada</p>
-                            {% endif %}
-                            {% endif %}
+                                {% if grupo.envioSolicitacao == '0' %}
+                                <a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a>
+                                {% else %}
+                                <p>Solicitação enviada</p>
+                                {% endif %}
+                        {% endif %}
                     </div>
-                {% endfor %}
-                </div>
+                    {% endfor %}
+                </div>-->
+
                 </div>
             </div>
         {% endfor %}

@@ -9,7 +9,7 @@ nav {
 }
 
 .mural-banner {
-  background: linear-gradient(0.75turn, #000000, #5B5C84);
+  background: linear-gradient(0.7turn, #000000 -70%, #5B5C84 257%);
 }
 
 .mural-banner .mural-leftColumn {
@@ -114,29 +114,55 @@ nav {
   background-color: var(--red1);
   padding: 2rem 3rem;
   border-radius: 15px;
+  cursor: pointer;
 }
-/**/
+
+.horizontal-row {
+  background: radial-gradient(#FFFFFF 10%, #505050);
+  width: 93%;
+  height: 5px;
+  align-self: center;
+  margin-top: 2rem;
+}
 
 .quests {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   margin-top: 2rem;
   gap: 2rem;
-  padding-bottom: 10%;
 }
 
 .quest {
-  gap: 2vw;
-  width: 95%;
-  border: 1px solid #FFF;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #8C0000, #1F2236);
+  z-index: 1;
+  width: 400px;
 }
 
-.quest img {
-  border-radius: 100%;
+.quest::before {
+  content: "";
+  position: absolute;
+  background-color: #18181C;
+  width: 99%;
+  height: 99%;
+  z-index: -1;
+  border-radius: 10px;
+}
+
+.quest .quest-header {
+  position: relative;
+  height: 180px;
+  background-size: cover;
+}
+
+.quest .quest-header img {
+  width: 100%;
+  height: 100%;
+}
+
+.quest .quest-header .desc-bar {
+  position: absolute;
+  bottom: 0;
 }
 
 .quest a {
@@ -144,25 +170,11 @@ nav {
   color: white;
 }
 
-
-
 .quest #text {
   margin-bottom: 1rem;
   font-size: clamp(14px, 1.8vw, 18px);
     width: 95%;
     font-weight: 600;
-}
-
-.quest-header {
-  justify-content: start;
-  height: 8rem;
-  gap: 2rem;
-  width: 95%;
-}
-
-.quest-header img {
-  width: clamp(80px, 7vw, 100px);
-  height: clamp(80px, 7vw, 100px);
 }
 
 .quest-info {
