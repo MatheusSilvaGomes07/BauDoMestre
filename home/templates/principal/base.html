@@ -9,6 +9,11 @@
     {% comment %} <title>Baú do Mestre</title> {% endcomment %}
     <link rel="stylesheet" href="{% static "css/navbar.css" %}" />
     <link rel="shortcut icon" href="{% static 'img/ain.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "css/global.css" %}" />
+    <link rel="stylesheet" href="{% static "css/responsivity.css" %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
     {% block head %}
 
     {% endblock %}
@@ -18,7 +23,11 @@
     {% if user.is_authenticated %}
     {% include 'includes/navbar.html' %}
     {% else %}
-    <nav>Navbar <a href="{% url 'account_signup' %}">Cadastre-se </a><a href="{% url 'account_login' %}">Login</a></nav>
+        <nav>
+            Navbar
+            <a href="{% url 'account_signup' %}">Cadastre-se</a>
+            <a href="{% url 'account_login' %}">Login</a>
+        </nav>
     {% endif %}
 
     {% block conteudo %}

@@ -1,9 +1,5 @@
 body {
   text-align: justify;
-  font-size: var(--font-size-smi);
-  color: var(--color-white);
-  font-family: var(--body);
-  background: black;
   display: flex;
   flex-direction: column;
 }
@@ -22,11 +18,12 @@ nav {
 }
 
 .mural-banner .mural-leftColumn h1 {
-  font-size: 85px;
+  font-size: var(--title-82);
 }
 
 .mural-banner .mural-leftColumn h3 {
   font-size: 36px;
+  font-weight: normal;
   width: 90%;
 }
 
@@ -36,6 +33,8 @@ nav {
   border-radius: 15px;
   align-self: center;
   padding: 1.8rem;
+  justify-content: space-between;
+  text-align: center;
 }
 
 .filter-box select {
@@ -56,74 +55,67 @@ nav {
   background-color: white;
 }
 
+.search-form {
+  gap: 3rem;
+  margin: 36px 0 60px 0;
+}
 
+.search-form h4 {
+  text-align: center;
+}
 
 .searchbar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  justify-content: center;
 }
 
 .search-head {
   height: 4rem;
   width: 95%;
-  gap: 5%;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .search-head input{
   all: unset;
   border-radius: 15px;
-border: 2px solid #4A4A4A;
-background: linear-gradient(120deg, #080808 -37.01%, rgba(53, 53, 53, 0.00) 165.9%), #767676;
-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
-width:  80%;
-height: 100%;
-font-size: 2.3rem;
-padding-left: .8rem;
+  background: linear-gradient(120deg, #080808 -37.01%, rgba(53, 53, 53, 0.00) 165.9%), #767676;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  width:  50%;
+  font-size: 2rem;
+  font-family: var(--garute);
+  padding-left: .8rem;
+  color: white;
 }
 
 .search-head button {
   all: unset;
-  font-family: var(--font-inter);
   border-radius: 5px;
-  background: var(--MudBase, #A8233C);
-  width: 10rem;
+  background: var(--red1);
   text-align: center;
-  height: 100%;
-  font-size: 1.8rem;
   cursor: pointer;
-  font-weight: bold;
+  padding: 5px 1rem;
 }
 
-.filters {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 95%;
-}
-
-.filters h4 {
-  font-size: 1.5rem;
-}
-
-.filter {
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-}
-
-.filter h3 {
-  font-size: 1.5rem;
-}
-
-.filter-box {
+.search-result {
   justify-content: space-between;
-  text-align: center;
+  padding: 0 50px;
 }
 
+.search-result .result-left{
+  gap: 10px;
+}
+
+.search-result .result-left p {
+  font-size: var(--logo);
+}
+
+.search-result .create-quest button {
+  background-color: var(--red1);
+  padding: 2rem 3rem;
+  border-radius: 15px;
+}
+/**/
 
 .quests {
   display: flex;

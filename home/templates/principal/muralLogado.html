@@ -6,15 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% comment %} <title>Baú do Mestre</title> {% endcomment %}
-    <link rel="shortcut icon" href="{% static 'img/ain.png' %}" type="image/x-icon">
-
-    <link rel="stylesheet" href="{% static "css/global-ia.css" %}" />
     <link rel="stylesheet" href="{% static "css/campanhas_mural.css" %}" />
-    <link rel="stylesheet" href="{% static "css/responsivity.css" %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
     <title>Buscar mesa - Baú do Mestre</title>
 {% endblock %}
 
@@ -32,7 +24,7 @@
 
     <div class="filter-box flex">
         <div class="filter-selec">
-            <h3>Sistema</h3>
+            <h4>Sistema</h4>
             <select name="sistema" id="sistema">
                 <option value="">Todos</option>
                 <option value="Dungeons & Dragons">Dungeons & Dragons</option>
@@ -46,7 +38,7 @@
         <div class="vertical-row"></div>
 
         <div class="filter-selec">
-            <h3>Ambiente</h3>
+            <h4>Ambiente</h4>
             <select name="ambiente" id="ambiente">
                 <option value="">Todos</option>
                 <option value="Online">Online</option>
@@ -57,7 +49,7 @@
         <div class="vertical-row"></div>
 
         <div class="filter-selec">
-            <h3>Gênero</h3>
+            <h4>Gênero</h4>
             <select name="genero" id="genero">
                 <option value="">Todos</option>
                 <option value="Aventura">Aventura</option>
@@ -72,27 +64,36 @@
         </div>
     </div>
 
-    <form style="all: unset;" method="GET" class="search-form">
+    <form method="GET" class="search-form flex-column">
+        <h4>Ou Busque Pelo Nome!</h4>
         <div class="searchbar">
-        <div class="search-head flex">
-            <input type="text" name="q" placeholder="Buscar por nome da campanha">
-            <button type="submit">
-            <p>Buscar</p>
-            </button>
-        </div>
-
-        <div class="filters">
-            <div style="justify-content: space-between;" class='flex'>
-                <h4>Filtros</h4>
-
-                {% if perfil.tipo_player == "Ambos" or perfil.tipo_player == "Mestre" %}
-                <a style="all: unset; cursor: pointer; text-decoration: none; color: white; font-weight: bold; font-size: 1.4rem;" href="{% url 'criarCampanhas' %}">Crie suas próprias mesas</a>
-                {% endif %}
+            <div class="search-head flex">
+                <input type="text" name="q" autocomplete="off" placeholder="Nome da campanha">
+                <button type="submit">
+                    <img src="{% static "img/icons/Lupa.svg" %}" alt="Buscar">
+                </button>
             </div>
         </div>
-
-        </div>
     </form>
+
+    <div class="search-result flex">
+        <div class="result-left flex-column">
+            <h3>Resultado da Busca</h3>
+            <p>Foram Encontradas: <strong>15 Campanhas</strong> </p>
+        </div>
+
+        <div class="create-quest">
+            <button>
+                <h4>Criar Campanha</h4>
+            </button>
+        </div>
+    </div>
+
+    <div style="justify-content: space-between;" class='flex'>
+        {% if perfil.tipo_player == "Ambos" or perfil.tipo_player == "Mestre" %}
+        <a style="all: unset; cursor: pointer; text-decoration: none; color: white; font-weight: bold; font-size: 1.4rem;" href="{% url 'criarCampanhas' %}">Crie suas próprias mesas</a>
+        {% endif %}
+    </div>
 
 
 
