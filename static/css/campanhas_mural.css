@@ -100,6 +100,7 @@ nav {
 .search-result {
   justify-content: space-between;
   padding: 0 50px;
+  align-items: center;
 }
 
 .search-result .result-left{
@@ -112,7 +113,7 @@ nav {
 
 .search-result .create-quest button {
   background-color: var(--red1);
-  padding: 2rem 3rem;
+  padding: 1.5rem 3rem;
   border-radius: 15px;
   cursor: pointer;
 }
@@ -127,8 +128,10 @@ nav {
 
 .quests {
   display: flex;
-  margin-top: 2rem;
-  gap: 2rem;
+  margin: 2rem 70px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
 .quest {
@@ -141,18 +144,21 @@ nav {
 
 .quest::before {
   content: "";
-  position: absolute;
-  background-color: #18181C;
-  width: 99%;
-  height: 99%;
-  z-index: -1;
-  border-radius: 10px;
+    position: absolute;
+    background-color: #18181C;
+    width: 98%;
+    height: 98%;
+    z-index: -1;
+    border-radius: 10px;
+    margin: 5px;
 }
 
 .quest .quest-header {
   position: relative;
   height: 180px;
   background-size: cover;
+  margin: 5px 4px;
+  border-radius: 10px 10px 0px 0;
 }
 
 .quest .quest-header img {
@@ -163,78 +169,72 @@ nav {
 .quest .quest-header .desc-bar {
   position: absolute;
   bottom: 0;
-  width: 98%;
+  width: 100%;
   justify-content: end;
   gap: 5px;
-  background: linear-gradient(270deg, #201353 0%, #55090F 59%, #D00000 100%);
+  background: linear-gradient(270deg, rgb(32 19 83 / 34%) 0%, rgb(85 9 15 / 34%) 59%, rgb(208 0 0 / 34%) 100%);
 }
 
-.quest a {
+.quest-header .desc-bar .desc-tag {
+  margin: 7px 5px;
+  padding: 5px 10px;
+  border-radius: 35px;
+  background-color: #1a00009a;
+  border: #8C00005e 1px solid;
+
+}
+
+.quest-body {
+  margin: 15px 10px;
+}
+
+.quest-body .quest-title {
+  justify-content: space-between;
+  margin: 0 10px;
+}
+
+.quest-body .quest-title > p {
+  font-size: var(--text-20);
+  font-weight: bold;
+}
+
+.quest-body .quest-title button {
+  background: var(--red1);
+  padding: 6px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.quest-title p > a {
   text-decoration: none;
   color: white;
+  text-transform: uppercase;
 }
 
-.quest #text {
-  margin-bottom: 1rem;
-  font-size: clamp(14px, 1.8vw, 18px);
-    width: 95%;
-    font-weight: 600;
+.divison-row {
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  margin: 10px 0;
 }
 
-.quest-info {
-  width: 100% ;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-    gap: 0.3rem;
+.quest-desc {
+  gap: 2rem;
 }
 
-.quest-info h3 {
-  font-size: clamp(20px, 3.4vw, 40px);
+.quest-desc #text {
+  margin: 0 14px 1rem 14px;
+  font-weight: 500;
 }
 
-.quest-info h4 {
-  font-size: clamp(.9rem, 2vw, 1rem);
-  color: #9A9A9A;
+.quest-desc .quest-tags {
+  gap: 10px;
+  margin-left: 8px;
 }
 
-.quest-footer {
-  justify-content: space-between;
-  align-items: start;
-  width: 95%;
-  margin-bottom: 1rem;
-}
-
-.stats-tags {
-  width: 40%;
-  justify-content: space-between;
-}
-
-.stats-tags div {
-  background: var(--DarkRed, #760D21);
-  padding: .5rem;
+.quest-desc .quest-tags .tag {
+  background-color: var(--red1);
+  border-radius: 35px;
+  padding: 9px 12px;
   font-weight: bold;
-  text-align: center;
-}
-
-.stats-tags div:nth-of-type(1), .stats-tags div:nth-of-type(2){
-  width: 30%;
-}
-
-.play {
-  border-radius: 5px;
-  background: var(--MudBase, #A8233C);
-  font-weight: bold;
-  padding: .8rem 2rem;
-  font-size: 2rem;
-}
-
-.noneCampanha {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-strong {
-  color: white;
 }
