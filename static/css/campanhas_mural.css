@@ -10,10 +10,11 @@ nav {
 
 .mural-banner {
   background: linear-gradient(0.7turn, #000000 -70%, #5B5C84 257%);
+  margin-bottom: 8rem;
 }
 
 .mural-banner .mural-leftColumn {
-  gap: 3.5rem;
+  gap: 2.7rem;
   padding: 2rem 0 2rem 2rem;
 }
 
@@ -35,12 +36,20 @@ nav {
   padding: 1.8rem;
   justify-content: space-between;
   text-align: center;
+  position: absolute;
+  margin: 38% 0 0 1.3rem;
 }
 
 .filter-box select {
   all: unset;
-  background-color: white;
-  color: black;
+  color: white;
+  font-size: 28px;
+  font-family: var(--poppins);
+  border-bottom: 2px solid white;
+}
+
+.filter-box select option {
+  background-color: black;
 }
 
 .filter-selec {
@@ -90,7 +99,7 @@ nav {
 
 .search-head button {
   all: unset;
-  border-radius: 5px;
+  border-radius: 10px;
   background: var(--red1);
   text-align: center;
   cursor: pointer;
