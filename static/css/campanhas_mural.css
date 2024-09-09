@@ -214,6 +214,10 @@ nav {
   font-weight: bold;
 }
 
+.quest-body .quest-title button a {
+  text-decoration: none;
+}
+
 .quest-title p > a {
   text-decoration: none;
   color: white;

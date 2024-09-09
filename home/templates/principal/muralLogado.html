@@ -79,7 +79,7 @@
         <div class="search-result flex">
             <div class="result-left flex-column">
                 <h3>Resultado da Busca</h3>
-                <p>Foram Encontradas: <strong>15 Campanhas</strong> </p>
+                <p>Foram Encontradas: <strong>{{ campanhas_e_grupos.items|length }} Campanhas</strong> </p>
             </div>
 
             <div class="create-quest">
@@ -99,7 +99,7 @@
                 {% else %}
                 <div class="no-found flex-column">
                     <div class="no-found-Text flex-column">
-                        <h2>Viish.. Aparentemente não começaram essa aventura</h2>
+                        <h2>Viish... Aparentemente não começaram essa aventura</h2>
                         <h4>Mas isso não te impede de começar a sua própria</h4>
                     </div>
 
@@ -128,7 +128,19 @@
                         <div class="quest-title flex">
                             <p><a href="{% url 'detalhes_campanha' campanha.id %}">{{ campanha.nomeCampanha }}</a></p>
                             <button>
-                                <p>Jogar</p>
+                                {% for grupo in grupos %}
+                                    <div id="{{ grupo.uuid }}">
+                                        {% if request.user in grupo.membros.all %}
+                                                <p><a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a></p>
+                                        {% else %}
+                                            {% if grupo.envioSolicitacao == '0' %}
+                                                <p><a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a></p>
+                                            {% else %}
+                                                <p>Solicitação enviada</p>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
                             </button>
                         </div>
 
@@ -149,58 +161,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Sistema Antigo -->
-
-                    <!-- <div class="quest-header flex">
-                        <div class="quest-info">
-                            <h3><a href="{% url 'detalhes_campanha' campanha.id %}">{{ campanha.nomeCampanha }}</a></h3>
-                            <h4>Mestre: <a href="{% url 'exibir_perfil' perfil_slug=campanha.nomeMestre.slug %}">{{ campanha.nomeMestre.nomePerfil.username }}</a></h4>
-                            <h4>Sistema: <strong>{{ campanha.sistemaCampanha }}</strong></h4>
-                        </div>
-                    </div> -->
-
-                    <!-- <p id="text">{{ campanha.descricaoCampanha }}</p> -->
-
-                    <!-- <div class="quest-footer flex">
-                    <div class="stats-tags flex">
-                        <div class="gender">
-                        <p>{{ campanha.generoRPG }}</p>
-                        </div>
-                        <div class="envy">
-                        <p>{{ campanha.ambienteCampanha }}</p>
-                        </div>
-                        <div class="qnt">
-                        <p>Max player: {{ campanha.numeroJogadores }}</p>
-                        </div>
-                    </div> -->
-
-                    <!-- <div class="play">
-                        {% for grupo in grupos %}
-                        <div id="{{ grupo.uuid }}">
-                            {% if request.user in grupo.membros.all %}
-                                <a href="{% url 'Abrir_chat_pub' uuid=grupo.uuid %}">Abrir</a>
-                                {% if user != grupo.criador %}
-                                    /
-                                    <a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a>
-                                {% endif %}
-
-                                {% if user == grupo.criador %}
-                                    /
-                                    <a href="{% url 'Remover_grupo' uuid=grupo.uuid %}">Excluir</a>
-                                {% endif %}
-
-                                {% else %}
-                                    {% if grupo.envioSolicitacao == '0' %}
-                                    <a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a>
-                                    {% else %}
-                                    <p>Solicitação enviada</p>
-                                    {% endif %}
-                            {% endif %}
-                        </div>
-                        {% endfor %}
-                    </div>-->
-
                 </div>
             {% endfor %}
 
