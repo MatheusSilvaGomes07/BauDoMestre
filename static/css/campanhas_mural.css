@@ -247,3 +247,33 @@ nav {
   padding: 9px 12px;
   font-weight: bold;
 }
+
+/*No found Quest*/
+
+.no-found {
+  align-items: center;
+  gap: 5rem;
+  margin: 2rem 0;
+}
+
+.no-found .no-found-Text {
+  text-align: center;
+  gap: 26px;
+}
+
+.no-found .no-found-Text h2 {
+  font-size: 48px;
+  font-family: var(--poppins);
+  font-weight: bold;
+}
+
+.no-found .no-found-Text h4 {
+  font-weight: normal;
+}
+
+.no-found .no-found-Button {
+  background-color: var(--red1);
+  padding: 1.5rem 3rem;
+  border-radius: 15px;
+  cursor: pointer;
+}

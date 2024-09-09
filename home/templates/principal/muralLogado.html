@@ -97,8 +97,16 @@
 
             {% if campanhas_e_grupos.items %}
                 {% else %}
-                <br>
-                    <h2>Nenhuma campanha encontrada.</h2>
+                <div class="no-found flex-column">
+                    <div class="no-found-Text flex-column">
+                        <h2>Viish.. Aparentemente não começaram essa aventura</h2>
+                        <h4>Mas isso não te impede de começar a sua própria</h4>
+                    </div>
+
+                    <button class="no-found-Button" onclick="window.location.href = '{% url 'criarCampanhas' %}';">
+                        <h4>Criar Campanha</h4>
+                    </button>
+                </div>
             {% endif %}
 
             {% for campanha, grupos in campanhas_e_grupos.items %}
@@ -141,6 +149,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Sistema Antigo -->
 
                     <!-- <div class="quest-header flex">
                         <div class="quest-info">
