@@ -4,13 +4,10 @@ body {
   flex-direction: column;
 }
 
-nav {
-  position: relative;
-}
-
 .mural-banner {
   background: linear-gradient(0.7turn, #000000 -70%, #5B5C84 257%);
   margin-bottom: 8rem;
+  padding-top: 5rem;
 }
 
 .mural-banner .mural-leftColumn {

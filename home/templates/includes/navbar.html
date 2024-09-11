@@ -1,40 +1,26 @@
 {% load static %}
 <nav class="flex">
+
+    <img src="{% static "img/icons/Logo-Ain.svg" %}" alt="">
+
     <div class="nav-buttons flex">
-      <div class="nav-btn">
-        <a style="all: unset;" href="{% url 'index' %}">Home</a>
-      </div>
-      <div class="nav-btn">
-        <a style="all: unset;" href="{% url 'inventarioRedirect' %}"><p>Inventário</p></a>
-      </div>
-      <div class="nav-btn">
-        <a style="all: unset;" href="{% url 'buscarmesa' %}"><p>Campanhas</p></a>
-      </div>
-      <div class="nav-btn">
-        <a style="all: unset;" href="{% url 'listar_amigos' %}"><p>Social</p></a>
-      </div>
-      <div class="nav-btn">
-        <a style="all: unset;" href="{% url 'meus_personagens' %}"><p>Personagens</p></a>
-      </div>
-      <div class="nav-btn">
-        <a style="all: unset;" href="{% url 'account_logout' %}"><p>Sair</p></a>
-      </div>
-      {% if user.is_authenticated%}
-      {% else %}
-      <div class="nav-btn">
-        <a href="{% url 'account_signup' %}">Cadastre-se</a>
-      </div>
-      <div class="nav-btn">
-        <a href="{% url 'account_login' %}">Login</a>
-      </div>
-      {% endif %}
+        <div class="flex">
+          <p><a href="{% url 'index' %}">Home</a></p>
+          <p><a href="{% url 'inventarioRedirect' %}">Inventário</a></p>
+          <p><a href="{% url 'buscarmesa' %}">Campanhas</a></p>
+          <p><a href="{% url 'listar_amigos' %}">Social</a></p>
+          <p><a href="{% url 'meus_personagens' %}">Personagens</a></p>
+        </div>
+
+        <button id="logoff">
+          <p><a href="{% url 'account_logout' %}">Sair</a></p>
+        </button>
     </div>
-    <button
-    onclick="openSide()"><img class="navbar-icon" id="btn-ico" src="{% static "img/public/list-bold.svg" %}" alt=""></button>
+
     {% if fotoConta != "Indefinido" %}
     <a style="cursor: pointer;" href="{% url 'usuario' %}"><img style="border-radius: 100%;" class="navbar-icon" alt="" src="{{ fotoConta.url }}" /></a>
     {% else %}
         <a style="all: unset; cursor: pointer;" href="{% url 'usuario' %}"><img style="border-radius: 100%;" class="navbar-icon" alt="" src="{% static "img/ain.png" %}" /></a>
     {% endif %}
-    
+
   </nav>
