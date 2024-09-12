@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="flex">
 
-    <img src="{% static "img/icons/Logo-Ain.svg" %}" alt="">
+    <img id="Logo-Ain" src="{% static "img/icons/Logo-Ain.svg" %}" alt="">
 
     <div class="nav-buttons flex">
         <div class="flex">
@@ -12,15 +12,22 @@
           <p><a href="{% url 'meus_personagens' %}">Personagens</a></p>
         </div>
 
-        <button id="logoff">
-          <p><a href="{% url 'account_logout' %}">Sair</a></p>
-        </button>
-    </div>
+          <div class="logout flex">
+            <div class="username flex-column">
+              <p>{{ perfil.nomePerfil.username }}</p>
+              <p><a href="{% url 'account_logout' %}">Encerrar Sessão</a></p>
+            </div>
 
-    {% if fotoConta != "Indefinido" %}
-    <a style="cursor: pointer;" href="{% url 'usuario' %}"><img style="border-radius: 100%;" class="navbar-icon" alt="" src="{{ fotoConta.url }}" /></a>
-    {% else %}
-        <a style="all: unset; cursor: pointer;" href="{% url 'usuario' %}"><img style="border-radius: 100%;" class="navbar-icon" alt="" src="{% static "img/ain.png" %}" /></a>
-    {% endif %}
+            {% if fotoConta != "Indefinido" %}
+              <a class="user-icon flex" style="cursor: pointer;" href="{% url 'usuario' %}">
+                <img style="border-radius: 100%;" class="navbar-icon" alt="" src="{{ fotoConta.url }}" />
+              </a>
+            {% else %}
+                <a class="user-icon flex" style="all: unset; cursor: pointer;" href="{% url 'usuario' %}">
+                  <img style="border-radius: 100%;" class="navbar-icon" alt="" src="{% static "img/ain.png" %}" />
+                </a>
+            {% endif %}
+          </div>
+    </div>
 
   </nav>
