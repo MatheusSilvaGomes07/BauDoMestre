@@ -3,24 +3,84 @@
 {% load static %}
 {% block head %}
     <title>Detalhes da Campanha - Baú do Mestre</title>
-    <link rel="stylesheet" href="{% static "css/global-ia.css" %}"/>
     <link rel="stylesheet" href="{% static "css/detalheCampanha.css"%}"/>
-    <link rel="stylesheet" href="{% static "css/responsivity.css" %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"/>
 {% endblock %}
 
 {% block conteudo %}
 
-    <div class="quests">
+    <div class="quest-header flex-column">
 
-        <div class="boto-parent flex">
+        <div class="background">
+            <img class="header-child" alt="" src="{{ campanha.fotoCampanha.url }}"/>
+            <div class="banner-title flex">
+                <div class="left-text flex-column">
+                    <h3>{{ campanha.nomeCampanha }}</h3>
+                    <p>MESTRE: {{ campanha.nomeMestre.nomePerfil }}</p>
+                </div>
+                <img src="{% static "img/icons/DJCTQ_-_10.svg" %}" alt="">
+            </div>
+        </div>
+
+        <img id="caret" src="{% static "img/icons/Caret-Down.svg" %}" alt="">
+
+    </div>
+
+    <div class="quest-description">
+        <h3>{{ campanha.nomeCampanha }}</h3>
+        <p>MESTRE: {{ campanha.nomeMestre.nomePerfil }}</p>
+
+        <div class="description-columns">
+            <div class="desc-left flex-column">
+                <div class="description">
+                    <h4>Descrição</h4>
+                    <p>Lorem Ipsum</p>
+                </div>
+
+                <div class="spec">
+                    <h4>Especificações</h4>
+                    <div class="tags flex">
+                        <div class="sys-tag">
+                            <div class="p">Dungeons & Dragons</div>
+                        </div>
+
+                        <div class="envy-tag">
+                            <p>Presencial</p>
+                        </div>
+
+                        <div class="genre-tag">
+                            <p>Medieval</p>
+                        </div>
+                    </div>
+
+                    <div class="date">
+                        <div class="date-header flex">
+                            <p>Data da Sessão</p>
+                            <p>Tempo da Sessão</p>
+                        </div>
+
+                        <div class="date-info flex">
+                            <p>Dia</p>
+                            <p>Tempo da Sessão</p>
+                        </div>
+                    </div>
+
+                    <div class="party">
+                        <h4>Party</h4>
+                        <p>--Here Goes Party Table--</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="desc-right">
+
+            </div>
+        </div>
+    </div>
+
+        {% comment %} <div class="boto-parent flex">
 
             <div class="quests-header flex">
-                <p class="the-dragoon-hunters">{{ campanha.nomeCampanha }}</p>
-                
+                <p class="the-dragoon-hunters"></p>
             </div>
 
             {% if user == campanha.nomeMestre.nomePerfil %}
@@ -51,7 +111,7 @@
                 <div class="jogadores flex">
                     <b class="jogadores1">Jogadores</b>
                     <div class="players">
-                        
+
 
                         {% for membro in membros %}
                             <div class="jogador1 flex">
@@ -82,10 +142,10 @@
                                         {% endif %}
                                     {% endif %}
                                 </div>
-                                
+
                             </div>
-                        {% endfor %} 
-                        
+                        {% endfor %}
+
                     </div>
                 </div>
                 <div class="status flex">
@@ -120,11 +180,8 @@
                     </form>
                 </div>
             </div>
-        {% endif %}        
-        </div>
-
-
-    </div>
+        {% endif %}
+        </div> {% endcomment %}
 
 <script>
     function confirmarExclusao() {
@@ -133,5 +190,5 @@
         }
     }
 </script>
-        
+
 {% endblock %}

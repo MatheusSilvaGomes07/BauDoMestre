@@ -5,6 +5,7 @@ nav {
     width: 100%;
     padding: 1rem 0;
     position: absolute;
+    z-index: 5;
 }
 
 nav #Logo-Ain {

@@ -1,33 +1,61 @@
 body {
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+}
+
+.quest-header {
+  gap: 2rem;
+}
+
+.quest-header .background {
+  height: 700px;
+  display: flex;
   position: relative;
-  background: linear-gradient(169deg, #000 35.32%, rgba(53, 51, 51, 0.50) 218.41%);
+  z-index: 0;
+}
+
+.quest-header .background > img {
   height: 100%;
-  text-align: center;
-  font-size: var(--body-size);
-  color: var(--color-white);
-  font-family: var(--body);
+  width: 100%;
 }
 
-.quests {
-  height: 100%;
+.banner-title {
+  background: linear-gradient(#380e1750, #8C00007d);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1.5rem 0;
+  justify-content: space-between;
 }
 
-.quests-header {
-  justify-content: center;
-  gap: 4rem;
-  padding: 1rem;
-  width: 95%;
+.left-text {
+    gap: 1rem;
 }
 
-.the-dragoon-hunters {
-  font-size: var(--font-size-45xl);
-  font-family: var(--header-12);
-  text-align: left;
+.background .banner-title h3{
+  font-size: 75px;
+  text-transform: uppercase;
+  line-height: 65px;
 }
 
-.image-49-icon {
-  border-radius: var(--br-8xs);
-  width: clamp(50px, 7vw, 125px);
+.background .banner-title p{
+  font-size: var(--subtitle-25);
+}
+
+.banner-title h3, .banner-title p {
+  width: fit-content;
+  margin-left: 1.5rem;
+}
+
+.banner-title > img {
+  height: 8.12rem;
+  margin-right: 3rem;
+}
+
+#caret {
+  width: 4rem;
+  align-self: center;
 }
 
 /**/
@@ -93,12 +121,6 @@ body {
 .nivel-17-txt-container {
   line-break: anywhere;
   width: 100%;
-}
-
-.header-child {
-  border-radius: 15px;
-  width: 100%;
-  height: 22vw;
 }
 
 /**/
@@ -246,8 +268,3 @@ body {
 .jogar {
   font-size: var(--font-size-45xl);
 }
-
-
-/**/
-
-

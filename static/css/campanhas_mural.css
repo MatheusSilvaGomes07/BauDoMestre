@@ -56,6 +56,10 @@ body {
   width: 30%;
 }
 
+.filter-selec h4 {
+  font-size: 30px;
+}
+
 .vertical-row {
   width: 5px;
   background-color: white;
