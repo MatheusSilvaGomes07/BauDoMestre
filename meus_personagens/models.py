@@ -14,10 +14,6 @@ class Personagem(models.Model):
 
     class Meta:
         abstract = True
-        unique_together = ('nome',)
-
-
-
 
 class DnD(Personagem):
     #Dados Iniciais

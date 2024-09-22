@@ -21,11 +21,10 @@ class TabletopConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         data = json.loads(text_data)
-        action = data['action']
+        action = data.get('action')
 
         if action == 'load_map':
-            map_id = data['map_id']
-
+            map_id = data.get('map_id')
             await self.channel_layer.group_send(
                 self.campaign_group_name,
                 {
@@ -34,10 +33,9 @@ class TabletopConsumer(AsyncWebsocketConsumer):
                 }
             )
         elif action == 'move_token':
-            token_id = data['token_id']
-            position_x = data['position_x']
-            position_y = data['position_y']
-
+            token_id = data.get('token_id')
+            position_x = data.get('position_x')
+            position_y = data.get('position_y')
             await self.channel_layer.group_send(
                 self.campaign_group_name,
                 {
@@ -50,7 +48,6 @@ class TabletopConsumer(AsyncWebsocketConsumer):
 
     async def load_map(self, event):
         map_id = event['map_id']
-
         await self.send(text_data=json.dumps({
             'action': 'load_map',
             'map_id': map_id
@@ -60,7 +57,6 @@ class TabletopConsumer(AsyncWebsocketConsumer):
         token_id = event['token_id']
         position_x = event['position_x']
         position_y = event['position_y']
-
         await self.send(text_data=json.dumps({
             'action': 'move_token',
             'token_id': token_id,

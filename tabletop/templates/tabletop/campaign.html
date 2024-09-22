@@ -90,11 +90,21 @@
 </head>
 <body>
     {% if is_mestre %}
-    {% include "tabletop/includes/mapa_form.html" %}
-    <h1>Campaign Maps</h1>
-    
+
+        <h1>Criar Mapa</h1>
+        {% include "tabletop/includes/mapa_form.html" %}
+
+        <h1>Criar Pasta</h1>
+        {% include "tabletop/includes/pastaCriaturas.html" %}
+
+        <h1>Campaign Maps</h1>
         {% include "tabletop/includes/lista_mapas.html" %}
+
     {% endif %}
+
+    <h1> Pastas de fichas </h1>
+    {% include "tabletop/includes/lista_pastasCriaturas.html" %}
+
     <div id="map-container">
         <!-- Loaded map will be inserted here -->
     </div>

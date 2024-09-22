@@ -1,7 +1,28 @@
 import os
 from django.db import models
 from home.models import Campanha
+from meus_personagens.models import DnD, OrdemParanormal, Tormenta, CallOfCthulhu, Personagem
 
+class PastaCriaturas(models.Model):
+    nome = models.CharField(max_length=100)
+    campanha = models.ForeignKey(Campanha, on_delete=models.CASCADE)
+
+class DnDCampanha(DnD):
+    campanha_id = models.ForeignKey(Campanha, on_delete=models.CASCADE)
+    pasta = models.ForeignKey(PastaCriaturas, on_delete=models.CASCADE)
+
+class OrdemParanormalCampanha(OrdemParanormal):
+    campanha_id = models.ForeignKey(Campanha, on_delete=models.CASCADE)
+    pasta = models.ForeignKey(PastaCriaturas, on_delete=models.CASCADE)
+
+class TormentaCampanha(Tormenta):
+    campanha_id = models.ForeignKey(Campanha, on_delete=models.CASCADE)
+    pasta = models.ForeignKey(PastaCriaturas, on_delete=models.CASCADE)
+
+class CallOfCthulhuCampanha(CallOfCthulhu):
+    campanha_id = models.ForeignKey(Campanha, on_delete=models.CASCADE)
+    pasta = models.ForeignKey(PastaCriaturas, on_delete=models.CASCADE)
+    
 class Map(models.Model):
     name = models.CharField(max_length=100)
     campanha_id = models.ForeignKey(Campanha, on_delete=models.CASCADE)
@@ -37,3 +58,5 @@ class Token(models.Model):
         if self.image and os.path.isfile(self.image.path):
             os.remove(self.image.path)
         super().delete(*args, **kwargs)
+
+
