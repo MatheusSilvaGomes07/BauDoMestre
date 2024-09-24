@@ -25,48 +25,67 @@
 
     </div>
 
-    <div class="quest-description">
-        <h3>{{ campanha.nomeCampanha }}</h3>
-        <p>MESTRE: {{ campanha.nomeMestre.nomePerfil }}</p>
+    <div class="quest-description flex-column">
+        <div class="quest-title flex-column">
+            <h3>{{ campanha.nomeCampanha }}</h3>
+            <p>MESTRE: {{ campanha.nomeMestre.nomePerfil }}</p>
+        </div>
 
-        <div class="description-columns">
+        <div class="description-columns flex">
             <div class="desc-left flex-column">
-                <div class="description">
+                <div class="description flex-column">
                     <h4>Descrição</h4>
-                    <p>Lorem Ipsum</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus, nunc a sodales facilisis, nisl libero rhoncus turpis, et dapibus sem eros eget neque. Nam vitae lobortis quam. Etiam semper ex ex, quis fermentum ligula pharetra sit amet. Curabitur orci enim, rhoncus nec dui ut, dictum ultricies nisi. Donec consequat nunc orci, eget porta nulla tristique vitae. Donec iaculis lectus eget metus vestibulum porta. Donec sodales a nisl sed lobortis. Nunc bibendum orci velit, ac vulputate nisl tempor quis. Mauris non efficitur orci. Sed at commodo erat. Etiam nunc augue, tempus non vehicula eget, tempus sed tellus.</p>
                 </div>
 
-                <div class="spec">
+                <div class="spec flex-column">
                     <h4>Especificações</h4>
                     <div class="tags flex">
-                        <div class="sys-tag">
-                            <div class="p">Dungeons & Dragons</div>
+                        <div class="tag">
+                            <p>Dungeons & Dragons</p>
                         </div>
 
-                        <div class="envy-tag">
+                        <div class="tag">
                             <p>Presencial</p>
                         </div>
 
-                        <div class="genre-tag">
+                        <div class="tag">
                             <p>Medieval</p>
                         </div>
                     </div>
 
-                    <div class="date">
-                        <div class="date-header flex">
+                    <div class="date flex">
+                        <div class="date-header flex-column">
                             <p>Data da Sessão</p>
-                            <p>Tempo da Sessão</p>
+                            <p id="dia-sessao">Segunda</p>
                         </div>
 
-                        <div class="date-info flex">
-                            <p>Dia</p>
+                        <div class="date-info flex-column">
                             <p>Tempo da Sessão</p>
+                            <p id="tempo-sessao">3h20min</p>
                         </div>
                     </div>
 
-                    <div class="party">
+                    <div class="party flex-column">
                         <h4>Party</h4>
-                        <p>--Here Goes Party Table--</p>
+
+                        <div class="party-box flex-column">
+                            <div class="party-header flex">
+                                <p>Nome</p>
+                                <p>Ficha</p>
+                                <p>Função</p>
+                                <p>Nivel</p>
+                            </div>
+
+                            <div class="party-content flex-column">
+                                <div class="party-member flex">
+                                    <p>Leonardo</p>
+                                    <p>Kharthaisen</p>
+                                    <p>Guerreiro</p>
+                                    <p>12</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
