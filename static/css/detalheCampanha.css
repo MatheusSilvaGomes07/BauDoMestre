@@ -83,6 +83,7 @@ body {
 .desc-left {
   width: 60%;
   gap: 50px;
+  padding-bottom: 70px;
 }
 
 .description {
@@ -128,9 +129,32 @@ body {
   gap: 35px;
 }
 
-.party-box {
+#party {
+  all: unset;
   background-color: #35353545;
   height: 405px;
+}
+
+tbody {
+  gap: 1rem;
+}
+
+#header {
+  background-color: var(--red1);
+  border-radius: 5px;
+}
+
+th {
+  font-size: var(--subtitle-25);
+}
+
+tr {
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+td {
+  font-size: var(--text-20);
 }
 
 .party-header {
@@ -143,213 +167,4 @@ body {
 .party-header p {
   font-size: var(--subtitle-25);
   font-weight: bold;
-}
-
-.boto-parent {
-  padding-top: 10vh;
-  flex-direction: column;
-  gap: 5vw;
-  height: 100%;
-}
-
-.header {
-  text-align: left;
-  font-size: var(--font-size-17xl);
-  justify-content: space-evenly;
-  height: 53%;
-  align-items: start;
-  width: 100%;
-}
-
-.header-leftcolumn {
-  width: 40%;
-  height: 100%;
-  flex-direction: column;
-  align-items: start;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.header-inner {
-  border-radius: var(--br-mini);
-  background-color: #f4f1f1;
-  width: 100%;
-  height: 85%;
-}
-
-.lorem-ipsum-dolor {
-  font-size: var(--font-size-3xs);
-  color: var(--color-black);
-  text-align: justify;
-  padding: 1rem;
-  background-color: white;
-  border-radius: var(--br-mini);
-  height: 21vw;
-  width: 100%;
-}
-
-.header-img {
-  width: 45%;
-  flex-direction: column;
-}
-
-.header-item {
-  width: 45%;
-  position: absolute;
-  height: 22vw;
-  background: linear-gradient(105deg, rgba(0, 0, 0, 0.42) -17.88%, #A8233C 93.66%, rgba(54, 0, 0, 0.57) 194.81%);
-  mix-blend-mode: hard-light;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 15px;
-}
-
-.nivel-17-txt-container {
-  line-break: anywhere;
-  width: 100%;
-}
-
-/**/
-
-.status-row {
-  width: 100%;
-  justify-content: space-between;
-}
-
-.jogadores {
-  width: 45%;
-  height: 60%;
-  overflow: hidden;
-  text-align: left;
-  font-size: var(--font-size-smi);
-  align-self: start;
-  margin: 0 0 0 2.5%;
-  flex-direction: column;
-  align-items: start;
-  gap: 1rem;
-}
-
-.jogadores1 {
-  font-size: var(--font-size-17xl);
-  letter-spacing: -0.02em;
-}
-
-.players {
-  background: linear-gradient(119.89deg, #080808, rgba(53, 53, 53, 0)), #767676;
-  height: 20vw;
-  width: 100%;
-  padding: 1rem 0;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    border-radius: 15px;
-}
-
-.players-child {
-  position: absolute;
-  left: 452px;
-  border-radius: var(--br-mini);
-  height: 15px;
-  transform: rotate(-90deg);
-  transform-origin: 0 0;
-}
-
-.jogador1 {
-  text-align: center;
-    font-size: var(--body-size);
-    justify-content: space-between;
-    width: 95%;
-}
-
-.nome-usuario1 {
-  text-align: left;
-  font-size: var(--font-size-smi);
-  gap: 0.5rem;
-  justify-content: start;
-  margin-left: 1rem;
-}
-
-.mestre {
-  font-size: var(--font-size-5xl);
-}
-
-.user-data {
-  flex-direction: column;
-  align-items: start;
-}
-
-.user-data p {
-  font-size: var(--font-size-4xl);
-}
-
-.player-icon {
-  border-radius: var(--br-194xl);
-  height: 46.1px;
-}
-
-.nome-do-usuario {
-  font-size: var(--font-size-lgi);
-  text-align: center;
-}
-
-/**/
-
-.status {
-  color: var(--color-darkgray);
-  flex-direction: column;
-  gap: 5rem;
-  width: 45%;
-  margin-right: 2.5%;
-}
-
-.status .icons div {
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.icons {
-  width: 100%;
-}
-
-
-
-.icons img {
-  width: clamp(25px, 7vw, 100px);
-  height: 0%;
-}
-
-.icons i {
-  width: 80%;
-  font-size: var(--font-size-5xl);
-  color: #c5c5c5;
-}
-
-.dungeons-and-dragons-png-1-icon {
-  height: 119px;
-}
-
-#group-tag {
-  font-size: var(--font-size-9xl);
-  font-family: var(--header-12);
-  color: var(--color-white);
-  text-align: left;
-}
-
-/**/
-
-.boto {
-  padding: 0 0 2rem 0;
-  width: 100%;
-}
-
-.boto-child {
-  border-radius: var(--br-8xs);
-  background-color: var(--mudbase);
-  box-sizing: border-box;
-  width: 50%;
-  height: 10vw;
-}
-
-.jogar {
-  font-size: var(--font-size-45xl);
 }
