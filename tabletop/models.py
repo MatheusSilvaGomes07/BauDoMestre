@@ -2,6 +2,8 @@ import os
 from django.db import models
 from home.models import Campanha
 from meus_personagens.models import DnD, OrdemParanormal, Tormenta, CallOfCthulhu, Personagem
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 class PastaCriaturas(models.Model):
     nome = models.CharField(max_length=100)
@@ -46,15 +48,20 @@ class Map(models.Model):
 
 class Token(models.Model):
     map = models.ForeignKey(Map, on_delete=models.CASCADE)
+    
+    # Campos para referenciar diferentes personagens
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    personagem = GenericForeignKey('content_type', 'object_id')
+    
     image = models.ImageField(upload_to='tokens/')
     position_x = models.IntegerField(default=0)
     position_y = models.IntegerField(default=0)
 
     def __str__(self):
         return f"Token on {self.map.name}"
-    
+
     def delete(self, *args, **kwargs):
-        # Remover a imagem do sistema de arquivos
         if self.image and os.path.isfile(self.image.path):
             os.remove(self.image.path)
         super().delete(*args, **kwargs)

@@ -7,7 +7,7 @@ from .membro_decorator import user_in_group
 from .mestre_decorator import is_mestre
 from .forms import MapForm, TokenForm, CampanhaDnDForm, CampanhaOrdemParanormalForm, CampanhaCallOfCthulhuCForm, CampanhaTormentaForm, PastaCriaturasForm
 from home.models import Campanha
-
+from django.contrib.contenttypes.models import ContentType
 
 @user_in_group
 #SE NÃO FOR MEMBRO DA CAMPANHA, É REDIRECIONADO PARA O BUSCAR MESA
@@ -43,8 +43,6 @@ def enter_campaign(request, campaign_id, is_mestre):
 
         # Armazena os personagens em um dicionário, com a pasta como chave
         pasta_personagens[pasta] = personagens
-
-
 
     tokenForm = TokenForm()
     if is_mestre:
@@ -106,20 +104,6 @@ def deletar_mapa(request, campaign_id, map_id, is_mestre):
         mapa.delete()
 
     return redirect('enter_campaign', campaign_id)
-        
-def upload_token(request, map_id):
-    mapa = get_object_or_404(Map, id=map_id)
-    campanha_id = mapa.campanha_id.id
-
-    formToken = TokenForm(request.POST, request.FILES)
-    if formToken.is_valid():
-        token = formToken.save(commit=False)
-        token.map = mapa
-        token.position_x = 372
-        token.position_y = -487
-        token.save()
-
-    return redirect ('enter_campaign', campanha_id)
 
 @is_mestre
 def criarPastaCriaturas(request, campaign_id, is_mestre):
@@ -160,3 +144,31 @@ def criar_personagem(request, campaign_id, pasta_id):
 
     return render(request, 'tabletop/criarPersonagem.html', {'personagemForm': personagemForm})
 
+def place_token(request, map_id, personagem_id):
+    mapa = get_object_or_404(Map, id=map_id)
+    sistema = mapa.campanha_id.sistemaCampanha
+
+    if sistema == 'Dungeons & Dragons':
+        personagem_model = DnDCampanha
+    elif sistema == 'Ordem Paranormal':
+        personagem_model = OrdemParanormalCampanha
+    elif sistema == 'Tormenta20':
+        personagem_model = TormentaCampanha
+    elif sistema == 'Call of Cthulu':
+        personagem_model = CallOfCthulhuCampanha
+    else:
+        print('Deu ruim')
+    
+    content_type = ContentType.objects.get_for_model(personagem_model)
+    personagem = personagem_model.objects.get(id=personagem_id)
+
+    token = Token.objects.create(
+        content_type=content_type,
+        object_id=personagem.id,
+        map=mapa,
+        position_x = 372,
+        position_y = -487,
+        image = personagem.foto
+    )
+
+    return redirect('load_map', map_id)

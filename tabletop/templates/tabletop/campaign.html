@@ -7,9 +7,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
     <script>
+        let currentMapId = null; // Variável global para armazenar o ID do mapa
         const campaignId = {{ campaign_id }};
         const socket = new WebSocket(`ws://${window.location.host}/ws/tabletop/${campaignId}/`);
-    
+        
         socket.onmessage = function(e) {
             const data = JSON.parse(e.data);
             if (data.action === 'load_map') {
@@ -22,6 +23,8 @@
         function loadMap(mapId) {
             $.get(`/tabletop/map/${mapId}/`, function(data) {
                 $('#map-container').html(data);
+                currentMapId = mapId; // Atualizando a variável global com o ID do mapa
+                console.log("Loaded map with ID:", mapId); // Exibindo no console
                 initializeDraggableTokens();
             });
         }
@@ -83,6 +86,11 @@
             token.css({ left: `${positionX}px`, top: `${positionY}px` });
         }
     
+        // Função para exibir o ID do mapa ao clicar
+        function showMapId(mapId) {
+            alert("Mapa ID: " + mapId); // Mostra o ID do mapa
+        }
+    
         $(document).ready(function() {
             initializeDraggableTokens();
         });
@@ -108,5 +116,6 @@
     <div id="map-container">
         <!-- Loaded map will be inserted here -->
     </div>
+    
 </body>
 </html>

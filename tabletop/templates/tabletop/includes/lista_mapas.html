@@ -2,12 +2,7 @@
     {% for map in maps %}
         <li><a href="#" onclick="selectMap({{ map.id }})">{{ map.name }}</a> <a href="{% url 'deletar_mapa' campaign_id map.id%}" class="delete-link">     Deletar</a></li>
         
-        <!--<h1>Upload Token Teste</h1>
-        <form method="post" enctype="multipart/form-data" action="{% url 'upload_token' map.id %}">
-            {% csrf_token %}
-            {{ tokenForm.as_p }}
-            <button type="submit">Enviar</button>
-        </form> -->
+
     {% endfor %}
 </ul>
 
@@ -22,4 +17,6 @@
             });
         });
     });
+
+
 </script>
