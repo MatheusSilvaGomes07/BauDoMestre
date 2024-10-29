@@ -136,11 +136,38 @@ def criar_personagem(request, campaign_id, pasta_id):
             personagemForm = CampanhaTormentaForm()
 
     elif sistemaCampanha == "Dungeons & Dragons":
-        personagemForm = CampanhaDnDForm()
+        personagemForm = CampanhaDnDForm(request.POST, request.FILES)
+        if personagemForm.is_valid():
+                personagem = personagemForm.save(commit=False)
+                personagem.nomePerfil = request.user
+                personagem.campanha_id = campanha
+                personagem.pasta = pasta
+                personagem.save()
+                return redirect('enter_campaign', campaign_id=campaign_id)
+        else:
+            personagemForm =CampanhaDnDForm()
     elif sistemaCampanha == "Call of Cthulu":
-        personagemForm = CampanhaCallOfCthulhuCForm()
+        personagemForm = CampanhaCallOfCthulhuCForm(request.POST, request.FILES)
+        if personagemForm.is_valid():
+                personagem = personagemForm.save(commit=False)
+                personagem.nomePerfil = request.user
+                personagem.campanha_id = campanha
+                personagem.pasta = pasta
+                personagem.save()
+                return redirect('enter_campaign', campaign_id=campaign_id)
+        else:
+            personagemForm = CampanhaCallOfCthulhuCForm()
     elif sistemaCampanha == "Ordem Paranormal":
-        personagemForm = CampanhaOrdemParanormalForm()
+        personagemForm = CampanhaOrdemParanormalForm(request.POST, request.FILES)
+        if personagemForm.is_valid():
+                personagem = personagemForm.save(commit=False)
+                personagem.nomePerfil = request.user
+                personagem.campanha_id = campanha
+                personagem.pasta = pasta
+                personagem.save()
+                return redirect('enter_campaign', campaign_id=campaign_id)
+        else:
+            personagemForm = CampanhaOrdemParanormalForm()
 
     return render(request, 'tabletop/criarPersonagem.html', {'personagemForm': personagemForm})
 
@@ -154,11 +181,11 @@ def place_token(request, map_id, personagem_id):
         personagem_model = OrdemParanormalCampanha
     elif sistema == 'Tormenta20':
         personagem_model = TormentaCampanha
-    elif sistema == 'Call of Cthulu':
+    elif sistema == 'Call of Cthulhu':
         personagem_model = CallOfCthulhuCampanha
     else:
-        print('Deu ruim')
-    
+        return JsonResponse({'error': 'Sistema de RPG desconhecido'}, status=400)
+
     content_type = ContentType.objects.get_for_model(personagem_model)
     personagem = personagem_model.objects.get(id=personagem_id)
 
@@ -166,9 +193,10 @@ def place_token(request, map_id, personagem_id):
         content_type=content_type,
         object_id=personagem.id,
         map=mapa,
-        position_x = 372,
-        position_y = -487,
-        image = personagem.foto
+        position_x=372,
+        position_y=-487,
+        image=personagem.foto
     )
 
-    return redirect('load_map', map_id)
+    # Retorne um JSON confirmando a criação do token
+    return JsonResponse({'status': 'success', 'token_id': token.id})

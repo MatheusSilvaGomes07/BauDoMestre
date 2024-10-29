@@ -10,3 +10,20 @@
     </div>
 </div>
 
+<script>
+    $(document).on('keydown', function(e) {
+        if (e.key === 'Delete' && selectedTokenId !== null) {
+            socket.send(JSON.stringify({
+                'action': 'delete_token',
+                'token_id': selectedTokenId
+            }));
+            selectedTokenId = null; // Resetando o token selecionado
+        }
+    });
+    
+    $(document).on('click', '.token', function() {
+        selectedTokenId = $(this).data('id');
+        console.log("Token selecionado com ID:", selectedTokenId);
+    });
+</script>
+

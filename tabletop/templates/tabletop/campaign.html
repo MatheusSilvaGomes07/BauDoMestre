@@ -10,16 +10,22 @@
         let currentMapId = null; // Variável global para armazenar o ID do mapa
         const campaignId = {{ campaign_id }};
         const socket = new WebSocket(`ws://${window.location.host}/ws/tabletop/${campaignId}/`);
+        let selectedTokenId = null;
         
         socket.onmessage = function(e) {
             const data = JSON.parse(e.data);
+            console.log("Received message:", data); // Adicione este log
+        
             if (data.action === 'load_map') {
                 loadMap(data.map_id);
             } else if (data.action === 'move_token') {
                 moveToken(data.token_id, data.position_x, data.position_y);
+            } else if (data.action === 'delete_token') {
+                $(`.token[data-id="${data.token_id}"]`).remove(); // Remove o token do DOM
             }
         };
-    
+        
+        
         function loadMap(mapId) {
             $.get(`/tabletop/map/${mapId}/`, function(data) {
                 $('#map-container').html(data);

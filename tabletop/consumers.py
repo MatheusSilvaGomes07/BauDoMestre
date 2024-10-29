@@ -1,3 +1,5 @@
+from channels.db import database_sync_to_async
+from .models import Token
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 
@@ -45,6 +47,9 @@ class TabletopConsumer(AsyncWebsocketConsumer):
                     'position_y': position_y
                 }
             )
+        elif action == 'delete_token':
+            token_id = data.get('token_id')
+            await self.delete_token(token_id)
 
     async def load_map(self, event):
         map_id = event['map_id']
@@ -62,4 +67,34 @@ class TabletopConsumer(AsyncWebsocketConsumer):
             'token_id': token_id,
             'position_x': position_x,
             'position_y': position_y
+        }))
+
+    @database_sync_to_async
+    def delete_token_sync(self, token_id):
+        try:
+            token = Token.objects.get(id=token_id)
+            token.delete()
+            print(f"Token {token_id} deleted.")  # Adicione log para verificar a exclusão
+            return token_id
+        except Token.DoesNotExist:
+            print(f"Token {token_id} does not exist.")  # Log para verificar se o token foi encontrado
+            return None  # Token não existe
+
+    async def delete_token(self, token_id):
+        deleted_token_id = await self.delete_token_sync(token_id)
+        if deleted_token_id is not None:
+            print(f"Token {deleted_token_id} deleted and notifying group.")  # Adicione este log
+            await self.channel_layer.group_send(
+                self.campaign_group_name,
+                {
+                    'type': 'token_deleted',
+                    'token_id': deleted_token_id
+                }
+            )
+
+    async def token_deleted(self, event):
+        token_id = event['token_id']
+        await self.send(text_data=json.dumps({
+            'action': 'delete_token',
+            'token_id': token_id
         }))

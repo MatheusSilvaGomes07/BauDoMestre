@@ -17,7 +17,7 @@
 <script>
     $('.place-on-map').click(function() {
         const personagemId = $(this).data('personagem-id');
-        const mapId = currentMapId;  // Você precisa definir o mapId em outro lugar do seu script
+        const mapId = currentMapId;  // You need to define currentMapId elsewhere in your script
 
         const myUrl = "{% url 'place_token' 0 0 %}".replace('0/0', mapId  + '/' + personagemId);
 
@@ -29,5 +29,5 @@
         .catch(error => {
             console.error("Erro na requisição:", error);
         });
-    });
+    });
 </script>
