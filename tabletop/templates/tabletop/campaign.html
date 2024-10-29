@@ -19,9 +19,15 @@
             if (data.action === 'load_map') {
                 loadMap(data.map_id);
             } else if (data.action === 'move_token') {
+                //console.log("Teste: ");
                 moveToken(data.token_id, data.position_x, data.position_y);
-            } else if (data.action === 'delete_token') {
-                $(`.token[data-id="${data.token_id}"]`).remove(); // Remove o token do DOM
+            } else if  (data.action === 'delete_token' && data.hide) {
+                const tokenElement = document.querySelector(`.token[data-id="${data.token_id}"]`);
+                console.log("ID do token a ser deletado:", data.token_id);
+                console.log("Elemento encontrado:", tokenElement);
+                if (tokenElement) {
+                    tokenElement.remove();
+                }
             }
         };
         

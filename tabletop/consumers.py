@@ -96,5 +96,6 @@ class TabletopConsumer(AsyncWebsocketConsumer):
         token_id = event['token_id']
         await self.send(text_data=json.dumps({
             'action': 'delete_token',
-            'token_id': token_id
+            'token_id': token_id,
+            'hide': True  # Incluímos uma flag para ocultar apenas o token deletado
         }))
