@@ -35,29 +35,29 @@
             <div class="desc-left flex-column">
                 <div class="description flex-column">
                     <h4>Descrição</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus, nunc a sodales facilisis, nisl libero rhoncus turpis, et dapibus sem eros eget neque. Nam vitae lobortis quam. Etiam semper ex ex, quis fermentum ligula pharetra sit amet. Curabitur orci enim, rhoncus nec dui ut, dictum ultricies nisi. Donec consequat nunc orci, eget porta nulla tristique vitae. Donec iaculis lectus eget metus vestibulum porta. Donec sodales a nisl sed lobortis. Nunc bibendum orci velit, ac vulputate nisl tempor quis. Mauris non efficitur orci. Sed at commodo erat. Etiam nunc augue, tempus non vehicula eget, tempus sed tellus.</p>
+                    <p>{{ campanha.descricaoCampanha }}</p>
                 </div>
 
                 <div class="spec flex-column">
                     <h4>Especificações</h4>
                     <div class="tags flex">
                         <div class="tag">
-                            <p>Dungeons & Dragons</p>
+                            <p>{{ campanha.sistemaCampanha }}</p>
                         </div>
 
                         <div class="tag">
-                            <p>Presencial</p>
+                            <p>{{ campanha.ambienteCampanha }}</p>
                         </div>
 
                         <div class="tag">
-                            <p>Medieval</p>
+                            <p>{{ campanha.generoRPG }}</p>
                         </div>
                     </div>
 
                     <div class="date flex">
                         <div class="date-header flex-column">
                             <p>Data da Sessão</p>
-                            <p id="dia-sessao">Segunda</p>
+                            <p id="dia-sessao">{{ campanha.diasSessao }}</p>
                         </div>
 
                         <div class="date-info flex-column">
@@ -95,17 +95,17 @@
                         <div class="join-line">
                             <div class="enviroment-label">
                                 <h4>Ambiente</h4>
-                                <p>Presencial</p>
+                                <p>{{ campanha.ambienteCampanha }}</p>
                             </div>
                             <div class="genre-label">
                                 <h4>Gênero</h4>
-                                <p>Medieval</p>
+                                <p>{{ campanha.generoRPG }}</p>
                             </div>
                         </div>
                         <div class="join-line">
                             <div class="system-label">
                                 <h4>Sistema</h4>
-                                <p>Dungeon&Dragons</p>
+                                <p>{{ campanha.sistemaCampanha }}</p>
                             </div>
                             <div class="party-label">
                                 <h4>Party</h4>

@@ -132,8 +132,9 @@ body {
 
 #party {
   all: unset;
-  background-color: #35353545;
+  background-color: #3535356b;
   height: 405px;
+  border-radius: 15px;
 }
 
 tbody {
