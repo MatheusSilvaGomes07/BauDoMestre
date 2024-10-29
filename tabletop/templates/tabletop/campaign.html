@@ -14,29 +14,45 @@
         
         socket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            console.log("Received message:", data); // Adicione este log
+           // console.log("Received message:", data);
         
             if (data.action === 'load_map') {
                 loadMap(data.map_id);
             } else if (data.action === 'move_token') {
-                //console.log("Teste: ");
                 moveToken(data.token_id, data.position_x, data.position_y);
-            } else if  (data.action === 'delete_token' && data.hide) {
+            } else if (data.action === 'delete_token' && data.hide) {
                 const tokenElement = document.querySelector(`.token[data-id="${data.token_id}"]`);
-                console.log("ID do token a ser deletado:", data.token_id);
-                console.log("Elemento encontrado:", tokenElement);
+               // console.log("ID do token a ser deletado:", data.token_id);
+               // console.log("Elemento encontrado:", tokenElement);
                 if (tokenElement) {
                     tokenElement.remove();
+                    updateTokenPositions(); // Chame a função para atualizar as posições dos tokens
                 }
             }
         };
         
+        // Nova função para atualizar as posições dos tokens
+        function updateTokenPositions() {
+            $(".token").each(function(index) {
+                const tokenId = $(this).data("id");
+                const positionX = $(this).position().left; // Captura a posição atual
+                const positionY = $(this).position().top; // Captura a posição atual
+        
+                // Atualize as posições no backend se necessário
+                socket.send(JSON.stringify({
+                    'action': 'move_token',
+                    'token_id': tokenId,
+                    'position_x': Math.round(positionX),
+                    'position_y': Math.round(positionY)
+                }));
+            });
+        }
         
         function loadMap(mapId) {
             $.get(`/tabletop/map/${mapId}/`, function(data) {
                 $('#map-container').html(data);
                 currentMapId = mapId; // Atualizando a variável global com o ID do mapa
-                console.log("Loaded map with ID:", mapId); // Exibindo no console
+               // console.log("Loaded map with ID:", mapId); // Exibindo no console
                 initializeDraggableTokens();
             });
         }

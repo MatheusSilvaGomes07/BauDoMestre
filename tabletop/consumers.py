@@ -74,16 +74,16 @@ class TabletopConsumer(AsyncWebsocketConsumer):
         try:
             token = Token.objects.get(id=token_id)
             token.delete()
-            print(f"Token {token_id} deleted.")  # Adicione log para verificar a exclusão
+           # print(f"Token {token_id} deleted.")  # Adicione log para verificar a exclusão
             return token_id
         except Token.DoesNotExist:
-            print(f"Token {token_id} does not exist.")  # Log para verificar se o token foi encontrado
+         #   print(f"Token {token_id} does not exist.")  # Log para verificar se o token foi encontrado
             return None  # Token não existe
 
     async def delete_token(self, token_id):
         deleted_token_id = await self.delete_token_sync(token_id)
         if deleted_token_id is not None:
-            print(f"Token {deleted_token_id} deleted and notifying group.")  # Adicione este log
+          #  print(f"Token {deleted_token_id} deleted and notifying group.")  # Adicione este log
             await self.channel_layer.group_send(
                 self.campaign_group_name,
                 {

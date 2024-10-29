@@ -193,8 +193,8 @@ def place_token(request, map_id, personagem_id):
         content_type=content_type,
         object_id=personagem.id,
         map=mapa,
-        position_x=372,
-        position_y=-487,
+        position_x=600,           #TAMANO PRE DEFINIDO DEPENDENDO DO TAMANHO DO MAPA
+        position_y=415,          #TAMANO PRE DEFINIDO DEPENDENDO DO TAMANHO DO MAPA
         image=personagem.foto
     )
 

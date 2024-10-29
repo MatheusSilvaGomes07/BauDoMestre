@@ -1,9 +1,9 @@
-<div id="map">
+<div id="map" style="position: relative;">
     <h2>{{ map.name }}</h2>
     <img src="{{ map.image.url }}" alt="{{ map.name }}">
     <div id="tokens">
         {% for token in tokens %}
-            <div class="token" data-id="{{ token.id }}" style="left: {{ token.position_x }}px; top: {{ token.position_y }}px; width: 100px; height: 100px;">
+            <div class="token" data-id="{{ token.id }}" style="left: {{ token.position_x }}px; top: {{ token.position_y }}px; width: 100px; height: 100px; position: absolute;">
                 <img src="{{ token.image.url }}" alt="Token" style="width: 100%; height: 100%;  cursor: pointer;">
             </div>
         {% endfor %}
