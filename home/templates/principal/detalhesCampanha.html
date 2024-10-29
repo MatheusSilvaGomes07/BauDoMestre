@@ -89,8 +89,35 @@
                 </div>
             </div>
 
-            <div class="desc-right">
+            <div class="desc-right flex">
+                <div id="join" class="join-box flex-column">
+                    <div class="join flex-column">
+                        <div class="join-line">
+                            <div class="enviroment-label">
+                                <h4>Ambiente</h4>
+                                <p>Presencial</p>
+                            </div>
+                            <div class="genre-label">
+                                <h4>Gênero</h4>
+                                <p>Medieval</p>
+                            </div>
+                        </div>
+                        <div class="join-line">
+                            <div class="system-label">
+                                <h4>Sistema</h4>
+                                <p>Dungeon&Dragons</p>
+                            </div>
+                            <div class="party-label">
+                                <h4>Party</h4>
+                                <p>5/12</p>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="button">
+                        <h3>Jogar</h3>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -207,6 +234,19 @@
             document.getElementById("form-excluir-campanha").submit();
         }
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const joinBox = document.querySelector("#join");
+    const joinBoxTopOffset = joinBox.offsetTop;
+
+    window.onscroll = function () {
+        if (window.scrollY >= joinBoxTopOffset) {
+            joinBox.classList.add("fixed");
+        } else {
+            joinBox.classList.remove("fixed");
+        }
+    };
+});
 </script>
 
 {% endblock %}
