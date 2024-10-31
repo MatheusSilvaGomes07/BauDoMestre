@@ -1,13 +1,160 @@
 {% extends 'meus_personagens/base.html' %}
+{% load static %}
 
-{% block title %}
-    {{user}} - Listagem dos meus personagens
+{% block head%}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} <title>Baú do Mestre</title> {% endcomment %}
+    <link rel="stylesheet" href="{% static "css/meusPersonagens.css" %}"/>
+    <title>Buscar mesa - Baú do Mestre</title>
 {% endblock %}
 
 {% block content %}
-    <h3><a href="{% url 'criacao_char' %}">Criar personagem</a></h3>
+
+<div class="mural-banner flex space-between">
+    <div class="mural-leftColumn flex flex-column">
+        <h1>Personagens</h1>
+        <h3>Crie seu personagem ou brinque de Deus!</h3>
+        <h3>Há: <strong>{{ Personagem|length }} Fichas</strong> Disponíveis</h3>
+    </div>
+
+    <img src="{% static "img/muralDragon.svg" %}" alt="">
+
+    <div class="filter-box flex">
+        <div class="filter-selec">
+            <h4>Sistema</h4>
+            <select name="sistema" id="sistema" style="background: url('{% static "img/icons/Select.svg" %}') no-repeat right center;">
+                <option value="">Todos</option>
+                <option value="Dungeons & Dragons">Dungeons & Dragons</option>
+                <option value="Ordem Paranormal">Ordem Paranormal</option>
+                <option value="Tormenta20">Tormenta20</option>
+                <option value="Call of Cthulu">Call of Cthulu</option>
+                <option value="Outro">Outro</option>
+            </select>
+        </div>
+
+        <div class="vertical-row"></div>
+
+        <div class="filter-selec">
+            <h4>Classe</h4>
+            <input name="classe" id="classe" autocomplete="off"></input>
+        </div>
+
+        <div class="vertical-row"></div>
+
+        <div class="filter-selec">
+            <h4>Nivel</h4>
+            <input type="number" name="nivel" id="nivel" autocomplete="off"></input>
+        </div>
+    </div>
+</div>
+
+<form method="GET" class="search-form flex-column">
+    <h4>Ou Busque Pelo Nome!</h4>
+    <div class="searchbar">
+        <div class="search-head flex">
+            <input type="text" name="q" autocomplete="off" placeholder="Nome da Ficha">
+            <button type="submit">
+                <img src="{% static "img/icons/Lupa.svg" %}" alt="Buscar">
+            </button>
+        </div>
+    </div>
+</form>
+
+    <div class="search-result flex">
+        <div class="result-left flex-column">
+            <h3>Resultado da Busca</h3>
+            <p>Foram Encontradas: <strong>{{ campanhas_e_grupos.items|length }} Fichas</strong> </p>
+        </div>
+
+        <div class="create-char">
+                <button onclick="window.location.href = '{% url 'criacao_char' %}';">
+                    <h4>Criar Ficha</h4>
+                </button>
+        </div>
+    </div>
+
+    <div class="horizontal-row"></div>
+
+    <div class="personagens">
+
+        {% if campanhas_e_grupos.items %}
+            {% else %}
+            <div class="no-found flex-column">
+                <div class="no-found-Text flex-column">
+                    <h2>Viish... Aparentemente você não tem nenhum personagem</h2>
+                    <h4>Tá na hora de botar a mão na massa e montar o seu primeiro!</h4>
+                </div>
+
+                <button class="no-found-Button" onclick="window.location.href = '{% url 'criacao_char' %}';">
+                    <h4>Criar Ficha</h4>
+                </button>
+            </div>
+        {% endif %}
+
+        {% for campanha, grupos in campanhas_e_grupos.items %}
+            <div class="quest">
+
+                <div class="quest-header flex-column" style="background-image: url({{ campanha.fotoCampanha.url }});">
+                    <div class="desc-bar flex">
+                        <div class="desc-tag">
+                            <p>{{ campanha.ambienteCampanha }}</p>
+                        </div>
+
+                        <div class="desc-tag">
+                            <p>{{ campanha.generoRPG }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quest-body">
+                    <div class="quest-title flex">
+                        <p><a href="{% url 'detalhes_campanha' campanha.id %}">{{ campanha.nomeCampanha }}</a></p>
+                        <button>
+                            {% for grupo in grupos %}
+                                <div id="{{ grupo.uuid }}">
+                                    {% if request.user in grupo.membros.all %}
+                                            <p><a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a></p>
+                                    {% else %}
+                                        {% if grupo.envioSolicitacao == '0' %}
+                                            <p><a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a></p>
+                                        {% else %}
+                                            <p>Solicitação enviada</p>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </button>
+                    </div>
+
+                    <div class="divison-row"></div>
+
+                    <div class="quest-desc flex-column">
+                        <p id="text">{{ campanha.descricaoCampanha }}</p>
+
+                        <div class="quest-tags flex">
+                            <div class="tag">
+                                <p>{{ campanha.sistemaCampanha }}</p>
+                            </div>
+
+                            <div class="tag flex" style="gap: 6px">
+                                <p>{{ campanha.numeroJogadores }}</p>
+                                <img src="{% static "img/icons/Group-icon.svg" %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+    {% comment %} <h3><a href="{% url 'criacao_char' %}">Criar personagem</a></h3>
     <h1> Meus personagens </h1>
-    
+
     <ul>
         <!-- Arrumar o ordem paranormal pois o link está sendo movido para ele também-->
         {% for personagem in dnd %}
@@ -22,6 +169,6 @@
         {% for personagem in coc %}
             <li><a href="{% url 'detail_char_coc' personagem.id %}">{{ personagem.nome }}</a> &nbsp &nbsp&nbsp<strong><a href="{% url 'edit_coc1920' personagem.id %}">Editar</a> <a href="{% url 'deletar_char' 'callofcthulhu' personagem.id %}">Deletar</a></strong></li>
         {% endfor %}
-    </ul>
+    </ul> {% endcomment %}
 {% endblock %}
 

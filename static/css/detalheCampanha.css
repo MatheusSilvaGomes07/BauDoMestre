@@ -115,8 +115,8 @@ body {
   gap: 80px;
 }
 
-.date .date-header, .date-info {
-  gap: 47px;
+.date .date-header{
+  gap: 15px;
   align-items: start;
   font-size: 24px;
 }
@@ -226,5 +226,5 @@ td {
 }
 
 .button h3 {
-  font-size: 40px
+  font-size: 22px
 }

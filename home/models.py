@@ -39,14 +39,14 @@ class Perfil(models.Model):
     descricao = models.TextField(max_length=256, null=True)
     sistema_rpg = models.CharField(max_length=20, choices=RPG_SYSTEM_CHOICES, null=True)
     idade = models.IntegerField(null=True)
-    
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nomePerfil.username)
         super(Perfil, self).save(*args, **kwargs)
-        
+
     def solicitacao_pendente_para_usuario(self, outro_usuario):
         return self.solicitacoes_enviadas.filter(para_usuario=outro_usuario, aceita=False).first()
-    
+
 
 # Model das Campanhas
 class Campanha(models.Model):
@@ -78,7 +78,7 @@ class Campanha(models.Model):
     numeroJogadores = models.IntegerField(null=True)
     diasSessao = models.CharField(max_length=52, null=True)
     generoRPG = models.CharField(max_length=100, choices=GENERO_RPG_CHOICES, null=True)
-    
+
     def obter_grupo(self):
         from chat.models import Grupo
         # Retorna o grupo associado a esta campanha
@@ -93,12 +93,12 @@ class Campanha(models.Model):
 def criar_perfil_usuario(sender, instance, created, **kwargs):
     if created and not Perfil.objects.filter(nomePerfil=instance).exists():
         perfil = Perfil.objects.create(nomePerfil=instance, descricao='Indefinido', tipo_sessao='Indefinido', tipo_player='Indefinido', sistema_rpg='Indefinido', idade='0', fotoConta='Indefinido')
-        
+
         # Cria a foto única para cada usuário
         # nome_usuario = instance.username
         # caminho_origem = 'media/images/Ain.png'
         # caminho_destino = f'images/profilePictures/{nome_usuario}.png'
-        
+
         # try:
         #     shutil.copyfile(caminho_origem, caminho_destino)
         # except FileNotFoundError:

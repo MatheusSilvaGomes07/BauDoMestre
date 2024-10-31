@@ -1,0 +1,292 @@
+body {
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mural-banner {
+    background: linear-gradient(0.7turn, #000000 -70%, #BE0B05 257%);
+    margin-bottom: 8rem;
+    padding-top: 5rem;
+  }
+
+  .mural-banner .mural-leftColumn {
+    gap: 2.7rem;
+    padding: 2rem 0 2rem 2rem;
+  }
+
+  .mural-banner .mural-leftColumn h1 {
+    font-size: var(--title-82);
+  }
+
+  .mural-banner .mural-leftColumn h3 {
+    font-size: 36px;
+    font-weight: normal;
+    width: 90%;
+  }
+
+  .filter-box {
+    background-color: #210707;
+    width: 93%;
+    border-radius: 15px;
+    align-self: center;
+    padding: 1.8rem;
+    justify-content: space-between;
+    text-align: center;
+    position: absolute;
+    margin: 38% 0 0 1.3rem;
+  }
+
+  .filter-box select {
+    all: unset;
+    color: white;
+    font-size: 28px;
+    font-family: var(--poppins);
+    border-bottom: 2px solid white;
+  }
+
+  .filter-box select option {
+    background-color: black;
+  }
+
+  .filter-box input {
+    all: unset;
+    color: white;
+    font-size: 28px;
+    font-family: var(--poppins);
+    border-bottom: 2px solid white;
+  }
+
+  .filter-selec {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 30%;
+  }
+
+  .filter-selec h4 {
+    font-size: 30px;
+  }
+
+  .vertical-row {
+    width: 5px;
+    background-color: white;
+  }
+
+  .search-form {
+    gap: 3rem;
+    margin: 36px 0 60px 0;
+  }
+
+  .search-form h4 {
+    text-align: center;
+  }
+
+  .searchbar {
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-head {
+    height: 4rem;
+    width: 95%;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .search-head input{
+    all: unset;
+    border-radius: 15px;
+    background: linear-gradient(120deg, #080808 -37.01%, rgba(53, 53, 53, 0.00) 165.9%), #767676;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    width:  50%;
+    font-size: 2rem;
+    font-family: var(--poppins);
+    padding-left: .8rem;
+    color: white;
+  }
+
+  .search-head button {
+    all: unset;
+    border-radius: 10px;
+    background: var(--red1);
+    text-align: center;
+    cursor: pointer;
+    padding: 5px 1rem;
+  }
+
+  .search-result {
+    justify-content: space-between;
+    padding: 0 50px;
+    align-items: center;
+  }
+
+  .search-result .result-left{
+    gap: 10px;
+  }
+
+  .search-result .result-left p {
+    font-size: var(--logo);
+  }
+
+  .search-result .create-char button {
+    background-color: var(--red1);
+    padding: 1.5rem 3rem;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+
+  .horizontal-row {
+    background: radial-gradient(#FFFFFF 10%, #505050);
+    width: 93%;
+    height: 5px;
+    align-self: center;
+    margin-top: 2rem;
+  }
+
+  .personagens {
+    display: flex;
+    margin: 2rem 70px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .quest {
+    position: relative;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #8C0000, #1F2236);
+    z-index: 1;
+    width: 400px;
+  }
+
+  .quest::before {
+    content: "";
+      position: absolute;
+      background-color: #18181C;
+      width: 98%;
+      height: 98%;
+      z-index: -1;
+      border-radius: 10px;
+      margin: 5px;
+  }
+
+  .quest .quest-header {
+    position: relative;
+    height: 180px;
+    background-size: cover;
+    margin: 5px 4px;
+    border-radius: 10px 10px 0px 0;
+  }
+
+  .quest .quest-header img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .quest .quest-header .desc-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    justify-content: end;
+    gap: 5px;
+    background: linear-gradient(270deg, rgb(32 19 83 / 34%) 0%, rgb(85 9 15 / 34%) 59%, rgb(208 0 0 / 34%) 100%);
+  }
+
+  .quest-header .desc-bar .desc-tag {
+    margin: 7px 5px;
+    padding: 5px 10px;
+    border-radius: 35px;
+    background-color: #1a00009a;
+    border: #8C00005e 1px solid;
+
+  }
+
+  .quest-body {
+    margin: 15px 10px;
+  }
+
+  .quest-body .quest-title {
+    justify-content: space-between;
+    margin: 0 10px;
+  }
+
+  .quest-body .quest-title > p {
+    font-size: var(--text-20);
+    font-weight: bold;
+  }
+
+  .quest-body .quest-title button {
+    background: var(--red1);
+    padding: 6px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+  }
+
+  .quest-body .quest-title button a {
+    text-decoration: none;
+  }
+
+  .quest-title p > a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  .divison-row {
+    width: 100%;
+    height: 1px;
+    background-color: white;
+    margin: 10px 0;
+  }
+
+  .quest-desc {
+    gap: 2rem;
+  }
+
+  .quest-desc #text {
+    margin: 0 14px 1rem 14px;
+    font-weight: 500;
+  }
+
+  .quest-desc .quest-tags {
+    gap: 10px;
+    margin-left: 8px;
+  }
+
+  .quest-desc .quest-tags .tag {
+    background-color: var(--red1);
+    border-radius: 35px;
+    padding: 9px 12px;
+    font-weight: bold;
+  }
+
+  /*No found Quest*/
+
+  .no-found {
+    align-items: center;
+    gap: 5rem;
+    margin: 2rem 0;
+  }
+
+  .no-found .no-found-Text {
+    text-align: center;
+    gap: 26px;
+  }
+
+  .no-found .no-found-Text h2 {
+    font-size: 48px;
+    font-family: var(--poppins);
+    font-weight: bold;
+  }
+
+  .no-found .no-found-Text h4 {
+    font-weight: normal;
+  }
+
+  .no-found .no-found-Button {
+    background-color: var(--red1);
+    padding: 1.5rem 3rem;
+    border-radius: 15px;
+    cursor: pointer;
+  }

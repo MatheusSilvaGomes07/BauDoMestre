@@ -59,11 +59,6 @@
                             <p>Data da Sessão</p>
                             <p id="dia-sessao">{{ campanha.diasSessao }}</p>
                         </div>
-
-                        <div class="date-info flex-column">
-                            <p>Tempo da Sessão</p>
-                            <p id="tempo-sessao">3h20min</p>
-                        </div>
                     </div>
 
                     <div class="party flex-column">
@@ -73,16 +68,27 @@
                             <tbody class="flex-column">
                                 <tr id="header" class="flex">
                                     <th><p>Nome</p></th>
-                                    <th><p>Ficha</p></th>
                                     <th><p>Função</p></th>
-                                    <th><p>Nivel</p></th>
                                 </tr>
+                            {% for membro in membros %}
                                 <tr class="party-box flex">
-                                    <td><p>Leonardo</p></td>
-                                    <td><p>Khartaisen</p></td>
-                                    <td><p>Guerreiro</p></td>
-                                    <td><p>12</p></td>
+                                    <td><p><a style="all: unset; cursor: pointer;" href="{% url 'exibir_perfil' membro.slug %}">{{ membro.nomePerfil }}</a></p></td>
+                                    {% if membro.id == mestre.id %}
+                                        <td><p>Mestre</p></td>
+                                    {% else %}
+                                        {% if user == mestre.nomePerfil %}
+                                            <td>
+                                                <form method="post" action="{% url 'excluir_jogador' campanha.id membro.id %}">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="mestre" style="cursor: pointer;">Excluir</button>
+                                                </form>
+                                            </td>
+                                        {% else %}
+                                            <td><p>Jogador</p></td>
+                                        {% endif %}
+                                    {% endif %}
                                 </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -108,14 +114,22 @@
                                 <p>{{ campanha.sistemaCampanha }}</p>
                             </div>
                             <div class="party-label">
-                                <h4>Party</h4>
-                                <p>5/12</p>
+                                <h4>Grupo</h4>
+                                <p>{{ membros|length }}/{{ campanha.numeroJogadores }}</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="button">
-                        <h3>Jogar</h3>
+                            {% if request.user in grupo.membros.all %}
+                                <h3><a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a></h3>
+                            {% else %}
+                                {% if grupo.envioSolicitacao == '0' %}
+                                    <h3><a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a></h3>
+                                {% else %}
+                                    <h3>Solicitação enviada</h3>
+                                {% endif %}
+                            {% endif %}
                     </div>
                 </div>
             </div>
@@ -124,33 +138,6 @@
 
         {% comment %} <div class="boto-parent flex">
 
-            <div class="quests-header flex">
-                <p class="the-dragoon-hunters"></p>
-            </div>
-
-            {% if user == campanha.nomeMestre.nomePerfil %}
-            <a href="{% url 'gerenciar_solicitacoes_campanha' campanha.id %}" class="botao-gerenciar-solicitacoes">Gerenciar Solicitações</a>
-            {% endif %}
-
-            <div class="header flex">
-
-                <div class="header-leftcolumn flex">
-                    <p class="lorem-ipsum-dolor">
-                        {{ campanha.descricaoCampanha }}
-                    </p>
-
-                    <div class="tempo-de-sesso-container">
-                        <p class="nivel-17-txt-container">Dias de sessão: {{ campanha.diasSessao }}</p>
-                    </div>
-
-                </div>
-
-                <div class="header-img flex">
-                    <div class="header-item"></div>
-                    <img class="header-child" alt="" src="{{ campanha.fotoCampanha.url }}"/>
-                </div>
-
-            </div>
 
             <div class="status-row flex">
                 <div class="jogadores flex">
@@ -174,15 +161,15 @@
                                 <div class="nome-ficha">
                                     {% if membro.id == mestre.id %}
                                     <b class="mestre">MESTRE</b>
+                                    {% else %}
+                                        {% if user == mestre.nomePerfil %}
+                                            <div class="nome-ficha">
+                                                <form method="post" action="{% url 'excluir_jogador' campanha.id membro.id %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="mestre" style="cursor: pointer;">Excluir</button>
+                                                </form>
+                                            </div>
                                         {% else %}
-                                            {% if user == mestre.nomePerfil %}
-                                                <div class="nome-ficha">
-                                                    <form method="post" action="{% url 'excluir_jogador' campanha.id membro.id %}">
-                                                    {% csrf_token %}
-                                                    <button type="submit" class="mestre" style="cursor: pointer;">Excluir</button>
-                                                    </form>
-                                                </div>
-                                            {% else %}
                                         <b class="mestre">JOGADOR</b>
                                         {% endif %}
                                     {% endif %}
