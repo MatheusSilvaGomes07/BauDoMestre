@@ -6,15 +6,21 @@
     <title>Campaign</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <style>
+        /* Estilo para o token selecionado */
+        .selected-token {
+            border: 2px solid blue;
+            box-sizing: border-box;
+        }
+    </style>
     <script>
         let currentMapId = null; // Variável global para armazenar o ID do mapa
         const campaignId = {{ campaign_id }};
         const socket = new WebSocket(`ws://${window.location.host}/ws/tabletop/${campaignId}/`);
         let selectedTokenId = null;
-        
+
         socket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-           // console.log("Received message:", data);
         
             if (data.action === 'load_map') {
                 loadMap(data.map_id);
@@ -22,23 +28,19 @@
                 moveToken(data.token_id, data.position_x, data.position_y);
             } else if (data.action === 'delete_token' && data.hide) {
                 const tokenElement = document.querySelector(`.token[data-id="${data.token_id}"]`);
-               // console.log("ID do token a ser deletado:", data.token_id);
-               // console.log("Elemento encontrado:", tokenElement);
                 if (tokenElement) {
                     tokenElement.remove();
-                    updateTokenPositions(); // Chame a função para atualizar as posições dos tokens
+                    updateTokenPositions();
                 }
             }
         };
-        
-        // Nova função para atualizar as posições dos tokens
+
         function updateTokenPositions() {
             $(".token").each(function(index) {
                 const tokenId = $(this).data("id");
-                const positionX = $(this).position().left; // Captura a posição atual
-                const positionY = $(this).position().top; // Captura a posição atual
+                const positionX = $(this).position().left;
+                const positionY = $(this).position().top;
         
-                // Atualize as posições no backend se necessário
                 socket.send(JSON.stringify({
                     'action': 'move_token',
                     'token_id': tokenId,
@@ -51,8 +53,7 @@
         function loadMap(mapId) {
             $.get(`/tabletop/map/${mapId}/`, function(data) {
                 $('#map-container').html(data);
-                currentMapId = mapId; // Atualizando a variável global com o ID do mapa
-               // console.log("Loaded map with ID:", mapId); // Exibindo no console
+                currentMapId = mapId;
                 initializeDraggableTokens();
             });
         }
@@ -68,11 +69,11 @@
             $(".token").draggable({
                 containment: "#map img",
                 drag: function(event, ui) {
-                    var tokenId = $(this).data("id");
-                    var position = ui.position;
+                    const tokenId = $(this).data("id");
+                    const position = ui.position;
     
-                    var positionX = Math.round(position.left);
-                    var positionY = Math.round(position.top);
+                    const positionX = Math.round(position.left);
+                    const positionY = Math.round(position.top);
     
                     socket.send(JSON.stringify({
                         'action': 'move_token',
@@ -82,11 +83,11 @@
                     }));
                 },
                 stop: function(event, ui) {
-                    var tokenId = $(this).data("id");
-                    var position = ui.position;
+                    const tokenId = $(this).data("id");
+                    const position = ui.position;
     
-                    var positionX = Math.round(position.left);
-                    var positionY = Math.round(position.top);
+                    const positionX = Math.round(position.left);
+                    const positionY = Math.round(position.top);
     
                     $.ajax({
                         url: `/tabletop/token/${tokenId}/move/`,
@@ -113,12 +114,32 @@
             const token = $(`.token[data-id=${tokenId}]`);
             token.css({ left: `${positionX}px`, top: `${positionY}px` });
         }
-    
-        // Função para exibir o ID do mapa ao clicar
-        function showMapId(mapId) {
-            alert("Mapa ID: " + mapId); // Mostra o ID do mapa
-        }
-    
+
+        // Seleção e deseleção dos tokens
+        $(document).on('click', '.token', function(e) {
+            e.stopPropagation(); // Impede que o evento clique se propague para o documento
+            const clickedTokenId = $(this).data('id');
+            
+            if (selectedTokenId !== clickedTokenId) {
+                // Remove a borda do token selecionado anteriormente
+                $(".token").removeClass("selected-token");
+
+                // Adiciona a borda ao token atual
+                $(this).addClass("selected-token");
+                selectedTokenId = clickedTokenId;
+            } else {
+                // Se já está selecionado, remove a borda
+                $(this).removeClass("selected-token");
+                selectedTokenId = null;
+            }
+        });
+
+        // Remove a borda ao clicar fora de qualquer token
+        $(document).on('click', function() {
+            $(".token").removeClass("selected-token");
+            selectedTokenId = null;
+        });
+
         $(document).ready(function() {
             initializeDraggableTokens();
         });
@@ -147,3 +168,4 @@
     
 </body>
 </html>
+ 

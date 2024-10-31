@@ -61,9 +61,4 @@ class Token(models.Model):
     def __str__(self):
         return f"Token on {self.map.name}"
 
-    def delete(self, *args, **kwargs):
-        if self.image and os.path.isfile(self.image.path):
-            os.remove(self.image.path)
-        super().delete(*args, **kwargs)
-
 
