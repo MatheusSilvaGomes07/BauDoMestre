@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/criacaoFicha.css" %}">
     {% block head %}
 
     {% endblock %}
@@ -33,6 +34,7 @@
             <a href="{% url 'account_login' %}">Login</a>
         </nav>
     {% endif %}
+    
     {% block content %}
 
     {% endblock content %}

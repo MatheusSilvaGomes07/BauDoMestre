@@ -12,38 +12,39 @@
 
 {% block content %}
 
-<p><a href="{% url 'index' %}">Home</a></p>
-<h1>Criação de Personagem</h1>
-<label>Escolha o sistema de RPG: </label>
-<select id="escolhaFormulario">
-    <option value="--">--</option>
-    <option value="DnD">Dungeons & Dragons</option>
-    <option value="OrdemParanormal">Ordem Paranormal</option>
-    <option value="Tormenta20">Tormenta20</option>
-    <option value="CoC">Call of Cthulhu 7e (1920)</option>
-</select>
+<div class="fichas">
+    <h1>Criação de Personagem</h1>
+    <label>Escolha o sistema de RPG: </label>
+    <select id="escolhaFormulario">
+        <option value="--">--</option>
+        <option value="DnD">Dungeons & Dragons</option>
+        <option value="OrdemParanormal">Ordem Paranormal</option>
+        <option value="Tormenta20">Tormenta20</option>
+        <option value="CoC">Call of Cthulhu 7e (1920)</option>
+    </select>
 
 
-<div id="formularioDnD" style="display: none;">
-    {% include "meus_personagens/includes/dndform.html"%}
-</div>
-
-
-
-
-<div id="formularioOrdemParanormal" style="display: none;">
-    {% include "meus_personagens/includes/ordemform.html"%}
-</div>
+    <div id="formularioDnD" style="display: none;">
+        {% include "meus_personagens/includes/dndform.html"%}
+    </div>
 
 
 
 
-<div id="formularioTormenta20" style="display: none;">
-    {% include "meus_personagens/includes/tormentaform.html"%}
-</div>
+    <div id="formularioOrdemParanormal" style="display: none;">
+        {% include "meus_personagens/includes/ordemform.html"%}
+    </div>
 
-<div id="formularioCoC" style="display: none;">
-    {% include "meus_personagens/includes/cocform.html"%}
+
+
+
+    <div id="formularioTormenta20" style="display: none;">
+        {% include "meus_personagens/includes/tormentaform.html"%}
+    </div>
+
+    <div id="formularioCoC" style="display: none;">
+        {% include "meus_personagens/includes/cocform.html"%}
+    </div>
 </div>
 
 
@@ -55,7 +56,7 @@
     const formularioCoC= document.getElementById('formularioCoC');
 
 
-    
+
     escolhaFormulario.addEventListener('change', function() {
         if (escolhaFormulario.value === 'DnD') {
             formularioDnD.style.display = 'block';
@@ -69,7 +70,7 @@
             formularioOrdemParanormal.style.display = 'block';
             formularioTormenta20.style.display = 'none';
             formularioCoC.style.display = 'none';
-            
+
         }else if (escolhaFormulario.value === 'Tormenta20') {
             formularioDnD.style.display = 'none';
             formularioOrdemParanormal.style.display = 'none';
