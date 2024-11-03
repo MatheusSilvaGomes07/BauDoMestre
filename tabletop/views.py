@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import CallOfCthulhuCampanha, DnDCampanha, Map, OrdemParanormalCampanha, Token, PastaCriaturas, TormentaCampanha
 from django.views.decorators.csrf import csrf_exempt
@@ -213,3 +214,28 @@ def place_token(request, map_id, personagem_id):
     )
 
     return JsonResponse({'status': 'success', 'token_id': token.id})
+
+def deletar_personagem_campanha (request, campaign_id, personagem_id):
+    campanha = get_object_or_404(Campanha, id=campaign_id)
+    sistema = campanha.sistemaCampanha
+    user = request.user
+
+    if sistema == 'Dungeons & Dragons':
+        personagem_model = DnDCampanha
+    elif sistema == 'Ordem Paranormal':
+        personagem_model = OrdemParanormalCampanha
+    elif sistema == 'Tormenta20':
+        personagem_model = TormentaCampanha
+    elif sistema == 'Call of Cthulhu':
+        personagem_model = CallOfCthulhuCampanha
+    else:
+        return JsonResponse({'error': 'Sistema de RPG desconhecido'}, status=400)
+    
+    personagem = get_object_or_404(personagem_model, id=personagem_id)
+    if user == personagem.nomePerfil or user.is_staff:
+        if personagem.foto:
+            os.remove(os.path.join('media', personagem.foto.name))
+            personagem.delete()
+            return redirect('enter_campaign', campaign_id)
+        else:
+            return redirect('meus_personagens', campaign_id)
