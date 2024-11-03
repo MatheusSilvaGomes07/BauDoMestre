@@ -1,4 +1,5 @@
-{% extends 'principal/baseDashboard.html' %}
+{% extends 'principal/baseDashboard.html'%}
+
 {% load static %}
 
 {% block head %}
@@ -11,13 +12,49 @@
 
 {% block dashboard %}
 
-<body>
+<body class="flex-column">
 
   <div class="homeHeader">
-    <div class="homeBanner" style="background-image: url({% static "img/background-home.png" %});">
+    <div class="homeBanner flex-column" style="background: linear-gradient(rgba(33, 7, 7, 0.5), rgba(33, 7, 7, 0.5)), url('{% static "img/background-home.png" %}'); background-position: center; background-repeat: no-repeat; background-size: cover;">
       <h1>Bem Vindo <strong>Jogador</strong></h1>
       <div class="hr"></div>
       <h3>Pronto para mais uma Aventura?</h3>
+    </div>
+  </div>
+
+  <div class="quest">
+    <div class="box-header">
+        <h3>Quests</h3>
+
+        {% if perfil.tipo_player == "Ambos" or perfil.tipo_player == "Mestre" %}
+            <button onclick="window.location.href = '{% url 'criarCampanhas' %}';">
+                <h4>Criar Campanha</h4>
+            </button>
+        {% elif perfil.tipo_player == "Jogador"%}
+            <button onclick="window.location.href = '{% url 'buscarMesa' %}';">
+                <h4>Mais Campanhas</h4>
+            </button>
+        {% endif %}
+
+    </div>
+    <div class="boxHr"></div>
+
+    <div class="quest-box">
+
+    </div>
+  </div>
+
+  <div class="fichas">
+    <div class="box-header">
+        <h3>Fichas</h3>
+        <button onclick="window.location.href = '{% url 'criacao_char' %}';">
+            <h4>Criar Ficha</h4>
+        </button>
+    </div>
+    <div class="boxHr"></div>
+
+    <div class="ficha-box">
+        {% include "principal/ficha.html" %}
     </div>
   </div>
 
@@ -30,202 +67,10 @@
     </div>
 
     <div class="char-carroussel flex">
-      {% for ficha in dnd %}
-          <div class="vector-parent">
-              <div class="frame-inner">
-              <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="frame-child3 character-banner">
-                  <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
-              </div>
-              </div>
-              <p class="lorem-ipsum-dolor2">{{ ficha.lore }}</p>
-              <div class="frame-body flex">
-              <div class="left-column">
-                  <div class="main-caracteristics flex">
-                  <div class="characteristic">
-                      <div class="char">Raça</div>
-                      <hr class="line-div">
-                      <p class="atr">{{ ficha.raca }}</p>
-                  </div>
-                  <div class="characteristic">
-                      <div class="char">Alinhamento</div>
-                      <hr class="line-div">
-                      <p class="atr">{% if ficha.personalidade != None %}{{ ficha.personalidade }}{% endif %}</p>
-                  </div>
-                  <div class="characteristic">
-                      <div class="char">Classe</div>
-                      <hr class="line-div">
-                      <p class="atr">{{ ficha.classe }}</p>
-                  </div>
-                  </div>
-              </div>
-              <div class="right-column flex">
-                  <img class="frame-child6" alt="" src="{% static "img/public/vector-17.svg" %}" />
-                  <div class="nivel3">
-                  <span class="nivel-txt">
-                      <p class="p">{{ ficha.nivel }}</p>
-                      <p class="nivel4">Nivel</p>
-                  </span>
-                  </div>
-              </div>
-              </div>
-              <div class="frame-footer flex">
-              <a style="all: unset; cursor: pointer;" href="{% url 'detail_char_dnd' ficha.id %}">
-                  <div class="frame6 flex">
-                      <b class="abrir">ABRIR</b>
-                  </div>
-              </a>
-              </div>
-          </div>
-      {% endfor %}
-
-      {% for ficha in ordem %}
-      <div class="vector-parent">
-          <div class="frame-inner">
-          <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="frame-child3 character-banner">
-              <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
-          </div>
-          </div>
-          <p class="lorem-ipsum-dolor2">{% if ficha.lore %}{{ ficha.lore }}{% else %}Não possui lore.{% endif %}</p>
-          <div class="frame-body flex">
-          <div class="left-column">
-              <div class="main-caracteristics flex">
-              <div class="characteristic">
-                  <div class="char">Origem</div>
-                  <hr class="line-div">
-                  <p class="atr">{{ ficha.origem }}</p>
-              </div>
-              <div class="characteristic">
-                  <div class="char">Vida</div>
-                  <hr class="line-div">
-                  <p class="atr">{{ ficha.vida }}</p>
-              </div>
-              <div class="characteristic">
-                  <div class="char">Classe</div>
-                  <hr class="line-div">
-                  <p class="atr">{{ ficha.classe }}</p>
-              </div>
-              </div>
-          </div>
-          <div class="right-column flex">
-              <img class="frame-child6" alt="" src="{% static "img/public/vector-17.svg" %}" />
-              <div class="nivel3">
-              <span class="nivel-txt">
-                  <p class="p">{{ ficha.nex }}%</p>
-                  <p class="nivel4">Nex</p>
-              </span>
-              </div>
-          </div>
-          </div>
-          <div class="frame-footer flex">
-          <a style="all: unset; cursor: pointer;" href="{% url 'detail_char_ordem' ficha.id %}">
-              <div class="frame6 flex">
-                  <b class="abrir">ABRIR</b>
-              </div>
-          </a>
-          </div>
-      </div>
-  {% endfor %}
-  {% for ficha in tormenta20 %}
-  <div class="vector-parent">
-      <div class="frame-inner">
-      <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="frame-child3 character-banner">
-          <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
-      </div>
-      </div>
-      <p class="lorem-ipsum-dolor2">{% if ficha.lore %}{{ ficha.lore }}{% else %}Não possui lore.{% endif %}</p>
-      <div class="frame-body flex">
-      <div class="left-column">
-          <div class="main-caracteristics flex">
-          <div class="characteristic">
-              <div class="char">Raça</div>
-              <hr class="line-div">
-              <p class="atr">{{ ficha.raca }}</p>
-          </div>
-          <div class="characteristic">
-              <div class="char">Divindade</div>
-              <hr class="line-div">
-              <p class="atr">{{ ficha.divindade }}</p>
-          </div>
-          <div class="characteristic">
-              <div class="char">Classe</div>
-              <hr class="line-div">
-              <p class="atr">{{ ficha.classe }}</p>
-          </div>
-          </div>
-      </div>
-      <div class="right-column flex">
-          <img class="frame-child6" alt="" src="{% static "img/public/vector-17.svg" %}" />
-          <div class="nivel3">
-          <span class="nivel-txt">
-              <p class="p">{{ ficha.nivel }}</p>
-              <p class="nivel4">Nivel</p>
-          </span>
-          </div>
-      </div>
-      </div>
-      <div class="frame-footer flex">
-      <a style="all: unset; cursor: pointer;" href="{% url 'detail_char_tormenta' ficha.id %}">
-          <div class="frame6 flex">
-              <b class="abrir">ABRIR</b>
-          </div>
-      </a>
-      </div>
-  </div>
-{% endfor %}
-{% for ficha in coc %}
-<div class="vector-parent">
-  <div class="frame-inner">
-  <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="frame-child3 character-banner">
-      <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
-  </div>
-  </div>
-  <p class="lorem-ipsum-dolor2">{% if ficha.lore %}{{ ficha.lore }}{% else %}Não possui lore.{% endif %}</p>
-  <div class="frame-body flex">
-  <div class="left-column">
-      <div class="main-caracteristics flex">
-      <div class="characteristic">
-          <div class="char">Ocupação</div>
-          <hr class="line-div">
-          <p class="atr">{{ ficha.ocupacao }}</p>
-      </div>
-      <div class="characteristic">
-          <div class="char">Residencia</div>
-          <hr class="line-div">
-          <p class="atr">{{ ficha.residencia }}</p>
-      </div>
-      </div>
-  </div>
-  <div class="right-column flex">
-      <img class="frame-child6" alt="" src="{% static "img/public/vector-17.svg" %}" />
-      <div class="nivel3">
-      <span class="nivel-txt">
-          <p class="p">{{ ficha.vida }}</p>
-          <p class="nivel4">Vida</p>
-      </span>
-      </div>
-  </div>
-  </div>
-  <div class="frame-footer flex">
-  <a style="all: unset; cursor: pointer;" href="{% url 'detail_char_coc' ficha.id %}">
-      <div class="frame6 flex">
-          <b class="abrir">ABRIR</b>
-      </div>
-  </a>
-  </div>
-</div>
-{% endfor %} {% endcomment %}
+    {% endcomment %}
 
 </body>
 </html>
-
-<script>
-function openSide(){
-  document.getElementById("sidebar").style.left = "0"
-}
-function closeSide(){
-  document.getElementById("sidebar").style.left = "-500px"
-}
-</script>
 
 <table class="table">
 </table>

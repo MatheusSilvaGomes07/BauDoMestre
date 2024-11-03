@@ -79,7 +79,10 @@
 
     <div class="personagens">
 
-        {% if campanhas_e_grupos.items %}
+        {% include "principal/ficha.html" %}
+
+        {% comment %} {% if campanhas_e_grupos.items %}
+
             {% else %}
             <div class="no-found flex-column">
                 <div class="no-found-Text flex-column">
@@ -91,62 +94,8 @@
                     <h4>Criar Ficha</h4>
                 </button>
             </div>
-        {% endif %}
+        {% endif %} {% endcomment %}
 
-        {% for campanha, grupos in campanhas_e_grupos.items %}
-            <div class="quest">
-
-                <div class="quest-header flex-column" style="background-image: url({{ campanha.fotoCampanha.url }});">
-                    <div class="desc-bar flex">
-                        <div class="desc-tag">
-                            <p>{{ campanha.ambienteCampanha }}</p>
-                        </div>
-
-                        <div class="desc-tag">
-                            <p>{{ campanha.generoRPG }}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="quest-body">
-                    <div class="quest-title flex">
-                        <p><a href="{% url 'detalhes_campanha' campanha.id %}">{{ campanha.nomeCampanha }}</a></p>
-                        <button>
-                            {% for grupo in grupos %}
-                                <div id="{{ grupo.uuid }}">
-                                    {% if request.user in grupo.membros.all %}
-                                            <p><a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a></p>
-                                    {% else %}
-                                        {% if grupo.envioSolicitacao == '0' %}
-                                            <p><a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a></p>
-                                        {% else %}
-                                            <p>Solicitação enviada</p>
-                                        {% endif %}
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        </button>
-                    </div>
-
-                    <div class="divison-row"></div>
-
-                    <div class="quest-desc flex-column">
-                        <p id="text">{{ campanha.descricaoCampanha }}</p>
-
-                        <div class="quest-tags flex">
-                            <div class="tag">
-                                <p>{{ campanha.sistemaCampanha }}</p>
-                            </div>
-
-                            <div class="tag flex" style="gap: 6px">
-                                <p>{{ campanha.numeroJogadores }}</p>
-                                <img src="{% static "img/icons/Group-icon.svg" %}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
 
     </div>
 
