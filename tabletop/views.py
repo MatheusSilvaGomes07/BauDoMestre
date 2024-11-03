@@ -8,6 +8,8 @@ from .mestre_decorator import is_mestre
 from .forms import MapForm, TokenForm, CampanhaDnDForm, CampanhaOrdemParanormalForm, CampanhaCallOfCthulhuCForm, CampanhaTormentaForm, PastaCriaturasForm
 from home.models import Campanha
 from django.contrib.contenttypes.models import ContentType
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 @user_in_group
 #SE NÃO FOR MEMBRO DA CAMPANHA, É REDIRECIONADO PARA O BUSCAR MESA
@@ -170,7 +172,6 @@ def criar_personagem(request, campaign_id, pasta_id):
             personagemForm = CampanhaOrdemParanormalForm()
 
     return render(request, 'tabletop/criarPersonagem.html', {'personagemForm': personagemForm})
-
 def place_token(request, map_id, personagem_id):
     mapa = get_object_or_404(Map, id=map_id)
     sistema = mapa.campanha_id.sistemaCampanha
@@ -193,10 +194,22 @@ def place_token(request, map_id, personagem_id):
         content_type=content_type,
         object_id=personagem.id,
         map=mapa,
-        position_x=600,           #TAMANO PRE DEFINIDO DEPENDENDO DO TAMANHO DO MAPA
-        position_y=415,          #TAMANO PRE DEFINIDO DEPENDENDO DO TAMANHO DO MAPA
+        position_x=600,           # Tamanho pré-definido dependendo do tamanho do mapa
+        position_y=415,           # Tamanho pré-definido dependendo do tamanho do mapa
         image=personagem.foto
     )
 
-    # Retorne um JSON confirmando a criação do token
+    # Enviar a mensagem pelo WebSocket
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        f'campaign_{mapa.campanha_id.id}',
+        {
+            'type': 'place_token',
+            'token_id': token.id,
+            'position_x': token.position_x,
+            'position_y': token.position_y,
+            'image': token.image.url  # Supondo que você deseja enviar a URL da imagem
+        }
+    )
+
     return JsonResponse({'status': 'success', 'token_id': token.id})

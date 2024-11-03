@@ -69,21 +69,31 @@ class TabletopConsumer(AsyncWebsocketConsumer):
             'position_y': position_y
         }))
 
+    async def place_token(self, event):
+        token_id = event['token_id']
+        position_x = event['position_x']
+        position_y = event['position_y']
+        image = event['image']
+        await self.send(text_data=json.dumps({
+            'action': 'place_token',
+            'token_id': token_id,
+            'position_x': position_x,
+            'position_y': position_y,
+            'image': image
+        }))
+
     @database_sync_to_async
     def delete_token_sync(self, token_id):
         try:
             token = Token.objects.get(id=token_id)
             token.delete()
-           # print(f"Token {token_id} deleted.")  # Adicione log para verificar a exclusão
             return token_id
         except Token.DoesNotExist:
-         #   print(f"Token {token_id} does not exist.")  # Log para verificar se o token foi encontrado
-            return None  # Token não existe
+            return None
 
     async def delete_token(self, token_id):
         deleted_token_id = await self.delete_token_sync(token_id)
         if deleted_token_id is not None:
-          #  print(f"Token {deleted_token_id} deleted and notifying group.")  # Adicione este log
             await self.channel_layer.group_send(
                 self.campaign_group_name,
                 {
@@ -97,5 +107,5 @@ class TabletopConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             'action': 'delete_token',
             'token_id': token_id,
-            'hide': True  # Incluímos uma flag para ocultar apenas o token deletado
+            'hide': True
         }))

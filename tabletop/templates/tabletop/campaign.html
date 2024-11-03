@@ -32,6 +32,39 @@
                     tokenElement.remove();
                     updateTokenPositions();
                 }
+            } else if (data.action === 'place_token') {
+                const tokenId = data.token_id;
+                const positionX = data.position_x;
+                const positionY = data.position_y;
+                const imageUrl = data.image;
+            
+                // Crie um novo div para o token
+                const tokenElement = document.createElement('div');
+                tokenElement.classList.add('token'); 
+                tokenElement.classList.add('ui-draggable');
+                tokenElement.classList.add('ui-draggable-handle');// Adiciona a classe 'token'
+                tokenElement.setAttribute('data-id', tokenId); // Define o ID do token como atributo data-id
+                tokenElement.style.position = 'absolute'; // Define a posição como absoluta
+                tokenElement.style.left = `${positionX}px`; // Define a posição X
+                tokenElement.style.top = `${positionY}px`; // Define a posição Y
+                tokenElement.style.width = '100px'; // Define a largura do token
+                tokenElement.style.height = '100px'; // Define a altura do token
+            
+                // Crie o elemento de imagem dentro do tokenElement
+                const imgElement = document.createElement('img');
+                imgElement.src = imageUrl; // Define a URL da imagem
+                imgElement.alt = 'Token'; // Adiciona texto alternativo para acessibilidade
+                imgElement.style.width = '100%'; // Faz a imagem ocupar toda a largura do div
+                imgElement.style.height = '100%'; // Faz a imagem ocupar toda a altura do div
+                imgElement.style.cursor = 'pointer'; // Define o cursor como pointer
+            
+                // Adiciona a imagem ao div do token
+                tokenElement.appendChild(imgElement);
+            
+                // Adiciona o tokenElement ao contêiner de tokens
+                document.getElementById('tokens').appendChild(tokenElement); // Substitua pelo ID do seu contêiner de tokens
+
+                initializeDraggableTokens();
             }
         };
 
