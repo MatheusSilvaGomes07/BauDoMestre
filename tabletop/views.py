@@ -1,5 +1,6 @@
 import os
 from django.shortcuts import redirect, render, get_object_or_404
+from meus_personagens.forms import CallOfCthulhuForm, DnDForm, OrdemParanormalForm, TormentaForm
 from .models import CallOfCthulhuCampanha, DnDCampanha, Map, OrdemParanormalCampanha, Token, PastaCriaturas, TormentaCampanha
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -239,3 +240,46 @@ def deletar_personagem_campanha (request, campaign_id, personagem_id):
             return redirect('enter_campaign', campaign_id)
         else:
             return redirect('meus_personagens', campaign_id)
+        
+
+def editar_personagem_campanha(request, campaign_id, personagem_id):
+    campanha = get_object_or_404(Campanha, id=campaign_id)
+    sistema = campanha.sistemaCampanha
+    user = request.user
+
+    if sistema == 'Dungeons & Dragons':
+        personagem_model = DnDCampanha
+        personagem_form = DnDForm
+    elif sistema == 'Ordem Paranormal':
+        personagem_model = OrdemParanormalCampanha
+        personagem_form = OrdemParanormalForm
+    elif sistema == 'Tormenta20':
+        personagem_model = TormentaCampanha
+        personagem_form = TormentaForm
+    elif sistema == 'Call of Cthulhu':
+        personagem_model = CallOfCthulhuCampanha
+        personagem_form = CallOfCthulhuForm
+    else:
+        return JsonResponse({'error': 'Sistema de RPG desconhecido'}, status=400)
+    
+    personagem = get_object_or_404(personagem_model, id=personagem_id)
+    foto_antiga = personagem.foto.name
+
+    if user == personagem.nomePerfil or user.is_staff:
+        if request.method == "POST":
+            form = personagem_form(request.POST, request.FILES, instance=personagem)
+            if form.is_valid():
+                if personagem.foto:
+                    
+                    caminho_arquivo_antigo = os.path.join('media', foto_antiga)
+
+                    if foto_antiga != personagem.foto:
+                        os.remove(caminho_arquivo_antigo)
+                form.save()
+                return redirect('meus_personagens')
+        else:
+            form = personagem_form(instance=personagem)
+    else:
+         return redirect('meus_personagens')
+    
+    return render(request, 'meus_personagens/editCharacter/edit_char_ordem.html', {'ordem': form, 'personagem': personagem})

@@ -10,4 +10,5 @@ urlpatterns = [
     path('criar_ficha/<int:campaign_id>/<int:pasta_id>/', views.criar_personagem, name='criar_personagem'),
     path('map/place_token/<int:map_id>/<int:personagem_id>/', views.place_token, name='place_token'), 
     path('deletar_personagem/<int:campaign_id>/<int:personagem_id>/', views.deletar_personagem_campanha, name="deletar_personagem_campanha"),
+    path('editar_personagem/<int:campaign_id>/<int:personagem_id>/', views.editar_personagem_campanha, name='editar_personagem_campanha'),
 ]

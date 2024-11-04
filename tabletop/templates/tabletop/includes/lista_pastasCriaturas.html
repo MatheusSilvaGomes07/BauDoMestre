@@ -7,6 +7,7 @@
                     <a href="{% url detalhePersonagem personagem.id %}">{{ personagem.nome }}</a>
                     <button class="place-on-map" data-personagem-id="{{ personagem.id }}">Colocar no mapa</button>
                     <a href="{% url 'deletar_personagem_campanha' campaign_id personagem.id %}"> Deletar</a>
+                    <a href="{% url 'editar_personagem_campanha' campaign_id personagem.id %}"> Editar</a>
                 </li>
             {% endfor %}
         </ul>
