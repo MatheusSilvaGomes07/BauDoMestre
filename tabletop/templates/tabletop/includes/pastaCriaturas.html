@@ -1,0 +1,5 @@
+<form method="post" action=" {% url 'criar_pasta_criaturas' campaign_id%}">
+    {% csrf_token %}
+    {{ pastaCriaturasForm.as_p }}
+    <button type="submit">Enviar</button>
+</form>

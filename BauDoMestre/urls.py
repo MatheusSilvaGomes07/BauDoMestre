@@ -14,6 +14,7 @@ urlpatterns = [
     path('chat/', include('chat.urls')),
     path('inventario/', include('inventario.urls')),
     path('SistAmizade/', include('SistAmizade.urls')),
+    path('tabletop/', include('tabletop.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -9,14 +9,9 @@ class Personagem(models.Model):
     nomePerfil = models.ForeignKey(User, on_delete=models.CASCADE)
     nome = models.CharField(max_length=100)
     vida = models.IntegerField(null=True)
-    
-    
 
     class Meta:
         abstract = True
-        unique_together = ('nome',)
-
-
 
 
 class DnD(Personagem):

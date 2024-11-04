@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <style>
+        /* Estilo para o token selecionado */
+        .selected-token {
+            border: 2px solid blue;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        let currentMapId = null; // Variável global para armazenar o ID do mapa
+        const campaignId = {{ campaign_id }};
+        const socket = new WebSocket(`ws://${window.location.host}/ws/tabletop/${campaignId}/`);
+        let selectedTokenId = null;
+
+        socket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+        
+            if (data.action === 'load_map') {
+                loadMap(data.map_id);
+            } else if (data.action === 'move_token') {
+                moveToken(data.token_id, data.position_x, data.position_y);
+            } else if (data.action === 'delete_token' && data.hide) {
+                const tokenElement = document.querySelector(`.token[data-id="${data.token_id}"]`);
+                if (tokenElement) {
+                    tokenElement.remove();
+                    updateTokenPositions();
+                }
+            } else if (data.action === 'place_token') {
+                const tokenId = data.token_id;
+                const positionX = data.position_x;
+                const positionY = data.position_y;
+                const imageUrl = data.image;
+            
+                // Crie um novo div para o token
+                const tokenElement = document.createElement('div');
+                tokenElement.classList.add('token'); 
+                tokenElement.classList.add('ui-draggable');
+                tokenElement.classList.add('ui-draggable-handle');// Adiciona a classe 'token'
+                tokenElement.setAttribute('data-id', tokenId); // Define o ID do token como atributo data-id
+                tokenElement.style.position = 'absolute'; // Define a posição como absoluta
+                tokenElement.style.left = `${positionX}px`; // Define a posição X
+                tokenElement.style.top = `${positionY}px`; // Define a posição Y
+                tokenElement.style.width = '100px'; // Define a largura do token
+                tokenElement.style.height = '100px'; // Define a altura do token
+            
+                // Crie o elemento de imagem dentro do tokenElement
+                const imgElement = document.createElement('img');
+                imgElement.src = imageUrl; // Define a URL da imagem
+                imgElement.alt = 'Token'; // Adiciona texto alternativo para acessibilidade
+                imgElement.style.width = '100%'; // Faz a imagem ocupar toda a largura do div
+                imgElement.style.height = '100%'; // Faz a imagem ocupar toda a altura do div
+                imgElement.style.cursor = 'pointer'; // Define o cursor como pointer
+            
+                // Adiciona a imagem ao div do token
+                tokenElement.appendChild(imgElement);
+            
+                // Adiciona o tokenElement ao contêiner de tokens
+                document.getElementById('tokens').appendChild(tokenElement); // Substitua pelo ID do seu contêiner de tokens
+
+                initializeDraggableTokens();
+            }
+        };
+
+        function updateTokenPositions() {
+            $(".token").each(function(index) {
+                const tokenId = $(this).data("id");
+                const positionX = $(this).position().left;
+                const positionY = $(this).position().top;
+        
+                socket.send(JSON.stringify({
+                    'action': 'move_token',
+                    'token_id': tokenId,
+                    'position_x': Math.round(positionX),
+                    'position_y': Math.round(positionY)
+                }));
+            });
+        }
+        
+        function loadMap(mapId) {
+            $.get(`/tabletop/map/${mapId}/`, function(data) {
+                $('#map-container').html(data);
+                currentMapId = mapId;
+                initializeDraggableTokens();
+            });
+        }
+    
+        function selectMap(mapId) {
+            socket.send(JSON.stringify({
+                'action': 'load_map',
+                'map_id': mapId
+            }));
+        }
+    
+        function initializeDraggableTokens() {
+            $(".token").draggable({
+                containment: "#map img",
+                drag: function(event, ui) {
+                    const tokenId = $(this).data("id");
+                    const position = ui.position;
+    
+                    const positionX = Math.round(position.left);
+                    const positionY = Math.round(position.top);
+    
+                    socket.send(JSON.stringify({
+                        'action': 'move_token',
+                        'token_id': tokenId,
+                        'position_x': positionX,
+                        'position_y': positionY
+                    }));
+                },
+                stop: function(event, ui) {
+                    const tokenId = $(this).data("id");
+                    const position = ui.position;
+    
+                    const positionX = Math.round(position.left);
+                    const positionY = Math.round(position.top);
+    
+                    $.ajax({
+                        url: `/tabletop/token/${tokenId}/move/`,
+                        method: 'POST',
+                        data: {
+                            'position_x': positionX,
+                            'position_y': positionY,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        success: function() {
+                            socket.send(JSON.stringify({
+                                'action': 'move_token',
+                                'token_id': tokenId,
+                                'position_x': positionX,
+                                'position_y': positionY
+                            }));
+                        }
+                    });
+                }
+            });
+        }
+    
+        function moveToken(tokenId, positionX, positionY) {
+            const token = $(`.token[data-id=${tokenId}]`);
+            token.css({ left: `${positionX}px`, top: `${positionY}px` });
+        }
+
+        // Seleção e deseleção dos tokens
+        $(document).on('click', '.token', function(e) {
+            e.stopPropagation(); // Impede que o evento clique se propague para o documento
+            const clickedTokenId = $(this).data('id');
+            
+            if (selectedTokenId !== clickedTokenId) {
+                // Remove a borda do token selecionado anteriormente
+                $(".token").removeClass("selected-token");
+
+                // Adiciona a borda ao token atual
+                $(this).addClass("selected-token");
+                selectedTokenId = clickedTokenId;
+            } else {
+                // Se já está selecionado, remove a borda
+                $(this).removeClass("selected-token");
+                selectedTokenId = null;
+            }
+        });
+
+        // Remove a borda ao clicar fora de qualquer token
+        $(document).on('click', function() {
+            $(".token").removeClass("selected-token");
+            selectedTokenId = null;
+        });
+
+        $(document).ready(function() {
+            initializeDraggableTokens();
+        });
+    </script>
+</head>
+<body>
+    {% if is_mestre %}
+
+        <h1>Criar Mapa</h1>
+        {% include "tabletop/includes/mapa_form.html" %}
+
+        <h1>Criar Pasta</h1>
+        {% include "tabletop/includes/pastaCriaturas.html" %}
+
+        <h1>Campaign Maps</h1>
+        {% include "tabletop/includes/lista_mapas.html" %}
+
+    {% endif %}
+
+    <h1> Pastas de fichas </h1>
+    {% include "tabletop/includes/lista_pastasCriaturas.html" %}
+
+    <div id="map-container">
+        <!-- Loaded map will be inserted here -->
+    </div>
+    
+</body>
+</html>
+ 

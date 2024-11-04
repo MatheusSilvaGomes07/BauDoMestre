@@ -1,0 +1,35 @@
+<ul>
+    {% for pasta, personagens in pasta_personagens.items %}
+        <li>{{ pasta.nome }} <a href="{% url 'criar_personagem' campaign_id pasta.id %}">Criar +</a></li>
+        <ul>
+            {% for personagem in personagens %}
+                <li>
+                    <a href="{% url detalhePersonagem personagem.id %}">{{ personagem.nome }}</a>
+                    <button class="place-on-map" data-personagem-id="{{ personagem.id }}">Colocar no mapa</button>
+                    <a href="{% url 'deletar_personagem_campanha' campaign_id personagem.id %}"> Deletar</a>
+                    <a href="{% url 'editar_personagem_campanha' campaign_id personagem.id %}"> Editar</a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% empty %}
+            <li>Crie uma pasta para criar suas fichas.</li>
+    {% endfor %}
+</ul>
+
+<script>
+    $('.place-on-map').click(function() {
+        const personagemId = $(this).data('personagem-id');
+        const mapId = currentMapId;  // You need to define currentMapId elsewhere in your script
+
+        const myUrl = "{% url 'place_token' 0 0 %}".replace('0/0', mapId  + '/' + personagemId);
+
+        fetch(myUrl)
+        .then(response => response.json())
+        .then(data => {
+            console.log("Dados recebidos:", data);
+        })
+        .catch(error => {
+            console.error("Erro na requisição:", error);
+        });
+    });
+</script>

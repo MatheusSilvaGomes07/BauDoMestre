@@ -16,7 +16,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [('20.253.72.234', 6379)],
+            "hosts": [('localhost', 6379)],
             "capacity": 10000,
         },
     },
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'tabletop',
 ]
 
 # Email settings
