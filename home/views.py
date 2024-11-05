@@ -14,7 +14,7 @@ from SistAmizade.models import Amigo, SolicitacaoAmizade
 from random import randint
 import os
 import shutil
-from allauth.account.views import SignupView, LoginView
+from allauth.account.views import SignupView, LoginView # type: ignore
 
 class CustomSignupView(SignupView):
     form_class = CustomSignupForm
