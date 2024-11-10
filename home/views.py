@@ -24,7 +24,7 @@ class CustomSignupView(SignupView):
 
 class CustomLoginView(LoginView):
     form_class = CustomLoginForm
-    
+
 
 
 def apenas_mestre(view_func):
@@ -32,12 +32,12 @@ def apenas_mestre(view_func):
     def _wrapped_view(request, *args, **kwargs):
         campanha = get_object_or_404(Campanha, id=kwargs['campanha_id'])
         perfil = Perfil.objects.get(nomePerfil=request.user)
-        
+
         if campanha.nomeMestre == perfil:
             return view_func(request, *args, **kwargs)
         else:
             raise PermissionDenied("Você não tem permissão para realizar esta ação.")
-    
+
     return _wrapped_view
 
 
@@ -90,6 +90,7 @@ def index(request):
         return render(request, 'principal/home-ia.html')
     else:
         user = request.user
+        perfil = Perfil.objects.get(nomePerfil=user)
         fotoConta = Perfil.objects.get(id=user.id).fotoConta
 
         dnd = DnD.objects.filter(nomePerfil=user)
@@ -104,8 +105,22 @@ def index(request):
             if uuid:
                 camp.uuid = uuid.uuid
 
+        for campanha in campanhas:
+            grupos = campanha.chats.all()
+            for grupo in grupos:
+                envioSolicitacao = '1' if bool(SolicitacaoEntrada.objects.filter(de_usuario = request.user.id, para_campanha = campanha.id, status='Pendente')) else '0'
 
-        return render(request, 'principal/home.html', {'campanhas': campanhas, 'fotoConta': fotoConta, 'dnd': dnd, 'ordem': ordem, 'tormenta20': tormenta20, 'coc': coc,})
+                grupo.envioSolicitacao = envioSolicitacao
+
+        return render(request, 'principal/home.html', {
+            'campanhas': campanhas,
+            'fotoConta': fotoConta,
+            'dnd': dnd,
+            'ordem': ordem,
+            'tormenta20': tormenta20,
+            'coc': coc,
+            'perfil': perfil,
+            'grupos': grupos})
 
 
 # views do mural logado + buscar as mesas
@@ -129,9 +144,6 @@ def buscarmesa(request):
 
     campanhas_e_grupos = {}
     for campanha in campanhas:
-        
-
-
         grupos = campanha.chats.all()
         for grupo in grupos:
             envioSolicitacao = '1' if bool(SolicitacaoEntrada.objects.filter(de_usuario = request.user.id, para_campanha = campanha.id, status='Pendente')) else '0'
@@ -147,12 +159,12 @@ def buscarmesa(request):
 def excluir_jogador(request, campanha_id, jogador_id):
     campanha = get_object_or_404(Campanha, id=campanha_id)
     jogador = get_object_or_404(Perfil, id=jogador_id)
-    
+
     grupo = Grupo.objects.get(campanha=campanha)
-    
+
     # Remover o jogador do grupo da campanha
     grupo.membros.remove(jogador.nomePerfil)
-    
+
     return redirect('detalhes_campanha', id=campanha_id)
 
 @login_required
@@ -186,7 +198,7 @@ def search_user(request):
         users = Perfil.objects.filter(
             Q(nomePerfil__username__icontains=conta_busca)
         )
-        
+
     return render(request, 'principal/buscaUser.html', {'users': users, 'busca_realizada': bool(conta_busca)})
 
 
@@ -198,12 +210,12 @@ def exibir_perfil(request, perfil_slug):
     is_amigo = not is_self and Amigo.objects.filter(usuario=request.user, amigo=perfil.nomePerfil).exists()
 
     solicitacao_pendente = None
-    
+
     quantidade_amigos = Amigo.objects.filter(usuario=perfil.nomePerfil.id).count()
-    
+
     if not is_self:
         solicitacao_pendente = SolicitacaoAmizade.objects.filter(de_usuario=request.user, para_usuario=perfil.nomePerfil, aceita=False).first()
-        
+
 
     return render(request, 'principal/exibir_perfil.html', {'perfil': perfil, 'is_amigo': is_amigo, 'is_self': is_self, 'solicitacao_pendente': solicitacao_pendente, 'quantidade_amigos':quantidade_amigos})
 
@@ -218,7 +230,7 @@ def criarCampanhas(request):
             perfil_mestre = get_object_or_404(Perfil, nomePerfil=request.user)
             campanha.nomeMestre = perfil_mestre
             campanha.save()
-            
+
             # Cria um novo chat (grupo) associado à campanha
             novo_grupo = Grupo.objects.create(criador=request.user, publico=True, campanha=campanha)
             novo_grupo.membros.add(request.user)

@@ -22,8 +22,8 @@
     </div>
   </div>
 
-  <div class="quest">
-    <div class="box-header">
+  <div class="quest-title flex-column">
+    <div class="box-header flex">
         <h3>Quests</h3>
 
         {% if perfil.tipo_player == "Ambos" or perfil.tipo_player == "Mestre" %}
@@ -31,7 +31,7 @@
                 <h4>Criar Campanha</h4>
             </button>
         {% elif perfil.tipo_player == "Jogador"%}
-            <button onclick="window.location.href = '{% url 'buscarMesa' %}';">
+            <button onclick="window.location.href = '{% url 'buscarmesa' %}';">
                 <h4>Mais Campanhas</h4>
             </button>
         {% endif %}
@@ -39,13 +39,13 @@
     </div>
     <div class="boxHr"></div>
 
-    <div class="quest-box">
-
+    <div class="quest-box flex">
+      {% include "principal/campanha.html" %}
     </div>
   </div>
 
   <div class="fichas">
-    <div class="box-header">
+    <div class="box-header flex ">
         <h3>Fichas</h3>
         <button onclick="window.location.href = '{% url 'criacao_char' %}';">
             <h4>Criar Ficha</h4>

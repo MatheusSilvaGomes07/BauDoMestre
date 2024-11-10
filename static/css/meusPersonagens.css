@@ -75,11 +75,15 @@ body {
 
   .search-form {
     gap: 3rem;
-    margin: 36px 0 60px 0;
   }
 
-  .search-form h4 {
+  .search h4 {
     text-align: center;
+  }
+
+  .search {
+    gap: 40px;
+    margin: 50px;
   }
 
   .searchbar {

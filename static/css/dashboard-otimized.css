@@ -32,9 +32,131 @@ gap: 16px;
   color: #BE0B05;
 }
 
-.quest {
+.quest-title {
   width: 95%;
   align-self: center;
+  gap: 1rem;
+}
+
+.box-header {
+  justify-content: space-between;
+}
+
+.box-header button {
+  background-color: #8C0000;
+  border-radius: 10px;
+  padding: 0 30px;
+  cursor: pointer;
+}
+
+.quest {
+  position: relative;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #8C0000, #1F2236);
+  z-index: 1;
+  width: 400px;
+  padding: 1px;
+}
+
+.quest::before {
+  content: "";
+    position: absolute;
+    background-color: #18181C;
+    width: 98%;
+    height: 98%;
+    z-index: -1;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.quest .quest-header {
+  position: relative;
+  height: 180px;
+  background-size: cover;
+  margin: 5px 4px;
+  border-radius: 10px 10px 0px 0;
+}
+
+.quest .quest-header img {
+  width: 100%;
+  height: 100%;
+}
+
+.quest .quest-header .desc-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  justify-content: end;
+  gap: 5px;
+  background: linear-gradient(270deg, rgb(32 19 83 / 34%) 0%, rgb(85 9 15 / 34%) 59%, rgb(208 0 0 / 34%) 100%);
+}
+
+.quest-header .desc-bar .desc-tag {
+  margin: 7px 5px;
+  padding: 5px 10px;
+  border-radius: 35px;
+  background-color: #1a00009a;
+  border: #8C00005e 1px solid;
+
+}
+
+.quest-body {
+  margin: 15px 10px;
+}
+
+.quest-body .quest-title {
+  justify-content: space-between;
+  margin: 0 10px;
+}
+
+.quest-body .quest-title > p {
+  font-size: var(--text-20);
+  font-weight: bold;
+}
+
+.quest-body .quest-title button {
+  background: var(--red1);
+  padding: 6px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.quest-body .quest-title button a {
+  text-decoration: none;
+}
+
+.quest-title p > a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+}
+
+.divison-row {
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  margin: 10px 0;
+}
+
+.quest-desc {
+  gap: 2rem;
+}
+
+.quest-desc #text {
+  margin: 0 14px 1rem 14px;
+  font-weight: 500;
+}
+
+.quest-desc .quest-tags {
+  gap: 10px;
+  margin-left: 8px;
+}
+
+.quest-desc .quest-tags .tag {
+  background-color: var(--red1);
+  border-radius: 35px;
+  padding: 9px 12px;
+  font-weight: bold;
 }
 
 .boxHr {
