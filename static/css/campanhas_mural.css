@@ -67,11 +67,15 @@ body {
 
 .search-form {
   gap: 3rem;
-  margin: 36px 0 60px 0;
 }
 
-.search-form h4 {
+ .search h4 {
   text-align: center;
+}
+
+.search {
+  gap: 40px;
+  margin-bottom: 65px;
 }
 
 .searchbar {
@@ -139,7 +143,7 @@ body {
 .quests {
   display: flex;
   margin: 2rem 70px;
-  justify-content: space-between;
+  justify-content: start;
   flex-wrap: wrap;
   gap: 1.5rem;
 }
