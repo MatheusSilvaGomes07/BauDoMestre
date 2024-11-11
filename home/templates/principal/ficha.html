@@ -3,187 +3,197 @@
 {% block ficha %}
 
 {% for ficha in dnd %}
-<div class="vector-parent">
-    <div class="frame-inner">
-    <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="frame-child3 character-banner">
-        <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
-    </div>
-    </div>
-    <p class="lorem-ipsum-dolor2">{{ ficha.lore }}</p>
-    <div class="frame-body flex">
-    <div class="left-column">
-        <div class="main-caracteristics flex">
-        <div class="characteristic">
-            <div class="char">Raça</div>
-            <hr class="line-div">
-            <p class="atr">{{ ficha.raca }}</p>
-        </div>
-        <div class="characteristic">
-            <div class="char">Alinhamento</div>
-            <hr class="line-div">
-            <p class="atr">{% if ficha.personalidade != None %}{{ ficha.personalidade }}{% endif %}</p>
-        </div>
-        <div class="characteristic">
-            <div class="char">Classe</div>
-            <hr class="line-div">
-            <p class="atr">{{ ficha.classe }}</p>
-        </div>
+<div class="ficha flex">
+
+    <div class="ficha-head">
+        <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="ficha-banner">
         </div>
     </div>
-    <div class="right-column flex">
-        <img class="frame-child6" alt="" src="{% static "img/public/vector-17.svg" %}" />
-        <div class="nivel3">
-        <span class="nivel-txt">
-            <p class="p">{{ ficha.nivel }}</p>
-            <p class="nivel4">Nivel</p>
-        </span>
+
+    <div class="ficha-body flex">
+
+        <div class="ficha-title">
+            <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
+            <span class="nivel-txt">
+                <p class="p">{{ ficha.nivel }}</p>
+                <p class="nivel4">Nivel</p>
+            </span>
         </div>
-    </div>
-    </div>
-    <div class="frame-footer flex">
-    <a style="all: unset; cursor: pointer;" href="{% url 'detail_char_dnd' ficha.id %}">
-        <div class="frame6 flex">
-            <b class="abrir">ABRIR</b>
+
+        <div class="ficha-left">
+
+            <p>{{ ficha.lore }}</p>
+
+            <div class="ficha-tags">
+                <div class="ficha-tag">
+                    <p>Dungeons & Dragons</p>
+                </div>
+                <div class="ficha-tag">
+                    <p>{{ ficha.classe }}</p>
+                </div>
+                <div class="ficha-tag">
+                    <p>{{ ficha.raca }}</p>
+                </div>
+            </div>
+
+            <div class="ficha-right flex">
+                <button onclick="window.location.href = '#';">
+                    <p>Editar Ficha</p>
+                </button>
+
+                <button onclick="window.location.href = '#';">
+                    <p>Abrir Ficha</p>
+                </button>
+            </div>
         </div>
-    </a>
+
     </div>
+
 </div>
 {% endfor %}
 
 {% for ficha in ordem %}
-<div class="vector-parent">
-<div class="frame-inner">
-<div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="frame-child3 character-banner">
-    <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
-</div>
-</div>
-<p class="lorem-ipsum-dolor2">{% if ficha.lore %}{{ ficha.lore }}{% else %}Não possui lore.{% endif %}</p>
-<div class="frame-body flex">
-<div class="left-column">
-    <div class="main-caracteristics flex">
-    <div class="characteristic">
-        <div class="char">Origem</div>
-        <hr class="line-div">
-        <p class="atr">{{ ficha.origem }}</p>
+<div class="ficha">
+
+    <div class="ficha-head">
+        <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="ficha-banner">
+        </div>
     </div>
-    <div class="characteristic">
-        <div class="char">Vida</div>
-        <hr class="line-div">
-        <p class="atr">{{ ficha.vida }}</p>
+
+    <div class="ficha-body flex">
+
+        <div class="ficha-title">
+            <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
+            <span class="nivel-txt">
+                <p class="p">{{ ficha.nex }}</p>
+                <p class="nivel4">Nex</p>
+            </span>
+        </div>
+
+        <div class="ficha-left">
+
+            <p>{{ ficha.lore }}</p>
+
+            <div class="ficha-tags">
+                <div class="ficha-tag">
+                    <p>Ordem Paranormal</p>
+                </div>
+                <div class="ficha-tag">
+                    <p>{{ ficha.classe }}</p>
+                </div>
+                <div class="ficha-tag">
+                    <p>{{ ficha.origem }}</p>
+                </div>
+            </div>
+
+            <div class="ficha-right flex">
+                <button onclick="window.location.href = '#';">
+                    <p>Editar Ficha</p>
+                </button>
+
+                <button onclick="window.location.href = '#';">
+                    <p>Abrir Ficha</p>
+                </button>
+            </div>
+        </div>
+
     </div>
-    <div class="characteristic">
-        <div class="char">Classe</div>
-        <hr class="line-div">
-        <p class="atr">{{ ficha.classe }}</p>
-    </div>
-    </div>
-</div>
-<div class="right-column flex">
-    <img class="frame-child6" alt="" src="{% static "img/public/vector-17.svg" %}" />
-    <div class="nivel3">
-    <span class="nivel-txt">
-        <p class="p">{{ ficha.nex }}%</p>
-        <p class="nivel4">Nex</p>
-    </span>
-    </div>
-</div>
-</div>
-<div class="frame-footer flex">
-<a style="all: unset; cursor: pointer;" href="{% url 'detail_char_ordem' ficha.id %}">
-    <div class="frame6 flex">
-        <b class="abrir">ABRIR</b>
-    </div>
-</a>
-</div>
 </div>
 {% endfor %}
 {% for ficha in tormenta20 %}
-<div class="vector-parent">
-<div class="frame-inner">
-<div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="frame-child3 character-banner">
-<p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
-</div>
-</div>
-<p class="lorem-ipsum-dolor2">{% if ficha.lore %}{{ ficha.lore }}{% else %}Não possui lore.{% endif %}</p>
-<div class="frame-body flex">
-<div class="left-column">
-<div class="main-caracteristics flex">
-<div class="characteristic">
-    <div class="char">Raça</div>
-    <hr class="line-div">
-    <p class="atr">{{ ficha.raca }}</p>
-</div>
-<div class="characteristic">
-    <div class="char">Divindade</div>
-    <hr class="line-div">
-    <p class="atr">{{ ficha.divindade }}</p>
-</div>
-<div class="characteristic">
-    <div class="char">Classe</div>
-    <hr class="line-div">
-    <p class="atr">{{ ficha.classe }}</p>
-</div>
-</div>
-</div>
-<div class="right-column flex">
-<img class="frame-child6" alt="" src="{% static "img/public/vector-17.svg" %}" />
-<div class="nivel3">
-<span class="nivel-txt">
-    <p class="p">{{ ficha.nivel }}</p>
-    <p class="nivel4">Nivel</p>
-</span>
-</div>
-</div>
-</div>
-<div class="frame-footer flex">
-<a style="all: unset; cursor: pointer;" href="{% url 'detail_char_tormenta' ficha.id %}">
-<div class="frame6 flex">
-    <b class="abrir">ABRIR</b>
-</div>
-</a>
-</div>
+<div class="ficha">
+
+    <div class="ficha-head">
+        <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="ficha-banner">
+        </div>
+    </div>
+
+    <div class="ficha-body flex">
+
+        <div class="ficha-title">
+            <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
+            <span class="nivel-txt">
+                <p class="p">{{ ficha.nivel }}</p>
+                <p class="nivel4">Nivel</p>
+            </span>
+        </div>
+
+        <div class="ficha-left">
+
+            <p>{{ ficha.lore }}</p>
+
+            <div class="ficha-tags">
+                <div class="ficha-tag">
+                    <p>Tormenta20</p>
+                </div>
+                <div class="ficha-tag">
+                    <p>{{ ficha.classe }}</p>
+                </div>
+                <div class="ficha-tag">
+                    <p>{{ ficha.raca }}</p>
+                </div>
+            </div>
+
+            <div class="ficha-right flex">
+                <button onclick="window.location.href = '#';">
+                    <p>Editar Ficha</p>
+                </button>
+
+                <button onclick="window.location.href = '#';">
+                    <p>Abrir Ficha</p>
+                </button>
+            </div>
+        </div>
+
+    </div>
 </div>
 {% endfor %}
 {% for ficha in coc %}
-<div class="vector-parent">
-<div class="frame-inner">
-<div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="frame-child3 character-banner">
-<p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
-</div>
-</div>
-<p class="lorem-ipsum-dolor2">{% if ficha.lore %}{{ ficha.lore }}{% else %}Não possui lore.{% endif %}</p>
-<div class="frame-body flex">
-<div class="left-column">
-<div class="main-caracteristics flex">
-<div class="characteristic">
-<div class="char">Ocupação</div>
-<hr class="line-div">
-<p class="atr">{{ ficha.ocupacao }}</p>
-</div>
-<div class="characteristic">
-<div class="char">Residencia</div>
-<hr class="line-div">
-<p class="atr">{{ ficha.residencia }}</p>
-</div>
-</div>
-</div>
-<div class="right-column flex">
-<img class="frame-child6" alt="" src="{% static "img/public/vector-17.svg" %}" />
-<div class="nivel3">
-<span class="nivel-txt">
-<p class="p">{{ ficha.vida }}</p>
-<p class="nivel4">Vida</p>
-</span>
-</div>
-</div>
-</div>
-<div class="frame-footer flex">
-<a style="all: unset; cursor: pointer;" href="{% url 'detail_char_coc' ficha.id %}">
-<div class="frame6 flex">
-<b class="abrir">ABRIR</b>
-</div>
-</a>
-</div>
+<div class="ficha">
+
+    <div class="ficha-head">
+        <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="ficha-banner">
+        </div>
+    </div>
+
+    <div class="ficha-body flex">
+
+        <div class="ficha-title">
+            <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
+            <span class="nivel-txt">
+                <p class="p">{{ ficha.nivel }}</p>
+                <p class="nivel4">Nivel</p>
+            </span>
+        </div>
+
+        <div class="ficha-left">
+
+            <p>{{ ficha.lore }}</p>
+
+            <div class="ficha-tags">
+                <div class="ficha-tag">
+                    <p>CallOfChtullu</p>
+                </div>
+                <div class="ficha-tag">
+                    <p>{{ ficha.ocupacao }}</p>
+                </div>
+                <div class="ficha-tag">
+                    <p>{{ ficha.residencia }}</p>
+                </div>
+            </div>
+
+            <div class="ficha-right flex">
+                <button onclick="window.location.href = '#';">
+                    <p>Editar Ficha</p>
+                </button>
+
+                <button onclick="window.location.href = '#';">
+                    <p>Abrir Ficha</p>
+                </button>
+            </div>
+        </div>
+
+    </div>
 </div>
 {% endfor %}
 

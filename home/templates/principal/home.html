@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div class="quest-title flex-column">
+  <div class="box-title flex-column">
     <div class="box-header flex">
         <h3>Quests</h3>
 
@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <div class="fichas">
+  <div class="box-title flex-column">
     <div class="box-header flex ">
         <h3>Fichas</h3>
         <button onclick="window.location.href = '{% url 'criacao_char' %}';">
@@ -53,21 +53,10 @@
     </div>
     <div class="boxHr"></div>
 
-    <div class="ficha-box">
+    <div class="ficha-box flex-column">
         {% include "principal/ficha.html" %}
     </div>
   </div>
-
-  {% comment %} <div class="personagens1 flex">
-    <div class="character-header flex">
-      <div class="personagens2">Personagens</div>
-      <a href="{% url 'criacao_char' %}">
-          <img class="vector-icon12" alt="" src="{% static "img/public/plus-bold.svg" %}" />
-      </a>
-    </div>
-
-    <div class="char-carroussel flex">
-    {% endcomment %}
 
 </body>
 </html>

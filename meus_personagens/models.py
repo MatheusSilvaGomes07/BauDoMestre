@@ -178,7 +178,7 @@ class DnD(Personagem):
 
 
 
-    
+
 
 
 
@@ -204,7 +204,7 @@ class OrdemParanormal(Personagem):
     vig = models.IntegerField(default=0)
     pre = models.IntegerField(default=0)
     forc = models.IntegerField(default=0)
-    
+
     #Outros dados
     origem = models.CharField(max_length=100)
 
@@ -476,7 +476,7 @@ class Tormenta(Personagem):
     armaduraBonus = models.IntegerField(default=0)
     escudoBonus = models.IntegerField(default=0)
     outrosBonus = models.IntegerField(default=0)
-    
+
     #Itens de armadura e escudo
     nomeArmadura = models.CharField(max_length=100, null=True, blank=True)
     bonusArmaduraItem = models.IntegerField(default=0)
@@ -558,23 +558,23 @@ class Tormenta(Personagem):
     iniciativa = models.BooleanField(default=False)
     iniciativaMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
     iniciativaOutros = models.IntegerField(default=0)
-    
+
     intimidacao = models.BooleanField(default=False)
     intimidacaoMod = models.CharField(max_length=3, choices=periciasMod, default='Car')
     intimidacaoOutros = models.IntegerField(default=0)
-    
+
     intuicao = models.BooleanField(default=False)
     intuicaoMod = models.CharField(max_length=3, choices=periciasMod, default='Sab')
     intuicaoOutros = models.IntegerField(default=0)
-    
+
     investigacao = models.BooleanField(default=False)
     investigacaoMod = models.CharField(max_length=3, choices=periciasMod, default='Int')
     investigacaoOutros = models.IntegerField(default=0)
-    
+
     jogatina = models.BooleanField(default=False)
     jogatinaMod = models.CharField(max_length=3, choices=periciasMod, default='Car')
     jogatinaOutros = models.IntegerField(default=0)
-    
+
     ladinagem = models.BooleanField(default=False)
     ladinagemMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
     ladinagemOutros = models.IntegerField(default=0)
@@ -582,15 +582,15 @@ class Tormenta(Personagem):
     luta = models.BooleanField(default=False)
     lutaMod = models.CharField(max_length=3, choices=periciasMod, default='For')
     lutaOutros = models.IntegerField(default=0)
-    
+
     misticismo = models.BooleanField(default=False)
     misticismoMod = models.CharField(max_length=3, choices=periciasMod, default='Int')
     misticismoOutros = models.IntegerField(default=0)
-    
+
     nobreza = models.BooleanField(default=False)
     nobrezaMod = models.CharField(max_length=3, choices=periciasMod, default='Int')
     nobrezaOutros = models.IntegerField(default=0)
-    
+
     oficio1 = models.BooleanField(default=False)
     oficio1Nome = models.CharField(max_length=50, null=True, blank=True)
     oficio1Mod = models.CharField(max_length=3, choices=periciasMod, default='Int')
@@ -600,23 +600,23 @@ class Tormenta(Personagem):
     oficio2Nome = models.CharField(max_length=50, null=True, blank=True)
     oficio2Mod = models.CharField(max_length=3, choices=periciasMod, default='Int')
     oficio2Outros = models.IntegerField(default=0)
-    
+
     percepcao = models.BooleanField(default=False)
     percepcaoMod = models.CharField(max_length=3, choices=periciasMod, default='Sab')
     percepcaoOutros = models.IntegerField(default=0)
-    
+
     pilotagem = models.BooleanField(default=False)
     pilotagemMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
     pilotagemOutros = models.IntegerField(default=0)
-    
+
     pontaria = models.BooleanField(default=False)
     pontariaMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
     pontariaOutros = models.IntegerField(default=0)
-    
+
     reflexos = models.BooleanField(default=False)
     reflexosMod = models.CharField(max_length=3, choices=periciasMod, default='Des')
     reflexosOutros = models.IntegerField(default=0)
-    
+
     religiao = models.BooleanField(default=False)
     religiaoMod = models.CharField(max_length=3, choices=periciasMod, default='Sab')
     religiaoOutros = models.IntegerField(default=0)
@@ -624,11 +624,11 @@ class Tormenta(Personagem):
     sobrevivencia = models.BooleanField(default=False)
     sobrevivenciaMod = models.CharField(max_length=3, choices=periciasMod, default='Sab')
     sobrevivenciaOutros = models.IntegerField(default=0)
-    
+
     vontade = models.BooleanField(default=False)
     vontadeMod = models.CharField(max_length=3, choices=periciasMod, default='Sab')
     vontadeOutros = models.IntegerField(default=0)
-    
+
 
     #Equipamentos
     equipamentos = models.TextField(blank=True, null=True)
@@ -675,24 +675,24 @@ class CallOfCthulhu(Personagem):
 
     antropologia = models.BooleanField(default=False)
     antropologiaMod = models.IntegerField(null=True, blank=True)
-    
+
     arqueologia = models.BooleanField(default=False)
     arqueologiaMod = models.IntegerField(null=True, blank=True)
-    
+
     livre1 = models.BooleanField(default=False)
     livre1Nome = models.CharField(max_length=50, null=True, blank=True)
     livre1Mod = models.IntegerField(null=True, blank=True)
-    
+
     livre2 = models.BooleanField(default=False)
     livre2Nome = models.CharField(max_length=50, null=True, blank=True)
     livre2Mod = models.IntegerField(null=True, blank=True)
 
     seducao = models.BooleanField(default=False)
     seducaoMod = models.IntegerField(null=True, blank=True)
-    
+
     escalada = models.BooleanField(default=False)
     escaladaMod = models.IntegerField(null=True, blank=True)
-    
+
 
     creditoMod = models.IntegerField(null=True, blank=True)
 
@@ -736,7 +736,7 @@ class CallOfCthulhu(Personagem):
     livre4 = models.BooleanField(default=False)
     livre4Nome = models.CharField(max_length=50, null=True, blank=True)
     livre4Mod = models.IntegerField(null=True, blank=True)
-    
+
     primeirosSocorros = models.BooleanField(default=False)
     primeirosSocorrosMod = models.IntegerField(null=True, blank=True)
 
@@ -744,10 +744,10 @@ class CallOfCthulhu(Personagem):
     historiaMod = models.IntegerField(null=True, blank=True)
 
     intimidacao = models.BooleanField(default=False)
-    intimidacaoMod = models.IntegerField(null=True, blank=True)    
-     
+    intimidacaoMod = models.IntegerField(null=True, blank=True)
+
     pulo = models.BooleanField(default=False)
-    puloMod = models.IntegerField(null=True, blank=True)  
+    puloMod = models.IntegerField(null=True, blank=True)
 
     livre5 = models.BooleanField(default=False)
     livre5Nome = models.CharField(max_length=50, null=True, blank=True)
@@ -870,8 +870,8 @@ class CallOfCthulhu(Personagem):
     ataque2Num = models.IntegerField(null=True, blank=True)
     ataque2Alcance = models.FloatField(null=True, blank=True)
     ataque2Municao = models.IntegerField(null=True, blank=True)
-    ataque2Defeito = models.IntegerField(null=True, blank=True) 
-    
+    ataque2Defeito = models.IntegerField(null=True, blank=True)
+
     ataque3 = models.CharField(max_length=100, null=True, blank=True)
     ataque3Mod = models.IntegerField(null=True, blank=True)
     ataque3Dano = models.CharField(max_length=100, null=True, blank=True)
