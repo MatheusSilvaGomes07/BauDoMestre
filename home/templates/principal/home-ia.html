@@ -34,35 +34,50 @@
         </div>
 
         <div class="nav-button">
-          <p><a href="{% url 'sobre-nos' %}">Sobre Nos</a></p>
+          <p><a href="{% url 'sobre-nos' %}">Sobre Nós</a></p>
         </div>
       </div>
 
       <div class="login-button flex">
         <button onclick="window.location.href = '{% url 'account_login' %}';">
-          <p>Login</p>
+          <p>LOGIN</p>
         </button>
 
         <button onclick="window.location.href = '{% url 'account_signup' %}';">
-          <p>Cadastre-se</p>
+          <p>CADASTRE-SE</p>
         </button>
       </div>
     </nav>
 
 
-  <div class="start text-align flex">
-    <div style="background-image: url({% static "img/public/edgelord-dragon-1@2x.png" %}); ">
+  <div class="landing-banner flex-column">
+    <div class="background-banner" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url({% static 'img/background-landing.png' %}); background-repeat: no-repeat; background-size: cover;">
 
-      <p>Um mundo de historias o aguarda</p>
+      <div class="banner-text flex-column">
+        <h1>A sua aventura inicia aqui</h1>
 
-      <div>
+        <p>Algumas aventuras começam em tavernas movimentadas, cheias de histórias e lendas. Outras se iniciam nas profundezas de masmorras perigosas, onde o perigo espreita a cada esquina. Mas a sua aventura, única e cheia de promessas, começa aqui no Báu do Mestre.</p>
 
-        <button onclick="window.location.href = '{% url 'account_signup' %}';">
-          <p>Comece sua jornada</p>
-        </button>
+        <div class="banner-buttons flex">
+          <button onclick="window.location.href = '{% url 'account_signup' %}';">
+            <p>Cadastre-se</p>
+          </button>
 
-        <p>Explore mundos incríveis, enfrente desafios épicos e compartilhe
-          momentos memoráveis com uma comunidade apaixonada por RPG de mesa!</p>
+          <button onclick="window.location.href = '{% url 'sobre-nos' %}';">
+            <p>Sobre Nós</p>
+          </button>
+        </div>
+
+        <div class="banner-sistemas">
+          <h2>Seus RPGs Favorito</h2>
+
+          <div class="sistemas-icons flex">
+              <img src="{% static "img/public/coc.png" %}" alt="">
+              <img src="{% static "img/public/ordem.png" %}" alt="">
+              <img src="{% static "img/public/dnd.png" %}" alt="">
+              <img src="{% static "img/public/tormenta.png" %}" alt="">
+          </div>
+        </div>
 
       </div>
     </div>

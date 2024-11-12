@@ -3,7 +3,8 @@ nav {
   align-items: center;
   position: absolute;
   width: 100%;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(3px);
   height: 70px;
   text-transform: uppercase;
   font-weight: bold;
@@ -14,7 +15,12 @@ nav p {
   font-size: var(--text-20);
 }
 
-.nav-button:nth-of-type(1) p, .nav-button:nth-of-type(1) a  {
+.nav-button:nth-of-type(1) a  {
+  color: var(--red2);
+}
+
+.nav-button a:hover {
+  transition: .2s;
   color: var(--red2);
 }
 
@@ -29,12 +35,60 @@ nav p {
   width: 57px;
 }
 
+nav .login-button {
+  padding-right: 2rem;
+  gap: 30px;
+}
+
 nav .login-button button {
-  padding: 7px;
+  padding: 10px;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
 }
 
 nav .login-button button:nth-child(2){
   background-color: var(--red1);
+}
+
+.landing-banner {
+  height: 878px;
+}
+
+.background-banner {
+  height: 100%;
+}
+
+.banner-text {
+  padding: 15% 0 0 4%;
+  text-align: start;
+  gap: 30px;
+}
+
+.banner-text h1 {
+  line-height: 60px;
+}
+
+.banner-buttons {
+  gap: 2rem;
+}
+
+.banner-buttons button{
+  padding: 10px 26px;
+  background-color: var(--red1);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.banner-buttons button:nth-child(2){
+  background-color: unset;
+  border: var(--red1) 2px solid;
+}
+
+.banner-sistemas h2{
+  font-size: var(--title-48);
+}
+
+.banner-sistemas img {
+  height: 100px;
 }
