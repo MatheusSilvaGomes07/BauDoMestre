@@ -6,82 +6,60 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="shortcut icon" href="{% static 'img/ain.png' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static "css/global-ia.css" %}" />
-    <link rel="stylesheet" href="{% static "css/responsivity.css" %}" />
+    <link rel="shortcut icon" href="{% static 'img/icons/Logo-Ain.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "css/global.css" %}" />
     <link rel="stylesheet" href="{% static 'css/index-ia.css' %}" />
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,700;1,400&display=swap"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <title>Baú do Mestre</title>
   </head>
 
-  <body class="desktop">
-    <div class="navbar1 flex">
+  <body>
 
-      <div class="left-box flex">
-        <img class="ba-do-mestre-23-4" alt="logo" src="{% static 'img/public/ba-do-mestre-23-4.svg' %}"/>
-        <p class="bau-do-mestre-container">BAU DO MESTRE</p>
-      </div>
+    <nav class="flex">
 
-      <div class="buttons flex">
-        <div class="basic-buttons flex">
-          <div class=" nav-button">
-            <a href="{% url 'home' %}">Home</a>
-          </div>
-          <div class="nav-button">
-            <a href="{% url 'sobre-nos' %}">Sobre Nos</a>
-          </div>
+      <div class="left-nav flex">
+        <img alt="logo" src="{% static 'img/icons/Logo-Ain.svg' %}"/>
+
+        <div class="nav-button">
+          <p><a href="{% url 'home' %}">Home</a></p>
         </div>
-        <div class="login-button flex">
-          <div class="red-button flex">
-            <a href="{% url 'account_signup' %}" class="red-button-inn">cadastro</a>
-          </div>
-          <div class="red-button flex">
-            <a href="{% url 'account_login' %}" class="red-button-inn">Login</a>
-          </div>
+        <div class="nav-button">
+          <p><a href="{% url 'sobre-nos' %}">Campanhas</a></p>
+        </div>
+
+        <div class="nav-button">
+          <p><a href="{% url 'sobre-nos' %}">Sobre Nos</a></p>
         </div>
       </div>
 
-    <button onclick="openSide()"><img class="line-nav" src="{% static 'img/public/3_line.png' %}" alt=""></button>
-  </div>
+      <div class="login-button flex">
+        <button onclick="window.location.href = '{% url 'account_login' %}';">
+          <p>Login</p>
+        </button>
 
-  <div id="sidenav" class="flex">
-    <div class="sidenav-header flex">
-      <p class="bau-do-mestre-sidenav">BAU DO MESTRE</p>
-      <button onclick="closeSide()"><img  src="{% static 'img/public/close-x.svg' %}" alt=""></button>
-    </div>
-    <div class="sidenav-body flex">
-      <div class=" nav-button">
-        <p>Home</p>
+        <button onclick="window.location.href = '{% url 'account_signup' %}';">
+          <p>Cadastre-se</p>
+        </button>
       </div>
-      <div class="nav-button">
-        <p>Sobre Nos</p>
-      </div>
-      <div class="red-button flex">
-        <p>Cadastro</p>
-      </div>
-      <div class="red-button flex">
-        <p>Login</p>
-      </div>
-
-    </div>
-  </div>
+    </nav>
 
 
   <div class="start text-align flex">
-    <div class="start-child flex"  style="background-image: url({% static "img/public/edgelord-dragon-1@2x.png" %}); ">
+    <div style="background-image: url({% static "img/public/edgelord-dragon-1@2x.png" %}); ">
 
-      <div class="overlay"></div>
+      <p>Um mundo de historias o aguarda</p>
 
-      <p id="start-header" class="text-align">Um mundo de historias o aguarda</p>
+      <div>
 
-      <div id="start-row" class="flex">
-
-        <div class="start-btn text-align flex" id="loginContainer">
-          <a href={% url 'account_signup' %}>Comece sua jornada</a>
-        </div>
+        <button onclick="window.location.href = '{% url 'account_signup' %}';">
+          <p>Comece sua jornada</p>
+        </button>
 
         <p>Explore mundos incríveis, enfrente desafios épicos e compartilhe
           momentos memoráveis com uma comunidade apaixonada por RPG de mesa!</p>
@@ -89,22 +67,20 @@
       </div>
     </div>
 
-    <div class="effecbar flex">
-      <div class="div-bar"></div>
-      <p class="por-meio-de">
+    <div>
+      <p>
         Por meio de uma plataforma rápida e pratica, acesse campanhas
         criadas pela comunidade dos jogadores de RPG, aonde você pode
         participar e se aventurar. Encontre amigos, crie personagens, e
         acima de tudo, se divirta!
       </p>
-
-      <img class="down-arrow-1-1" alt="" src="{% static "img/public/downarrow-1-11@2x.png" %}"/>
     </div>
 
 
   </div>
-  <div class="public flex">
-    <div class="flex public-body">
+
+  <!-- <div>
+    <div>
       <div class="public-header flex">
         <div class="public-header-left-column flex">
           <div class="aventuras-incriveis text-align">aventuras incriveis</div>
@@ -225,7 +201,7 @@
       </div>
 
     </div>
-  </div>
+  </div> -->
 </body>
 </html>
 
