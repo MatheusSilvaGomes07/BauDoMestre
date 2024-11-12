@@ -150,10 +150,31 @@ body {
 
   .personagens {
     display: flex;
-    margin: 2rem 70px;
+    margin: 2rem 3%;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1.5rem;
+    height: 850px;
+    overflow-y: auto;
+    padding-right: 26px;
+  }
+
+  ::-webkit-scrollbar {
+    height: 16px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #535353;
+    border-radius: 15px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #FFFFFF;
+    border-radius: 15px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
   }
 
   .quest {
@@ -293,4 +314,104 @@ body {
     padding: 1.5rem 3rem;
     border-radius: 15px;
     cursor: pointer;
+  }
+
+
+  .fichas {
+    width: 95%;
+    align-self: center;
+  }
+
+  .ficha-box {
+    gap: 20px;
+    height: 850px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 26px;
+  }
+
+  .ficha {
+    width: 100%;
+    background-color: #2F0B0B;
+    border: #8C0000 3px solid;
+    border-radius: 15px;
+    height: 250px;
+    justify-content: space-between;
+  }
+
+  .ficha .ficha-head{
+    width: 18%;
+  }
+
+  .ficha-head img{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+  }
+
+  .ficha-body {
+    width: 80%;
+    gap: 10px;
+  }
+
+  .ficha-title {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ficha-title > p {
+    font-size: var(--title-48);
+    font-weight: bold;
+    font-family: var(--poppins);
+  }
+
+  .ficha-title span {
+    font-size: var(--subtitle-25);
+    font-family: var(--Alata);
+    padding: 0 1rem;
+    gap: .5rem;
+    font-weight: bold;
+  }
+
+  .hr {
+    height: 2px;
+    background-color: #ffffff;
+  }
+
+  .ficha-desc {
+    height: 62%;
+    justify-content: space-between;
+  }
+
+  .ficha-left {
+    width: 85%;
+    gap: 10px;
+  }
+
+  .ficha-left > p {
+    height: 65%;
+    text-align: justify;
+  }
+
+  .ficha-tags {
+    gap: 15px;
+  }
+
+  .ficha-tag {
+    background-color: var(--red1);
+    border-radius: 35px;
+    padding: 5px 23px;
+    font-weight: bold;
+  }
+
+  .ficha-right {
+    gap: 20px;
+    padding-right: 11px;
+  }
+
+  .ficha-right > button {
+    padding: 10px 12px;
+    background-color: var(--red1);
+    border-radius: 15px;
+    font-weight: bold;
   }

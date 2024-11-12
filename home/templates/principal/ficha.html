@@ -6,37 +6,40 @@
 <div class="ficha flex">
 
     <div class="ficha-head">
-        <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="ficha-banner">
-        </div>
+        <img src="{{ ficha.foto.url }}" alt="">
     </div>
 
-    <div class="ficha-body flex">
+    <div class="ficha-body flex-column">
 
-        <div class="ficha-title">
+        <div class="ficha-title flex">
             <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
-            <span class="nivel-txt">
-                <p class="p">{{ ficha.nivel }}</p>
+            <span class="nivel flex">
                 <p class="nivel4">Nivel</p>
+                <p class="p">{{ ficha.nivel }}</p>
             </span>
         </div>
 
-        <div class="ficha-left">
+        <div class="hr"></div>
 
-            <p>{{ ficha.lore }}</p>
+        <div class="ficha-desc flex">
+            <div class="ficha-left flex-column">
 
-            <div class="ficha-tags">
-                <div class="ficha-tag">
-                    <p>Dungeons & Dragons</p>
-                </div>
-                <div class="ficha-tag">
-                    <p>{{ ficha.classe }}</p>
-                </div>
-                <div class="ficha-tag">
-                    <p>{{ ficha.raca }}</p>
+                <p>{{ ficha.lore }}</p>
+
+                <div class="ficha-tags flex">
+                    <div class="ficha-tag">
+                        <p>Dungeons & Dragons</p>
+                    </div>
+                    <div class="ficha-tag">
+                        <p>{{ ficha.classe }}</p>
+                    </div>
+                    <div class="ficha-tag">
+                        <p>{{ ficha.raca }}</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="ficha-right flex">
+            <div class="ficha-right flex-column">
                 <button onclick="window.location.href = '#';">
                     <p>Editar Ficha</p>
                 </button>
@@ -53,40 +56,43 @@
 {% endfor %}
 
 {% for ficha in ordem %}
-<div class="ficha">
+<div class="ficha flex">
 
     <div class="ficha-head">
-        <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="ficha-banner">
-        </div>
+        <img src="{{ ficha.foto.url }}" alt="">
     </div>
 
-    <div class="ficha-body flex">
+    <div class="ficha-body flex-column">
 
-        <div class="ficha-title">
+        <div class="ficha-title flex">
             <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
-            <span class="nivel-txt">
-                <p class="p">{{ ficha.nex }}</p>
+            <span class="nivel flex">
                 <p class="nivel4">Nex</p>
+                <p class="p">{{ ficha.nex }}</p>
             </span>
         </div>
 
-        <div class="ficha-left">
+        <div class="hr"></div>
 
-            <p>{{ ficha.lore }}</p>
+        <div class="ficha-desc flex">
+            <div class="ficha-left flex-column">
 
-            <div class="ficha-tags">
-                <div class="ficha-tag">
-                    <p>Ordem Paranormal</p>
-                </div>
-                <div class="ficha-tag">
-                    <p>{{ ficha.classe }}</p>
-                </div>
-                <div class="ficha-tag">
-                    <p>{{ ficha.origem }}</p>
+                <p>{{ ficha.lore }}</p>
+
+                <div class="ficha-tags flex">
+                    <div class="ficha-tag">
+                        <p>Ordem Paranormal</p>
+                    </div>
+                    <div class="ficha-tag">
+                        <p>{{ ficha.classe }}</p>
+                    </div>
+                    <div class="ficha-tag">
+                        <p>{{ ficha.origem }}</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="ficha-right flex">
+            <div class="ficha-right flex-column">
                 <button onclick="window.location.href = '#';">
                     <p>Editar Ficha</p>
                 </button>
@@ -98,43 +104,47 @@
         </div>
 
     </div>
+
 </div>
 {% endfor %}
 {% for ficha in tormenta20 %}
-<div class="ficha">
+<div class="ficha flex">
 
     <div class="ficha-head">
-        <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="ficha-banner">
-        </div>
+        <img src="{{ ficha.foto.url }}" alt="">
     </div>
 
-    <div class="ficha-body flex">
+    <div class="ficha-body flex-column">
 
-        <div class="ficha-title">
+        <div class="ficha-title flex">
             <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
-            <span class="nivel-txt">
-                <p class="p">{{ ficha.nivel }}</p>
-                <p class="nivel4">Nivel</p>
+            <span class="nivel flex">
+                <p class="nivel4">Nex</p>
+                <p class="p">{{ ficha.nex }}</p>
             </span>
         </div>
 
-        <div class="ficha-left">
+        <div class="hr"></div>
 
-            <p>{{ ficha.lore }}</p>
+        <div class="ficha-desc flex">
+            <div class="ficha-left flex-column">
 
-            <div class="ficha-tags">
-                <div class="ficha-tag">
-                    <p>Tormenta20</p>
-                </div>
-                <div class="ficha-tag">
-                    <p>{{ ficha.classe }}</p>
-                </div>
-                <div class="ficha-tag">
-                    <p>{{ ficha.raca }}</p>
+                <p>{{ ficha.lore }}</p>
+
+                <div class="ficha-tags flex">
+                    <div class="ficha-tag">
+                        <p>Tormenta 20</p>
+                    </div>
+                    <div class="ficha-tag">
+                        <p>{{ ficha.classe }}</p>
+                    </div>
+                    <div class="ficha-tag">
+                        <p>{{ ficha.raca }}</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="ficha-right flex">
+            <div class="ficha-right flex-column">
                 <button onclick="window.location.href = '#';">
                     <p>Editar Ficha</p>
                 </button>
@@ -146,43 +156,47 @@
         </div>
 
     </div>
+
 </div>
 {% endfor %}
 {% for ficha in coc %}
-<div class="ficha">
+<div class="ficha flex">
 
     <div class="ficha-head">
-        <div style=" background-image: linear-gradient(105.23deg,rgb(0 0 0 / 42%),#a8233c 145.44%,rgb(54 0 0 / 99%)), url({{ ficha.foto.url }});" class="ficha-banner">
-        </div>
+        <img src="{{ ficha.foto.url }}" alt="">
     </div>
 
-    <div class="ficha-body flex">
+    <div class="ficha-body flex-column">
 
-        <div class="ficha-title">
+        <div class="ficha-title flex">
             <p class="kharthaisen1 the-dragoon-hunters">{{ ficha.nome }}</p>
-            <span class="nivel-txt">
-                <p class="p">{{ ficha.nivel }}</p>
-                <p class="nivel4">Nivel</p>
+            <span class="nivel flex">
+                <p class="nivel4">Nex</p>
+                <p class="p">{{ ficha.nex }}</p>
             </span>
         </div>
 
-        <div class="ficha-left">
+        <div class="hr"></div>
 
-            <p>{{ ficha.lore }}</p>
+        <div class="ficha-desc flex">
+            <div class="ficha-left flex-column">
 
-            <div class="ficha-tags">
-                <div class="ficha-tag">
-                    <p>CallOfChtullu</p>
-                </div>
-                <div class="ficha-tag">
-                    <p>{{ ficha.ocupacao }}</p>
-                </div>
-                <div class="ficha-tag">
-                    <p>{{ ficha.residencia }}</p>
+                <p>{{ ficha.lore }}</p>
+
+                <div class="ficha-tags flex">
+                    <div class="ficha-tag">
+                        <p>CallOfChtullu</p>
+                    </div>
+                    <div class="ficha-tag">
+                        <p>{{ ficha.ocupacao }}</p>
+                    </div>
+                    <div class="ficha-tag">
+                        <p>{{ ficha.residencia }}</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="ficha-right flex">
+            <div class="ficha-right flex-column">
                 <button onclick="window.location.href = '#';">
                     <p>Editar Ficha</p>
                 </button>
@@ -194,6 +208,7 @@
         </div>
 
     </div>
+
 </div>
 {% endfor %}
 
