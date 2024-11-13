@@ -49,6 +49,7 @@ nav .login-button button {
 
 nav .login-button button:nth-child(2){
   background-color: var(--red1);
+  padding: 10px 20px;
 }
 
 .landing-banner {
@@ -63,6 +64,10 @@ nav .login-button button:nth-child(2){
   padding: 15% 0 0 4%;
   text-align: start;
   gap: 30px;
+}
+
+.banner-text > p {
+  width: 60%;
 }
 
 .banner-text h1 {
@@ -85,10 +90,110 @@ nav .login-button button:nth-child(2){
   border: var(--red1) 2px solid;
 }
 
+.banner-sistemas {
+  gap: 30px;
+  margin-top: 5rem;
+}
+
 .banner-sistemas h2{
-  font-size: var(--title-48);
+  font-size: 52px;
 }
 
 .banner-sistemas img {
   height: 100px;
+}
+
+.banner-sistemas img:nth-child(4){
+  height: 90px;
+}
+
+.banner-sistemas .sistemas-icons {
+  justify-content: space-around;
+}
+
+.article-boxes {
+  gap: 25px;
+}
+
+.article {
+  background-color: var(--background2);
+  padding: 60px 0;
+}
+
+.article > h2 {
+  padding-left: 3rem;
+  padding-bottom: 25px;
+}
+
+.article .article-box {
+  width: 93%;
+  align-self: center;
+  background-color: #0F0F0F;
+  border-radius: 15px;
+}
+
+.article-box .intro-text {
+  padding: 20px 30px;
+  gap: 20px;
+}
+
+.intro-text h4 {
+  font-size: 45px;
+  font-family: var(--staat);
+  font-weight: normal;
+  color: #FA4141;
+}
+
+.intro-text p {
+  text-align: justify;
+  width: 97%;
+  font-size: 18px;
+}
+
+.article-box img {
+  padding: 35px 26px;
+}
+
+.left-article {
+  gap: 20px;
+  padding: 30px;
+  background-color: #0F0F0F;
+  border-radius: 15px;
+  width: 400px;
+}
+
+.left-article img {
+  padding: 0;
+  width: 298px;
+}
+
+.left-article div {
+  gap: 16px;
+}
+
+.left-article div p {
+  text-align: justify;
+}
+
+.left-article h4 {
+  font-size: 30px;
+  font-family: var(--staat);
+  font-weight: normal;
+}
+
+.article-box:nth-child(2) {
+  gap: 20px;
+  background-color: unset;
+}
+
+.right-article {
+  align-items: center;
+  justify-content: center;
+}
+
+.right-article h3 {
+    padding: 5%;
+    font-size: 50px;
+    font-family: var(--staat);
+    font-weight: normal;
 }

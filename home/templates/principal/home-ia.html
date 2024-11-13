@@ -68,8 +68,8 @@
           </button>
         </div>
 
-        <div class="banner-sistemas">
-          <h2>Seus RPGs Favorito</h2>
+        <div class="banner-sistemas flex-column">
+          <h2>Seus RPGs Favoritos</h2>
 
           <div class="sistemas-icons flex">
               <img src="{% static "img/public/coc.png" %}" alt="">
@@ -81,17 +81,37 @@
 
       </div>
     </div>
+  </div>
 
-    <div>
-      <p>
-        Por meio de uma plataforma rápida e pratica, acesse campanhas
-        criadas pela comunidade dos jogadores de RPG, aonde você pode
-        participar e se aventurar. Encontre amigos, crie personagens, e
-        acima de tudo, se divirta!
-      </p>
+  <div class="article">
+    <h2>Crie Sua Campanha Já</h2>
+
+    <div class="article-boxes flex-column">
+
+      <div class="article-box flex">
+        <div class="intro-text flex-column">
+          <h4>Encontre Jogadores para sua campanha de maneira unica</h4>
+          <p>Mestres de RPG frequentemente enfrentam dificuldades para encontrar jogadores devido à falta de um local de reunião ou ao tema específico da aventura que atrai apenas certos tipos de jogadores. Para resolver esse problema, criamos um recurso para mestres de campanha divulgarem suas aventuras e jogarem com novos jogadores.</p>
+        </div>
+        <img src="{% static "img/article-tabletop.png" %}" alt="">
+      </div>
+
+      <div class="article-box flex">
+        <div class="left-article flex-column">
+          <img src="{% static "img/cavaleiro.png" %}" alt="">
+
+          <div class="flex-column">
+            <h4>Crie seus personagens para a sua aventura</h4>
+            <p>Uma aventura precisa de aventureiros; aqui você pode criar fichas de monstros e protagonistas para sua aventura.</p>
+          </div>
+        </div>
+
+        <div class="right-article flex" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url({% static 'img/tabletop-background.png' %});">
+          <h3>TABLETOP DIGITAL PARA CAMPANHAS, JOGUE AGORA! COM RECURSO DE CHAT EM GRUPO</h3>
+        </div>
+      </div>
+
     </div>
-
-
   </div>
 
   <!-- <div>
