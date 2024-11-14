@@ -11,109 +11,94 @@
     {% load account socialaccount %}
     {% block conteudo %}
 
-    <div class="left-column">
-      <div class="logo">
+    <div class="left-column flex-column">
+
+      <div class="logo flex">
         <img src="{% static 'img/icons/Logo-Ain.svg' %}" alt="Logo Ain">
         <h4>Báu Do Mestre</h4>
+      </div>
+
+      <h1>{% trans "Seja Bem Vindo!" %}</h1>
+
+      {% get_providers as socialaccount_providers %}
+
+      <div class="registers flex">
+          {% if socialaccount_providers %}
+            <p>{% blocktrans with site.name as site_name %}Please sign in with one
+            of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+            for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+            <div class="socialaccount_ballot">
+
+              <ul class="socialaccount_providers">
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+              </ul>
+
+              <div class="login-or">{% trans 'or' %}</div>
+
+            </div>
+
+            {% include "socialaccount/snippets/login_extra.html" %}
+
+          {% else %}
+            <p id="login-register">{% blocktrans %}If you have not created an account yet, then please
+            <a href="{{ signup_url }}"><b>sign up</b></a> first.{% endblocktrans %}</p>
+          {% endif %}
+
+          <form class="login signup flex" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            <ul class='errorlist'>
+              {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            <div class="nome-de-usurio-container flex data-box">
+              <img class="vector-icon5" src="{% static "img/public/vector4.svg" %}">
+              {{ form.login }}
+            </div>
+
+            <div class="nome-de-usurio-container flex data-box">
+              <img class="vector-icon5" src="{% static "img/public/vector6.svg" %}">
+              {{ form.password }}
+            </div>
+
+            <div id="remember" class="nome-de-usurio-container flex">
+              <p>Se manter conectado?</p>
+              {{ form.remember }}
+            </div>
+
+
+            {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+            <button class="cadastro-child confirmar primaryAction" type="submit">{% trans "Sign In" %}</button>
+          </form>
+
       </div>
     </div>
 
     <div class="right-column">
+      <a href="{% url 'home' %}">
+        <div class="cadastro-inner">
+          <p>Home</p>
+        </div>
+      </a>
 
+      <a href="{% url 'account_signup' %}">
+        <div class="cadastro-inner">
+          <p>Cadastro</p>
+        </div>
+      </a>
+
+      <div class="a-batalha-final flex">
+        <p>
+          “A batalha final começa, e então... COMO ASSIM VOCÊ TIROU ERRO CRITICO
+          KARLOS?”
+        </p>
+      </div>
+      <img class="image-53-icon" alt="" src="../../../static/img/public/image-53@2x.png"/>
     </div>
-
-      <nav class="navbar">
-        <div class="site-logo flex">
-          <img class="bau-icon" alt="" src="../../../static/img/public/ba-do-mestre-23-4.svg"/>
-          <p>BAU DO MESTRE</p>
-        </div>
-        <div class="login-button flex">
-          <a href="{% url 'home' %}">
-            <div class="cadastro-inner">
-              <p>Home</p>
-            </div>
-          </a>
-          <a href="{% url 'account_signup' %}">
-            <div class="cadastro-inner">
-              <p>Cadastro</p>
-            </div>
-          </a>
-        </div>
-      </nav>
-
-      <main class="register-box flex">
-
-        <aside class="aside-register flex" id="login">
-          <h1>{% trans "Seja Bem Vindo!" %}</h1>
-
-          {% get_providers as socialaccount_providers %}
-
-          <div class="registers flex">
-            {% if socialaccount_providers %}
-              <p>{% blocktrans with site.name as site_name %}Please sign in with one
-              of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-              for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
-
-              <div class="socialaccount_ballot">
-
-                <ul class="socialaccount_providers">
-                  {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                </ul>
-
-                <div class="login-or">{% trans 'or' %}</div>
-
-              </div>
-
-              {% include "socialaccount/snippets/login_extra.html" %}
-
-              {% else %}
-              <p id="login-register">{% blocktrans %}If you have not created an account yet, then please
-              <a href="{{ signup_url }}"><b>sign up</b></a> first.{% endblocktrans %}</p>
-              {% endif %}
-
-              <form class="login signup flex" method="POST" action="{% url 'account_login' %}">
-                {% csrf_token %}
-                <ul class='errorlist'>
-                  {% for error in form.non_field_errors %}
-                    <li>{{ error }}</li>
-                  {% endfor %}
-                </ul>
-
-                <div class="nome-de-usurio-container flex data-box">
-                  <img class="vector-icon5" src="{% static "img/public/vector4.svg" %}">
-                  {{ form.login }}
-                </div>
-
-                <div class="nome-de-usurio-container flex data-box">
-                  <img class="vector-icon5" src="{% static "img/public/vector6.svg" %}">
-                  {{ form.password }}
-                </div>
-
-                <div id="remember" class="nome-de-usurio-container flex">
-                  <p>Se manter conectado?</p>
-                  {{ form.remember }}
-                </div>
-
-
-                {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                {% endif %}
-                <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-                <button class="cadastro-child confirmar primaryAction" type="submit">{% trans "Sign In" %}</button>
-              </form>
-
-        </aside>
-
-        <aside class="aside-image flex">
-            <div class="a-batalha-final flex">
-              <p>
-                “A batalha final começa, e então... COMO ASSIM VOCÊ TIROU ERRO CRITICO
-                KARLOS?”
-              </div>
-            </p>
-          <img class="image-53-icon" alt="" src="../../../static/img/public/image-53@2x.png"/>
-        </aside>
-
-      </main>
 {% endblock %}
 
