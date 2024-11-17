@@ -1,22 +1,44 @@
 {% extends "account/base.html" %}
+{% load static %}
 
 {% load i18n %}
 
-<title>Logout - Baú Do Mestre</title>
-
 
 {% block content %}
-<h1>{% trans "Sign Out" %}</h1>
 
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
+<div class="left-column">
 
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button type="submit">{% trans 'Sign Out' %}</button>
-</form>
+  <div class="top-buttons flex">
+    <button onclick="window.location.href = '{% url 'home' %}'">
+      <p>Mural</p>
+    </button>
+  </div>
+
+  <div class="text-banner flex">
+    <p>“As lendas dizem que, entre o tempo de você sair e voltar... O Mestre não terá feito a mesa dele ainda”</p>
+  </div>
+  <img class="image-53-icon" alt="" src="{% static "img/background-logout1.png" %}"/>
+
+</div>
+
+<div class="right-column flex-column">
+  <div class="logo flex">
+    <img src="{% static 'img/icons/Logo-Ain.svg' %}" alt="Logo Ain">
+    <h4>Báu Do Mestre</h4>
+  </div>
+
+  <h1>Já vai sair?</h1>
+
+  <h3>Muito obrigado pela visita!</h3>
+
+  <form method="post" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+    {% endif %}
+    <button type="submit">Sair</button>
+  </form>
+</div>
 
 
 {% endblock %}

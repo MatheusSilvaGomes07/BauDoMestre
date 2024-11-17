@@ -1,18 +1,158 @@
 /* Start header */
 body {
-  background: linear-gradient(168.9deg, #000, rgba(53, 51, 51, 0.5));
+  background: #0F0F0F;
   text-align: center;
 }
 
 .left-column {
   height: 100%;
+  gap: 86px;
+  width: 50%;
+}
+
+.left-column h1 {
+  font-family: var(--Inter);
+  font-size: 52px;
+  font-weight: bold;
 }
 
 .left-column .logo {
+  margin-top: 25px;
+  gap: 50px;
+  align-self: center;
+  align-items: center;
+}
 
+.logo h4 {
+  font-family: "Vidaloka";
+  font-weight: normal;
+}
+
+.registers {
+  align-items: center;
+}
+
+.login {
+  gap: 44px;
+  justify-content: start;
+  align-items: center;
+}
+
+.errorlist {
+  padding: 0;
+}
+
+.errorlist li {
+  color: white;
+  font-family: var(--Inter);
+}
+
+.input-box {
+  background-color: #252525;
+  border: white 1px solid;
+  border-radius: 5px;
+  align-items: center;
+  width: 100%;
+}
+
+.input-box img {
+  padding: 0 19px;
+  height: 1.8rem;
+  width: 2rem;
+}
+
+.input-box input {
+  all: unset;
+  font-family: var(--Inter);
+  font-size: 20px;
+  color: white;
+  width: 400px;
+  padding: 12px;
+  text-align: start;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #252525 inset; /* Remove a cor de fundo */
+    box-shadow: 0 0 0px 1000px #252525 inset;
+    -webkit-text-fill-color: white; /* Define a cor do texto */
+}
+
+.remember-box {
+  justify-content: space-between;
+  font-size: 20px;
+  font-family: var(--Inter);
+  align-items: center;
+  width: 100%;
+}
+
+.remember-div {
+  gap: 10px;
+}
+
+.login-button {
+  all: unset;
+  color: white;
+  font-weight: bold;
+  font-family: var(--Inter);
+  font-size: 24px;
+  background-color: var(--red1);
+  padding: 15px 30px;
+  border-radius: 5px;
+  width: 30%;
+  cursor: pointer;
 }
 
 .right-column {
   height: 100%;
+  width: 50%;
 }
 
+.right-column img {
+  width: 100%;
+  height: 100%;
+}
+
+.right-column .top-buttons, .text-banner {
+  position: absolute;
+}
+
+.top-buttons {
+  position: absolute;
+  right: 0;
+  padding: 25px 20px 0 0;
+  gap: 40px;
+}
+
+.top-buttons button{
+  background-color: rgba(0, 0,0,0.8);
+  border-radius: 35px;
+  border: 2px white solid;
+  padding: 4px 40px;
+  cursor: pointer;
+}
+
+.top-buttons button:hover {
+  transition: .5s;
+  background-color: white;
+}
+
+.top-buttons button:hover p {
+  color: black;
+}
+
+.text-banner {
+  width: 50%;
+  height: 29%;
+  bottom: 0;
+  background: rgba(217, 217, 217, 0.1);
+  backdrop-filter: blur(20px);
+  align-items: center;
+  justify-content: center;
+}
+
+.text-banner p {
+  font-family: "Vidaloka";
+  font-size: 40px;
+  line-height: 60px;
+  width: 90%;
+}

@@ -1,0 +1,105 @@
+/* Start header */
+body {
+    background: #0F0F0F;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .left-column {
+    height: 100%;
+    width: 50%;
+  }
+
+  .left-column img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .top-buttons, .text-banner {
+    position: absolute;
+  }
+
+  .top-buttons {
+    position: absolute;
+    left: 0;
+    padding: 25px 0 0 20px;
+    gap: 40px;
+  }
+
+  .top-buttons button{
+    background-color: rgba(0, 0,0,0.8);
+    border-radius: 35px;
+    border: 2px white solid;
+    padding: 4px 40px;
+    cursor: pointer;
+  }
+
+  .top-buttons button:hover {
+    transition: .5s;
+    background-color: white;
+  }
+
+  .top-buttons button:hover p {
+    color: black;
+  }
+
+  .text-banner {
+    width: 50%;
+    height: 29%;
+    bottom: 0;
+    background: rgba(217, 217, 217, 0.1);
+    backdrop-filter: blur(20px);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .text-banner p {
+    font-family: "Vidaloka";
+    font-size: 40px;
+    line-height: 60px;
+    width: 90%;
+  }
+
+  /* Divisor */
+
+  .right-column {
+    height: 100%;
+    width: 50%;
+    gap: 86px;
+  }
+
+  .right-column h1 {
+    font-family: var(--Inter);
+    font-size: 52px;
+    font-weight: bold;
+  }
+
+  .right-column h3 {
+    font-size: 40px;
+  }
+
+  .right-column .logo {
+    margin-top: 25px;
+    gap: 50px;
+    align-self: center;
+    align-items: center;
+  }
+
+  .logo h4 {
+    font-family: "Vidaloka";
+    font-weight: normal;
+  }
+
+  .right-column button {
+    all: unset;
+    color: white;
+    font-weight: bold;
+    font-family: var(--Inter);
+    font-size: 36px;
+    background-color: var(--red1);
+    margin-top: 3rem;
+    padding: 15px 30px;
+    border-radius: 5px;
+    width: 40%;
+    cursor: pointer;
+  }
