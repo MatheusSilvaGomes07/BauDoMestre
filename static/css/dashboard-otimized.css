@@ -195,7 +195,6 @@ gap: 16px;
 
 .ficha-box {
   gap: 20px;
-  height: 850px;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 26px;

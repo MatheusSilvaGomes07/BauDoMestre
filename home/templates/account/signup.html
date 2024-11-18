@@ -11,91 +11,92 @@
 
     <link rel="stylesheet" href="{% static "css/global.css" %}" />
     <link rel="stylesheet" href="{% static "css/cadastro.css" %}"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;0,900;1,700&display=swap"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Vidaloka&display=swap" rel="stylesheet">
   </head>
-  <body id="register">
-      <nav class="navbar">
-        <div class="site-logo flex">
-          <img class="bau-icon" alt="" src="{% static 'img/public/ba-do-mestre-23-4.svg' %}"/>
-          <p>BAU DO MESTRE</p>
-        </div>
-        <div class="login-button flex">
-          <a href="{% url 'home' %}">
-            <div class="cadastro-inner">
-              <p>Home</p>
-            </div>
-          </a>
-          <a href="{% url 'account_login' %}">
-            <div class="cadastro-inner">
-              <p>Login</p>
-            </div>
-          </a>
-        </div>
-      </nav>
 
-      <main class="register-box flex">
+  <body class="flex" id="register">
+    <div class="left-column flex-column" id="cadastro">
 
-        <aside class="aside-register flex">
-          <h1 id="cadastro-h1">{% trans "Espadas, Poções.. Cadastro!" %}</h1>
+      <div class="logo flex">
+        <img src="{% static 'img/icons/Logo-Ain.svg' %}" alt="Logo Ain">
+        <h4>Báu Do Mestre</h4>
+      </div>
 
-          <ul class="socialaccount_providers">
-            {% include "socialaccount/snippets/provider_list.html" %}
-          </ul>
+      <h1>Faça seu Cadastro</h1>
 
-          <div class="registers flex">
-            {% if form.errors %}
-              {% for field in form %}
-              {% for error in field.errors %}
-              <div class="alert alert-error">
-                <span> {{error}} <span>
-              </div>
-              {% endfor %}
-              {% endfor %}
-              {% endif %}
+      <ul class="socialaccount_providers" style="display: none">
+        {% include "socialaccount/snippets/provider_list.html" %}
+      </ul>
 
-            <form class="signup flex" id="signup_form" method="post" action="{% url 'account_signup' %}">
-              {% csrf_token %}
-              <div class="nome-de-usurio-container flex data-box">
-                <img class="vector-icon5" src="{% static "img/public/vector5.svg" %}">
-                {{ form.email }}
-              </div>
+      <div class="registers flex-column">
+        {% if form.errors %}
+          {% for field in form %}
+          {% for error in field.errors %}
+          <div class="alert alert-error">
+            <span> {{error}} <span>
+          </div>
+          {% endfor %}
+          {% endfor %}
+          {% endif %}
 
-              <div class="nome-de-usurio-container flex data-box">
-                <img class="vector-icon5" src="{% static "img/public/vector4.svg" %}">
-                {{ form.username }}
-              </div>
+        <form class="login flex-column" id="signup_form" method="post" action="{% url 'account_signup' %}" style="gap: 30px">
+          {% csrf_token %}
 
-              <div class="nome-de-usurio-container flex data-box">
-                <img class="vector-icon5" src="{% static "img/public/vector7.svg" %}">
-                {{ form.password1 }}
-              </div>
-
-              <div class="nome-de-usurio-container flex data-box">
-                <img class="vector-icon5" src="{% static "img/public/vector7.svg" %}">
-                {{ form.password2 }}
-              </div>
-
-              {% if redirect_field_value %}
-              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-              {% endif %}
-              <button class="cadastro-child confirmar" type="submit">{% trans "Sign Up" %} </button>
-            </form>
+          <div class="input-box flex data-box">
+            <img class="vector-icon5" src="{% static "img/public/vector5.svg" %}">
+            {{ form.email }}
           </div>
 
-        </aside>
+          <div class="input-box flex data-box">
+            <img class="vector-icon5" src="{% static "img/public/vector4.svg" %}">
+            {{ form.username }}
+          </div>
 
-        <aside class="aside-image flex">
-            <div class="a-batalha-final flex">
-              <p>
-                “Na floresta vocês encontram um cervo morto com- Não Tulgrin, você não pode procurar loot nele.”
-              </div>
-            </p>
-          <img class="image-53-icon" alt="" src="{% static 'img/public/image-53@2x.png' %}"/>
-        </aside>
+          <div class="input-box flex data-box">
+            <img class="vector-icon5" src="{% static "img/public/vector7.svg" %}">
+            {{ form.password1 }}
+          </div>
 
-      </main>
+          <div class="input-box flex data-box">
+            <img class="vector-icon5" src="{% static "img/public/vector7.svg" %}">
+            {{ form.password2 }}
+          </div>
+
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <button class="login-button confirmar" type="submit">{% trans "Sign Up" %} </button>
+        </form>
+      </div>
+
+    </div>
+
+
+      {% comment %}  {% endcomment %}
+
+      <div class="right-column">
+        <div class="top-buttons flex">
+          <button onclick="window.location.href = '{% url 'home' %}'">
+            <p>Home</p>
+          </button>
+
+          <button onclick="window.location.href = '{% url 'account_login' %}'">
+            <p>Login</p>
+          </button>
+        </div>
+
+        <div class="text-banner flex">
+          <p>“Ok, temos um mago, um paladino e... Ryuj, por que você fez um vendedor de flores?”</p>
+        </div>
+        <img class="image-53-icon" alt="" src="{% static "img/background-signup.png" %}"/>
+      </div>
 
   </body>
 

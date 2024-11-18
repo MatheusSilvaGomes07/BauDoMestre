@@ -2,12 +2,18 @@
 body {
   background: #0F0F0F;
   text-align: center;
+  overflow: hidden;
 }
 
 .left-column {
   height: 100%;
   gap: 86px;
   width: 50%;
+  align-items: center;
+}
+
+#cadastro {
+  gap: 40px;
 }
 
 .left-column h1 {
@@ -29,7 +35,9 @@ body {
 }
 
 .registers {
-  align-items: center;
+  align-items: start;
+  width: 70%;
+  gap: 5px;
 }
 
 .login {
@@ -42,14 +50,15 @@ body {
   padding: 0;
 }
 
-.errorlist li {
+.errorlist li, .alert {
   color: white;
   font-family: var(--Inter);
+  font-size: 14px;
+  text-align: start;
 }
 
 .input-box {
   background-color: #252525;
-  border: white 1px solid;
   border-radius: 5px;
   align-items: center;
   width: 100%;
@@ -145,7 +154,7 @@ input:-webkit-autofill {
   height: 29%;
   bottom: 0;
   background: rgba(217, 217, 217, 0.1);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(30px);
   align-items: center;
   justify-content: center;
 }

@@ -92,6 +92,7 @@ def index(request):
         user = request.user
         perfil = Perfil.objects.get(nomePerfil=user)
         fotoConta = Perfil.objects.get(id=user.id).fotoConta
+        grupos = None
 
         dnd = DnD.objects.filter(nomePerfil=user)
         ordem = OrdemParanormal.objects.filter(nomePerfil=user)
