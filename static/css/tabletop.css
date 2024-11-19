@@ -1,0 +1,517 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+:root{
+  --Inter: "Inter";
+}
+/* Estilo para o token selecionado */
+.selected-token {
+    border: 2px solid blue;
+     box-sizing: border-box;
+}
+
+    /* Estilo do botão de abrir modal */
+    #openModalBtn {
+        position: fixed;
+        top: 20px;
+        left: 0;
+        padding: 10px 20px;
+        background-color: #C10000;
+        color: #fff;
+        border: none;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+        z-index: 2;
+        transition: transform 0.3s ease;
+      }
+  
+      /* Estilo do modal lateral */
+      #sideModal {
+        font-weight: bold;
+        font-family: var(--Inter);
+        text-transform: uppercase;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 50vw;
+        background-color: #313131;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow-y: auto;
+      }
+  
+      /* Mostrar modal quando ativo */
+      #sideModal.active {
+        transform: translateX(0);
+      }
+  
+      /* Fundo esmaecido quando modal está ativo */
+      #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+        z-index: 0;
+      }
+  
+      /* Mostrar fundo esmaecido quando ativo */
+      #overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+  
+      /* Mover o botão junto com o modal quando ativo */
+      #openModalBtn.active {
+        transform: translateX(50vw);
+      }
+  
+      /* Estilo do botão de fechar em forma de "X" */
+      #closeModalBtn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        cursor: pointer;
+      }
+  
+      /* Estilo da lista de imagens */
+      .image-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+  
+      .image-item {
+        color: white;
+        position: relative; /* Importante para posicionar o ícone no canto */
+        text-align: center;
+      }
+  
+      .image-item img {
+        width: 100%;
+        height: 100%;
+        max-height: 200px;
+        border-radius: 4px;
+        min-height: 200px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        object-fit: cover;
+      }
+  
+      /* Efeito ao passar o mouse sobre as imagens */
+      .image-item img:hover {
+        transform: scale(1.05);
+      }
+
+      .delete-icon {
+        position: absolute; /* Posiciona o ícone no canto superior direito */
+        top: 5px;
+        right: 5px;
+        font-size: 20px;
+        color: red; /* Cor do ícone */
+        cursor: pointer;
+        z-index: 10; /* Garante que o ícone fique sobre os outros elementos */
+        transition: color 0.3s ease;
+      }
+      
+      .delete-icon:hover {
+        color: darkred; /* Cor de hover para o ícone */
+      }
+
+      .add-icon {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 36px;
+        color: white;
+        background-color: blue;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        font-weight: bold;
+    }
+  
+      /* Estilo para o contêiner principal da página */
+      .main-container {
+        display: flex;
+        height: 100vh;
+        background-color: #f5f5f5;
+      }
+  
+      /* Div esquerda com a imagem centralizada */
+      .left {
+        flex: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+      }
+  
+      .mapa {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+        -webkit-user-drag: none; /* Para navegadores baseados em WebKit (Chrome, Safari, etc.) */
+        -moz-user-drag: none;    /* Para Firefox */
+        -ms-user-drag: none;     /* Para navegadores baseados em Microsoft */
+
+        pointer-events: none;    /* Opcional: impede também ações do mouse */
+      }
+  
+      /* Div direita vazia com cor de fundo cinza */
+      .right {
+        flex: 0.7;
+        background-color: #313131;
+        padding: 10px;
+        overflow-y: auto;  /* Adicionando o scroll vertical */
+      }
+  
+      /* Estilo para a navbar no topo da div direita */
+      .navbar {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 10px;
+        background-color: #999;
+        border-bottom: 1px solid #ddd;
+      }
+  
+      .icon {
+        font-size: 20px;
+        cursor: pointer;
+      }
+  
+      /* Estilo para o campo de criação de pasta */
+      .create-folder form {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        margin-top: 10px;
+        border-bottom: 2px solid #626267; /* Linha entre o input e a lista de pastas */
+        justify-content: center;
+      }
+  
+      .create-folder input {
+        background-color: #626267;
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #626267;
+        border-radius: 4px;
+        font-size: 14px;
+        width: 16vw;
+        font-family: 'Poppins';
+        font-size: 0.7rem;
+      }
+  
+      .create-folder input::placeholder {
+        color: rgb(223, 223, 223);
+      }
+
+      .create-folder button {
+        margin-left: 8px;
+        padding: 8px 16px;
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        width: 10vw;
+      }
+  
+      /* Estilo para a lista de pastas */
+      .folder-list {
+        font-family: 'Poppins';
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 4px;
+      }
+  
+      .folder-item {
+        margin-bottom: 10px;
+      }
+  
+      /* Estilo para a seta */
+      .folder-name .arrow {
+        margin-right: 0.8rem;
+        margin-left: 0.2rem;
+        width: 8.5px;
+        height: 8.5px;
+        border-left: 2px solid rgb(223, 223, 223);
+        border-bottom: 2px solid rgb(223, 223, 223);
+        transform: rotate(222deg);
+        transition: transform 0.3s ease;
+      }
+  
+      .folder-content {
+        display: none;
+        margin-top: 5px;
+        padding-left: 15px;
+      }
+  
+      .folder-content.active {
+        display: block;
+      }
+  
+      /* Estilo para os itens dentro da pasta */
+      .folder-item p {
+        margin: 5px 0;
+        color: #333;
+      }
+      
+      .modal {
+        display: none; /* Inicialmente escondido */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    /* Estilo do conteúdo do modal */
+    .modal-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 4px;
+        width: 40%;
+        position: relative;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Estilo para o botão de fechar */
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+.token {
+    width: 68px; 
+    height: 68px; 
+    position: absolute;
+}
+
+#map-container {
+  max-height: 100vh; /* Limita a altura ao tamanho da tela */
+}
+  
+#mapaImg {
+  max-width: 70%; /* Para manter a imagem dentro da largura do contêiner */
+  max-height: 70%; /* Limita a altura da imagem ao tamanho do contêiner */
+  object-fit: contain; /* Ajusta a imagem dentro do contêiner, mantendo a proporção */
+}
+
+#map{
+  display: flex;
+  justify-content: center;
+}
+
+.form-upload{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+#id_image {
+  display: none;
+}
+
+.upload_image {
+  width: 100%;
+}
+
+.img-conteiner {
+  border-radius: 4px;
+  color: white;
+  background-color: rgb(82, 131, 255);
+  padding: 2%;
+  cursor: pointer;
+}
+
+.img-conteiner label {
+  cursor: pointer;
+}
+
+
+.img-conteiner:hover {
+  background-color: rgb(34, 79, 193);
+}
+
+.form-upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.upload_image {
+  margin-top: 5%;
+}
+
+/* CSS */
+.button-9 {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
+
+.button-9:disabled {
+  cursor: default;
+}
+
+.button-9:focus {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+}
+
+.folder-name {
+    color: rgb(223, 223, 223);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.folder-left {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre a seta e o nome */
+}
+
+.arrow {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-size: contain;
+}
+
+.create-button {
+    text-decoration: none;
+    color: rgb(240, 240, 240);
+    font-weight: 600;
+}
+
+.personagem {
+  display: flex; /* Alinha os filhos em uma linha */
+  align-items: center; /* Alinha os elementos verticalmente ao centro */
+  justify-content: space-between; /* Espaça o texto e o bloco de ações */
+  padding: 10px;
+  border-bottom: 1px solid #ccc; /* Separador opcional */
+}
+
+.personagem p {
+  margin: 0; /* Remove margens desnecessárias */
+  font-family: var(--Inter); /* Fonte opcional */
+}
+
+.personagem .actions {
+  display: flex;
+  gap: 10px; /* Espaço entre o botão e o link */
+}
+
+.personagem button,
+.personagem a {
+  font-family: var(--Inter); /* Fonte opcional */
+  font-size: 0.9rem; /* Ajusta o tamanho */
+  color: rgb(223, 223, 223);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.personagem button {
+  background-color: #405cf5;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+}
+
+.personagem button:hover {
+  background-color: #2b49f0; /* Cor de hover */
+}
+
+.personagem a:hover {
+  color: red; /* Cor de hover para o link */
+}
+
+.personagem button {
+  margin-right: 3px;
+}
+
+.direita a {
+  color: #ff4d4d;
+}
+
+.create-button:hover {
+  color: #2b49f0;
+}
+
+.deleta_pasta {
+  text-decoration: none;
+  color: #ff4d4d;
+}
+
+.deleta_pasta:hover {
+  color: red;
+}

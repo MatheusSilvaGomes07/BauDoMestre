@@ -13,9 +13,20 @@ class DnDCampanha(DnD):
     campanha_id = models.ForeignKey(Campanha, on_delete=models.CASCADE)
     pasta = models.ForeignKey(PastaCriaturas, on_delete=models.CASCADE)
 
+    def delete(self, *args, **kwargs):
+        # Excluir tokens associados
+        Token.objects.filter(content_type=ContentType.objects.get_for_model(self), object_id=self.id).delete()
+        super().delete(*args, **kwargs)
+        
+
 class OrdemParanormalCampanha(OrdemParanormal):
     campanha_id = models.ForeignKey(Campanha, on_delete=models.CASCADE)
     pasta = models.ForeignKey(PastaCriaturas, on_delete=models.CASCADE)
+
+    def delete(self, *args, **kwargs):
+        # Excluir tokens associados
+        Token.objects.filter(content_type=ContentType.objects.get_for_model(self), object_id=self.id).delete()
+        super().delete(*args, **kwargs)
 
 class TormentaCampanha(Tormenta):
     campanha_id = models.ForeignKey(Campanha, on_delete=models.CASCADE)
@@ -29,6 +40,11 @@ class TormentaCampanha(Tormenta):
 class CallOfCthulhuCampanha(CallOfCthulhu):
     campanha_id = models.ForeignKey(Campanha, on_delete=models.CASCADE)
     pasta = models.ForeignKey(PastaCriaturas, on_delete=models.CASCADE)
+
+    def delete(self, *args, **kwargs):
+        # Excluir tokens associados
+        Token.objects.filter(content_type=ContentType.objects.get_for_model(self), object_id=self.id).delete()
+        super().delete(*args, **kwargs)
     
 class Map(models.Model):
     name = models.CharField(max_length=100)

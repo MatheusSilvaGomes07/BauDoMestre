@@ -1,5 +1,27 @@
-<form method="post" enctype="multipart/form-data">
+<form class="form-upload" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Enviar</button>
+
+    <label>Nome Mapa: <label>
+    {{ form.name }}
+    <br>
+    <img class="upload_image" />
+    <div class="img-conteiner">
+        <label id="label_image" for="id_image">Selecionar uma imagem<label>
+        {{ form.image }}
+    </div>
+    <br>
+    <button class="button-9" type="submit">Enviar</button>
 </form>
+
+<script>
+    const S = document.querySelector.bind(document);
+
+	const previewImg = S('.upload_image');
+	const fileChooser = S('#id_image');
+	fileChooser.onchange = e => {
+		const fileToUpload = e.target.files.item(0);
+		const reader = new FileReader();
+		reader.onload = e => previewImg.src = e.target.result;
+		reader.readAsDataURL(fileToUpload);
+	};
+</script>

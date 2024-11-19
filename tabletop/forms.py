@@ -6,11 +6,21 @@ class MapForm(forms.ModelForm):
     class Meta:
         model = Map
         fields = ['name', 'image']
+        labels = {
+            'image': '', 
+            'name': ''
+        }
 
 class PastaCriaturasForm(forms.ModelForm):
     class Meta:
         model = PastaCriaturas
         fields = ['nome']
+        labels = {
+            'nome': ''  # Define a label do campo 'nome' como uma string vazia
+        }
+        widgets = {
+            'nome': forms.TextInput(attrs={'placeholder': 'Digite o nome da pasta'})  # Adiciona o placeholder
+        }
 
 class TokenForm(forms.ModelForm):
     class Meta:

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,13 +8,11 @@
     <title>Campaign</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
-    <style>
-        /* Estilo para o token selecionado */
-        .selected-token {
-            border: 2px solid blue;
-            box-sizing: border-box;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static "css/tabletop.css" %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <script>
         let currentMapId = null; // Variável global para armazenar o ID do mapa
         const campaignId = {{ campaign_id }};
@@ -47,8 +47,8 @@
                 tokenElement.style.position = 'absolute'; // Define a posição como absoluta
                 tokenElement.style.left = `${positionX}px`; // Define a posição X
                 tokenElement.style.top = `${positionY}px`; // Define a posição Y
-                tokenElement.style.width = '100px'; // Define a largura do token
-                tokenElement.style.height = '100px'; // Define a altura do token
+                tokenElement.style.width = '68px'; // Define a largura do token
+                tokenElement.style.height = '68px'; // Define a altura do token
             
                 // Crie o elemento de imagem dentro do tokenElement
                 const imgElement = document.createElement('img');
@@ -82,6 +82,7 @@
                 }));
             });
         }
+
         
         function loadMap(mapId) {
             $.get(`/tabletop/map/${mapId}/`, function(data) {
@@ -142,7 +143,7 @@
                 }
             });
         }
-    
+
         function moveToken(tokenId, positionX, positionY) {
             const token = $(`.token[data-id=${tokenId}]`);
             token.css({ left: `${positionX}px`, top: `${positionY}px` });
@@ -176,28 +177,146 @@
         $(document).ready(function() {
             initializeDraggableTokens();
         });
+        
     </script>
+
 </head>
 <body>
+    <div class="main-container">
+        <!-- Div esquerda com imagem centralizada -->
+        <div class="left" id="map-container">
+
+        </div>
+    
+        <!-- Div direita com navbar e campo de criação de pasta -->
+        <div class="right">
+          <!-- Navbar no topo com dois ícones -->
+          <div class="navbar">
+            <div class="icon">🔍</div>
+            <div class="icon">⚙️</div>
+          </div>
+    
+          <!-- Input para criar pasta -->
+          <div class="create-folder">
+            {% include "tabletop/includes/pastaCriaturas.html" %}
+          </div>
+    
+          <!-- Lista de pastas expansíveis com scroll -->
+          <div class="folder-list">
+
+            {% include "tabletop/includes/lista_pastasCriaturas.html" %}
+
+          </div>
+        </div>
+      </div>
+   
     {% if is_mestre %}
+    <!-- Botão de abrir modal lateral -->
+    <button id="openModalBtn">Abrir Modal</button>
 
-        <h1>Criar Mapa</h1>
-        {% include "tabletop/includes/mapa_form.html" %}
+    <!-- Modal lateral -->
+    <div id="sideModal">
+        <button id="closeModalBtn">&times;</button> <!-- Botão de fechar em forma de "X" -->
 
-        <h1>Criar Pasta</h1>
-        {% include "tabletop/includes/pastaCriaturas.html" %}
+        <!-- Lista de imagens -->
+        <div class="image-list">
+            <!-- Card de criar o mapa- -->
+            <div class="image-item" onclick="openModal()">
+                <img src="https://via.placeholder.com/200x200/FFFFFF/FFFFFF?text=" alt="Imagem 1">
+                <div class="image-name">Criar mapa</div>
+                <div class="add-icon">+</div>
+            </div>
 
-        <h1>Campaign Maps</h1>
-        {% include "tabletop/includes/lista_mapas.html" %}
+            <!-- Modal criar mapa -->
+            <div id="createMapModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Criar Mapa</h2>
+                    {% include "tabletop/includes/mapa_form.html" %}
+                </div>
+            </div>
+            {% include "tabletop/includes/lista_mapas.html" %}
 
-    {% endif %}
-
-    <h1> Pastas de fichas </h1>
-    {% include "tabletop/includes/lista_pastasCriaturas.html" %}
-
-    <div id="map-container">
-        <!-- Loaded map will be inserted here -->
+<!--
+        <div class="image-item">
+            <img src="https://via.placeholder.com/150" alt="Imagem 1">
+            <div class="image-name">Imagem 1</div>
+        </div>
+        <div class="image-item">
+            <img src="https://via.placeholder.com/150" alt="Imagem 2">
+            <div class="image-name">Imagem 2</div>
+        </div>
+        <div class="image-item">
+            <img src="https://via.placeholder.com/150" alt="Imagem 3">
+            <div class="image-name">Imagem 3</div>
+        </div>
+        <div class="image-item">
+            <img src="https://via.placeholder.com/150" alt="Imagem 4">
+            <div class="image-name">Imagem 4</div>
+        </div>
+        <div class="image-item">
+            <img src="https://via.placeholder.com/150" alt="Imagem 5">
+            <div class="image-name">Imagem 5</div>
+        </div>
+-->
+        </div>
     </div>
+
+    <!-- Fundo esmaecido -->
+    <div id="overlay"></div>
+
+  {% endif %}
+
+  <script>
+    // Função para alternar o conteúdo da pasta
+    function toggleFolderContent(element) {
+      const content = element.nextElementSibling;
+      const arrow = element.querySelector('.arrow');
+      content.classList.toggle('active');
+      arrow.style.transform = content.classList.contains('active') ? 'rotate(315deg)' : 'rotate(222deg)';
+    }
+
+    // Função para abrir a modal lateral
+    const openModalBtn = document.getElementById('openModalBtn');
+    const sideModal = document.getElementById('sideModal');
+    const overlay = document.getElementById('overlay');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    openModalBtn.addEventListener('click', () => {
+      sideModal.classList.add('active');
+      overlay.classList.add('active');
+      openModalBtn.classList.add('active');
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      sideModal.classList.remove('active');
+      overlay.classList.remove('active');
+      openModalBtn.classList.remove('active');
+    });
+
+    // Fechar modal ao clicar no fundo esmaecido
+    overlay.addEventListener('click', () => {
+      sideModal.classList.remove('active');
+      overlay.classList.remove('active');
+      openModalBtn.classList.remove('active');
+    });
+
+    function openModal() {
+        document.getElementById("createMapModal").style.display = "flex";
+    }
+    
+    // Função para fechar a modal
+    function closeModal() {
+        document.getElementById("createMapModal").style.display = "none";
+    }
+    
+    // Fechar a modal se clicar fora dela
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("createMapModal")) {
+            closeModal();
+        }
+    }
+  </script>
     
 </body>
 </html>

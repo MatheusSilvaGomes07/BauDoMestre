@@ -119,7 +119,16 @@ def criarPastaCriaturas(request, campaign_id, is_mestre):
                 pasta.campanha = get_object_or_404(Campanha, pk = campaign_id)
                 pasta.save()
     return redirect ('enter_campaign', campaign_id)
+@is_mestre
+def deletarPastaCriaturas(request, campaign_id, pasta_id, is_mestre):
+    if is_mestre:
 
+        pasta = PastaCriaturas(id=pasta_id)
+
+        pasta.delete()
+
+    return redirect('enter_campaign', campaign_id)
+    
 @user_in_group
 def criar_personagem(request, campaign_id, pasta_id):
     campanha = get_object_or_404(Campanha, id=campaign_id)
@@ -174,6 +183,7 @@ def criar_personagem(request, campaign_id, pasta_id):
             personagemForm = CampanhaOrdemParanormalForm()
 
     return render(request, 'tabletop/criarPersonagem.html', {'personagemForm': personagemForm})
+
 def place_token(request, map_id, personagem_id):
     mapa = get_object_or_404(Map, id=map_id)
     sistema = mapa.campanha_id.sistemaCampanha
@@ -220,7 +230,7 @@ def deletar_personagem_campanha (request, campaign_id, personagem_id):
     campanha = get_object_or_404(Campanha, id=campaign_id)
     sistema = campanha.sistemaCampanha
     user = request.user
-
+  
     if sistema == 'Dungeons & Dragons':
         personagem_model = DnDCampanha
     elif sistema == 'Ordem Paranormal':
@@ -241,7 +251,6 @@ def deletar_personagem_campanha (request, campaign_id, personagem_id):
         else:
             return redirect('meus_personagens', campaign_id)
         
-
 def editar_personagem_campanha(request, campaign_id, personagem_id):
     campanha = get_object_or_404(Campanha, id=campaign_id)
     sistema = campanha.sistemaCampanha
