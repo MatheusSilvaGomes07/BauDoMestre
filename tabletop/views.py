@@ -292,3 +292,58 @@ def editar_personagem_campanha(request, campaign_id, personagem_id):
          return redirect('meus_personagens')
     
     return render(request, 'meus_personagens/editCharacter/edit_char_ordem.html', {'ordem': form, 'personagem': personagem})
+
+def editar_personagem_campanha(request, campaign_id, personagem_id):
+    campanha = get_object_or_404(Campanha, id=campaign_id)
+    sistema = campanha.sistemaCampanha
+    user = request.user
+    personagem = None
+    template = ''
+    form_name = ''
+
+    if sistema == 'Dungeons & Dragons':
+        personagem = get_object_or_404(DnDCampanha, id=personagem_id)
+        personagem_form = DnDForm
+        template = 'edit_char_dnd.html'
+        form_name = 'dnd'
+    elif sistema == 'Ordem Paranormal':
+        personagem = get_object_or_404(OrdemParanormalCampanha, id=personagem_id)
+        personagem_form = OrdemParanormalForm
+        template = 'edit_char_ordem.html'
+        form_name = 'ordem'
+    elif sistema == 'Tormenta20':
+        personagem = get_object_or_404(TormentaCampanha, id=personagem_id)
+        personagem_form = TormentaForm
+        template = 'edit_char_tormenta20.html'
+        form_name = 'tormenta'
+    elif sistema == 'Call of Cthulhu':
+        personagem = get_object_or_404(CallOfCthulhuCampanha, id=personagem_id)
+        personagem_form = CallOfCthulhuForm
+        template = 'edit_char_coc1920.html'
+        form_name = 'coc7e'
+    else:
+        return JsonResponse({'error': 'Sistema de RPG desconhecido'}, status=400)
+    
+
+    if user == personagem.nomePerfil or user.is_staff:
+        foto_antiga = personagem.foto.name
+
+        if request.method == "POST":
+            form = personagem_form(request.POST, request.FILES, instance=personagem)
+            if form.is_valid():
+                if personagem.foto:
+                    caminho_arquivo_antigo = os.path.join('media', foto_antiga)
+
+                    if foto_antiga != personagem.foto:
+                        os.remove(caminho_arquivo_antigo)
+                form.save()
+                print('Local 1')
+                return redirect('enter_campaign', campaign_id)
+        else:
+            form = personagem_form(instance=personagem)
+    else:
+        print('Local 2')
+        return redirect('enter_campaign', campaign_id)
+        
+    return render(request, 'meus_personagens/editCharacter/' + template, {form_name: form, 'personagem': personagem})
+            

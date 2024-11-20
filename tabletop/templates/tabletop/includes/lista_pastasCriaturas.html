@@ -13,7 +13,7 @@
             <div class="personagem">
                 <div class="esquerda">
                     <p>
-                        <a href="{% url detalhePersonagem personagem.id %}">{{ personagem.nome }}</a>
+                        <a href="{% url 'editar_personagem_campanha' campaign_id personagem.id %}">{{ personagem.nome }}</a>
                     </p>
                 </div>
                 <div class="direita">

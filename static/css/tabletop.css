@@ -19,13 +19,17 @@
 
     /* Estilo do botão de abrir modal */
     #openModalBtn {
+        width: 50px;
+        height: 50px;
         position: fixed;
         top: 20px;
         left: 0;
-        padding: 10px 20px;
         background-color: #C10000;
         color: #fff;
         border: none;
+        padding-top: 6px;
+        padding-right: 5px;
+        padding-bottom: 10px;
         border-radius: 0 4px 4px 0;
         cursor: pointer;
         z-index: 2;
@@ -91,7 +95,7 @@
         border: none;
         font-size: 24px;
         font-weight: bold;
-        color: #333;
+        color: rgb(240, 240, 240);
         cursor: pointer;
       }
   
@@ -514,4 +518,10 @@
 
 .deleta_pasta:hover {
   color: red;
+}
+
+#openModalBtn img {
+  padding: 0;
+  height: 110%;
+  width: 110%;
 }

@@ -35,7 +35,6 @@ body {
 }
 
 .registers {
-  align-items: start;
   width: 70%;
   gap: 5px;
 }
