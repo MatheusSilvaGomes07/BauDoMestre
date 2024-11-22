@@ -192,21 +192,53 @@
         <div class="right">
           <!-- Navbar no topo com dois ícones -->
           <div class="navbar">
-            <div class="icon">🔍</div>
-            <div class="icon">⚙️</div>
+            <div id="creatures" class="icon"><img src='{% static "img/icons/Creature.svg" %}' /></div>
+            <div id="dice" class="icon"><img src='{% static "img/icons/WhiteDice.svg" %}' /></div>
           </div>
     
           <!-- Input para criar pasta -->
-          <div class="create-folder">
-            {% include "tabletop/includes/pastaCriaturas.html" %}
-          </div>
-    
-          <!-- Lista de pastas expansíveis com scroll -->
-          <div class="folder-list">
+           <div class="hide-modal">
+                <div class="create-folder">
+                    {% include "tabletop/includes/pastaCriaturas.html" %}
+                </div>
+            
+                <!-- Lista de pastas expansíveis com scroll -->
 
-            {% include "tabletop/includes/lista_pastasCriaturas.html" %}
+                <div id="content-creatures" class="folder-list modal-content-right">
+                    {% include "tabletop/includes/lista_pastasCriaturas.html" %}
+                </div>
 
-          </div>
+
+
+                <div id="content-dice" class="modal-content-right">
+                    <h1>Rolagem de Dados</h1>
+        <div id="roll-history"></div>
+
+        <form id="dice-form">
+            <label for="quantity">Quantidade de Dados:</label>
+            <input type="number" id="quantity" min="1" placeholder="Ex: 2" required>
+
+            <label for="type">Tipo de Dado:</label>
+            <select id="type">
+                <option value="3">d3</option>
+                <option value="4">d4</option>
+                <option value="6">d6</option>
+                <option value="8">d8</option>
+                <option value="10">d10</option>
+                <option value="12">d12</option>
+                <option value="20">d20</option>
+                <option value="100">d100</option>
+            </select>
+
+            <label for="modifier">Modificador:</label>
+            <input type="number" id="modifier" value="0" placeholder="Ex: 3" required>
+
+            <button type="submit">Rolar Dados</button>
+        </form>
+                </div>
+                
+
+            </div>
         </div>
       </div>
    
@@ -317,7 +349,81 @@
         }
     }
   </script>
-    
+  <script>
+    $(document).ready(function () {
+        // Esconde todos os conteúdos inicialmente, exceto o padrão
+        $('.modal-content-right').hide();
+        $('#content-creatures').show();
+
+        // Alterna o conteúdo ao clicar nos ícones
+        $('#dice').on('click', function () {
+            $('.modal-content-right').hide(); // Esconde todos os conteúdos
+            $('#content-dice').show(); // Mostra o conteúdo correspondente
+        });
+
+        $('#creatures').on('click', function () {
+            $('.modal-content-right').hide(); // Esconde todos os conteúdos
+            $('#content-creatures').show(); // Mostra o conteúdo correspondente
+        });
+    });
+</script>
+
+<script>
+    // Seleção de elementos
+    const rollHistory = document.getElementById("roll-history");
+    const diceForm = document.getElementById("dice-form");
+
+    // Função para rolar dados
+    function rollDice(quantity, type, modifier) {
+        let total = 0;
+        const rolls = [];
+
+        for (let i = 0; i < quantity; i++) {
+            const roll = Math.floor(Math.random() * type) + 1;
+            rolls.push(roll);
+            total += roll;
+        }
+
+        total += modifier;
+
+        return { rolls, total };
+    }
+
+    // Função para exibir resultados no histórico
+    function addToHistory(quantity, type, modifier, result) {
+        const resultDiv = document.createElement("div");
+        resultDiv.className = "roll-result";
+
+        resultDiv.innerHTML = `
+            <strong>Rolaram ${quantity}d${type} + ${modifier}:</strong><br>
+            Rolagens individuais: ${result.rolls.join(", ")}<br>
+            Total: <strong>${result.total}</strong>
+        `;
+
+        rollHistory.appendChild(resultDiv);
+
+        // Faz scroll automático para o final do histórico
+        rollHistory.scrollTop = rollHistory.scrollHeight;
+    }
+
+    // Event listener para o formulário
+    diceForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const quantity = parseInt(document.getElementById("quantity").value);
+        const type = parseInt(document.getElementById("type").value);
+        const modifier = parseInt(document.getElementById("modifier").value);
+
+        // Realiza a rolagem
+        const result = rollDice(quantity, type, modifier);
+
+        // Adiciona ao histórico
+        addToHistory(quantity, type, modifier, result);
+
+        // Limpa o formulário
+        diceForm.reset();
+    });
+</script>
 </body>
 </html>
  
