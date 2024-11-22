@@ -1,230 +1,283 @@
 {% load static %}
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" id="start_form" class="flex-column" enctype="multipart/form-data">
     {% csrf_token %}
 
     <!-- Box inicial dos dados do personagem -->
-<div class="sheet_header">
+<div class="sheet_header flex">
 
-    {{ dnd.foto }}
-    {{ dnd.nome.label_tag }}
-    {{ dnd.nome }}
+    <div class="header-name flex-column">
+        <h3>Nome:</h3>
+        {{ dnd.nome }}
 
-    {{ dnd.classe.label_tag }}
-    {{ dnd.classe }}
+        <div class="screen-buttons flex">
+            <button><p>Base</p></button>
+            <button><p>Bio</p></button>
+            <button><p>Magias</p></button>
+        </div>
+    </div>
 
-    {{ dnd.sub_classe.label_tag }}
-    {{ dnd.sub_classe }}
+    <div class="header-specs flex-column">
+        <div class="specs">
+            <div class="spec-box">
+                <p>Classe:</p>
+                {{ dnd.classe }}
+            </div>
 
-    {{ dnd.nivel.label_tag }}
-    {{ dnd.nivel }}
+            <div class="spec-box" id="sub_classe">
+                <p>Sub-Classe:</p>
+                {{ dnd.sub_classe }}
+            </div>
 
-    {{ dnd.raca.label_tag }}
-    {{ dnd.raca }}
+            <div class="spec-box" id="nivel">
+                <p>Nivel:</p>
+                {{ dnd.nivel }}
+            </div>
+        </div>
 
-    {{ dnd.sub_raca.label_tag }}
-    {{ dnd.sub_raca }}
+        <div class="specs">
+            <div class="spec-box">
+                <p>Raça:</p>
+                {{ dnd.raca }}
+            </div>
 
-    {{ dnd.xp.label_tag }}
-    {{ dnd.xp }}
+            <div class="spec-box">
+                <p>Sub Raça:</p>
+                {{ dnd.sub_raca }}
+            </div>
+
+            <div class="spec-box">
+                <p>XP:</p>
+                {{ dnd.xp }}
+            </div>
+        </div>
+    </div>
 
 </div>
 
-<br>
+<div class="dnd-description flex">
+    <!-- Box de atributos -->
+    <div class="atributos_box flex-column">
 
-<!-- Box de atributos -->
-<div class="atributos_box">
-    <div class="atributo">
-        <label>FORÇA</label>
-        {{ dnd.forca }}
-        <label id="mod_forca">0</label>
+        <div class="atributo">
+            <div class="att-box">
+                <h4>Força</h4>
+                <p id="mod_forca">0</p>
+            </div>
+            {{ dnd.forca }}
+        </div>
+
+        <div class="atributo">
+            <div class="att-box">
+                <h4>Destreza</h4>
+                <p id="mod_dex">0</p>
+            </div>
+            {{ dnd.dex }}
+        </div>
+
+        <div class="atributo">
+            <div class="att-box">
+                <h4>Constituição</h4>
+                <p id="mod_const">0</p>
+            </div>
+            {{ dnd.const }}
+        </div>
+
+        <div class="atributo">
+            <div class="att-box">
+                <h4>Inteligência</h4>
+                <p id="mod_int">0</p>
+            </div>
+            {{ dnd.int }}
+        </div>
+
+        <div class="atributo">
+            <div class="att-box">
+                <h4>Sabedoria</h4>
+                <p id="mod_sab">0</p>
+            </div>
+            {{ dnd.sab }}
+        </div>
+
+        <div class="atributo">
+            <div class="att-box">
+                <h4>Carisma</h4>
+                <p id="mod_car">0</p>
+            </div>
+            {{ dnd.carisma }}
+        </div>
     </div>
 
-    <div class="atributo">
-        <label>DEXTREZA</label>
-        {{ dnd.dex }}
-        <label id="mod_dex">0</label>
+    <div class="skill-column">
+        <div class="inspiration-box flex">
+            {{ dnd.inspiracao }}
+            <img src="{% static "img/icons/inspiration.svg" %}" alt="">
+            <p>Inspiração</p>
+        </div>
+
+        <div class="proficiency flex">
+            <h6 id="bonusProf">0</h6>
+            <p>Bônus de proficiência</p>
+        </div>
+
+        <!-- Saving Throws -->
+        <div class="salvaguarda_box">
+
+            <div class="savethrow">
+                {{ dnd.forcaSalvaguarda }}
+                <p id="salva_for">0</p>
+                <p>Força</p>
+            </div>
+
+            <div class="savethrow">
+                {{ dnd.dexSalvaguarda }}
+                <p id="salva_dex">0</p>
+                <p>Destreza</p>
+            </div>
+
+            <div class="savethrow">
+                {{ dnd.constSalvaguarda }}
+                <p id="salva_const">0</p>
+                <p>Constituição</p>
+            </div>
+
+            <div class="savethrow">
+                {{ dnd.intSalvaguarda }}
+                <p id="salva_int">0</p>
+                <p>Inteligência</p>
+            </div>
+
+            <div class="savethrow">
+                {{ dnd.sabSalvaguarda }}
+                <p id="salva_sab">0</p>
+                <p>Sabedoria</p>
+            </div>
+
+            <div class="savethrow">
+                {{ dnd.carismaSalvaguarda }}
+                <p id="salva_car">0</p>
+                <p>Carisma</p>
+            </div>
+        </div>
+
+        <!-- Perícias -->
+        <div class="pericias">
+
+            <div class="pericia">
+                {{ dnd.acrobacia }}
+                <label id="mod_acrobacia">0</label>
+                <label>Acrobacia(Dex)</label>
+            </div>
+
+
+            <div class="pericia">
+                {{ dnd.adestrarAnimais }}
+                <label id="mod_adestrarAnimais">0</label>
+                <label>Adestrar Animais(Sab)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.arcana }}
+                <label id="mod_arcana">0</label>
+                <label>Arcana(Int)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.atletismo }}
+                <label id="mod_atletismo">0</label>
+                <label>Atletismo(For)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.enganacao }}
+                <label id="mod_enganacao">0</label>
+                <label>Enganação(Car)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.historia }}
+                <label id="mod_historia">0</label>
+                <label>Historia(Int)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.intuicao }}
+                <label id="mod_intuicao">0</label>
+                <label>Intuição(Sab)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.intimidacao }}
+                <label id="mod_intimidacao">0</label>
+                <label>Intimidação(Car)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.investigacao }}
+                <label id="mod_investigacao">0</label>
+                <label>Investigação(Int)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.medicina }}
+                <label id="mod_medicina">0</label>
+                <label>Medicina(Sab)</label>
+            </div>
+
+
+            <div class="pericia">
+                {{ dnd.natureza }}
+                <label id="mod_natruza">0</label>
+                <label>Natureza(Int)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.percepcao }}
+                <label id="mod_percepcao">0</label>
+                <label>Percepção(Sab)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.atuacao }}
+                <label id="mod_atuacao">0</label>
+                <label>Atuação(Car)</label>
+            </div>
+
+
+            <div class="pericia">
+                {{ dnd.persuasao }}
+                <label id="mod_persuasao">0</label>
+                <label>Persuasão(Car)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.religiao }}
+                <label id="mod_religiao">0</label>
+                <label>Religião(Int)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.prestigitacao }}
+                <label id="mod_prestigitacao">0</label>
+                <label>Prestigitação(Dex)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.furtividade }}
+                <label id="mod_furtividade">0</label>
+                <label>Furtividade(Dex)</label>
+            </div>
+
+            <div class="pericia">
+                {{ dnd.sobrevivencia }}
+                <label id="mod_sobrevivencia">0</label>
+                <label>Sobrevivência(Sab)</label>
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="atributo">
-        <label>CONSTITUIÇÃO</label>
-        {{ dnd.const }}
-        <label id="mod_const">0</label>
-    </div>
-
-    <div class="atributo">
-        <label>INTELIGÊNCIA</label>
-        {{ dnd.int }}
-        <label id="mod_int">0</label>
-    </div>
-
-    <div class="atributo">
-        <label>SABEDORIA</label>
-        {{ dnd.sab }}
-        <label id="mod_sab">0</label>
-    </div>
-
-    <div class="atributo">
-        <label>CARISMA</label>
-        {{ dnd.carisma }}
-        <label id="mod_car">0</label>
-    </div>
-</div>
-
-
-<br>
-
-{{ dnd.inspiracao }}
-<label>Inspiração</label>
-
-<label id="bonusProf">0</label>
-<label>Bônus de proficiência</label>
-
-
-<!-- Saving Throws -->
-<div class="salvaguarda_box">
-    {{ dnd.forcaSalvaguarda }}
-    <label id="salva_for">0</label>
-    <label>Força</label>
-
-    {{ dnd.dexSalvaguarda }}
-    <label id="salva_dex">0</label>
-    <label>Dextreza</label>
-
-    {{ dnd.constSalvaguarda }}
-    <label id="salva_const">0</label>
-    <label>Constituição</label>
-
-    {{ dnd.intSalvaguarda }}
-    <label id="salva_int">0</label>
-    <label>Inteligência</label>
-
-    {{ dnd.sabSalvaguarda }}
-    <label id="salva_sab">0</label>
-    <label>Sabedoria</label>
-
-    {{ dnd.carismaSalvaguarda }}
-    <label id="salva_car">0</label>
-    <label>Carisma</label>
-
-</div>
-
-<br>
-
-
-<!-- Perícias -->
-<div class="pericias">
-
-    <div class="pericia">
-        {{ dnd.acrobacia }}
-        <label id="mod_acrobacia">0</label>
-        <label>Acrobacia(Dex)</label>
-    </div>
-    
-
-    <div class="pericia">
-        {{ dnd.adestrarAnimais }}
-        <label id="mod_adestrarAnimais">0</label>
-        <label>Adestrar Animais(Sab)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.arcana }}
-        <label id="mod_arcana">0</label>
-        <label>Arcana(Int)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.atletismo }}
-        <label id="mod_atletismo">0</label>
-        <label>Atletismo(For)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.enganacao }}
-        <label id="mod_enganacao">0</label>
-        <label>Enganação(Car)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.historia }}
-        <label id="mod_historia">0</label>
-        <label>Historia(Int)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.intuicao }}
-        <label id="mod_intuicao">0</label>
-        <label>Intuição(Sab)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.intimidacao }}
-        <label id="mod_intimidacao">0</label>
-        <label>Intimidação(Car)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.investigacao }}
-        <label id="mod_investigacao">0</label>
-        <label>Investigação(Int)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.medicina }}
-        <label id="mod_medicina">0</label>
-        <label>Medicina(Sab)</label>
-    </div>
-
-
-    <div class="pericia">
-        {{ dnd.natureza }}
-        <label id="mod_natruza">0</label>
-        <label>Natureza(Int)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.percepcao }}
-        <label id="mod_percepcao">0</label>
-        <label>Percepção(Sab)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.atuacao }}
-        <label id="mod_atuacao">0</label>
-        <label>Atuação(Car)</label>
-    </div>
-    
-
-    <div class="pericia">
-        {{ dnd.persuasao }}
-        <label id="mod_persuasao">0</label>
-        <label>Persuasão(Car)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.religiao }}
-        <label id="mod_religiao">0</label>
-        <label>Religião(Int)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.prestigitacao }}
-        <label id="mod_prestigitacao">0</label>
-        <label>Prestigitação(Dex)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.furtividade }}
-        <label id="mod_furtividade">0</label>
-        <label>Furtividade(Dex)</label>
-    </div>
-
-    <div class="pericia">
-        {{ dnd.sobrevivencia }}
-        <label id="mod_sobrevivencia">0</label>
-        <label>Sobrevivência(Sab)</label>
-    </div>
 
 </div>
 
@@ -244,7 +297,7 @@
 <div class="coluna_meio">
     {{ dnd.ca }}
     <label>Classe de Armadura</label>
-    
+
     <label id="iniciativa">0</label>
     <label>Iniciativa</label>
 
@@ -315,7 +368,7 @@
             <td>{{ dnd.danoTipoAtk5}}</td>
         </tr>
     </table>
-    
+
 </div>
 <br>
 <div class="Dinheiro">
@@ -439,7 +492,7 @@
     const bonusProf = document.getElementById('bonusProf');
 
     nivel.addEventListener('input', function() {
-    
+
        const valorNivel = parseInt(nivel.value);
        bonusProf.textContent = valorNivel;
 
@@ -453,7 +506,7 @@
             bonusProf.textContent = 0;
             bonusProficiencia = 0;
         }
-        
+
 
     });
 
@@ -462,10 +515,10 @@
     const forcaMod = document.getElementById('mod_forca');
 
     forca.addEventListener('input', function() {
-    
+
     const valorForca = parseInt(forca.value);
 
-    
+
      modForca = Math.floor((valorForca - 10) / 2);
 
 
@@ -483,10 +536,10 @@
     const dexMod = document.getElementById('mod_dex');
 
     dex.addEventListener('input', function() {
-    
+
     const valorDex = parseInt(dex.value);
 
-    
+
      modDex = Math.floor((valorDex - 10) / 2);
 
 
@@ -506,10 +559,10 @@
     const constMod = document.getElementById('mod_const');
 
     cons.addEventListener('input', function() {
-    
+
     const valorConst = parseInt(cons.value);
 
-    
+
     modConst = Math.floor((valorConst - 10) / 2);
 
 
@@ -527,10 +580,10 @@
     const intMod = document.getElementById('mod_int');
 
     inte.addEventListener('input', function() {
-    
+
     const valorInt = parseInt(inte.value);
 
-    
+
      modInt = Math.floor((valorInt - 10) / 2);
 
 
@@ -549,10 +602,10 @@
     const sabMod = document.getElementById('mod_sab');
 
     sab.addEventListener('input', function() {
-    
+
     const valorSab = parseInt(sab.value);
 
-    
+
      modSab = Math.floor((valorSab - 10) / 2);
 
 
@@ -570,10 +623,10 @@
     const carMod = document.getElementById('mod_car');
 
     car.addEventListener('input', function() {
-    
+
     const valorCar = parseInt(car.value);
 
-    
+
      modCar = Math.floor((valorCar - 10) / 2);
 
 
@@ -598,7 +651,7 @@
 
 
     function calcularSalvaguardas(){
-        
+
         const modSalvaFor = document.getElementById('salva_for');
         const modSalvaDex = document.getElementById('salva_dex');
         const modSalvaConst = document.getElementById('salva_const');

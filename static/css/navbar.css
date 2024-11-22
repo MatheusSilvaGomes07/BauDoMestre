@@ -16,7 +16,7 @@ nav .nav-buttons {
   text-align: center;
   align-items: center;
   padding-left: 40px;
-  gap: 19%;
+  justify-content: space-between;
   width: 100%;
 }
 
