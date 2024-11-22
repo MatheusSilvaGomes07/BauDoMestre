@@ -108,7 +108,7 @@
         </div>
     </div>
 
-    <div class="skill-column">
+    <div class="skill-column flex-column">
         <div class="inspiration-box flex">
             {{ dnd.inspiracao }}
             <img src="{% static "img/icons/inspiration.svg" %}" alt="">
@@ -116,12 +116,12 @@
         </div>
 
         <div class="proficiency flex">
-            <h6 id="bonusProf">0</h6>
+            <h4 id="bonusProf">0</h4>
             <p>Bônus de proficiência</p>
         </div>
 
         <!-- Saving Throws -->
-        <div class="salvaguarda_box">
+        <div class="salvaguarda_box flex-column">
 
             <div class="savethrow">
                 {{ dnd.forcaSalvaguarda }}

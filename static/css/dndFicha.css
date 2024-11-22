@@ -156,6 +156,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.skill-column {
+    gap: 20px;
+}
+
 .inspiration-box, .proficiency {
     background-color: #353535;
     border-radius: 15px;
@@ -169,7 +173,8 @@ input::-webkit-inner-spin-button {
     font-family: var(--Inter);
     font-size: 20px;
     font-weight: bold;
-    width: 115px;
+    width: 100px;
+    padding-right: 30px;
 }
 
 .inspiration-box input {
@@ -182,4 +187,29 @@ input::-webkit-inner-spin-button {
     padding: 10px 18px;
     height: 76%;
     border-radius: 10px 0 0 10px;
+}
+
+.proficiency h4 {
+    width: 40%;
+    text-align: center;
+    padding: 12px;
+    background-color: var(--red1);
+    border-radius: 10px 0 0 10px;
+}
+
+.salvaguarda_box {
+    background-color: #353535;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.salvaguarda_box .savethrow {
+    display: flex;
+    background-color: #1F1F1F;
+    padding: 6px;
+    width: 70%;
+    border-radius: 10px;
+    justify-content: space-between;
 }
