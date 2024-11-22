@@ -154,7 +154,6 @@ body {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1.5rem;
-    height: 850px;
     overflow-y: auto;
     padding-right: 26px;
   }
