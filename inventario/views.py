@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 import os
+from home.models import Perfil
 from inventario.forms import PastaForm, FileForm
 from inventario.models import Pasta, File
 from django.contrib import messages
@@ -8,11 +9,15 @@ import magic
 
 @login_required
 def index(request):
-    return render(request, 'inventario/index.html')
+
+    perfil = Perfil.objects.get(nomePerfil=request.user)
+    return render(request, 'inventario/index.html', {'fotoConta': perfil.fotoConta})
 
 
 @login_required
 def mapas(request):
+
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     div = 'Mapas'
     user = request.user
     pastas = Pasta.objects.filter(owner=user, divisao=div)
@@ -33,10 +38,11 @@ def mapas(request):
     else:
         form = PastaForm()
 
-    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem, 'fotoConta': perfil.fotoConta})
 
 @login_required
 def criaturas(request):
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     div = 'Criaturas'
     user = request.user
     pastas = Pasta.objects.filter(owner=user, divisao=div)
@@ -56,10 +62,11 @@ def criaturas(request):
     else:
         form = PastaForm()
 
-    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem':mensagem})
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem':mensagem, 'fotoConta': perfil.fotoConta})
 
 @login_required
 def documentos(request):
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     div = 'Documentos'
     user = request.user
     pastas = Pasta.objects.filter(owner=user, divisao=div)
@@ -79,10 +86,11 @@ def documentos(request):
     else:
         form = PastaForm()
 
-    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem, 'fotoConta': perfil.fotoConta})
 
 @login_required
 def imagens(request):
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     div = 'Imagens'
     user = request.user
     pastas = Pasta.objects.filter(owner=user, divisao=div)
@@ -102,10 +110,11 @@ def imagens(request):
     else:
         form = PastaForm()
 
-    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem, 'fotoConta': perfil.fotoConta})
 
 @login_required
 def musicas(request):
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     div = 'Musicas'
     user = request.user
     pastas = Pasta.objects.filter(owner=user, divisao=div)
@@ -124,7 +133,7 @@ def musicas(request):
     else:
         form = PastaForm()
 
-    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem})
+    return render(request, 'inventario/divisao.html', {'form': form, 'pastas': pastas, 'div': div, 'mensagem': mensagem, 'fotoConta': perfil.fotoConta})
 
 def verificar_extensao(div, file_type, request, tamanho, extension):
     # Convertendo a extensão para minúsculas para garantir a comparação consistente

@@ -20,7 +20,7 @@
 
             {% if fotoConta != "Indefinido" %}
               <a class="user-icon flex" style="cursor: pointer;" href="{% url 'usuario' %}">
-                <img style="border-radius: 100%;" class="navbar-icon" alt="" src="{{ fotoConta.url }}" />
+                <img style="border-radius: 100%;" class="navbar-icon" alt="" id="sla" src="{{ fotoConta.url }}" />
               </a>
             {% else %}
                 <a class="user-icon flex" style="all: unset; cursor: pointer;" href="{% url 'usuario' %}">

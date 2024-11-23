@@ -134,6 +134,7 @@ def buscarmesa(request):
     genero_filtro = request.GET.get('genero')
     campanhas = Campanha.objects.all()
 
+
     if sistema_busca:
         campanhas = campanhas.filter(Q(nomeCampanha__icontains=sistema_busca))
     if sistema_filtro:
@@ -153,7 +154,7 @@ def buscarmesa(request):
         campanhas_e_grupos[campanha] = grupos
 
 
-    return render(request, 'principal/muralLogado.html', {'campanhas_e_grupos': campanhas_e_grupos, 'perfil': perfil})
+    return render(request, 'principal/muralLogado.html', {'campanhas_e_grupos': campanhas_e_grupos, 'perfil': perfil, 'fotoConta': perfil.fotoConta})
 
 @login_required
 @apenas_mestre
@@ -252,7 +253,7 @@ def usuario(request):
 
     quantidade_amigos = Amigo.objects.filter(usuario=request.user.id).count()
 
-    return render(request, 'principal/user.html', {'perfil': perfil, 'campanha': campanha, 'quantidade_amigos':quantidade_amigos})
+    return render(request, 'principal/user.html', {'perfil': perfil, 'campanha': campanha, 'quantidade_amigos':quantidade_amigos, 'fotoConta': perfil.fotoConta})
 
 
 # view da edição de conta do usuário

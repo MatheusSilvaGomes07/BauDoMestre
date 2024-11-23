@@ -24,6 +24,10 @@ nav .nav-buttons {
   gap: 1.8rem;
 }
 
+.logout {
+  margin-right: 1rem;
+}
+
 nav .nav-buttons p {
   font-size: var(--text-20);
 }

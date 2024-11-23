@@ -1,5 +1,7 @@
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+
+from home.models import Perfil
 from .forms import DnDForm, OrdemParanormalForm, TormentaForm, CallOfCthulhuForm
 from .models import DnD, OrdemParanormal, Tormenta, CallOfCthulhu
 from django.contrib.auth.decorators import login_required
@@ -8,6 +10,7 @@ import os
 @login_required
 def edit_dnd(request, id):
     personagem = get_object_or_404(DnD, pk=id)
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     user = request.user
     foto_antiga = personagem.foto.name
 
@@ -17,7 +20,7 @@ def edit_dnd(request, id):
             form = DnDForm(request.POST, request.FILES, instance=personagem)
             if form.is_valid():
                 if personagem.foto:
-                    
+
 
                     caminho_arquivo_antigo = os.path.join('media', foto_antiga)
                     if foto_antiga != personagem.foto:
@@ -28,12 +31,13 @@ def edit_dnd(request, id):
             form = DnDForm(instance=personagem)
     else:
          return redirect('meus_personagens')
-    
-    return render(request, 'meus_personagens/editCharacter/edit_char_dnd.html', {'dnd': form, 'personagem': personagem})
+
+    return render(request, 'meus_personagens/editCharacter/edit_char_dnd.html', {'dnd': form, 'personagem': personagem, "fotoConta": perfil.fotoConta})
 
 @login_required
 def edit_ordem(request, id):
     personagem = get_object_or_404(OrdemParanormal, pk=id)
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     user = request.user
     foto_antiga = personagem.foto.name
 
@@ -42,7 +46,7 @@ def edit_ordem(request, id):
             form = OrdemParanormalForm(request.POST, request.FILES, instance=personagem)
             if form.is_valid():
                 if personagem.foto:
-                    
+
 
                     caminho_arquivo_antigo = os.path.join('media', foto_antiga)
 
@@ -54,12 +58,13 @@ def edit_ordem(request, id):
             form = OrdemParanormalForm(instance=personagem)
     else:
          return redirect('meus_personagens')
-    
-    return render(request, 'meus_personagens/editCharacter/edit_char_ordem.html', {'ordem': form, 'personagem': personagem})
+
+    return render(request, 'meus_personagens/editCharacter/edit_char_ordem.html', {'ordem': form, 'personagem': personagem, "fotoConta": perfil.fotoConta})
 
 @login_required
 def edit_tormenta20(request, id):
     personagem = get_object_or_404(Tormenta, pk=id)
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     user = request.user
     foto_antiga = personagem.foto.name
 
@@ -68,7 +73,7 @@ def edit_tormenta20(request, id):
             form = TormentaForm(request.POST, request.FILES, instance=personagem)
             if form.is_valid():
                 if personagem.foto:
-                    
+
 
                     caminho_arquivo_antigo = os.path.join('media', foto_antiga)
 
@@ -80,12 +85,13 @@ def edit_tormenta20(request, id):
             form = TormentaForm(instance=personagem)
     else:
          return redirect('meus_personagens')
-    
-    return render(request, 'meus_personagens/editCharacter/edit_char_tormenta20.html', {'tormenta': form, 'personagem': personagem})
+
+    return render(request, 'meus_personagens/editCharacter/edit_char_tormenta20.html', {'tormenta': form, 'personagem': personagem, "fotoConta": perfil.fotoConta})
 
 @login_required
 def edit_coc1920(request, id):
     personagem = get_object_or_404(CallOfCthulhu, pk=id)
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     user = request.user
     foto_antiga = personagem.foto.name
 
@@ -94,7 +100,7 @@ def edit_coc1920(request, id):
             form = CallOfCthulhuForm(request.POST, request.FILES, instance=personagem)
             if form.is_valid():
                 if personagem.foto:
-                    
+
 
                     caminho_arquivo_antigo = os.path.join('media', foto_antiga)
 
@@ -106,13 +112,13 @@ def edit_coc1920(request, id):
             form = CallOfCthulhuForm(instance=personagem)
     else:
          return redirect('meus_personagens')
-    
-    return render(request, 'meus_personagens/editCharacter/edit_char_coc1920.html', {'coc7e': form, 'personagem': personagem})
+
+    return render(request, 'meus_personagens/editCharacter/edit_char_coc1920.html', {'coc7e': form, 'personagem': personagem, "fotoConta": perfil.fotoConta})
 
 @login_required
 def deletarChar(request, rpg, id):
     user = request.user
-    
+
     try:
         #Delete DND
         if rpg == 'dungeons&dragons':
@@ -124,7 +130,7 @@ def deletarChar(request, rpg, id):
                 return redirect('meus_personagens')
             else:
                 return redirect('meus_personagens')
-            
+
         #Delete Ordem Paranormal
         if rpg == 'ordemparanormal':
             personagem = get_object_or_404(OrdemParanormal, pk=id)
@@ -135,7 +141,7 @@ def deletarChar(request, rpg, id):
                 return redirect('meus_personagens')
             else:
                 return redirect('meus_personagens')
-            
+
         #Delete Tormenta20
         if rpg == 'tormenta20':
             personagem = get_object_or_404(Tormenta, pk=id)
@@ -146,7 +152,7 @@ def deletarChar(request, rpg, id):
                 return redirect('meus_personagens')
             else:
                 return redirect('meus_personagens')
-            
+
         #Delete Tormenta20
         if rpg == 'callofcthulhu':
             personagem = get_object_or_404(CallOfCthulhu, pk=id)
@@ -159,23 +165,24 @@ def deletarChar(request, rpg, id):
                 return redirect('meus_personagens')
     except Exception as e:
         raise Http404(e)
-        
-               
+
+
 
 @login_required
 def index(request):
     user = request.user
-
     dnd = DnD.objects.filter(nomePerfil=user)
     ordem = OrdemParanormal.objects.filter(nomePerfil=user)
     tormenta20 = Tormenta.objects.filter(nomePerfil=user)
     coc = CallOfCthulhu.objects.filter(nomePerfil=user)
+    perfil = Perfil.objects.get(nomePerfil=user)
 
-    
-    return render(request, 'meus_personagens/index.html', { 'dnd': dnd, 'ordem': ordem, 'tormenta20': tormenta20, 'coc': coc })
+    return render(request, 'meus_personagens/index.html', { 'dnd': dnd, 'ordem': ordem, 'tormenta20': tormenta20, 'coc': coc, 'fotoConta': perfil.fotoConta })
 
 @login_required
 def criacao_char(request):
+    perfil = Perfil.objects.get(nomePerfil=request.user)
+
     if request.method == 'POST':
         formDnD = DnDForm(request.POST, request.FILES)
         if formDnD.is_valid():
@@ -185,7 +192,7 @@ def criacao_char(request):
             return redirect('meus_personagens')
     else:
         formDnD = DnDForm()
-    
+
     if request.method == 'POST':
         formOrdem = OrdemParanormalForm(request.POST, request.FILES)
         if formOrdem.is_valid():
@@ -215,46 +222,6 @@ def criacao_char(request):
             return redirect('meus_personagens')
     else:
          formCoC = CallOfCthulhuForm()
-    
 
-    return render(request, 'meus_personagens/criacao_char.html', {'dnd': formDnD, 'ordem': formOrdem, 'tormenta': formTormenta, 'coc7e': formCoC })
 
-@login_required
-def detail_charDnD(request, id):
-    personagem = get_object_or_404(DnD, pk=id)
-    user = request.user
-
-    if user == personagem.nomePerfil or user.is_staff:
-        return render(request, 'meus_personagens/detailCharacter/detail_char_dnd.html', {'personagem': personagem})
-    else:
-         return redirect('meus_personagens')
-    
-@login_required
-def detail_charOrdemParanormal(request, id):
-    personagem = get_object_or_404(OrdemParanormal, pk=id)
-    user = request.user
-
-    if user == personagem.nomePerfil or user.is_staff:
-        return render(request, 'meus_personagens/detailCharacter/detail_char_ordem.html', {'personagem': personagem})
-    else:
-         return redirect('meus_personagens')
-    
-@login_required
-def detail_charTormenta(request, id):
-    personagem = get_object_or_404(Tormenta, pk=id)
-    user = request.user
-
-    if user == personagem.nomePerfil or user.is_staff:
-        return render(request, 'meus_personagens/detailCharacter/detail_char_tormenta.html', {'personagem': personagem})
-    else:
-         return redirect('meus_personagens')
-
-@login_required
-def detail_charCoC(request, id):
-    personagem = get_object_or_404(CallOfCthulhu, pk=id)
-    user = request.user
-
-    if user == personagem.nomePerfil or user.is_staff:
-        return render(request, 'meus_personagens/detailCharacter/detail_char_coc.html', {'personagem': personagem})
-    else:
-         return redirect('meus_personagens')
+    return render(request, 'meus_personagens/criacao_char.html', {'dnd': formDnD, 'ordem': formOrdem, 'tormenta': formTormenta, 'coc7e': formCoC, 'fotoConta': perfil.fotoConta })

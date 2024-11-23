@@ -57,241 +57,209 @@
 
 <div class="dnd-description flex">
     <!-- Box de atributos -->
-    <div class="atributos_box flex-column">
+    <div class="left-column flex-column">
 
-        <div class="atributo">
-            <div class="att-box">
-                <h4>Força</h4>
-                <p id="mod_forca">0</p>
+        <div class="atributes-skills flex">
+
+            <div class="atributos_box flex-column">
+                <div class="atributo">
+                    <div class="att-box">
+                        <h4>Força</h4>
+                        <p id="mod_forca">0</p>
+                    </div>
+                    {{ dnd.forca }}
+                </div>
+                <div class="atributo">
+                    <div class="att-box">
+                        <h4>Destreza</h4>
+                        <p id="mod_dex">0</p>
+                    </div>
+                    {{ dnd.dex }}
+                </div>
+                <div class="atributo">
+                    <div class="att-box">
+                        <h4>Constituição</h4>
+                        <p id="mod_const">0</p>
+                    </div>
+                    {{ dnd.const }}
+                </div>
+                <div class="atributo">
+                    <div class="att-box">
+                        <h4>Inteligência</h4>
+                        <p id="mod_int">0</p>
+                    </div>
+                    {{ dnd.int }}
+                </div>
+                <div class="atributo">
+                    <div class="att-box">
+                        <h4>Sabedoria</h4>
+                        <p id="mod_sab">0</p>
+                    </div>
+                    {{ dnd.sab }}
+                </div>
+                <div class="atributo">
+                    <div class="att-box">
+                        <h4>Carisma</h4>
+                        <p id="mod_car">0</p>
+                    </div>
+                    {{ dnd.carisma }}
+                </div>
             </div>
-            {{ dnd.forca }}
+
+            <div class="skill-column flex-column">
+                <div class="inspiration-box flex">
+                    {{ dnd.inspiracao }}
+                    <img src="{% static "img/icons/inspiration.svg" %}" alt="">
+                    <p>Inspiração</p>
+                </div>
+                <div class="proficiency flex">
+                    <h4 id="bonusProf">0</h4>
+                    <p>Bônus de proficiência</p>
+                </div>
+                <!-- Saving Throws -->
+                <div class="salvaguarda_box flex-column">
+                    <div class="savethrow">
+                        {{ dnd.forcaSalvaguarda }}
+                        <p id="salva_for">0</p>
+                        <p>Força</p>
+                    </div>
+                    <div class="savethrow">
+                        {{ dnd.dexSalvaguarda }}
+                        <p id="salva_dex">0</p>
+                        <p>Destreza</p>
+                    </div>
+                    <div class="savethrow">
+                        {{ dnd.constSalvaguarda }}
+                        <p id="salva_const">0</p>
+                        <p>Constituição</p>
+                    </div>
+                    <div class="savethrow">
+                        {{ dnd.intSalvaguarda }}
+                        <p id="salva_int">0</p>
+                        <p>Inteligência</p>
+                    </div>
+                    <div class="savethrow">
+                        {{ dnd.sabSalvaguarda }}
+                        <p id="salva_sab">0</p>
+                        <p>Sabedoria</p>
+                    </div>
+                    <div class="savethrow">
+                        {{ dnd.carismaSalvaguarda }}
+                        <p id="salva_car">0</p>
+                        <p>Carisma</p>
+                    </div>
+                    <h5>SALVAGUARDA</h5>
+                </div>
+                <!-- Perícias -->
+                <div class="pericias flex-column">
+                    <div class="pericia">
+                        {{ dnd.acrobacia }}
+                        <p id="mod_acrobacia">0</p>
+                        <p>Acrobacia(Dex)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.adestrarAnimais }}
+                        <p id="mod_adestrarAnimais">0</p>
+                        <p>Adestrar Animais(Sab)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.arcana }}
+                        <p id="mod_arcana">0</p>
+                        <p>Arcana(Int)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.atletismo }}
+                        <p id="mod_atletismo">0</p>
+                        <p>Atletismo(For)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.enganacao }}
+                        <p id="mod_enganacao">0</p>
+                        <p>Enganação(Car)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.historia }}
+                        <p id="mod_historia">0</p>
+                        <p>Historia(Int)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.intuicao }}
+                        <p id="mod_intuicao">0</p>
+                        <p>Intuição(Sab)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.intimidacao }}
+                        <p id="mod_intimidacao">0</p>
+                        <p>Intimidação(Car)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.investigacao }}
+                        <p id="mod_investigacao">0</p>
+                        <p>Investigação(Int)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.medicina }}
+                        <p id="mod_medicina">0</p>
+                        <p>Medicina(Sab)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.natureza }}
+                        <p id="mod_natruza">0</p>
+                        <p>Natureza(Int)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.percepcao }}
+                        <p id="mod_percepcao">0</p>
+                        <p>Percepção(Sab)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.atuacao }}
+                        <p id="mod_atuacao">0</p>
+                        <p>Atuação(Car)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.persuasao }}
+                        <p id="mod_persuasao">0</p>
+                        <p>Persuasão(Car)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.religiao }}
+                        <p id="mod_religiao">0</p>
+                        <p>Religião(Int)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.prestigitacao }}
+                        <p id="mod_prestigitacao">0</p>
+                        <p>Prestigitação(Dex)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.furtividade }}
+                        <p id="mod_furtividade">0</p>
+                        <p>Furtividade(Dex)</p>
+                    </div>
+                    <div class="pericia">
+                        {{ dnd.sobrevivencia }}
+                        <p id="mod_sobrevivencia">0</p>
+                        <p>Sobrevivência(Sab)</p>
+                    </div>
+                    <h5>PERICIAS</h5>
+                </div>
+            </div>
         </div>
 
-        <div class="atributo">
-            <div class="att-box">
-                <h4>Destreza</h4>
-                <p id="mod_dex">0</p>
+        <div class="proficiencySkill flex-column">
+            <div class="proficiency-box flex-column">
+                <p>Proficiencia com ferramentas e Habilidades Customizadas</p>
+                {{ dnd.proficienciasFerramentas }}
             </div>
-            {{ dnd.dex }}
-        </div>
-
-        <div class="atributo">
-            <div class="att-box">
-                <h4>Constituição</h4>
-                <p id="mod_const">0</p>
+            <div class="proficiency-box flex-column">
+                <p>Outras Proficiências e Linguagens</p>
+                {{ dnd.outrasProf_Linguagens }}
             </div>
-            {{ dnd.const }}
-        </div>
-
-        <div class="atributo">
-            <div class="att-box">
-                <h4>Inteligência</h4>
-                <p id="mod_int">0</p>
-            </div>
-            {{ dnd.int }}
-        </div>
-
-        <div class="atributo">
-            <div class="att-box">
-                <h4>Sabedoria</h4>
-                <p id="mod_sab">0</p>
-            </div>
-            {{ dnd.sab }}
-        </div>
-
-        <div class="atributo">
-            <div class="att-box">
-                <h4>Carisma</h4>
-                <p id="mod_car">0</p>
-            </div>
-            {{ dnd.carisma }}
         </div>
     </div>
 
-    <div class="skill-column flex-column">
-        <div class="inspiration-box flex">
-            {{ dnd.inspiracao }}
-            <img src="{% static "img/icons/inspiration.svg" %}" alt="">
-            <p>Inspiração</p>
-        </div>
-
-        <div class="proficiency flex">
-            <h4 id="bonusProf">0</h4>
-            <p>Bônus de proficiência</p>
-        </div>
-
-        <!-- Saving Throws -->
-        <div class="salvaguarda_box flex-column">
-
-            <div class="savethrow">
-                {{ dnd.forcaSalvaguarda }}
-                <p id="salva_for">0</p>
-                <p>Força</p>
-            </div>
-
-            <div class="savethrow">
-                {{ dnd.dexSalvaguarda }}
-                <p id="salva_dex">0</p>
-                <p>Destreza</p>
-            </div>
-
-            <div class="savethrow">
-                {{ dnd.constSalvaguarda }}
-                <p id="salva_const">0</p>
-                <p>Constituição</p>
-            </div>
-
-            <div class="savethrow">
-                {{ dnd.intSalvaguarda }}
-                <p id="salva_int">0</p>
-                <p>Inteligência</p>
-            </div>
-
-            <div class="savethrow">
-                {{ dnd.sabSalvaguarda }}
-                <p id="salva_sab">0</p>
-                <p>Sabedoria</p>
-            </div>
-
-            <div class="savethrow">
-                {{ dnd.carismaSalvaguarda }}
-                <p id="salva_car">0</p>
-                <p>Carisma</p>
-            </div>
-        </div>
-
-        <!-- Perícias -->
-        <div class="pericias">
-
-            <div class="pericia">
-                {{ dnd.acrobacia }}
-                <label id="mod_acrobacia">0</label>
-                <label>Acrobacia(Dex)</label>
-            </div>
-
-
-            <div class="pericia">
-                {{ dnd.adestrarAnimais }}
-                <label id="mod_adestrarAnimais">0</label>
-                <label>Adestrar Animais(Sab)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.arcana }}
-                <label id="mod_arcana">0</label>
-                <label>Arcana(Int)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.atletismo }}
-                <label id="mod_atletismo">0</label>
-                <label>Atletismo(For)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.enganacao }}
-                <label id="mod_enganacao">0</label>
-                <label>Enganação(Car)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.historia }}
-                <label id="mod_historia">0</label>
-                <label>Historia(Int)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.intuicao }}
-                <label id="mod_intuicao">0</label>
-                <label>Intuição(Sab)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.intimidacao }}
-                <label id="mod_intimidacao">0</label>
-                <label>Intimidação(Car)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.investigacao }}
-                <label id="mod_investigacao">0</label>
-                <label>Investigação(Int)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.medicina }}
-                <label id="mod_medicina">0</label>
-                <label>Medicina(Sab)</label>
-            </div>
-
-
-            <div class="pericia">
-                {{ dnd.natureza }}
-                <label id="mod_natruza">0</label>
-                <label>Natureza(Int)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.percepcao }}
-                <label id="mod_percepcao">0</label>
-                <label>Percepção(Sab)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.atuacao }}
-                <label id="mod_atuacao">0</label>
-                <label>Atuação(Car)</label>
-            </div>
-
-
-            <div class="pericia">
-                {{ dnd.persuasao }}
-                <label id="mod_persuasao">0</label>
-                <label>Persuasão(Car)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.religiao }}
-                <label id="mod_religiao">0</label>
-                <label>Religião(Int)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.prestigitacao }}
-                <label id="mod_prestigitacao">0</label>
-                <label>Prestigitação(Dex)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.furtividade }}
-                <label id="mod_furtividade">0</label>
-                <label>Furtividade(Dex)</label>
-            </div>
-
-            <div class="pericia">
-                {{ dnd.sobrevivencia }}
-                <label id="mod_sobrevivencia">0</label>
-                <label>Sobrevivência(Sab)</label>
-            </div>
-
-        </div>
-
-    </div>
-
-
 </div>
-
-<div class="profecienciasFerramentas">
-    <label>Proficiencia com ferramentas e Habilidades Customizadas</label>
-    {{ dnd.proficienciasFerramentas }}
-</div>
-
-<div class="outrasProf_Linguagens">
-    <label>Outras Proficiências e Linguagens</label>
-    {{ dnd.outrasProf_Linguagens }}
-</div>
-
-<br>
 
 <!-- Meio -->
 <div class="coluna_meio">

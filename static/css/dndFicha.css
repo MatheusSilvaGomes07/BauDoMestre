@@ -105,9 +105,17 @@ input:-webkit-autofill {
     gap: 26px;
 }
 
+.left-column {
+    gap: 20px;
+}
+
+.dnd-description .atributes-skills {
+    gap: 26px;
+}
+
 .atributos_box {
     width: 150px;
-    gap: 30px;
+    gap: 50px;
 }
 
 
@@ -202,14 +210,67 @@ input::-webkit-inner-spin-button {
     border-radius: 5px;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 8px;
+    padding: 10px 0;
 }
 
 .salvaguarda_box .savethrow {
     display: flex;
     background-color: #1F1F1F;
     padding: 6px;
-    width: 70%;
+    width: 85%;
+    border-radius: 6px;
+    justify-content: space-between;
+}
+
+.savethrow p {
+    font-size: 12px;
+}
+
+.salvaguarda_box h5, .pericias h5 {
+    font-family: var(--Inter);
+    color: white;
+    font-size: 17px;
+    margin-top: .5rem;
+}
+
+.pericias {
+    background-color: #353535;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+}
+
+.pericia {
+    display: flex;
+    background-color: #1F1F1F;
+    padding: 6px;
+    width: 85%;
     border-radius: 10px;
     justify-content: space-between;
+}
+
+.pericia p {
+    font-size: 11px;
+}
+
+.proficiencySkill {
+    gap: 20px;
+}
+
+.proficiencySkill .proficiency-box{
+    flex-direction: column-reverse;
+    background-color: #353535;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.proficiency-box textarea{
+    all: unset;
+    font-family: var(--Inter);
+    color: white;
+    background-color: #565656;
+    width: 95%;
 }
