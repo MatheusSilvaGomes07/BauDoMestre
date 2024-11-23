@@ -530,23 +530,21 @@
   width: 40px;
 }
 
-
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+#content-dice {
+  font-family: var(--Inter);
 }
 .container {
   max-width: 600px;
   margin: 0 auto;
 }
 #roll-history {
-  border: 1px solid #ddd;
+  font-family: var(--Inter);
+  border: 1px solid #181818;
   border-radius: 5px;
   padding: 10px;
   height: 300px;
   overflow-y: auto;
-  background: #f9f9f9;
+  background: #181818;
   margin-bottom: 20px;
 }
 .roll-result {
@@ -560,10 +558,35 @@ body {
 .roll-result strong {
   color: #333;
 }
-input, select, button {
+
+#content-dice input, #content-dice select, #content-dice button {
   margin: 5px 0;
   padding: 10px;
   font-size: 16px;
   width: 100%;
   box-sizing: border-box;
+  background-color: #181818;
+  border-radius: 5px;
+  border: none;
+  color: #d5d5d5;
+}
+
+#content-dice label {
+  color: rgb(223, 223, 223);
+}
+
+#content-dice button, #content-dice select {
+  cursor: pointer;
+}
+
+#content-dice button {
+  background-color: #b00101;
+  font-weight: 550;
+  &:hover{
+    background-color: #950202;
+  }
+  &:active{
+    scale: 0.91;
+  }
+  transition: all 0.3s ease;
 }

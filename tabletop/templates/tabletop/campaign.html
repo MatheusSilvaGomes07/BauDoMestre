@@ -211,12 +211,12 @@
 
 
                 <div id="content-dice" class="modal-content-right">
-                    <h1>Rolagem de Dados</h1>
+                    <br>
         <div id="roll-history"></div>
 
         <form id="dice-form">
             <label for="quantity">Quantidade de Dados:</label>
-            <input type="number" id="quantity" min="1" placeholder="Ex: 2" required>
+            <input type="number" id="quantity" min="1" placeholder="Ex: 2" value="1" required>
 
             <label for="type">Tipo de Dado:</label>
             <select id="type">
@@ -395,8 +395,8 @@
         resultDiv.className = "roll-result";
 
         resultDiv.innerHTML = `
-            <strong>Rolaram ${quantity}d${type} + ${modifier}:</strong><br>
-            Rolagens individuais: ${result.rolls.join(", ")}<br>
+            <strong>${quantity}d${type} + ${modifier}:</strong><br>
+            ${result.rolls.join(", ")}<br>
             Total: <strong>${result.total}</strong>
         `;
 
