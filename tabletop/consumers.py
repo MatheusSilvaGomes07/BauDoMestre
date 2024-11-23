@@ -50,6 +50,34 @@ class TabletopConsumer(AsyncWebsocketConsumer):
         elif action == 'delete_token':
             token_id = data.get('token_id')
             await self.delete_token(token_id)
+        elif action == 'roll_dice':
+            quantity = data.get('quantity')
+            dice_type = data.get('dice_type')
+            modifier = data.get('modifier')
+            result = data.get('result')
+            await self.channel_layer.group_send(
+                self.campaign_group_name,
+                {
+                    'type': 'roll_dice',
+                    'quantity': quantity,
+                    'dice_type': dice_type,
+                    'modifier': modifier,
+                    'result': result
+                }
+            )
+
+    async def roll_dice(self, event):
+        quantity = event['quantity']
+        dice_type = event['dice_type']
+        modifier = event['modifier']
+        result = event['result']
+        await self.send(text_data=json.dumps({
+            'action': 'roll_dice',
+            'quantity': quantity,
+            'dice_type': dice_type,
+            'modifier': modifier,
+            'result': result
+        }))
 
     async def load_map(self, event):
         map_id = event['map_id']

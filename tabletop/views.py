@@ -1,4 +1,5 @@
 import os
+import random
 from django.shortcuts import redirect, render, get_object_or_404
 from meus_personagens.forms import CallOfCthulhuForm, DnDForm, OrdemParanormalForm, TormentaForm
 from .models import CallOfCthulhuCampanha, DnDCampanha, Map, OrdemParanormalCampanha, Token, PastaCriaturas, TormentaCampanha
@@ -346,4 +347,41 @@ def editar_personagem_campanha(request, campaign_id, personagem_id):
         return redirect('enter_campaign', campaign_id)
         
     return render(request, 'meus_personagens/editCharacter/' + template, {form_name: form, 'personagem': personagem})
-            
+
+@csrf_exempt
+@user_in_group
+def roll_dice(request, campaign_id):
+    if request.method == 'POST':
+        quantity = int(request.POST.get('quantity'))
+        dice_type = int(request.POST.get('type'))
+        modifier = int(request.POST.get('modifier'))
+
+        total = 0
+        rolls = []
+
+        for _ in range(quantity):
+            roll = random.randint(1, dice_type)
+            rolls.append(roll)
+            total += roll
+
+        total += modifier
+
+        result = {
+            'rolls': rolls,
+            'total': total
+        }
+
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            f'campaign_{campaign_id}',
+            {
+                'type': 'roll_dice',
+                'quantity': quantity,
+                'dice_type': dice_type,
+                'modifier': modifier,
+                'result': result
+            }
+        )
+
+        return JsonResponse({'status': 'success', 'result': result})
+    return JsonResponse({'status': 'error'}, status=400)

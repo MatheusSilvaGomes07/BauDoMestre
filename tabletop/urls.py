@@ -12,7 +12,8 @@ urlpatterns = [
     path('deletar_personagem/<int:campaign_id>/<int:personagem_id>/', views.deletar_personagem_campanha, name="deletar_personagem_campanha"),
     path('editar_personagem/<int:campaign_id>/<int:personagem_id>/', views.editar_personagem_campanha, name='editar_personagem_campanha'),
     path('deletar_pasta/<int:campaign_id>/<int:pasta_id>/', views.deletarPastaCriaturas, name='deletar_pasta_criaturas'),
-    path('editar_personagem/<int:campaign_id>/<int:personagem_id>/', views.editar_personagem_campanha, name='editar_personagem_campanha')
+    path('editar_personagem/<int:campaign_id>/<int:personagem_id>/', views.editar_personagem_campanha, name='editar_personagem_campanha'),
+    path('roll_dice/<int:campaign_id>/', views.roll_dice, name='roll_dice')
 ]
 
 

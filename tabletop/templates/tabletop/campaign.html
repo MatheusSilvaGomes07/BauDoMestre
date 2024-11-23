@@ -65,6 +65,8 @@
                 document.getElementById('tokens').appendChild(tokenElement); // Substitua pelo ID do seu contêiner de tokens
 
                 initializeDraggableTokens();
+            } else if (data.action === 'roll_dice') {
+                addToHistory(data.quantity, data.dice_type, data.modifier, data.result);
             }
         };
 
@@ -417,8 +419,20 @@
         // Realiza a rolagem
         const result = rollDice(quantity, type, modifier);
 
-        // Adiciona ao histórico
-        addToHistory(quantity, type, modifier, result);
+        // Envia o resultado para o servidor
+        $.ajax({
+            url: `/tabletop/roll_dice/${campaignId}/`,
+            method: 'POST',
+            data: {
+                'quantity': quantity,
+                'type': type,
+                'modifier': modifier,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(response) {
+                console.log('Dice roll sent to server');
+            }
+        });
 
         // Limpa o formulário
         diceForm.reset();
@@ -426,4 +440,3 @@
 </script>
 </body>
 </html>
- 
