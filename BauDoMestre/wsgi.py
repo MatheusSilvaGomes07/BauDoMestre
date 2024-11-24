@@ -15,4 +15,4 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'BauDoMestre.settings')
 
 application = get_wsgi_application()
 
-application.timeout = 180
+app = application

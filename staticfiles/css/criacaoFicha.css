@@ -1,3 +1,41 @@
 .fichas {
-    padding-top: 5%;
+    padding-top: 7%;
 }
+
+.fichas > h1{
+    font-family: var(--Inter);
+    font-weight: bold;
+    text-align: center;
+ }
+
+ .select-sheet {
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 0;
+ }
+
+ .select-sheet p {
+    font-size: 2rem;
+ }
+
+ select {
+    all: unset;
+    background-color: unset;
+    color: white;
+    font-family: var(--Inter);
+    font-size: 2rem;
+    background-size: 12px; /* Ajuste o tamanho da seta */
+    padding-right: 20px;
+    appearance: auto;
+    border-radius: 5px;
+    background-color: #8d8d8d;
+    text-align: center;
+}
+
+select:hover{
+    border: none;
+}
+
+.dnd-body {
+    padding-top: 1rem !important;
+ }

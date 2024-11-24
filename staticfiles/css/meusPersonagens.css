@@ -6,7 +6,7 @@ body {
 
   .mural-banner {
     background: linear-gradient(0.7turn, #000000 -70%, #BE0B05 257%);
-    margin-bottom: 8rem;
+    margin-bottom: 2rem;
     padding-top: 5rem;
   }
 
@@ -390,6 +390,13 @@ body {
   .ficha-left > p {
     height: 65%;
     text-align: justify;
+  }
+
+  .lore-box {
+    white-space: pre-wrap; /* Impede que o texto quebre para a próxima linha */
+    overflow: hidden; /* Esconde o texto que ultrapassa o limite */
+    text-overflow: ellipsis;
+    height: 50%;
   }
 
   .ficha-tags {

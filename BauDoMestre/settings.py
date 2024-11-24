@@ -107,7 +107,11 @@ WSGI_APPLICATION = 'BauDoMestre.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'HOST': 'aws-0-sa-east-1.pooler.supabase.com',
+        'NAME': 'postgres',
+        'USER': 'postgres.lyxrgnppbxdhnivpuawm',
+        'PASSWORD': 'BaúDoMestre',
+        'PORT': '6543',
     }
 }
 
