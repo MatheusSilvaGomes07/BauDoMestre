@@ -1,17 +1,15 @@
 textarea{
    resize: none;
 }
-
-
 .atributos_box{
-  
+
    display: flex;
    flex-direction: column;
    width: 10%;
 }
 
 .atributo{
-   
+
    margin: 2px;
    padding: 3%;
 }
@@ -21,7 +19,6 @@ textarea{
    height: 30px;
    text-align: center;
 }
-
 
 .ataques_box{
    display: flex;

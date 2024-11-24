@@ -8,23 +8,26 @@
 
 {% block css_files %}
  <link rel="stylesheet" href="{% static 'meus_personagens/fichadnd.css'%}"></link>
+ <link rel="stylesheet" href="{% static 'dndFicha.css'%}"></link>
 {% endblock %}
 
 {% block content %}
 
 <div class="fichas">
     <h1>Criação de Personagem</h1>
-    <label>Escolha o sistema de RPG: </label>
-    <select id="escolhaFormulario">
-        <option value="--">--</option>
-        <option value="DnD">Dungeons & Dragons</option>
-        <option value="OrdemParanormal">Ordem Paranormal</option>
-        <option value="Tormenta20">Tormenta20</option>
-        <option value="CoC">Call of Cthulhu 7e (1920)</option>
-    </select>
+    <div class="select-sheet flex">
+        <p>Escolha o sistema de RPG: </p>
+        <select id="escolhaFormulario">
+            <option value="--">--</option>
+            <option value="DnD">Dungeons & Dragons</option>
+            <option value="OrdemParanormal">Ordem Paranormal</option>
+            <option value="Tormenta20">Tormenta20</option>
+            <option value="CoC">Call of Cthulhu 7e (1920)</option>
+        </select>
+    </div>
 
 
-    <div id="formularioDnD" style="display: none;">
+    <div class="dnd-body" id="formularioDnD" style="display: none;">
         {% include "meus_personagens/includes/dndform.html"%}
     </div>
 
