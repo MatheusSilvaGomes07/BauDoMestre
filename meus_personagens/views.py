@@ -2,6 +2,7 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from home.models import Perfil
+from tabletop.models import CallOfCthulhuCampanha, DnDCampanha, OrdemParanormalCampanha, TormentaCampanha
 from .forms import DnDForm, OrdemParanormalForm, TormentaForm, CallOfCthulhuForm
 from .models import DnD, OrdemParanormal, Tormenta, CallOfCthulhu
 from django.contrib.auth.decorators import login_required
@@ -171,10 +172,18 @@ def deletarChar(request, rpg, id):
 @login_required
 def index(request):
     user = request.user
-    dnd = DnD.objects.filter(nomePerfil=user)
-    ordem = OrdemParanormal.objects.filter(nomePerfil=user)
-    tormenta20 = Tormenta.objects.filter(nomePerfil=user)
-    coc = CallOfCthulhu.objects.filter(nomePerfil=user)
+   
+    #Isso é uma maneira muito burra de conciliar os personagens de Campanha com MeusPersonagens mas é o que ta tendo para hoje
+    ids_campanha_T = TormentaCampanha.objects.values_list('pk', flat=True).distinct()
+    ids_campanha_D = DnDCampanha.objects.values_list('pk', flat=True).distinct()
+    ids_campanha_O = OrdemParanormalCampanha.objects.values_list('pk', flat=True).distinct()
+    ids_campanha_C = CallOfCthulhuCampanha.objects.values_list('pk', flat=True).distinct()
+
+
+    dnd = DnD.objects.filter(nomePerfil=user).exclude(id__in=ids_campanha_D)
+    ordem = OrdemParanormal.objects.filter(nomePerfil=user).exclude(id__in=ids_campanha_O)
+    tormenta20 = Tormenta.objects.filter(nomePerfil=user).exclude(id__in=ids_campanha_T)
+    coc = CallOfCthulhu.objects.filter(nomePerfil=user).exclude(id__in=ids_campanha_C)
     perfil = Perfil.objects.get(nomePerfil=user)
 
     return render(request, 'meus_personagens/index.html', { 'dnd': dnd, 'ordem': ordem, 'tormenta20': tormenta20, 'coc': coc, 'fotoConta': perfil.fotoConta })
