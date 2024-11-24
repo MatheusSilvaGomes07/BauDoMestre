@@ -17,11 +17,8 @@
                     <h3>{{ campanha.nomeCampanha }}</h3>
                     <p>MESTRE: {{ campanha.nomeMestre.nomePerfil }}</p>
                 </div>
-                <img src="{% static "img/icons/DJCTQ_-_10.svg" %}" alt="">
             </div>
         </div>
-
-        <img id="caret" src="{% static "img/icons/Caret-Down.svg" %}" alt="">
 
     </div>
 
@@ -122,6 +119,9 @@
 
                     <div class="button">
                             {% if request.user in grupo.membros.all %}
+                                <button>
+                                    <p><a href="{% url 'Abrir_chat_pub' uuid=grupo.uuid %}">Entrar</a></p>
+                                </button>
                                 <h3><a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a></h3>
                             {% else %}
                                 {% if grupo.envioSolicitacao == '0' %}

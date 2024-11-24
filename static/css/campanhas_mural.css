@@ -243,6 +243,10 @@ body {
 .quest-desc #text {
   margin: 0 14px 1rem 14px;
   font-weight: 500;
+  white-space: pre-wrap; /* Impede que o texto quebre para a próxima linha */
+    overflow: hidden; /* Esconde o texto que ultrapassa o limite */
+    text-overflow: ellipsis;
+    height: 50px;
 }
 
 .quest-desc .quest-tags {

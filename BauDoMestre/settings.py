@@ -104,15 +104,22 @@ WSGI_APPLICATION = 'BauDoMestre.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'HOST': 'aws-0-sa-east-1.pooler.supabase.com',
+#         'NAME': 'postgres',
+#         'USER': 'postgres.lyxrgnppbxdhnivpuawm',
+#         'PASSWORD': 'BaúDoMestre',
+#         'PORT': '6543',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'HOST': 'aws-0-sa-east-1.pooler.supabase.com',
-        'NAME': 'postgres',
-        'USER': 'postgres.lyxrgnppbxdhnivpuawm',
-        'PASSWORD': 'BaúDoMestre',
-        'PORT': '6543',
-    }
+        'NAME': BASE_DIR / 'db.sqlite3'
+     }
 }
 
 # Password validation

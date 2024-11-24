@@ -129,21 +129,28 @@
                     <div class="quest-body">
                         <div class="quest-title flex">
                             <p><a href="{% url 'detalhes_campanha' campanha.id %}">{{ campanha.nomeCampanha }}</a></p>
-                            <button>
                                 {% for grupo in grupos %}
                                     <div id="{{ grupo.uuid }}">
                                         {% if request.user in grupo.membros.all %}
+                                            <button>
+                                                <p><a href="{% url 'Abrir_chat_pub' uuid=grupo.uuid %}">Entrar</a></p>
+                                            </button>
+                                            <button>
                                                 <p><a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a></p>
+                                            </button>
                                         {% else %}
                                             {% if grupo.envioSolicitacao == '0' %}
-                                                <p><a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a></p>
+                                                <button>
+                                                    <p><a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a></p>
+                                                </button>
                                             {% else %}
-                                                <p>Solicitação enviada</p>
+                                                <button>
+                                                    <p>Solicitação enviada</p>
+                                                </button>
                                             {% endif %}
                                         {% endif %}
                                     </div>
                                 {% endfor %}
-                            </button>
                         </div>
 
                         <div class="divison-row"></div>
