@@ -265,6 +265,17 @@ input::-webkit-inner-spin-button {
     background-color: #353535;
     border-radius: 5px;
     align-items: center;
+    padding: 10px 0;
+    gap: 1rem;
+}
+
+.proficiencySkill p {
+    width: 80%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: var(--Inter);
+    text-transform: uppercase;
 }
 
 .proficiency-box textarea{
@@ -272,5 +283,178 @@ input::-webkit-inner-spin-button {
     font-family: var(--Inter);
     color: white;
     background-color: #565656;
-    width: 95%;
+    width: 90%;
+    border-radius: 10px;
+    padding: 10px 10px;
+}
+
+.middle-column {
+    width: 30%;
+}
+
+.health-section {
+    background-color: #353535;
+    padding: 25px;
+    border-radius: 10px;
+    gap: 20px;
+}
+
+.hit-box {
+    justify-content: space-between;
+}
+
+.health-section .stat-box {
+    background-color: var(--red1);
+    width: 25%;
+    border: #380E17 5px solid;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.stat-box p {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.health-section .stat-box input, #iniciativa {
+    all: unset;
+    font-family: var(--Inter);
+    color: white;
+    width: 90%;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.health-total {
+    gap: 26px;
+}
+
+.hit-points {
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    background-color: #767676;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.hit-points p {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.vida{
+    width: 45%;
+}
+
+.vida input {
+    all: unset;
+    font-size: 80px;
+    color: white;
+    font-weight: bold;
+    font-family: var(--Inter);
+}
+
+.vertical-line {
+    height: 100px;
+    width: 3px;
+    background-color: white;
+}
+
+.vida-max {
+    background-color: #767676;
+    border-radius: 15px;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.vida-max p {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.vida-max select {
+    all: unset;
+    background-color: unset;
+    color: white;
+    font-family: var(--Inter);
+    font-size: 15px;
+    background-size: 12px; /* Ajuste o tamanho da seta */
+    padding-right: 20px;
+    appearance: auto;
+    border-radius: 5px;
+    background-color: #8d8d8d;
+}
+
+.vida-max select:hover{
+    border: none;
+}
+
+
+.vida-max input {
+    all: unset;
+    font-size: 50px;
+    color: white;
+    font-weight: bold;
+    font-family: var(--Inter);
+    width: 80%;
+}
+
+.death-save {
+    background-color: #767676;
+    border-radius: 15px;
+    padding: 10px;
+    gap: 10px;
+}
+
+.death-save p {
+    font-weight: bold;
+}
+
+.death-save .checkboxes {
+    gap: 12px;
+}
+
+.death-save > div {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.death-save input {
+    appearance: none; /* Remove o estilo padrão */
+    -webkit-appearance: none; /* Remove no Safari */
+    -moz-appearance: none; /* Remove no Firefox */
+    height: 20px;
+    width: 20px;
+    background-color: #353535;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 4px; /* Arredondado */
+    position: relative; /* Necessário para posicionar o ::after */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.death-save input:checked {
+    background-color: #767676; /* Cor quando marcado */
+    border-color: #555;
+}
+
+.death-save input:checked::after {
+    content: ''; /* O conteúdo é necessário para exibir o ícone */
+    position: absolute;
+    display: block;
+    left: 6px; /* Ajuste horizontal */
+    top: 3px; /* Ajuste vertical */
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg); /* Forma o símbolo de check */
+}
+
+.attack-box {
+    background-color: #353535;
 }

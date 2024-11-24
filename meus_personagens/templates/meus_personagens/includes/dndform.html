@@ -249,119 +249,145 @@
 
         <div class="proficiencySkill flex-column">
             <div class="proficiency-box flex-column">
-                <p>Proficiencia com ferramentas e Habilidades Customizadas</p>
+                <p>Proficiência em ferramentas</p>
                 {{ dnd.proficienciasFerramentas }}
             </div>
             <div class="proficiency-box flex-column">
-                <p>Outras Proficiências e Linguagens</p>
+                <p>Proficiências e Linguagens</p>
                 {{ dnd.outrasProf_Linguagens }}
             </div>
         </div>
     </div>
 
-</div>
+    <div class="middle-column">
+        <div class="health-section flex-column">
 
-<!-- Meio -->
-<div class="coluna_meio">
-    {{ dnd.ca }}
-    <label>Classe de Armadura</label>
+            <div class="hit-box flex">
+                <div class="stat-box">
+                    {{ dnd.ca }}
+                    <p>CA</p>
+                </div>
 
-    <label id="iniciativa">0</label>
-    <label>Iniciativa</label>
+                <div class="stat-box">
+                    <p>INICIA</p>
+                    <p id="iniciativa">0</p>
+                </div>
 
-    {{ dnd.movi }}
-    <label>Movimentação</label>
+                <div class="stat-box">
+                    <p>MOVIME</p>
+                    {{ dnd.movi }}
+                </div>
+            </div>
 
-    <br>
+            <div class="health-total flex-column">
+                <div class="hit-points flex">
+                    <div class="vida flex-column">
+                        <p>Vida</p>
+                        {{ dnd.vida }}
+                    </div>
+                    <div class="vertical-line"></div>
+                    <div class="vida flex-column">
+                        <p>Temporária</p>
+                        {{ dnd.vidaTemp }}
+                    </div>
+                </div>
 
-    {{ dnd.vida.label_tag }}
-    {{ dnd.vida }}
+                <div class="vida-max flex-column">
+                    {{ dnd.hitDice }}
+                    <select id=" {{ dnd.hitDiceType.id_for_label }}" name="{{ dnd.hitDiceType.name }}">
+                        {% for value, label in dnd.hitDiceType.field.choices %}
+                            <option value="{{ value }}" {% if dnd.hitDiceType.value == value %}selected{% endif %}>{{ label }}</option>>
+                        {% endfor %}
+                    </select>
+                    <p>Vida Máxima</p>
+                </div>
 
-    {{ dnd.vidaTemp }}
-    <label>Vida Temporária</label>
+                <div class="death-save flex-column">
+                    <div class="flex">
+                        <p>Sucesso</p>
+                        <div class="checkboxes flex">
+                            {{ dnd.deathSucess1 }}
+                            {{ dnd.deathSucess2 }}
+                            {{ dnd.deathSucess3 }}
+                        </div>
+                    </div>
 
-    <label>Total</label>
-    {{ dnd.hitDice }}
-    <select id=" {{ dnd.hitDiceType.id_for_label }}" name="{{ dnd.hitDiceType.name }}">
-        {% for value, label in dnd.hitDiceType.field.choices %}
-            <option value="{{ value }}" {% if dnd.hitDiceType.value == value %}selected{% endif %}>{{ label }}</option>>
-        {% endfor %}
-    </select>
+                    <div class="flex">
+                        <p>Falha</p>
+                        <div class="checkboxes flex">
+                            {{ dnd.deathFailure1 }}
+                            {{ dnd.deathFailure2 }}
+                            {{ dnd.deathFailure3 }}
+                        </div>
+                    </div>
+                </div>
 
-    <div class="death_saving">
-        <label>Sucesso</label>
-        {{ dnd.deathSucess1 }}
-        {{ dnd.deathSucess2 }}
-        {{ dnd.deathSucess3 }}
-        <br>
-        <label>Falha</label>
-        {{ dnd.deathFailure1 }}
-        {{ dnd.deathFailure2 }}
-        {{ dnd.deathFailure3 }}
+            </div>
+
+        </div>
+
+        <div class="attack-box">
+            <table>
+                <tr>
+                    <td><p>Ataque</p></td>
+                    <td><p>Bônus</p></td>
+                    <td><p>Dano/Tipo</p></td>
+                </tr>
+                <tr>
+                    <td>{{ dnd.nomeAtk1 }}</td>
+                    <td>{{ dnd.bonusAtk1 }}</td>
+                    <td>{{ dnd.danoTipoAtk1 }}</td>
+                </tr>
+                <tr>
+                    <td>{{ dnd.nomeAtk2 }}</td>
+                    <td>{{ dnd.bonusAtk2 }}</td>
+                    <td>{{ dnd.danoTipoAtk2 }}</td>
+                </tr>
+                <tr>
+                    <td>{{ dnd.nomeAtk3 }}</td>
+                    <td>{{ dnd.bonusAtk3 }}</td>
+                    <td>{{ dnd.danoTipoAtk3}}</td>
+                </tr>
+                <tr>
+                    <td>{{ dnd.nomeAtk4 }}</td>
+                    <td>{{ dnd.bonusAtk4 }}</td>
+                    <td>{{ dnd.danoTipoAtk4}}</td>
+                </tr>
+                <tr>
+                    <td>{{ dnd.nomeAtk5 }}</td>
+                    <td>{{ dnd.bonusAtk5 }}</td>
+                    <td>{{ dnd.danoTipoAtk5}}</td>
+                </tr>
+            </table>
+
+            <p>Ataque</p>
+        </div>
+
+        <div class="inventory">
+            <div class="Dinheiro">
+                <label>PC</label>
+                {{ dnd.pc }}
+
+                <label>PP</label>
+                {{ dnd.pp }}
+
+                <label>PE</label>
+                {{ dnd.pe }}
+
+                <label>PO</label>
+                {{ dnd.po }}
+
+                <label>PL</label>
+                {{ dnd.pl }}
+            </div>
+
+            <div class="inventario_box">
+                <label>Inventário</label>
+                {{ dnd.inventario }}
+            </div>
+        </div>
     </div>
-
 </div>
-
-
-<div class="ataques_box">
-    <table>
-        <tr>
-            <td>Ataque</td>
-            <td>Bônus</td>
-            <td>Dano/Tipo</td>
-        </tr>
-        <tr>
-            <td>{{ dnd.nomeAtk1 }}</td>
-            <td>{{ dnd.bonusAtk1 }}</td>
-            <td>{{ dnd.danoTipoAtk1 }}</td>
-        </tr>
-        <tr>
-            <td>{{ dnd.nomeAtk2 }}</td>
-            <td>{{ dnd.bonusAtk2 }}</td>
-            <td>{{ dnd.danoTipoAtk2 }}</td>
-        </tr>
-        <tr>
-            <td>{{ dnd.nomeAtk3 }}</td>
-            <td>{{ dnd.bonusAtk3 }}</td>
-            <td>{{ dnd.danoTipoAtk3}}</td>
-        </tr>
-        <tr>
-            <td>{{ dnd.nomeAtk4 }}</td>
-            <td>{{ dnd.bonusAtk4 }}</td>
-            <td>{{ dnd.danoTipoAtk4}}</td>
-        </tr>
-        <tr>
-            <td>{{ dnd.nomeAtk5 }}</td>
-            <td>{{ dnd.bonusAtk5 }}</td>
-            <td>{{ dnd.danoTipoAtk5}}</td>
-        </tr>
-    </table>
-
-</div>
-<br>
-<div class="Dinheiro">
-    <label>PC</label>
-    {{ dnd.pc }}
-
-    <label>PP</label>
-    {{ dnd.pp }}
-
-    <label>PE</label>
-    {{ dnd.pe }}
-
-    <label>PO</label>
-    {{ dnd.po }}
-
-    <label>PL</label>
-    {{ dnd.pl }}
-</div>
-
-
-<div class="inventario_box">
-    <label>Inventário</label>
-    {{ dnd.inventario }}
-</div>
-<br>
 
 <div class="caracteristicas">
     <label>Características</label>
