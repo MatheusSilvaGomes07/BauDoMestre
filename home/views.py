@@ -6,6 +6,7 @@ from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 
 from meus_personagens.models import CallOfCthulhu, DnD, OrdemParanormal, Tormenta
+from tabletop.models import CallOfCthulhuCampanha, DnDCampanha, OrdemParanormalCampanha, TormentaCampanha
 from .models import Campanha, Perfil
 from .forms import CampanhaForm, PerfilForm, CustomSignupForm, CustomLoginForm
 from functools import wraps
@@ -94,10 +95,18 @@ def index(request):
         fotoConta = Perfil.objects.get(id=user.id).fotoConta
         grupos = None
 
-        dnd = DnD.objects.filter(nomePerfil=user)
-        ordem = OrdemParanormal.objects.filter(nomePerfil=user)
-        tormenta20 = Tormenta.objects.filter(nomePerfil=user)
-        coc = CallOfCthulhu.objects.filter(nomePerfil=user)
+       
+        #Isso é uma maneira muito burra de conciliar os personagens de Campanha com MeusPersonagens mas é o que ta tendo para hoje
+        ids_campanha_T = TormentaCampanha.objects.values_list('pk', flat=True).distinct()
+        ids_campanha_D = DnDCampanha.objects.values_list('pk', flat=True).distinct()
+        ids_campanha_O = OrdemParanormalCampanha.objects.values_list('pk', flat=True).distinct()
+        ids_campanha_C = CallOfCthulhuCampanha.objects.values_list('pk', flat=True).distinct()
+
+
+        dnd = DnD.objects.filter(nomePerfil=user).exclude(id__in=ids_campanha_D)
+        ordem = OrdemParanormal.objects.filter(nomePerfil=user).exclude(id__in=ids_campanha_O)
+        tormenta20 = Tormenta.objects.filter(nomePerfil=user).exclude(id__in=ids_campanha_T)
+        coc = CallOfCthulhu.objects.filter(nomePerfil=user).exclude(id__in=ids_campanha_C)
 
         campanhas = Campanha.objects.filter(chats__membros=user)
 
