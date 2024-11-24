@@ -1,5 +1,5 @@
 #start_form {
-    gap: 20px;
+    gap: 30px;
 }
 
 .dnd-body {
@@ -42,18 +42,26 @@ input:-webkit-autofill {
 
 .screen-buttons {
     gap: 1rem;
+    align-items: center;
 }
 
-.screen-buttons button {
+.screen-buttons > input {
+    font-size: 15px !important;
+    background-color: unset;
+    width: auto !important;
+}
+
+.header-name button {
     background-color: var(--red1);
     padding: 1px 6px;
     font-size: 28px;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
+    width: 20%;
 }
 
-.screen-buttons button p {
+.header-name button p {
     font-family: var(--Inter);
 }
 
@@ -103,6 +111,7 @@ input:-webkit-autofill {
 
 .dnd-description {
     gap: 26px;
+    height: 1470px;
 }
 
 .left-column {
@@ -175,7 +184,44 @@ input::-webkit-inner-spin-button {
     align-items: center;
     justify-content: space-between;
     gap: 16px;
+    width: 16rem;
 }
+
+.inspiration-box .checkbox-box {
+    height: 100%;
+    width: 50%;
+    background-color: var(--red1);
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inspiration-box input[type="checkbox"] {
+    appearance: none;
+    all: revert; /* Remove o estilo padrão do navegador */
+    -webkit-appearance: none;
+    width: 60%;
+    height: 80%;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+  }
+
+  /* Adiciona o SVG quando a checkbox está marcada */
+  .inspiration-box input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 90%;
+    height: 90%;
+    background-image: url('Vector.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
 .inspiration-box > p, .proficiency > p {
     font-family: var(--Inter);
@@ -183,18 +229,6 @@ input::-webkit-inner-spin-button {
     font-weight: bold;
     width: 100px;
     padding-right: 30px;
-}
-
-.inspiration-box input {
-    background-color: var(--red1);
-    display: none;
-}
-
-.inspiration-box img {
-    background-color: var(--red1);
-    padding: 10px 18px;
-    height: 76%;
-    border-radius: 10px 0 0 10px;
 }
 
 .proficiency h4 {
@@ -221,10 +255,49 @@ input::-webkit-inner-spin-button {
     width: 85%;
     border-radius: 6px;
     justify-content: space-between;
+    align-items: center;
 }
 
 .savethrow p {
-    font-size: 12px;
+    font-size: 16px;
+}
+
+.savethrow input {
+    appearance: none; /* Remove o estilo padrão */
+    -webkit-appearance: none; /* Remove no Safari */
+    -moz-appearance: none; /* Remove no Firefox */
+    height: 20px;
+    width: 20px;
+    background-color: #353535;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 4px; /* Arredondado */
+    position: relative; /* Necessário para posicionar o ::after */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.savethrow input:checked {
+    background-color: #767676; /* Cor quando marcado */
+    border-color: #555;
+}
+
+.savethrow input:checked::after {
+    content: ''; /* O conteúdo é necessário para exibir o ícone */
+    position: absolute;
+    display: block;
+    left: 6px; /* Ajuste horizontal */
+    top: 3px; /* Ajuste vertical */
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg); /* Forma o símbolo de check */
+}
+
+.savethrow-box {
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
 }
 
 .salvaguarda_box h5, .pericias h5 {
@@ -250,10 +323,49 @@ input::-webkit-inner-spin-button {
     width: 85%;
     border-radius: 10px;
     justify-content: space-between;
+    align-items: center;
 }
 
 .pericia p {
-    font-size: 11px;
+    font-size: 14px;
+}
+
+.pericia .skill-slot {
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
+}
+
+.pericia input {
+    appearance: none; /* Remove o estilo padrão */
+    -webkit-appearance: none; /* Remove no Safari */
+    -moz-appearance: none; /* Remove no Firefox */
+    height: 20px;
+    width: 20px;
+    background-color: #353535;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 4px; /* Arredondado */
+    position: relative; /* Necessário para posicionar o ::after */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.pericia input:checked {
+    background-color: #767676; /* Cor quando marcado */
+    border-color: #555;
+}
+
+.pericia input:checked::after {
+    content: ''; /* O conteúdo é necessário para exibir o ícone */
+    position: absolute;
+    display: block;
+    left: 6px; /* Ajuste horizontal */
+    top: 3px; /* Ajuste vertical */
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg); /* Forma o símbolo de check */
 }
 
 .proficiencySkill {
@@ -267,6 +379,7 @@ input::-webkit-inner-spin-button {
     align-items: center;
     padding: 10px 0;
     gap: 1rem;
+    height: 38%;
 }
 
 .proficiencySkill p {
@@ -610,4 +723,140 @@ td > p {
     font-weight: bold;
     text-transform: uppercase;
     font-size: 28px;
+}
+
+#lore textarea {
+    width: 96%;
+    text-align: justify;
+    line-height: 25px;
+}
+
+form > .horizontal-row {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    align-self: center;
+}
+
+.magias {
+    gap: 50px;
+    margin-top: 2rem;
+}
+
+.modificadores {
+    justify-content: end;
+    gap: 20px;
+    align-items: center;
+}
+
+.modificadores h1 {
+    font-weight: bold;
+    font-family: var(--poppins);
+    margin-right: 1rem;
+}
+
+.modifier {
+    background-color: #353535;
+    padding: 10px 20px;
+    border-radius: 10px;
+    gap: 20px;
+    align-items: center;
+    width: 20%;
+}
+
+.modifier p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.modifier input {
+    all: unset;
+    font-size: 36px;
+    width: 50%;
+    color: white;
+    font-family: var(--Inter);
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid white;
+}
+
+.modifier select {
+    all: unset;
+    background-color: unset;
+    color: white;
+    font-family: var(--Inter);
+    font-size: 36px;
+    background-size: 12px; /* Ajuste o tamanho da seta */
+    padding-right: 20px;
+    appearance: auto;
+    border-radius: 5px;
+    background-color: #8d8d8d;
+    text-align: center;
+}
+
+.modifier select:hover{
+    border: none;
+}
+
+.slots {
+    flex-wrap: wrap;
+    gap: 5%;
+    justify-content: center;
+}
+
+.slot {
+    display: flex;
+    flex-direction: column;
+    background-color: #353535;
+    padding: 10px;
+    border-radius: 15px;
+    width: 45%;
+    text-align: center;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.slot p {
+    font-family: "Vidaloka";
+    font-size: 36px;
+}
+
+.slot .horizontal-row {
+    width: 100%;
+    height: 1px;
+    background-color: white;
+}
+
+.slot .slot-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.slot-box input {
+    width: 100%;
+}
+
+.slot .qnt {
+    display: flex;
+    gap: 10px;
+    width: 40%;
+}
+
+.qnt p {
+    font-family: var(--poppins);
+    font-size: 20px;
+}
+
+.slot textarea {
+    all: unset;
+    width: 95%;
+    border-radius: 10px;
+    height: 100%;
+    padding: 10px;
+    background-color: #767676;
+    text-align: start;
+    color: white;
+    font-family: var(--Inter);
 }
