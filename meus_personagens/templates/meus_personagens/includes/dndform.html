@@ -9,12 +9,6 @@
     <div class="header-name flex-column">
         <h3>Nome:</h3>
         {{ dnd.nome }}
-
-        <div class="screen-buttons flex">
-            <button><p>Base</p></button>
-            <button><p>Bio</p></button>
-            <button><p>Magias</p></button>
-        </div>
     </div>
 
     <div class="header-specs flex-column">
@@ -259,7 +253,7 @@
         </div>
     </div>
 
-    <div class="middle-column">
+    <div class="middle-column flex-column">
         <div class="health-section flex-column">
 
             <div class="hit-box flex">
@@ -326,89 +320,112 @@
 
         </div>
 
-        <div class="attack-box">
-            <table>
-                <tr>
+        <div class="attack-box flex-column">
+            <table class="flex-column">
+                <tr id="head">
                     <td><p>Ataque</p></td>
                     <td><p>Bônus</p></td>
                     <td><p>Dano/Tipo</p></td>
                 </tr>
                 <tr>
-                    <td>{{ dnd.nomeAtk1 }}</td>
-                    <td>{{ dnd.bonusAtk1 }}</td>
-                    <td>{{ dnd.danoTipoAtk1 }}</td>
+                    <td class="input-attack">{{ dnd.nomeAtk1 }}</td>
+                    <td class="input-attack">{{ dnd.bonusAtk1 }}</td>
+                    <td class="input-attack">{{ dnd.danoTipoAtk1 }}</td>
                 </tr>
                 <tr>
-                    <td>{{ dnd.nomeAtk2 }}</td>
-                    <td>{{ dnd.bonusAtk2 }}</td>
-                    <td>{{ dnd.danoTipoAtk2 }}</td>
+                    <td class="input-attack">{{ dnd.nomeAtk2 }}</td>
+                    <td class="input-attack">{{ dnd.bonusAtk2 }}</td>
+                    <td class="input-attack">{{ dnd.danoTipoAtk2 }}</td>
                 </tr>
                 <tr>
-                    <td>{{ dnd.nomeAtk3 }}</td>
-                    <td>{{ dnd.bonusAtk3 }}</td>
-                    <td>{{ dnd.danoTipoAtk3}}</td>
+                    <td class="input-attack">{{ dnd.nomeAtk3 }}</td>
+                    <td class="input-attack">{{ dnd.bonusAtk3 }}</td>
+                    <td class="input-attack">{{ dnd.danoTipoAtk3}}</td>
                 </tr>
                 <tr>
-                    <td>{{ dnd.nomeAtk4 }}</td>
-                    <td>{{ dnd.bonusAtk4 }}</td>
-                    <td>{{ dnd.danoTipoAtk4}}</td>
+                    <td class="input-attack">{{ dnd.nomeAtk4 }}</td>
+                    <td class="input-attack">{{ dnd.bonusAtk4 }}</td>
+                    <td class="input-attack">{{ dnd.danoTipoAtk4}}</td>
                 </tr>
                 <tr>
-                    <td>{{ dnd.nomeAtk5 }}</td>
-                    <td>{{ dnd.bonusAtk5 }}</td>
-                    <td>{{ dnd.danoTipoAtk5}}</td>
+                    <td class="input-attack">{{ dnd.nomeAtk5 }}</td>
+                    <td class="input-attack">{{ dnd.bonusAtk5 }}</td>
+                    <td class="input-attack">{{ dnd.danoTipoAtk5}}</td>
                 </tr>
             </table>
 
-            <p>Ataque</p>
+            <p>ATAQUES</p>
         </div>
 
-        <div class="inventory">
-            <div class="Dinheiro">
-                <label>PC</label>
-                {{ dnd.pc }}
+        <div class="inventory flex-column">
+            <div class="dinheiro flex">
+                <div class="money">
+                    <p>PC</p>
+                    {{ dnd.pc }}
+                </div>
 
-                <label>PP</label>
-                {{ dnd.pp }}
+                <div class="money">
+                    <p>PP</p>
+                    {{ dnd.pp }}
+                </div>
 
-                <label>PE</label>
-                {{ dnd.pe }}
+                <div class="money">
+                    <p>PE</p>
+                    {{ dnd.pe }}
+                </div>
 
-                <label>PO</label>
-                {{ dnd.po }}
+                <div class="money">
+                    <p>PO</p>
+                    {{ dnd.po }}
+                </div>
 
-                <label>PL</label>
-                {{ dnd.pl }}
+                <div class="money">
+                    <p>PL</p>
+                    {{ dnd.pl }}
+                </div>
             </div>
 
-            <div class="inventario_box">
-                <label>Inventário</label>
+            <div class="horizontal-line"></div>
+
+            <div class="inventario-box flex-column">
+                <p>INVENTÁRIO</p>
                 {{ dnd.inventario }}
             </div>
         </div>
     </div>
+
+    <div class="right-column flex-column">
+        <div class="caracteristicas flex-column">
+            <div class="trait">
+                {{ dnd.personalidade }}
+                <p>Personalidade</p>
+            </div>
+
+            <div class="trait">
+                {{ dnd.ideias }}
+                <p>Ideais</p>
+            </div>
+
+            <div class="trait">
+                {{ dnd.vinculos }}
+                <p>Vínculos</p>
+            </div>
+
+            <div class="trait">
+                {{ dnd.fraquezas }}
+                <p>Fraquezas</p>
+            </div>
+
+            <div class="feats">
+                    {{ dnd.caracteristicas }}
+                    <p> Características</p>
+            </div>
+        </div>
+
+    </div>
 </div>
 
-<div class="caracteristicas">
-    <label>Características</label>
-    {{ dnd.personalidade }}
-    <label>Personalidade</label>
 
-    {{ dnd.ideias }}
-    <label>Ideais</label>
-
-    {{ dnd.vinculos }}
-    <label>Vínculos</label>
-
-    {{ dnd.fraquezas }}
-    <label>Fraquezas</label>
-
-</div>
-
-<div class="caracteristicas">
-    {{ dnd.caracteristicas }}
-    <label> Características & Talentos </label>
-</div>
 
 <div class="magias">
     <label>Modificador de habilidade</label>

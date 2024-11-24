@@ -290,6 +290,7 @@ input::-webkit-inner-spin-button {
 
 .middle-column {
     width: 30%;
+    gap: 20px;
 }
 
 .health-section {
@@ -457,4 +458,156 @@ input::-webkit-inner-spin-button {
 
 .attack-box {
     background-color: #353535;
+    padding: 10px 0;
+    border-radius: 10px;
+    text-align: center;
+    gap: 20px;
+}
+
+.attack-box > p {
+    font-weight: bold;
+    font-size: 36px;
+}
+
+tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+tr {
+    display: flex;
+    justify-content: space-around;
+}
+
+tr#head {
+    gap: 30px;
+}
+
+td > p {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.input-attack {
+    width: 110px;
+}
+
+.input-attack > input {
+    width: 100%;
+    background-color: #767676;
+    padding: 5px 0 5px 3px;
+    font-size: 12px;
+}
+
+.inventory {
+    background-color: #353535;
+    border-radius: 10px;
+    gap: 15px;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.dinheiro {
+ justify-content: space-between;
+ padding: 10px;
+ width: 90%;
+}
+
+.money {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    text-align: center;
+    gap: 10px;
+}
+
+.money p {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.money input{
+    background-color: #767676;
+}
+
+.horizontal-line {
+    width: 80%;
+    height: 1px;
+    background-color: white;
+}
+
+.inventario-box {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.inventario-box textarea {
+    all: unset;
+    width: 85%;
+    background-color: #767676;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    font-family: var(--Inter);
+}
+
+.inventario-box p {
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.caracteristicas {
+    gap: 20px;
+}
+
+.trait {
+    background-color: #353535;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px 10px 10px;
+    gap: 20px;
+}
+
+.trait input {
+    width: 93%;
+    background-color: #767676;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.trait p {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 28px;
+}
+
+.feats {
+    background-color: #353535;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px 10px 10px;
+    gap: 20px;
+}
+
+.feats textarea {
+    all: unset;
+    width: 93%;
+    background-color: #767676;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    font-family: var(--Inter);
+}
+
+.feats p {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 28px;
 }
