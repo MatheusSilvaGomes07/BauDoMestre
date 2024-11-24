@@ -7,6 +7,7 @@
             </div>
         {% endfor %}
     </div>
+    <div id="distance">0 m</div>
 </div>
 
 <script>
@@ -24,5 +25,124 @@
         selectedTokenId = $(this).data('id');
         console.log("Token selecionado com ID:", selectedTokenId);
     });
+
+    const map = document.getElementById('map');
+    const distanceDisplay = document.getElementById('distance');
+
+    const pixelsPerMeter = 30; // Define a escala: 15 pixels = 1 metro
+
+    let isMeasuring = false;
+    let startX, startY;
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Shift') {
+            isMeasuring = true;
+            distanceDisplay.style.display = 'block';
+            e.preventDefault(); // Evita a seleção de elementos
+        }
+    });
+
+    document.addEventListener('keyup', (e) => {
+        if (e.key === 'Shift') {
+            isMeasuring = false;
+            distanceDisplay.style.display = 'none';
+            clearLines();
+        }
+    });
+
+    map.addEventListener('mousedown', (e) => {
+        if (isMeasuring) {
+            const rect = map.getBoundingClientRect();
+            startX = e.clientX - rect.left;
+            startY = e.clientY - rect.top;
+        }
+    });
+
+    map.addEventListener('mousemove', (e) => {
+        if (isMeasuring && startX !== undefined && startY !== undefined) {
+            clearLines();
+
+            const rect = map.getBoundingClientRect();
+            let currentX = e.clientX - rect.left;
+            let currentY = e.clientY - rect.top;
+
+            drawArrow(startX, startY, currentX, currentY);
+
+            let distanceInPixels = Math.sqrt(Math.pow(currentX - startX, 2) + Math.pow(currentY - startY, 2));
+            let distanceInMeters = distanceInPixels / pixelsPerMeter;
+
+            distanceDisplay.innerText = `${distanceInMeters.toFixed(2)} m`;
+        }
+    });
+
+    map.addEventListener('mouseup', () => {
+        if (isMeasuring) {
+            startX = undefined;
+            startY = undefined;
+        }
+    });
+
+    function drawArrow(fromX, fromY, toX, toY) {
+        const line = document.createElement('div');
+        line.className = 'line';
+        line.style.position = 'absolute';
+        line.style.borderTop = '2px solid red';
+        line.style.width = `${Math.sqrt(Math.pow(toX - fromX, 2) + Math.pow(toY - fromY, 2))}px`;
+        line.style.transform = `rotate(${Math.atan2(toY - fromY, toX - fromX)}rad)`;
+        line.style.transformOrigin = '0 0';
+        line.style.left = `${fromX}px`;
+        line.style.top = `${fromY}px`;
+
+        const headLength = 10; // Tamanho da cabeça da seta
+        const angle = Math.atan2(toY - fromY, toX - fromX);
+
+        const arrowHead1 = document.createElement('div');
+        arrowHead1.className = 'line';
+        arrowHead1.style.position = 'absolute';
+        arrowHead1.style.borderTop = '2px solid red';
+        arrowHead1.style.width = `${headLength}px`;
+        arrowHead1.style.transform = `rotate(${angle - Math.PI / 6}rad)`; // Ajuste a direção da seta
+        arrowHead1.style.transformOrigin = '0 0';
+        arrowHead1.style.left = `${toX - headLength * Math.cos(angle - Math.PI / 6)}px`; // Ajuste a posição da seta
+        arrowHead1.style.top = `${toY - headLength * Math.sin(angle - Math.PI / 6)}px`; // Ajuste a posição da seta
+
+        const arrowHead2 = document.createElement('div');
+        arrowHead2.className = 'line';
+        arrowHead2.style.position = 'absolute';
+        arrowHead2.style.borderTop = '2px solid red';
+        arrowHead2.style.width = `${headLength}px`;
+        arrowHead2.style.transform = `rotate(${angle + Math.PI / 6}rad)`; // Ajuste a direção da seta
+        arrowHead2.style.transformOrigin = '0 0';
+        arrowHead2.style.left = `${toX - headLength * Math.cos(angle + Math.PI / 6)}px`; // Ajuste a posição da seta
+        arrowHead2.style.top = `${toY - headLength * Math.sin(angle + Math.PI / 6)}px`; // Ajuste a posição da seta
+
+        map.appendChild(line);
+        map.appendChild(arrowHead1);
+        map.appendChild(arrowHead2);
+    }
+
+    function clearLines() {
+        const lines = document.querySelectorAll('.line');
+        lines.forEach(line => line.remove());
+    }
 </script>
+<style>
+    #distance {
+        position: fixed;
+        top: 10px;
+        right: 10px; /* Altere para o canto direito */
+        font-size: 18px;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 5px;
+        border-radius: 5px;
+        display: none;
+    }
+    .line {
+        border-top: 4px solid red;
+    }
+    /* Evita a seleção de elementos */
+    body {
+        user-select: none;
+    }
+</style>
 
