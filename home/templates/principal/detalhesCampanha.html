@@ -14,8 +14,10 @@
             <img class="header-child" alt="" src="{{ campanha.fotoCampanha.url }}"/>
             <div class="banner-title flex">
                 <div class="left-text flex-column">
-                    <h3>{{ campanha.nomeCampanha }}</h3>
-                    <p>MESTRE: {{ campanha.nomeMestre.nomePerfil }}</p>
+                    <div class="text">
+                        <h3>{{ campanha.nomeCampanha }}</h3>
+                        <p>MESTRE: {{ campanha.nomeMestre.nomePerfil }}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -24,8 +26,31 @@
 
     <div class="quest-description flex-column">
         <div class="quest-title flex-column">
-            <h3>{{ campanha.nomeCampanha }}</h3>
-            <p>MESTRE: {{ campanha.nomeMestre.nomePerfil }}</p>
+            <div class="title-row flex">
+                <div class="title-title">
+                    <h3>{{ campanha.nomeCampanha }}</h3>
+                    <p>MESTRE: {{ campanha.nomeMestre.nomePerfil }}</p>
+                </div>
+
+                <div class="title-buttons flex-column">
+                    {% for grupo in grupos %}
+                        {% if user == mestre.nomePerfil %}
+                            <button onclick="window.location.href = '{% url 'gerenciar_solicitacoes_campanha' campanha.id %}';">
+                                <p>Gerenciar Solicitações</p>
+                            </button>
+
+                            <form id="form-excluir-campanha" method="post" action="{% url 'excluir_campanha' campanha.id %}">
+                                {% csrf_token %}
+                                <button style="cursor: pointer;" type="button" class="jogar" onclick="confirmarExclusao()"><p>Excluir Mesa</p></button>
+                            </form>
+                        {% elif request.user in grupo.membros.all and user != mestre.nomePerfil %}
+                            <button onclick="window.location.href = '{% url 'Sair_grupo' uuid=grupo.uuid %}';">
+                                <p>Sair</p>
+                            </button>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
 
         <div class="description-columns flex">
@@ -117,28 +142,25 @@
                         </div>
                     </div>
 
-                    <div class="button">
+                    <div class="button flex">
                         {% for grupo in grupos %}
                             {% if request.user in grupo.membros.all and user != mestre.nomePerfil %}
-                                <button>
-                                    <p><a href="{% url 'Abrir_chat_pub' uuid=grupo.uuid %}">Entrar</a></p>
+                                <button onclick="window.location.href = '{% url 'Abrir_chat_pub' uuid=grupo.uuid %}';">
+                                    <p>Chat</p>
                                 </button>
-                                <button>
-                                    <p><a href="{% url 'enter_campaign' uuid=grupo.uuid %}">Entrar</a></p>
+
+                                <button onclick="window.location.href = '{% url 'enter_campaign' campanha.id %}';">
+                                    <p>Tabletop</p>
                                 </button>
-                                <h3><a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a></h3>
                             {% elif user == mestre.nomePerfil %}
-                                <button>
-                                    <a href="{% url 'gerenciar_solicitacoes_campanha' campanha.id %}" class="botao-gerenciar-solicitacoes">Gerenciar Solicitações</a>
-                                    <p><a href="{% url 'Abrir_chat_pub' uuid=grupo.uuid %}">Entrar</a></p>
+                                <button onclick="window.location.href = '{% url 'Abrir_chat_pub' uuid=grupo.uuid %}';">
+                                    <p>Chat</p>
                                 </button>
-                                <button>
-                                    <p><a href="{% url 'enter_campaign' campanha.id %}">Tabletop</a></p>
+
+                                <button onclick="window.location.href = '{% url 'enter_campaign' campanha.id %}';">
+                                    <p>Tabletop</p>
                                 </button>
-                                <form id="form-excluir-campanha" method="post" action="{% url 'excluir_campanha' campanha.id %}">
-                                    {% csrf_token %}
-                                    <button style="cursor: pointer;" type="button" class="jogar" onclick="confirmarExclusao()">Excluir Mesa</button>
-                                </form>
+
                             {% else %}
                                 {% if grupo.envioSolicitacao == '0' %}
                                     <h3><a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a></h3>

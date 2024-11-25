@@ -76,6 +76,25 @@ body {
   line-height: 65px;
 }
 
+.title-row {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-row .title-buttons {
+  margin-right: 2%;
+  gap: 1.5rem;
+  align-items: end;
+}
+
+.title-buttons button {
+  background-color: var(--red1);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .description-columns {
   margin: 0 30px;
   gap: 50px;
@@ -171,9 +190,14 @@ td {
   font-weight: bold;
 }
 
+.party-box button {
+  font-family: var(--poppins);
+  font-size: 20px;
+  color: white;
+}
 
 .desc-right {
-  justify-content: center;
+  justify-content: end;
   width: 40%;
 }
 
@@ -183,7 +207,7 @@ td {
   width: 23vw;
   align-self: start;
   padding: 25px;
-  gap: 70px;
+  gap: 50px;
 }
 
 .fixed {
@@ -217,12 +241,21 @@ td {
 }
 
 .join-box .button {
-  background-color: var(--red1);
   text-align: center;
   width: 75%;
   margin: 0 auto;
   border-radius: 10px;
   padding: 7px 0;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.button button {
+  background-color: var(--red1);
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .button h3 {
