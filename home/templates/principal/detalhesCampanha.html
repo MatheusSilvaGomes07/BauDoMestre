@@ -118,11 +118,27 @@
                     </div>
 
                     <div class="button">
-                            {% if request.user in grupo.membros.all %}
+                        {% for grupo in grupos %}
+                            {% if request.user in grupo.membros.all and user != mestre.nomePerfil %}
                                 <button>
                                     <p><a href="{% url 'Abrir_chat_pub' uuid=grupo.uuid %}">Entrar</a></p>
                                 </button>
+                                <button>
+                                    <p><a href="{% url 'enter_campaign' uuid=grupo.uuid %}">Entrar</a></p>
+                                </button>
                                 <h3><a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a></h3>
+                            {% elif user == mestre.nomePerfil %}
+                                <button>
+                                    <a href="{% url 'gerenciar_solicitacoes_campanha' campanha.id %}" class="botao-gerenciar-solicitacoes">Gerenciar Solicitações</a>
+                                    <p><a href="{% url 'Abrir_chat_pub' uuid=grupo.uuid %}">Entrar</a></p>
+                                </button>
+                                <button>
+                                    <p><a href="{% url 'enter_campaign' campanha.id %}">Tabletop</a></p>
+                                </button>
+                                <form id="form-excluir-campanha" method="post" action="{% url 'excluir_campanha' campanha.id %}">
+                                    {% csrf_token %}
+                                    <button style="cursor: pointer;" type="button" class="jogar" onclick="confirmarExclusao()">Excluir Mesa</button>
+                                </form>
                             {% else %}
                                 {% if grupo.envioSolicitacao == '0' %}
                                     <h3><a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a></h3>
@@ -130,6 +146,8 @@
                                     <h3>Solicitação enviada</h3>
                                 {% endif %}
                             {% endif %}
+                        {% endfor %}
+
                     </div>
                 </div>
             </div>

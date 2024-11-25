@@ -95,7 +95,7 @@ def index(request):
         fotoConta = Perfil.objects.get(id=user.id).fotoConta
         grupos = None
 
-       
+
         #Isso é uma maneira muito burra de conciliar os personagens de Campanha com MeusPersonagens mas é o que ta tendo para hoje
         ids_campanha_T = TormentaCampanha.objects.values_list('pk', flat=True).distinct()
         ids_campanha_D = DnDCampanha.objects.values_list('pk', flat=True).distinct()
@@ -192,11 +192,18 @@ def detalhes_campanha(request, id):
     mestre = campanha.nomeMestre
     membros_id = Grupo.objects.filter(campanha=campanha.id).values_list('membros', flat=True)
     membros = Perfil.objects.filter(nomePerfil__in=membros_id)
+    user = request.user
+    fotoConta = Perfil.objects.get(id=user.id).fotoConta
+    grupos = Grupo.objects.filter(campanha=campanha.id)
+
 
     return render(request, 'principal/detalhesCampanha.html', {
         'campanha': campanha,
         'mestre': mestre,
         'membros': membros,
+        'user': user,
+        'fotoConta': fotoConta,
+        'grupos': grupos,
     })
 
 # view da busca de usuários

@@ -29,7 +29,7 @@ def enter_campaign(request, campaign_id, is_mestre):
     for pasta in pastaCriaturas:
         # Verifica o sistema de RPG associado à campanha
         sistema_rpg = campanha.sistemaCampanha
-        
+
         # Filtra personagens apenas do sistema associado à campanha
         if sistema_rpg == 'Dungeons & Dragons':
             personagens = DnDCampanha.objects.filter(pasta=pasta)
@@ -61,19 +61,19 @@ def enter_campaign(request, campaign_id, is_mestre):
                 mapa.save()
                 return redirect('enter_campaign', campaign_id)
         return render(request, 'tabletop/campaign.html', {
-            'maps': maps, 
-            'campaign_id': campaign_id, 
-            'is_mestre': is_mestre, 
-            'form': form, 
+            'maps': maps,
+            'campaign_id': campaign_id,
+            'is_mestre': is_mestre,
+            'form': form,
             'tokenForm': tokenForm,
             'pastaCriaturasForm' : pastaCritaturasForm,
             'pasta_personagens': pasta_personagens,
             'detalhePersonagem' : detalhePersonagem
         })
-    
+
     return render(request, 'tabletop/campaign.html', {
-        'maps': maps, 
-        'campaign_id': campaign_id, 
+        'maps': maps,
+        'campaign_id': campaign_id,
         'pasta_personagens': pasta_personagens,
         'is_mestre': is_mestre,
         'detalhePersonagem' : detalhePersonagem
@@ -99,7 +99,7 @@ def move_token(request, token_id):
         token.save()
 
         return JsonResponse({'status': 'success'})
-    
+
 
 @is_mestre
 def deletar_mapa(request, campaign_id, map_id, is_mestre):
@@ -129,7 +129,7 @@ def deletarPastaCriaturas(request, campaign_id, pasta_id, is_mestre):
         pasta.delete()
 
     return redirect('enter_campaign', campaign_id)
-    
+
 @user_in_group
 def criar_personagem(request, campaign_id, pasta_id):
     campanha = get_object_or_404(Campanha, id=campaign_id)
@@ -231,7 +231,7 @@ def deletar_personagem_campanha (request, campaign_id, personagem_id):
     campanha = get_object_or_404(Campanha, id=campaign_id)
     sistema = campanha.sistemaCampanha
     user = request.user
-  
+
     if sistema == 'Dungeons & Dragons':
         personagem_model = DnDCampanha
     elif sistema == 'Ordem Paranormal':
@@ -242,7 +242,7 @@ def deletar_personagem_campanha (request, campaign_id, personagem_id):
         personagem_model = CallOfCthulhuCampanha
     else:
         return JsonResponse({'error': 'Sistema de RPG desconhecido'}, status=400)
-    
+
     personagem = get_object_or_404(personagem_model, id=personagem_id)
     if user == personagem.nomePerfil or user.is_staff:
         if personagem.foto:
@@ -251,7 +251,7 @@ def deletar_personagem_campanha (request, campaign_id, personagem_id):
             return redirect('enter_campaign', campaign_id)
         else:
             return redirect('meus_personagens', campaign_id)
-        
+
 def editar_personagem_campanha(request, campaign_id, personagem_id):
     campanha = get_object_or_404(Campanha, id=campaign_id)
     sistema = campanha.sistemaCampanha
@@ -271,7 +271,7 @@ def editar_personagem_campanha(request, campaign_id, personagem_id):
         personagem_form = CallOfCthulhuForm
     else:
         return JsonResponse({'error': 'Sistema de RPG desconhecido'}, status=400)
-    
+
     personagem = get_object_or_404(personagem_model, id=personagem_id)
     foto_antiga = personagem.foto.name
 
@@ -280,7 +280,7 @@ def editar_personagem_campanha(request, campaign_id, personagem_id):
             form = personagem_form(request.POST, request.FILES, instance=personagem)
             if form.is_valid():
                 if personagem.foto:
-                    
+
                     caminho_arquivo_antigo = os.path.join('media', foto_antiga)
 
                     if foto_antiga != personagem.foto:
@@ -291,7 +291,7 @@ def editar_personagem_campanha(request, campaign_id, personagem_id):
             form = personagem_form(instance=personagem)
     else:
          return redirect('meus_personagens')
-    
+
     return render(request, 'meus_personagens/editCharacter/edit_char_ordem.html', {'ordem': form, 'personagem': personagem})
 
 def editar_personagem_campanha(request, campaign_id, personagem_id):
@@ -324,7 +324,7 @@ def editar_personagem_campanha(request, campaign_id, personagem_id):
         form_name = 'coc7e'
     else:
         return JsonResponse({'error': 'Sistema de RPG desconhecido'}, status=400)
-    
+
 
     if user == personagem.nomePerfil or user.is_staff:
         foto_antiga = personagem.foto.name
@@ -345,7 +345,7 @@ def editar_personagem_campanha(request, campaign_id, personagem_id):
     else:
         print('Local 2')
         return redirect('enter_campaign', campaign_id)
-        
+
     return render(request, 'meus_personagens/editCharacter/' + template, {form_name: form, 'personagem': personagem})
 
 @csrf_exempt

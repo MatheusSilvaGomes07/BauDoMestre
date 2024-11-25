@@ -263,6 +263,13 @@ gap: 16px;
   text-align: justify;
 }
 
+.lore-box {
+  white-space: pre-wrap; /* Impede que o texto quebre para a próxima linha */
+    overflow: hidden; /* Esconde o texto que ultrapassa o limite */
+    text-overflow: ellipsis;
+    height: 50%;
+}
+
 .ficha-tags {
   gap: 15px;
 }
