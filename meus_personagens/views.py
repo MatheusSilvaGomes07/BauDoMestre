@@ -1,12 +1,14 @@
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+import os
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+
 
 from home.models import Perfil
 from tabletop.models import CallOfCthulhuCampanha, DnDCampanha, OrdemParanormalCampanha, TormentaCampanha
 from .forms import DnDForm, OrdemParanormalForm, TormentaForm, CallOfCthulhuForm
 from .models import DnD, OrdemParanormal, Tormenta, CallOfCthulhu
-from django.contrib.auth.decorators import login_required
-import os
 
 @login_required
 def edit_dnd(request, id):
@@ -172,21 +174,48 @@ def deletarChar(request, rpg, id):
 @login_required
 def index(request):
     user = request.user
-   
-    #Isso é uma maneira muito burra de conciliar os personagens de Campanha com MeusPersonagens mas é o que ta tendo para hoje
-    ids_campanha_T = TormentaCampanha.objects.values_list('pk', flat=True).distinct()
-    ids_campanha_D = DnDCampanha.objects.values_list('pk', flat=True).distinct()
-    ids_campanha_O = OrdemParanormalCampanha.objects.values_list('pk', flat=True).distinct()
-    ids_campanha_C = CallOfCthulhuCampanha.objects.values_list('pk', flat=True).distinct()
+    sistema_busca = request.GET.get('q')
 
+    # Filtrar personagens por modelo, aplicando o sistema de busca se necessário
+    dnd = DnD.objects.filter(nomePerfil=user)
+    tormenta = Tormenta.objects.filter(nomePerfil=user)
+    call_of_cthulhu = CallOfCthulhu.objects.filter(nomePerfil=user)
+    ordem_paranormal = OrdemParanormal.objects.filter(nomePerfil=user)
 
-    dnd = DnD.objects.filter(nomePerfil=user).exclude(id__in=ids_campanha_D)
-    ordem = OrdemParanormal.objects.filter(nomePerfil=user).exclude(id__in=ids_campanha_O)
-    tormenta20 = Tormenta.objects.filter(nomePerfil=user).exclude(id__in=ids_campanha_T)
-    coc = CallOfCthulhu.objects.filter(nomePerfil=user).exclude(id__in=ids_campanha_C)
+    if sistema_busca:
+        # Ajuste para busca no campo correto do modelo referenciado
+        dnd = dnd.filter(nomePerfil__username__icontains=sistema_busca)
+        tormenta = tormenta.filter(nomePerfil__username__icontains=sistema_busca)
+        call_of_cthulhu = call_of_cthulhu.filter(nomePerfil__username__icontains=sistema_busca)
+        ordem_paranormal = ordem_paranormal.filter(nomePerfil__username__icontains=sistema_busca)
+
+    # Excluir personagens que já estão em campanhas
+    ids_campanha_T = TormentaCampanha.objects.values_list('pk', flat=True)
+    ids_campanha_D = DnDCampanha.objects.values_list('pk', flat=True)
+    ids_campanha_O = OrdemParanormalCampanha.objects.values_list('pk', flat=True)
+    ids_campanha_C = CallOfCthulhuCampanha.objects.values_list('pk', flat=True)
+
+    dnd = dnd.exclude(id__in=ids_campanha_D)
+    ordem_paranormal = ordem_paranormal.exclude(id__in=ids_campanha_O)
+    tormenta = tormenta.exclude(id__in=ids_campanha_T)
+    call_of_cthulhu = call_of_cthulhu.exclude(id__in=ids_campanha_C)
+
+    # Combinar todos os personagens para exibição na interface
+    personagens_filtro = list(dnd) + list(tormenta) + list(call_of_cthulhu) + list(ordem_paranormal)
+
     perfil = Perfil.objects.get(nomePerfil=user)
 
-    return render(request, 'meus_personagens/index.html', { 'dnd': dnd, 'ordem': ordem, 'tormenta20': tormenta20, 'coc': coc, 'fotoConta': perfil.fotoConta })
+    return render(request, 'meus_personagens/index.html', {
+        'personagens_filtro': personagens_filtro,
+        'dnd': dnd,
+        'ordem': ordem_paranormal,
+        'tormenta20': tormenta,
+        'coc': call_of_cthulhu,
+        'fotoConta': perfil.fotoConta,
+    })
+
+
+
 
 @login_required
 def criacao_char(request):
