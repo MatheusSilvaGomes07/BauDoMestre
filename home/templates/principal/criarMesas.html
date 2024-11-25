@@ -60,11 +60,10 @@ nav {
   <div class="image-box flex">
     <h1>Imagem</h1>
     <div class="image-sent">
+      <img id="image-preview" src="#" alt="Prévia da imagem" style="max-width: 300px; display: none;" />
       <button>
         {{ form.fotoCampanha }}
-       <!-- <h3>Arquivo</h3>-->
       </button>
-    
     </div>
   </div>
 
@@ -92,4 +91,27 @@ nav {
     <h3>Criar</h3>
   </button>
 </form>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const fileInput = document.querySelector('input[name="fotoCampanha"]');
+    const imagePreview = document.getElementById("image-preview");
+
+    fileInput.addEventListener("change", function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imagePreview.src = e.target.result;
+          imagePreview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      } else {
+        imagePreview.src = "#";
+        imagePreview.style.display = "none";
+      }
+    });
+  });
+</script>
+
 {% endblock conteudo %}
