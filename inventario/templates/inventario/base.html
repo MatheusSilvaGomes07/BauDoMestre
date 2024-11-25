@@ -9,21 +9,31 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="shortcut icon" href="{% static 'img/Ain.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "css/global.css" %}" />
+    <link rel="stylesheet" href="{% static "css/responsivity.css" %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Vidaloka&display=swap" rel="stylesheet">
     <title>{% block title %}{% endblock title %}</title>
     {% block head %}
-    
+
     {% endblock %}
 </head>
-<body class="inventrio flex">
-    
+<body class="inventrio flex-column">
+
     {% if user.is_authenticated %}
     {% include 'includes/navbar.html' %}
     {% else %}
     <nav>Navbar <a href="{% url 'account_signup' %}">Cadastre-se </a><a href="{% url 'account_login' %}">Login</a></nav>
     {% endif %}
     {% block content %}
-    
+
     {% endblock content %}
-    
+
 </body>
 </html>

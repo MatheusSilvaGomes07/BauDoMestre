@@ -1,75 +1,108 @@
-html {
-  background: #000
+body {
+  gap: 2rem;
 }
 
-.inventrio {
+.inventory-banner {
   position: relative;
-  text-align: center;
+  text-align: start;
   font-size: var(--body-size);
-  color: var(--color-white);
-  font-family: var(--body);
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 10vh;
+  padding-top: 7rem;
+  background-color: var(--background2);
+  gap: .5rem;
 }
 
-.inventario-header {
-  flex-direction: column;
-  justify-content: space-around;
-  gap: 10vh;
-  padding-top: 10vh;
-  width: 100%;
+.inventory-banner h1, .inventory-banner > p  {
+  padding-left: 2.3%;
 }
 
-.inventario-header h2 {
-  font-size: var(--font-size-9xl);
-  width: 75%;
+.inventory-banner > p {
+  font-size: 20px;
+  font-family: var(--Inter);
+  padding-bottom: .5rem;
 }
 
-.inventario-header > p {
-  width: 50%;
-  font-size: var(--font-size-4xl);
-}
-
-.inventario {
-  font-size: var(--font-size-45xl);
-  font-family: var(--header-12);
-  font-weight: unset;
-  align-self: start;
-  margin: 2rem 0 3rem 2%;
-}
-
-.inv-buttons {
-  width: 100%;
-  flex-wrap: wrap;
-}
-
-.inv-button {
-  margin: 2.2rem 6.5vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.button-cover {
-  border-radius: var(--br-8xs);
-  background: linear-gradient(137deg, #F00 -58.3%, rgb(255 0 0 / 38%) 100.26%);
-  box-shadow: 5px 4px 4px rgba(0, 0, 0, 0.5) inset;
-  width: 180px;
-  height: 180px;
-  cursor: pointer;
-}
-
-.inner-icon {
-  width: 60%;
+.horizontal-row {
+  width: 95%;
+  height: 1px;
+  background-color: white;
   align-self: center;
 }
 
-.inv-button p {
-  letter-spacing: -0.02em;
-  line-height: 35px;
-  font-weight: 800;
-  margin-top: .5rem;
-  font-size: var(--title-13-size);
+.directory {
+  padding: 0 2.3%;
+  margin-top: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
 }
 
+.directory form {
+  gap: 20px;
+}
+
+.directory form input {
+  all: unset;
+  color: black;
+  background-color: white;
+  border: #CECECE 3px solid;
+  border-radius: 15px;
+  font-family: var(--Inter);
+  text-align: center;
+}
+
+.directory button {
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 10px 15px;
+  background-color: var(--red1);
+  border-radius: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.inv-buttons {
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0 2rem 2.3%;
+  width: 95%;
+  overflow-x: auto;
+}
+
+.inv-button {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(120deg, #380E17 20%, #8C0000 90%);
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  gap: 30px;
+}
+
+.inv-button:hover {
+  background: linear-gradient(120deg,#A8233C, #8C0000);
+  transition: .5s;
+}
+
+.inv-button:hover a > p:hover {
+  text-decoration: underline;
+}
+
+.inv-button h4 {
+  font-family: var(--Inter);
+}
+
+.inv-button p{
+  font-weight: normal;
+}
+
+.select-warning {
+  background-color: #15151A;
+  width: 95%;
+  height: 15rem;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border-radius: 10px;
+}

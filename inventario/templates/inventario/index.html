@@ -6,82 +6,64 @@
 {% endblock %}
 
 {% block head %}
-<meta charset="utf-8" />
-
-    <link rel="stylesheet" href="{% static "css/global.css" %}" />
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="{% static "css/inventario.css" %}" />
-    <link rel="stylesheet" href="{% static "css/responsivity.css" %}">
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,700;0,800;1,400&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" />
 {% endblock %}
 
 {% block content %}
 
-    <div class="inventario-header flex">
+    <div class="inventory-banner flex-column">
 
-        <h1 class="inventario">Inventario</h1>
-  
-        <h2>
-          Salve seus arquivos e use-os quando desejar
-        </h2>
-  
-        <p>
-          Crie subpastas e organize seus mapas, fichas, imagens documentons e
-          músicas para sua campanha ou personagem
-        </div>
-  
-      <div class="inv-buttons flex">
-  
-          <div class="inv-button">
-            <a href="{% url "mapas"  %}">
-              <div class="button-cover flex" id="rectangle3">
-                <img class="inner-icon" alt="" src="{% static 'img/public/map.svg' %}" />
-              </div>
-            </a>
-            <p>Mapas</p>
-          </div>
-  
+        <h1>Inventario</h1>
+        <p>Organize seus documentos para uma sessão inesquecível</p>
+        <div class="horizontal-row"></div>
 
-          <div class="inv-button">
-            <a href="{% url "criaturas"  %}">
-                <div class="button-cover flex" id="rectangle3">
-                <img class="inner-icon" alt="" src="{% static 'img/public/dragon.svg' %}" />
-                </div>
-            </a>
-            <p>Criaturas</p>
-          </div>
-  
-          <div class="inv-button">
-            <a href="{% url "imagens"  %}">
-                <div class="button-cover flex" id="rectangle1">
-                <img class="inner-icon" alt="" src="{% static 'img/public/images.svg' %}" />
-                </div>
-            </a>
-                <p>Imagens</p>
-          </div>
-  
-          <div class="inv-button">
-            <a href="{% url "documentos"  %}">
-                <div class="button-cover flex" id="rectangle2">
-                <img class="inner-icon" alt="" src="{% static 'img/public/doc.svg' %}" />
-                </div>
-            </a>
-            <p>Documentos</p>
-          </div>
-  
-          <div class="inv-button">
-            <a href="{% url "musicas"  %}">
-                <div class="button-cover flex" id="rectangle">
-                <img class="inner-icon" alt="" src="{% static 'img/public/headphones.svg' %}"/>
-                </div>
-            </a>
-            <p>Músicas</p>
-          </div>
-  
+        {% comment %} <div class="directory flex">
+          <h4>Diretórios</h4>
+          <button>
+             <p>Criar</p>
+             <img src="{% static "img/plus.svg" %}" alt="">
+          </button>
+        </div> {% endcomment %}
+
+        <div class="inv-buttons flex">
+
+          <button onclick="window.location.href = '{% url 'mapas' %}';" class="inv-button">
+              <h4>Mapas</h4>
+              <p>0 Arquivos</p>
+          </button>
+
+
+          <button onclick="window.location.href = '{% url 'criaturas' %}';" class="inv-button">
+                <h4>Criaturas</h4>
+                <p>0 Arquivos</p>
+          </button>
+
+          <button onclick="window.location.href = '{% url 'imagens' %}';" class="inv-button">
+                <h4>Imagens</h4>
+                <p>0 Arquivos</p>
+          </button>
+
+          <button onclick="window.location.href = '{% url 'documentos' %}';" class="inv-button">
+                <h4>Imagens</h4>
+                <p>0 Arquivos</p>
+          </button>
+
+          <button onclick="window.location.href = '{% url 'musicas' %}';" class="inv-button">
+              <h4>Musicas</h4>
+              <p>0 Arquivos</p>
+          </button>
+
         </div>
-    
+
+    </div>
+
+    <div class="select-warning flex-column">
+      <h4>Selecione um dos botões acima!</h4>
+
+      <p>E então, crie pastas para organizar seus documentos!</p>
+    </div>
+
+
 
 {% endblock%}

@@ -266,10 +266,17 @@ def criarCampanhas(request):
 def usuario(request):
     perfil = Perfil.objects.get(nomePerfil=request.user)
     campanha = Campanha.objects.filter(nomeMestre=perfil).first()
+    user = request.user
+    fotoConta = Perfil.objects.get(id=user.id).fotoConta
 
     quantidade_amigos = Amigo.objects.filter(usuario=request.user.id).count()
 
-    return render(request, 'principal/user.html', {'perfil': perfil, 'campanha': campanha, 'quantidade_amigos':quantidade_amigos, 'fotoConta': perfil.fotoConta})
+    return render(request, 'principal/user.html', {
+        'perfil': perfil,
+        'campanha': campanha,
+        'quantidade_amigos':quantidade_amigos,
+        'fotoConta': fotoConta,
+        'user': user,})
 
 
 # view da edição de conta do usuário

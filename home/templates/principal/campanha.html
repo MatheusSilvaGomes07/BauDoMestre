@@ -21,19 +21,35 @@
                     <div class="quest-body">
                         <div class="quest-title flex">
                             <p><a href="{% url 'detalhes_campanha' campanha.id %}">{{ campanha.nomeCampanha }}</a></p>
-                            <button>
                                 {% for grupo in grupos %}
                                     <div id="{{ grupo.uuid }}">
-                                        {% if request.user in grupo.membros.all %}
-                                                <p><a href="{% url 'Sair_grupo' uuid=grupo.uuid %}">Sair</a></p>
+                                        {% if request.user in grupo.membros.all and user != mestre.nomePerfil %}
+                                            <button onclick="window.location.href = '{% url 'Abrir_chat_pub' uuid=grupo.uuid %}';">
+                                                <p>Chat</p>
+                                            </button>
+
+                                            <button onclick="window.location.href = '{% url 'enter_campaign' campanha.id %}';">
+                                                <p>Tabletop</p>
+                                            </button>
+                                        {% elif user == mestre.nomePerfil %}
+                                            <button onclick="window.location.href = '{% url 'Abrir_chat_pub' uuid=grupo.uuid %}';">
+                                                <p>Chat</p>
+                                            </button>
+
+                                            <button onclick="window.location.href = '{% url 'enter_campaign' campanha.id %}';">
+                                                <p>Tabletop</p>
+                                            </button>
+
                                         {% else %}
                                             {% if grupo.envioSolicitacao == '0' %}
-                                                <p><a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a></p>
+                                                <h3><a href="{% url 'enviar_solicitacao' campanha_id=campanha.id %}" data-id="{{ campanha.id }}" class="solicitar-jogo">Jogar</a></h3>
+                                            {% else %}
+                                                <h3>Solicitação enviada</h3>
                                             {% endif %}
                                         {% endif %}
                                     </div>
                                 {% endfor %}
-                            </button>
+
                         </div>
 
                         <div class="divison-row"></div>
