@@ -127,3 +127,58 @@ body {
   gap: 20px;
   border-radius: 10px;
 }
+
+.archives {
+  width: 95%;
+  height: 60%;
+  border: 5px #4D4D56 solid;
+  border-radius: 15px;
+}
+
+.pastas {
+  width: 95%;
+  justify-content: space-between;
+}
+
+.pastas form {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pastas input {
+  all: unset;
+  font-family: var(--Inter);
+  color: white;
+  font-weight: bold;
+  font-size: 15px !important;
+  background-color: unset;
+  width: auto !important;
+  border-radius: 5px;
+}
+
+.pastas form button {
+  background-color: var(--red1);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+#archive-box {
+  height: 25rem;
+}
+
+.archives-title {
+  width: 90%;
+  height: 2rem;
+  background-color: #606074;
+  border-radius: 10px;
+  margin: 15px 0 0 15px;
+  align-items: center;
+  padding-left: 30px;
+  gap: 35%;
+}
+
+.files {
+  width: 93%;
+}

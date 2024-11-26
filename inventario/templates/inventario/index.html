@@ -18,14 +18,6 @@
         <p>Organize seus documentos para uma sessão inesquecível</p>
         <div class="horizontal-row"></div>
 
-        {% comment %} <div class="directory flex">
-          <h4>Diretórios</h4>
-          <button>
-             <p>Criar</p>
-             <img src="{% static "img/plus.svg" %}" alt="">
-          </button>
-        </div> {% endcomment %}
-
         <div class="inv-buttons flex">
 
           <button onclick="window.location.href = '{% url 'mapas' %}';" class="inv-button">
@@ -45,7 +37,7 @@
           </button>
 
           <button onclick="window.location.href = '{% url 'documentos' %}';" class="inv-button">
-                <h4>Imagens</h4>
+                <h4>Documentos</h4>
                 <p>0 Arquivos</p>
           </button>
 
