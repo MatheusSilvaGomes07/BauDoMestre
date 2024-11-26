@@ -49,37 +49,39 @@
             <p>Tamanho</p>
         </div>
 
-        <div class="files">
+        <div class="files flex-column">
             {% for file in files %}
-                <div class="directory-box">
-                    <div class="directory flex">
-                        <div class="direc-a flex">
+                <div class="file-box flex">
+                    <div class="file flex">
+                        <div class="file-icon flex">
                             {% if file.extensao in '.jpg .jpeg .png .gif' %}
                                 <img src="{{ file.file.url }}" alt="{{ file.nome }}">
                             {% elif file.extensao in '.mp3, .wav, .ogg' %}
-                            <img src="{% static 'img/public/music.svg' %}" alt="Music Icon">
+                                <img src="{% static 'img/public/music.svg' %}" alt="Music Icon">
                             {% elif file.extensao in '.pdf, .doc, .docx. .txt' %}
-                            <img  src="{% static 'img/public/document.svg' %}" alt="" >
+                                <img  src="{% static 'img/public/File-icon.svg' %}" alt="" >
                             {% elif file.extensao in '.zip, .rar' %}
                                 <img src="{% static 'img/public/archive.svg' %}" alt="">
                             {% else %}
-                                <img src="{% static 'img/public/doc.svg' %}" alt="">
+                                <img src="{% static 'img/public/File-icon.svg' %}" alt="">
                             {% endif %}
-                            <a href="{{ file.file.url }}" download><p class="inventory-item">{{ file.nome }}{{ file.extensao }}</p></a>
+                            <p class="inventory-item">{{ file.nome }}.{{ file.extensao }}</p>
                         </div>
-                        <p class="inventory-item">{{ file.data }}</p>
-                        <p id="tamanho{{ forloop.counter }}" class="inventory-item">{{ file.tamanho }}</p>
-                        <button onclick="OpenStats()" style="all: unset;"><img class="three-dots" src="{% static 'img/public/three-dots.svg' %}" alt=""></button>
-                        <a href="{% url 'deletar_arquivo' file.id div file.pasta_id %}"><img src="{% static 'img/public/thrash.svg' %}" alt="Trash Icon"></a>
-                    </div>
-                    <div id="dot1" class="info-column flex">
-                        <div class="data-column">
-                            <p>{{ file.data }}</p>
-                            <p>Data</p>
+                        <div class="file-info flex">
+                            <p class="file-data">{{ file.data }}</p>
+                            <p id="tamanho{{ forloop.counter }}" class="file-size">{{ file.tamanho }}</p>
                         </div>
-                        <div class="data-column">
-                            <p id="tamanho{{ forloop.counter }}" class="inventory-item">123.43 KB</p>
-                            <p>Tamanho</p>
+
+                        <div class="file-buttons flex">
+                            <button style="all: unset;">
+                                <a href="{{ file.file.url }}" download>
+                                    <img src="{% static 'img/public/Download-icon.svg' %}" alt="">
+                                </a>
+                            </button>
+
+                            <button onclick="window.location.href = '{% url 'deletar_arquivo' file.id div file.pasta_id %}';">
+                                    <img src="{% static 'img/public/Trash-icon.svg' %}" alt="Trash Icon">
+                            </button>
                         </div>
                     </div>
                 </div>

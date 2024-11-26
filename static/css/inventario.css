@@ -96,7 +96,6 @@ body {
 
 .inv-buttons::-webkit-scrollbar-thumb {
   border-radius: 10px;
-
 }
 
 .inv-button:hover {
@@ -126,13 +125,15 @@ body {
   justify-content: center;
   gap: 20px;
   border-radius: 10px;
+  margin-bottom: 2rem;
 }
 
 .archives {
   width: 95%;
-  height: 60%;
+  height: 86%;
   border: 5px #4D4D56 solid;
   border-radius: 15px;
+  gap: 23px;
 }
 
 .pastas {
@@ -165,7 +166,9 @@ body {
 }
 
 #archive-box {
-  height: 25rem;
+  justify-content: start;
+  height: 50rem;
+  padding-top: 2rem;
 }
 
 .archives-title {
@@ -175,10 +178,69 @@ body {
   border-radius: 10px;
   margin: 15px 0 0 15px;
   align-items: center;
-  padding-left: 30px;
-  gap: 35%;
+  padding-left: 20px;
+  gap: 33%;
 }
 
 .files {
-  width: 93%;
+  width: 92%;
+  overflow-y: auto;
+  height: 85%;
+  padding-right: 1rem;
+  margin-left: 15px;
+  gap: 1rem;
+}
+
+.files::-webkit-scrollbar {
+  width: 10px;
+}
+
+.files::-webkit-scrollbar-track {
+  background-color: white;
+  border-radius: 10px;
+}
+
+.files::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
+.file-box .file {
+  width: 100%;
+  padding: 8px 8px;
+  border: 5px #4D4D56 solid;
+  border-radius: 15px;
+  justify-content: space-between;
+  align-self: center;
+}
+
+.file-icon {
+  gap: 17px;
+  align-self: center;
+}
+
+.file-icon > p {
+  width: 15rem;
+  align-self: center;
+  white-space: nowrap; /* Impede que o texto quebre em várias linhas */
+  overflow: hidden; /* Oculta o texto que ultrapassa o limite */
+  text-overflow: ellipsis;
+}
+
+.file-info {
+  gap: 23rem;
+  align-self: center;
+}
+
+.file-buttons {
+  gap: 30px;
+  align-items: center;
+}
+
+.file-buttons button {
+  cursor: pointer;
+}
+
+.file-size {
+  width: 70px;
+  text-align: start;
 }
