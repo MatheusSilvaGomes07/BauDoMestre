@@ -183,11 +183,11 @@ def index(request):
     ordem_paranormal = OrdemParanormal.objects.filter(nomePerfil=user)
 
     if sistema_busca:
-        # Ajuste para busca no campo correto do modelo referenciado
-        dnd = dnd.filter(nomePerfil__username__icontains=sistema_busca)
-        tormenta = tormenta.filter(nomePerfil__username__icontains=sistema_busca)
-        call_of_cthulhu = call_of_cthulhu.filter(nomePerfil__username__icontains=sistema_busca)
-        ordem_paranormal = ordem_paranormal.filter(nomePerfil__username__icontains=sistema_busca)
+        # Ajuste para buscar pelo nome da ficha
+        dnd = dnd.filter(nome__icontains=sistema_busca)
+        tormenta = tormenta.filter(nome__icontains=sistema_busca)
+        call_of_cthulhu = call_of_cthulhu.filter(nome__icontains=sistema_busca)
+        ordem_paranormal = ordem_paranormal.filter(nome__icontains=sistema_busca)
 
     # Excluir personagens que já estão em campanhas
     ids_campanha_T = TormentaCampanha.objects.values_list('pk', flat=True)
@@ -213,6 +213,7 @@ def index(request):
         'coc': call_of_cthulhu,
         'fotoConta': perfil.fotoConta,
     })
+
 
 
 
