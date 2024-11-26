@@ -116,6 +116,12 @@ body {
   width: fit-content;
 }
 
+.info {
+  text-align: center;
+  font-size: 36px;
+  font-family: var(--Inter);
+}
+
 .select-warning {
   background-color: #15151A;
   width: 95%;
@@ -216,6 +222,12 @@ body {
 .file-icon {
   gap: 17px;
   align-self: center;
+}
+
+.file-icon .special-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 5px;
 }
 
 .file-icon > p {

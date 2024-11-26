@@ -13,10 +13,10 @@
 
 {% block content %}
 
-{% if div == 'Mapas' or div == 'Imagens'%}
-    {% include "inventario/includes/images_format.html" %}
-{% elif div == 'Musicas' or div == 'Documentos' or div == 'Criaturas' %}
-    {% include "inventario/includes/file_format.html" %}
-{% endif %}
+    {% if div == 'Mapas' or div == 'Imagens'%}
+        {% include "inventario/includes/images_format.html" %}
+    {% elif div == 'Musicas' or div == 'Documentos' or div == 'Criaturas' %}
+        {% include "inventario/includes/file_format.html" %}
+    {% endif %}
 
 {% endblock%}

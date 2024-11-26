@@ -32,6 +32,14 @@
 
   </div>
 
+    {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'info' %}
+            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          {% endif %}
+        {% endfor %}
+    {% endif %}
+
   <div class="select-warning flex-column" id="archive-box">
     <div class="pastas flex">
         <h4>Arquivos</h4>
@@ -55,13 +63,13 @@
                     <div class="file flex">
                         <div class="file-icon flex">
                             {% if file.extensao in '.jpg .jpeg .png .gif' %}
-                                <img src="{{ file.file.url }}" alt="{{ file.nome }}">
+                                <img class="special-img" src="{{ file.file.url }}" alt="{{ file.nome }}">
                             {% elif file.extensao in '.mp3, .wav, .ogg' %}
-                                <img src="{% static 'img/public/music.svg' %}" alt="Music Icon">
+                                <img src="{% static 'img/public/music-note-fill.svg' %}" alt="Music Icon">
                             {% elif file.extensao in '.pdf, .doc, .docx. .txt' %}
                                 <img  src="{% static 'img/public/File-icon.svg' %}" alt="" >
                             {% elif file.extensao in '.zip, .rar' %}
-                                <img src="{% static 'img/public/archive.svg' %}" alt="">
+                                <img src="{% static 'img/public/file-archive-fill.svg' %}" alt="">
                             {% else %}
                                 <img src="{% static 'img/public/File-icon.svg' %}" alt="">
                             {% endif %}
@@ -100,17 +108,14 @@
             {% endfor %}
         </div>
     </div>
-  </div>
+</div>
 
 <div class="inventario-header flex">
-
-    <!-- {% if messages %}
-        {% for message in messages %}
+        {% comment %} {% for message in messages %}
             {% if message.tags == 'info' %}
                 <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
             {% endif %}
-        {% endfor %}
-    {% endif %} -->
+        {% endfor %} {% endcomment %}
 
         <!-- {% for file in files %}
             <div class="directory-box">

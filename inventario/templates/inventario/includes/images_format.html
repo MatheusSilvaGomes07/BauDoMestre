@@ -1,5 +1,116 @@
 {% load static %}
-<div class="inventario-header flex">
+
+<div class="inventory-banner flex-column">
+
+    <h1>{{ pasta }}</h1>
+    <div class="horizontal-row"></div>
+
+    <div class="directory flex">
+      <h4>Diretórios</h4>
+      <form class="flex" method="post" action="">
+        {% csrf_token %}
+        {{ form.nome }}
+        <button style="cursor: pointer;" class="send-button flex" type="submit">
+          <p>Criar</p>
+          <img src="{% static "img/plus.svg" %}" alt="">
+        </button>
+      </form>
+    </div>
+
+    <div class="inv-buttons flex">
+
+      {% for pasta in pastas %}
+
+        <button onclick="window.location.href = '{% url "visualizar_pasta" div pasta.nome %}';" class="inv-button direct-box">
+          <h4>{{pasta.nome}}</h4>
+          <a href="{% url "deletar_pasta" pasta.id %}"> <p>Deletar Pasta</p> </a>
+        </button>
+
+      {% endfor%}
+
+    </div>
+
+  </div>
+
+    {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'info' %}
+            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          {% endif %}
+        {% endfor %}
+    {% endif %}
+
+  <div class="select-warning flex-column" id="archive-box">
+    <div class="pastas flex">
+        <h4>Arquivos</h4>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.file }}
+            <button style="cursor: pointer;" class="send-button flex" type="submit"><p>Enviar Arquivo</p></button>
+        </form>
+    </div>
+
+    <div class="archives flex-column">
+        <div class="archives-title flex">
+            <p>Nome</p>
+            <p>Data</p>
+            <p>Tamanho</p>
+        </div>
+
+        <div class="files flex-column">
+            {% for file in files %}
+                <div class="file-box flex">
+                    <div class="file flex">
+                        <div class="file-icon flex">
+                            {% if file.extensao in '.jpg .jpeg .png .gif' %}
+                                <img class="special-img" src="{{ file.file.url }}" alt="{{ file.nome }}">
+                            {% elif file.extensao in '.mp3, .wav, .ogg' %}
+                                <img src="{% static 'img/public/music-note-fill.svg' %}" alt="Music Icon">
+                            {% elif file.extensao in '.pdf, .doc, .docx. .txt' %}
+                                <img  src="{% static 'img/public/File-icon.svg' %}" alt="" >
+                            {% elif file.extensao in '.zip, .rar' %}
+                                <img src="{% static 'img/public/file-archive-fill.svg' %}" alt="">
+                            {% else %}
+                                <img src="{% static 'img/public/File-icon.svg' %}" alt="">
+                            {% endif %}
+                            <p class="inventory-item">{{ file.nome }}.{{ file.extensao }}</p>
+                        </div>
+                        <div class="file-info flex">
+                            <p class="file-data">{{ file.data }}</p>
+                            <p id="tamanho{{ forloop.counter }}" class="file-size">{{ file.tamanho }}</p>
+                        </div>
+
+                        <div class="file-buttons flex">
+                            <button style="all: unset;">
+                                <a href="{{ file.file.url }}" download>
+                                    <img src="{% static 'img/public/Download-icon.svg' %}" alt="">
+                                </a>
+                            </button>
+
+                            <button onclick="window.location.href = '{% url 'deletar_arquivo' file.id div file.pasta_id %}';">
+                                    <img src="{% static 'img/public/Trash-icon.svg' %}" alt="Trash Icon">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    var tamanhoEmBytes = {{ file.tamanho }};
+                    var tamanhoEmKB = tamanhoEmBytes / 1024;
+
+                    if (tamanhoEmKB >= 1024){
+                        var tamanhoMB = tamanhoEmKB / 1024;
+                        document.getElementById('tamanho' + {{ forloop.counter }}).innerText = tamanhoMB.toFixed(2) + 'MB';
+                    } else {
+                        document.getElementById('tamanho' + {{ forloop.counter }}).innerText = tamanhoEmKB.toFixed(2) + 'KB';
+                    }
+                </script>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% comment %} <div class="inventario-header flex">
 
     <h1 class="inventario">{{ pasta }}</h1>
 
@@ -33,12 +144,12 @@
                 <div class="image-box">
                     <div class="box">
 
-                        {% if file.extensao in '.jpg .jpeg .png .gif' %}
+                    {% if file.extensao in '.jpg .jpeg .png .gif' %}
                         <img src="{{ file.file.url }}" alt="{{ file.nome }}">
                     {% elif file.extensao in '.mp3, .wav, .ogg' %}
-                    <img src="{% static 'img/public/music.svg' %}" alt="Music Icon">
+                        <img src="{% static 'img/public/music.svg' %}" alt="Music Icon">
                     {% elif file.extensao in '.pdf, .doc, .docx. .txt' %}
-                    <img  src="{% static 'img/public/PDF.svg' %}" alt="" >
+                        <img  src="{% static 'img/public/PDF.svg' %}" alt="" >
                     {% elif file.extensao in '.zip, .rar' %}
                         <img src="{% static 'img/public/archive.svg' %}" alt="">
                     {% else %}
@@ -59,4 +170,4 @@
   </div>
 
 
-e esse é para o formato de imagem
+e esse é para o formato de imagem {% endcomment %}
