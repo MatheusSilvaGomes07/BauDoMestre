@@ -35,7 +35,3 @@
 select:hover{
     border: none;
 }
-
-.dnd-body {
-    padding-top: 1rem !important;
- }
