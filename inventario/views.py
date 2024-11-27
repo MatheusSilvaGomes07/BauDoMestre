@@ -9,9 +9,25 @@ import magic
 
 @login_required
 def index(request):
-
+    user = request.user
     perfil = Perfil.objects.get(nomePerfil=request.user)
-    return render(request, 'inventario/index.html', {'fotoConta': perfil.fotoConta})
+
+
+    mapas_count = Pasta.objects.filter(owner=user, divisao='Mapas').count()
+    criaturas_count = Pasta.objects.filter(owner=user, divisao='Criaturas').count()
+    documentos_count = Pasta.objects.filter(owner=user, divisao='Documentos').count()
+    imagens_count = Pasta.objects.filter(owner=user, divisao='Imagens').count()
+    musicas_count = Pasta.objects.filter(owner=user, divisao='Musicas').count()
+    
+
+    return render(request, 'inventario/index.html', {
+        'fotoConta': perfil.fotoConta,
+        'mapas_count': mapas_count,
+        'criaturas_count': criaturas_count,
+        'documentos_count': documentos_count,
+        'imagens_count': imagens_count,
+        'musicas_count': musicas_count
+        })
 
 
 @login_required
@@ -187,7 +203,7 @@ def verificar_extensao(div, file_type, request, tamanho, extension):
 
 @login_required
 def visualizar_pasta(request, div, pasta):
-
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     user = request.user
     pastas = Pasta.objects.get(nome=pasta, owner=user, divisao=div)
     files = File.objects.filter(owner=user, pasta=pastas.id)
@@ -214,7 +230,7 @@ def visualizar_pasta(request, div, pasta):
             return redirect('visualizar_pasta', div, pasta)
     else:
         form = FileForm()
-    return render(request, 'inventario/visualizar_pasta.html', {'files': files, 'form': form, 'div': div, 'pasta':pasta})
+    return render(request, 'inventario/visualizar_pasta.html', {'files': files, 'form': form, 'div': div, 'pasta':pasta, 'fotoConta': perfil.fotoConta})
 
 @login_required
 def deletar_arquivo(request, id, div, id_pasta):

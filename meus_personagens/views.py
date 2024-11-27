@@ -200,6 +200,8 @@ def index(request):
     tormenta = tormenta.exclude(id__in=ids_campanha_T)
     call_of_cthulhu = call_of_cthulhu.exclude(id__in=ids_campanha_C)
 
+    count = (dnd.count() + tormenta.count() + call_of_cthulhu.count() + ordem_paranormal.count())
+
     # Combinar todos os personagens para exibição na interface
     personagens_filtro = list(dnd) + list(tormenta) + list(call_of_cthulhu) + list(ordem_paranormal)
 
@@ -212,6 +214,7 @@ def index(request):
         'tormenta20': tormenta,
         'coc': call_of_cthulhu,
         'fotoConta': perfil.fotoConta,
+        'count': count,
     })
 
 

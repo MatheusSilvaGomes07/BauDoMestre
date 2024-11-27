@@ -210,14 +210,14 @@ def detalhes_campanha(request, id):
 @login_required
 def search_user(request):
     conta_busca = request.GET.get('q')
-
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     users = []
     if conta_busca:
         users = Perfil.objects.filter(
             Q(nomePerfil__username__icontains=conta_busca)
         )
 
-    return render(request, 'principal/buscaUser.html', {'users': users, 'busca_realizada': bool(conta_busca)})
+    return render(request, 'principal/buscaUser.html', {'users': users, 'busca_realizada': bool(conta_busca), 'fotoConta': perfil.fotoConta})
 
 
 # view do perfil com link slug dos usuários
@@ -226,7 +226,7 @@ def exibir_perfil(request, perfil_slug):
     perfil = get_object_or_404(Perfil, slug=perfil_slug)
     is_self = perfil.nomePerfil == request.user
     is_amigo = not is_self and Amigo.objects.filter(usuario=request.user, amigo=perfil.nomePerfil).exists()
-
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     solicitacao_pendente = None
 
     quantidade_amigos = Amigo.objects.filter(usuario=perfil.nomePerfil.id).count()
@@ -235,7 +235,7 @@ def exibir_perfil(request, perfil_slug):
         solicitacao_pendente = SolicitacaoAmizade.objects.filter(de_usuario=request.user, para_usuario=perfil.nomePerfil, aceita=False).first()
 
 
-    return render(request, 'principal/exibir_perfil.html', {'perfil': perfil, 'is_amigo': is_amigo, 'is_self': is_self, 'solicitacao_pendente': solicitacao_pendente, 'quantidade_amigos':quantidade_amigos})
+    return render(request, 'principal/exibir_perfil.html', {'perfil': perfil, 'is_amigo': is_amigo, 'is_self': is_self, 'solicitacao_pendente': solicitacao_pendente, 'quantidade_amigos':quantidade_amigos, 'fotoConta': perfil.fotoConta})
 
 # view da criação de campanhas que também é protegida por um decorator que só permite a entrada de "Mestre" e "Ambos"
 @login_required

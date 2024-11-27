@@ -1062,6 +1062,20 @@
 
     calcularSalvaguardas();
     calcularProficiencias()
+
+    function runAllCalculations() {
+        nivel.dispatchEvent(new Event('input'));
+        forca.dispatchEvent(new Event('input'));
+        dex.dispatchEvent(new Event('input'));
+        cons.dispatchEvent(new Event('input'));
+        inte.dispatchEvent(new Event('input'));
+        sab.dispatchEvent(new Event('input'));
+        car.dispatchEvent(new Event('input'));
+        calcularSalvaguardas();
+        calcularProficiencias();
+    }
+
+    window.addEventListener('load', runAllCalculations);
 </script>
 
 

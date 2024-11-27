@@ -22,28 +22,28 @@
 
           <button onclick="window.location.href = '{% url 'mapas' %}';" class="inv-button">
               <h4>Mapas</h4>
-              <p>0 Arquivos</p>
+              <p>{{ mapas_count }} Pastas</p>
           </button>
 
 
           <button onclick="window.location.href = '{% url 'criaturas' %}';" class="inv-button">
                 <h4>Criaturas</h4>
-                <p>0 Arquivos</p>
+                <p>{{ criaturas_count }} Pastas</p>
           </button>
 
           <button onclick="window.location.href = '{% url 'imagens' %}';" class="inv-button">
                 <h4>Imagens</h4>
-                <p>0 Arquivos</p>
+                <p>{{ imagens_count }} Pastas</p>
           </button>
 
           <button onclick="window.location.href = '{% url 'documentos' %}';" class="inv-button">
                 <h4>Documentos</h4>
-                <p>0 Arquivos</p>
+                <p>{{ documentos_count }} Pastas</p>
           </button>
 
           <button onclick="window.location.href = '{% url 'musicas' %}';" class="inv-button">
               <h4>Musicas</h4>
-              <p>0 Arquivos</p>
+              <p>{{ musicas_count }} Pastas</p>
           </button>
 
         </div>

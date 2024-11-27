@@ -16,7 +16,7 @@
     <div class="mural-leftColumn flex flex-column">
         <h1>Personagens</h1>
         <h3>Crie seu personagem ou brinque de Deus!</h3>
-        <h3>Há: <strong>{{ Dnd.items|length }} Fichas</strong> Disponíveis</h3>
+        <h3>Há: <strong>{{ count }} Fichas</strong> Disponíveis</h3>
     </div>
 
     <img src="{% static "img/muralDragon.svg" %}" alt="">
@@ -40,7 +40,7 @@
     <div class="search-result flex">
         <div class="result-left flex-column">
             <h3>Resultado da Busca</h3>
-            <p>Foram Encontradas: <strong>{{ campanhas_e_grupos.items|length }} Fichas</strong> </p>
+            <p>Foram Encontradas: <strong>{{ count }} Fichas</strong> </p>
         </div>
 
         <div class="create-char">

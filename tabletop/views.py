@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .membro_decorator import user_in_group
 from .mestre_decorator import is_mestre
 from .forms import MapForm, TokenForm, CampanhaDnDForm, CampanhaOrdemParanormalForm, CampanhaCallOfCthulhuCForm, CampanhaTormentaForm, PastaCriaturasForm
-from home.models import Campanha
+from home.models import Campanha, Perfil
 from django.contrib.contenttypes.models import ContentType
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
@@ -132,9 +132,11 @@ def deletarPastaCriaturas(request, campaign_id, pasta_id, is_mestre):
 
 @user_in_group
 def criar_personagem(request, campaign_id, pasta_id):
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     campanha = get_object_or_404(Campanha, id=campaign_id)
     pasta = get_object_or_404(PastaCriaturas, id = pasta_id)
     sistemaCampanha = campanha.sistemaCampanha
+    form_name = None
 
     if sistemaCampanha == "Tormenta20":
         if request.method == 'POST':
@@ -151,6 +153,7 @@ def criar_personagem(request, campaign_id, pasta_id):
 
     elif sistemaCampanha == "Dungeons & Dragons":
         personagemForm = CampanhaDnDForm(request.POST, request.FILES)
+        form_name = 'dnd'
         if personagemForm.is_valid():
                 personagem = personagemForm.save(commit=False)
                 personagem.nomePerfil = request.user
@@ -183,7 +186,7 @@ def criar_personagem(request, campaign_id, pasta_id):
         else:
             personagemForm = CampanhaOrdemParanormalForm()
 
-    return render(request, 'tabletop/criarPersonagem.html', {'personagemForm': personagemForm})
+    return render(request, 'tabletop/criarPersonagem.html', {form_name: personagemForm, 'fotoConta': perfil.fotoConta})
 
 def place_token(request, map_id, personagem_id):
     mapa = get_object_or_404(Map, id=map_id)
@@ -254,6 +257,7 @@ def deletar_personagem_campanha (request, campaign_id, personagem_id):
 
 def editar_personagem_campanha(request, campaign_id, personagem_id):
     campanha = get_object_or_404(Campanha, id=campaign_id)
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     sistema = campanha.sistemaCampanha
     user = request.user
 
@@ -292,7 +296,7 @@ def editar_personagem_campanha(request, campaign_id, personagem_id):
     else:
          return redirect('meus_personagens')
 
-    return render(request, 'meus_personagens/editCharacter/edit_char_ordem.html', {'ordem': form, 'personagem': personagem})
+    return render(request, 'meus_personagens/editCharacter/edit_char_ordem.html', {'ordem': form, 'personagem': personagem, 'fotoConta': perfil.fotoConta})
 
 def editar_personagem_campanha(request, campaign_id, personagem_id):
     campanha = get_object_or_404(Campanha, id=campaign_id)
@@ -302,6 +306,7 @@ def editar_personagem_campanha(request, campaign_id, personagem_id):
     template = ''
     form_name = ''
 
+    perfil = Perfil.objects.get(nomePerfil=request.user)
     if sistema == 'Dungeons & Dragons':
         personagem = get_object_or_404(DnDCampanha, id=personagem_id)
         personagem_form = DnDForm
@@ -346,7 +351,7 @@ def editar_personagem_campanha(request, campaign_id, personagem_id):
         print('Local 2')
         return redirect('enter_campaign', campaign_id)
 
-    return render(request, 'meus_personagens/editCharacter/' + template, {form_name: form, 'personagem': personagem})
+    return render(request, 'meus_personagens/editCharacter/' + template, {form_name: form, 'personagem': personagem, 'fotoConta': perfil.fotoConta})
 
 @csrf_exempt
 @user_in_group

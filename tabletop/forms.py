@@ -2,6 +2,9 @@ from django import forms
 from .models import Map, Token, DnDCampanha, OrdemParanormalCampanha, CallOfCthulhuCampanha, TormentaCampanha, PastaCriaturas
 from meus_personagens.forms import DnDForm, OrdemParanormalForm, TormentaForm, CallOfCthulhuForm
 
+class FileInputWithoutClear(forms.ClearableFileInput):
+    template_name = 'principal/custom_file_input.html'
+    
 class MapForm(forms.ModelForm):
     class Meta:
         model = Map
@@ -30,6 +33,15 @@ class TokenForm(forms.ModelForm):
 class CampanhaDnDForm(DnDForm):
     class Meta(DnDForm.Meta):
         model = DnDCampanha
+        fields = '__all__'
+        labels = {
+           #'foto': '',
+        }
+        widgets = {
+            'inventario': forms.Textarea(attrs={'rows': 15, }), #'cols': 15
+            'foto': FileInputWithoutClear,
+        
+        }
         exclude = ['campanha_id', 'nomePerfil', 'pasta']
 
 class CampanhaTormentaForm(TormentaForm):
