@@ -18,7 +18,7 @@ def index(request):
     documentos_count = Pasta.objects.filter(owner=user, divisao='Documentos').count()
     imagens_count = Pasta.objects.filter(owner=user, divisao='Imagens').count()
     musicas_count = Pasta.objects.filter(owner=user, divisao='Musicas').count()
-    
+
 
     return render(request, 'inventario/index.html', {
         'fotoConta': perfil.fotoConta,
@@ -206,6 +206,12 @@ def visualizar_pasta(request, div, pasta):
     perfil = Perfil.objects.get(nomePerfil=request.user)
     user = request.user
     pastas = Pasta.objects.get(nome=pasta, owner=user, divisao=div)
+
+    pastas_sessao = Pasta.objects.filter(owner=user, divisao=div)
+
+    for p in pastas_sessao:
+        print(p.nome)
+
     files = File.objects.filter(owner=user, pasta=pastas.id)
     base_name = ''
     mime = magic.Magic()
@@ -230,7 +236,7 @@ def visualizar_pasta(request, div, pasta):
             return redirect('visualizar_pasta', div, pasta)
     else:
         form = FileForm()
-    return render(request, 'inventario/visualizar_pasta.html', {'files': files, 'form': form, 'div': div, 'pasta':pasta, 'fotoConta': perfil.fotoConta})
+    return render(request, 'inventario/visualizar_pasta.html', {'files': files, 'form': form, 'div': div, 'pasta':pasta, 'fotoConta': perfil.fotoConta, 'pastas_sessao': pastas_sessao,})
 
 @login_required
 def deletar_arquivo(request, id, div, id_pasta):

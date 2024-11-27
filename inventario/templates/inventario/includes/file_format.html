@@ -19,14 +19,16 @@
 
     <div class="inv-buttons flex">
 
-      {% for pasta in pastas %}
+
+
+      {% for pasta in pastas_sessao %}
 
         <button onclick="window.location.href = '{% url "visualizar_pasta" div pasta.nome %}';" class="inv-button direct-box">
           <h4>{{pasta.nome}}</h4>
           <a href="{% url "deletar_pasta" pasta.id %}"> <p>Deletar Pasta</p> </a>
         </button>
 
-      {% endfor%}
+      {% endfor %}
 
     </div>
 
