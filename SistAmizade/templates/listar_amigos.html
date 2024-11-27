@@ -2,55 +2,53 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/global.css' %}" />
-<link rel="stylesheet" href="{% static 'css/chat.css' %}" />
-<link rel="stylesheet" href="{% static 'css/responsivity.css' %}">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=a Absolute Empire:wght@400&display=swap"/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&display=swap"/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"/>
-<style>
-    #chat-body {
-        background-image: url({% static "img/public/chat-background.svg" %});
-        height: 87%;
-        width: 100%;
-        background-size: 75%;
-        display: flex;
-        flex-direction: column;
-        justify-content: end;
-    }
-    nav {
-        display: none !important;
-    }
-</style>
-<title>Lista de amigos</title>
+    <link rel="stylesheet" href="{% static "css/chat.css" %}">
+    <style>
+        #chat-body {
+            background-image: url({% static "img/public/chat-background.svg" %});
+            height: 87%;
+            width: 100%;
+            background-size: 75%;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+        }
+        nav {
+            display: none !important;
+        }
+    </style>
+    <title>Lista de amigos</title>
 {% endblock %}
 
 {% block conteudo %}
 
 <div class="flex" style="height: 100vh;">
+
     <div class="leftmessanger flex">
 
         <div class="contacts-header flex">
-            <button style="all: unset;" onclick="goBack()">
-                <img class="down-arrow-1-41" alt="" src="{% static 'img/public/downarrow-1-4@2x.png'%}" id="downArrow14"/>
+
+            <button class="flex" style="all: unset;" onclick="goBack()">
+                <img class="back-caret" alt="" src="{% static 'img/icons/caret-left.svg'%}"/>
             </button>
 
-            <div id="amizades">AMIZADES</div>
-            <div class="contacts-header-icon flex">
+            <p id="amizades">AMIZADES</p>
+            <div class="header-icon flex">
                 <a href="{% url 'search_user' %}">
-                    <img class="create-group-button-2-1" alt="" src="{% static "img/public/addFriend.png" %}" id="createGroupButton21"/>
+                    <img alt="" src="{% static "img/public/addFriend.png" %}" />
                 </a>
             </div>
         </div>
 
-      <div class="searchbar2">
+      <div class="searchbar">
+
         <div class="searchbar-inner flex">
             <input id="searchInput" placeholder="Pesquisar" class="pesquisar" oninput="filterFriends()"></input>
-            <div class="searchbar-child1 flex"/>
+            <div class="search-button flex"/>
                 <img class="magnifying-glass-1-icon1" alt="" src="{% static "img/public/magnifyingglass-11.svg" %}"/>
             </div>
         </div>
+
     </div>
 
       <div class="contact-list flex">
@@ -63,7 +61,7 @@
                 {% else %}
                     <img class="image-50-icon1" alt="" src="{{ amigo.fotoConta.url }}"/>
                 {% endif %}
-                
+
             </div>
             <div class="contact-write">
                 <b>{{ amigo.amigo.username }}</b>
@@ -87,7 +85,7 @@
           </div>
 
           <div class="header-text">
-        
+
           </div>
 
 
@@ -145,7 +143,7 @@ function goBack() {
 {% endcomment %}
 
 
-    
+
 
 
 {% endblock conteudo %}

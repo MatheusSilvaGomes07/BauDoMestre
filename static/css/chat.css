@@ -1,19 +1,20 @@
 body {
-  position: relative;
-  width: 100%;
   text-align: justify;
   font-size: var(--font-size-smi);
-  color: var(--color-white);
-  font-family: var(--body);
-  background: linear-gradient(169deg, #000 35.32%, rgba(53, 51, 51, 0.50) 218.41%);
+  color: white;
+  background-color: #0F0F0F;
 }
 
+body,
+.chatprivado {
+  overflow: hidden;
+  flex-direction: column;
+}
 
 
 .leftmessanger {
   flex-direction: column;
   width: 35%;
-  height: 100%;
   justify-content: start;
 }
 
@@ -23,69 +24,66 @@ body {
   width: 100%;
   padding: 1rem 0;
   justify-content: space-around;
+  align-items: center;
 }
 
-#amizades {
-  font-size: var(--font-size-lgi);
-  font-family: var(--header-12);
-  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+.contacts-header button {
+  align-items: center;
 }
 
-.down-arrow-1-41 {
-  height: 26px;
+.back-caret {
+  height: 2rem;
   cursor: pointer;
 }
 
-.contacts-header-icon {
-  gap: 1rem;
+.contacts-header p {
+  font-weight: bold;
+  font-size: 20px;
 }
 
-.contacts-header-icon .frame-icon3 {
-  overflow: hidden;
-}
-
-.contacts-header-icon .create-group-button-2-1 {
-  height: 29px;
-  object-fit: cover;
+.header-icon a > img {
+  height: 3rem;
 }
 
 /*CONTACT HEADER*/
 
-.searchbar2 {
-  font-size: var(--font-size-3xs);
-  color: var(--color-black);
+.searchbar {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .searchbar-inner {
-  border-radius: var(--br-xl);
-  background-color: var(--color-white);
-  border: 1.6px solid var(--color-black);
+  background-color: white;
+  border-radius: 15px;
   box-sizing: border-box;
   width: 85%;
-  height: 40px;
+  height: 3rem;
   justify-content: space-between;
 }
 
 .searchbar-inner input {
   all: unset;
+  color: black;
+  font-family: var(--Inter);
   margin-left: 1rem;
-  width: 78%;
+  margin-top: 3px;
+  width: 80%;
   font-size: 18px;
   height: 90%;
 }
 
-.searchbar-child1 {
+.search-button {
   border-radius: 0px 11px 11px 0px;
-    background: #DF0101;
-    height: 100%;
-    width: 14%;
+  background: #DF0101;
+  height: 100%;
+  width: 14%;
+  align-items: center;
+  justify-content: center;
 }
 
-.searchbar-child1 img {
-  width: 45%;
+.search-button img {
+  width: 50%;
 }
 
 /**/
@@ -94,26 +92,32 @@ body {
   flex-direction: column;
   width: 100%;
   margin-top: 1.5rem;
-  height: 100%;
   justify-content: start;
   gap: 1.5rem;
   overflow-y: auto;
+  align-items: center;
+}
+
+.contact-list a {
+  width: 80%;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 15px;
+}
+
+.contact-list a:hover {
+  transition: .5s;
+  background: #91919170;
 }
 
 .amizade {
   all: unset;
   display: flex;
   justify-content: space-around;
-  width: 90%;
-  padding: 0.5rem;
-  border-radius: 15px;
+  width: 100%;
 }
 
-.amizade:hover {
-  background: linear-gradient(169deg, #0a0a0a 10.32%, rgb(145 145 145 / 44%) 218.41%);
-}
-
-.image-50-group {
+.friend-icon {
   width: 20%;
   display: flex;
   align-items: end;
@@ -175,12 +179,6 @@ body {
   font-size: var(--title-13-size);
 }
 
-body,
-.chatprivado {
-  height: 100%;
-  overflow: hidden;
-  flex-direction: column;
-}
 
 .header1 {
   width: 100%;
@@ -479,33 +477,4 @@ body,
 
 .user-add {
   width: 15%;
-}
-
-/* .label {
-  text-align: center;
-  font-size: 11px;
-  width: 85%;
-  margin-top: 2vw;
-}
-
-.label p {
-  width: 100%;
-}
-
-.adicione-um-amigo {
-  font-size: var(--font-size-xl);
-  font-weight: 800;
-}
-
-.para-adicionar-um {
-  font-size: var(--font-size-lg);
-}
-
-.vector-icon {
-} */
-
-.contact-list a {
-  all: unset;
-  width: 100%;
-  cursor: pointer;
 }
