@@ -16,6 +16,7 @@ body,
   flex-direction: column;
   width: 35%;
   justify-content: start;
+  background-color: #0F0F0F;
 }
 
 /*CONTACT HEADER*/
@@ -102,19 +103,20 @@ body,
   width: 80%;
   cursor: pointer;
   padding: 1rem;
-  border-radius: 15px;
 }
 
 .contact-list a:hover {
   transition: .5s;
   background: #91919170;
+  border-radius: 15px;
 }
 
 .amizade {
   all: unset;
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
   width: 100%;
+  gap: 10%;
 }
 
 .friend-icon {
@@ -123,7 +125,7 @@ body,
   align-items: end;
 }
 
-.image-50-icon1 {
+.icon {
   border-radius: 100%;
   width: 100%;
 }
@@ -150,12 +152,13 @@ body,
   white-space: nowrap;
 }
 
-.contact-write b {
-  font-size: var(--font-size-lgi);
+.contact-write p {
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 18px;
+  text-transform: capitalize;
 }
 
 .e-a-mesa {
@@ -176,41 +179,67 @@ body,
 
 .chatprivado {
   width: 65%;
-  font-size: var(--title-13-size);
+  font-size: var(--Inter);
 }
 
-
-.header1 {
+.header-chat {
   width: 100%;
-  font-size: var(--body-size);
+  background-color: #0F0F0F;
   height: 13%;
 }
 
-.header-child {
-  background-color: rgba(84, 84, 84, 0.4);
-  height: 70px;
+.header-box {
   justify-content: start;
   padding-left: 1rem;
   height: 100%;
+  width: 100%;
+  gap: 1rem;
 }
 
-.header-child > img {
+.header-box > img {
   width: 5%;
 }
 
-.image-50-parent3 {
-  align-items: end;
-  justify-content: end;
+.sent-bar {
+  width: 100%;
+  padding: 2% 0;
+  align-self: center;
+  background-color: #0F0F0F;
+  justify-content: space-around;
+}
+
+#sent {
+  width: 100%;
+  justify-content: space-around;
+}
+
+.sent-bar textarea {
+  all: unset;
+  font-family: var(--Inter);
+  text-align: start;
+  margin-left: 1rem;
+  width: 80%;
+  color: white;
+  background-color: #2d2d2d;
+  border-radius: 15px;
+  resize: none;
+  padding: 0.8rem;
+  font-size: 18px;
+  height: fit-content;
+}
+
+.sent-box {
+  width: 8%;
+  padding-right: 1.5rem;
+}
+
+.sent-box img {
+  width: 100%;
 }
 
 .image-50-icon6 {
   border-radius: var(--br-194xl);
   width: clamp(53px, 5.5vw, 500px);
-}
-
-.header-child {
-  width: 100%;
-  gap: 1rem;
 }
 
 .header-text {
@@ -308,43 +337,6 @@ body,
 .your-text .msg-box p {
   padding: 1rem;
   text-align: start;
-}
-
-.sent-bar {
-  width: 100%;
-  padding: 2% 0;
-  align-self: center;
-  background-color: black;
-  justify-content: space-between;
-}
-
-#sent {
-  width: 100%;
-  justify-content: space-around;
-}
-
-.sent-elipse {
-  width: 6%;
-  padding-right: 0.5rem;
-}
-
-.sent-bar textarea {
-  all: unset;
-  margin-left: 1rem;
-  width: 80%;
-  color: white;
-  background-color: #2d2d2d;
-  border-radius: 15px;
-  min-height: 84px;
-  max-height: 84px;
-  resize: none;
-  padding: 0.8rem;
-  font-size: 1.5rem;
-}
-
-.sent-elipse img {
-  width: 100%;
-  padding: .5rem;
 }
 
 /*DIVISION*/

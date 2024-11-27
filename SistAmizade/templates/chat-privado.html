@@ -25,22 +25,24 @@
     <div class="leftmessanger flex">
 
         <div class="contacts-header flex">
-            <button style="all: unset;" onclick="goBack()">
-                <img class="down-arrow-1-41" alt="" src="{% static 'img/public/downarrow-1-4@2x.png'%}" id="downArrow14"/>
+
+            <button class="flex" style="all: unset;" onclick="goBack()">
+                <img class="back-caret" alt="" src="{% static 'img/icons/caret-left.svg'%}"/>
             </button>
 
-            <div id="amizades">AMIZADES</div>
-            <div class="contacts-header-icon flex">
+            <p id="amizades">AMIZADES</p>
+            <div class="header-icon flex">
                 <a href="{% url 'search_user' %}">
-                    <img class="create-group-button-2-1" alt="" src="{% static "img/public/addFriend.png" %}" id="createGroupButton21"/>
+                    <img alt="" src="{% static "img/public/addFriend.png" %}" />
                 </a>
             </div>
         </div>
 
-        <div class="searchbar2">
+        <div class="searchbar">
+
             <div class="searchbar-inner flex">
                 <input id="searchInput" placeholder="Pesquisar" class="pesquisar" oninput="filterFriends()"></input>
-                <div class="searchbar-child1 flex"/>
+                <div class="search-button flex"/>
                     <img class="magnifying-glass-1-icon1" alt="" src="{% static "img/public/magnifyingglass-11.svg" %}"/>
                 </div>
             </div>
@@ -48,25 +50,24 @@
 
         <div class="contact-list flex">
             {% for amigo in amigos %}
-                <a href="{% url 'Abrir_chat_privado' amigo.amigo.id %}">
-                    <div id="{{ amigo.nomeAmigo }}" class="amizade">
-
-                        <div class="friend-icon">
-                            {% if amigo.fotoConta == 'Indefinido' %}
-                                <img style="background-color: white;" class="image-50-icon1" alt="" src="{% static 'img/Ain.png' %}"/>
-                            {% else %}
-                                <img class="image-50-icon1" alt="" src="{{ amigo.fotoConta.url }}"/>
-                            {% endif %}
-
-                        </div>
-                        <div class="contact-write">
-                            <b>{{ amigo.nomeAmigo }}</b>
-                            <p class="e-a-mesa">{{ amigo.lastMessage }}</p>
-                        </div>
-                        <p class="time">{{ amigo.lastHour|date:"H:i" }}</p>
+            <a href="{% url 'Abrir_chat_privado' amigo.amigo.id %}">
+                <div onclick="initMob()" class="amizade">
+                    <div class="friend-icon">
+                        {% if amigo.fotoConta == "Indefinido" %}
+                            <img style="background-color: white;" class="icon" alt="" src="{% static 'img/Ain.png' %}"/>
+                        {% else %}
+                            <img class="icon" alt="" src="{{ amigo.fotoConta.url }}"/>
+                        {% endif %}
                     </div>
-                </a>
-            {% endfor %}
+
+                    <div class="contact-write">
+                        <p>{{ amigo.amigo.username }}</p>
+                        <p class="e-a-mesa">{{ amigo.lastMessage }}</p>
+                    </div>
+                    <p class="time">{{ amigo.lastHour|date:"H:i" }}</p>
+                </div>
+            </a>
+        {% endfor %}
         </div>
 
     </div>
