@@ -7,14 +7,6 @@
 
     <div class="directory flex">
       <h4>Diretórios</h4>
-      <form class="flex" method="post" action="">
-        {% csrf_token %}
-        {{ form.nome }}
-        <button style="cursor: pointer;" class="send-button flex" type="submit">
-          <p>Criar</p>
-          <img src="{% static "img/plus.svg" %}" alt="">
-        </button>
-      </form>
     </div>
 
     <div class="inv-buttons flex">
