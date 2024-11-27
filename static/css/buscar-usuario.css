@@ -54,7 +54,7 @@
 /*CONTACT HEADER*/
 
 .searchbar2 {
-  font-size: var(--font-size-3xs);
+  font-size: var(--Inter);
   color: var(--color-black);
   width: 100%;
   display: flex;
@@ -84,6 +84,7 @@
   font-size: 18px;
   height: 90%;
   color: white;
+  font-family: var(--Inter);
 }
 
 .searchbar-inner input::placeholder {
@@ -112,21 +113,18 @@
   align-items: start;
   gap: 1.5rem;
   overflow-y: auto;
+  align-self: center;
 }
 
 .amizade {
   all: unset;
   display: flex;
   justify-content: start;
-  width: 90%;
+  width: 98%;
   padding: 0.5rem;
   border-radius: 15px;
   gap: 1rem;
   align-items: center;
-}
-
-.amizade:hover {
-  background: linear-gradient(169deg, #0a0a0a 10.32%, rgb(145 145 145 / 44%) 218.41%);
 }
 
 .image-50-group {
