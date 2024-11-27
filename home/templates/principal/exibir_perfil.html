@@ -60,7 +60,7 @@
             </div>
             {% if not is_self %}
             <div class="adicionar flex">
-              
+
               {% if is_amigo %}
                   <a href="{% url 'remover_amigo' perfil.nomePerfil.id %}">Desfazer Amizade</a>
               {% else %}
@@ -71,7 +71,7 @@
                       <b style='cursor: default;' class="adicionar1">Solicitação Enviada</b>
                   {% endif %}
               {% endif %}
-            
+
             </div>
             {% endif %}
           </div>
@@ -90,7 +90,7 @@
       <div class="preferences flex">
 
         <b id="descrio">Preferencias</b>
-    
+
         <div class="preference-stats flex">
           <div class="preference-stat">
             {% if perfil.tipo_sessao == "Online" %}
@@ -100,7 +100,7 @@
             {% endif %}
             <b class="mesa-virtual">{{ perfil.tipo_sessao }}</b>
           </div>
-    
+
           <div class="preference-stat">
             {% if perfil.tipo_player == "Jogador" %}
               <img class="ss-2-icon" alt="" src="{% static "img/public/player.svg" %}" />
@@ -109,10 +109,10 @@
             {% else %}
               <img class="ss-2-icon" alt="" src="{% static "img/public/ambos.svg" %}" />
             {% endif %}
-            
+
             <b class="mestrejogador">{{ perfil.tipo_player }}</b>
           </div>
-    
+
           <div class="preference-stat">
             {% if perfil.sistema_rpg == "Dungeons & Dragons"%}
               <img class="dnd-2-icon" alt="Imagem representando Dungeon and Dragons" src="{% static "img/public/dnd.svg" %}" />
@@ -128,9 +128,9 @@
             <b class="dnd">{{ perfil.sistema_rpg }}</b>
           </div>
         </div>
-    
-      
-    
+
+
+
       </div>
     </div>
 

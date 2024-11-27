@@ -1,322 +1,252 @@
 body {
-  background: linear-gradient(169deg, #000 35.32%, rgba(53, 51, 51, 0.50) 218.41%);
-  font-size: var(--body-size);
-  color: var(--color-white);
-  font-family: var(--body);
+  background-color: #0F0F0F;
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-body > div {
-  width: 100%;
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-
-.user-header {
-  margin-bottom: 3rem;
-  width: 100%;
 }
 
 .user-body {
-  flex-direction: column;
   gap: 2rem;
-  justify-content: start;
 }
 
-.user-body b, .user-body .body-header b {
-  margin-top: 1.5vw;
-  font-size: var(--font-size-21xl);
+.user-header {
+  margin-bottom: 3rem;
 }
 
-.body-header div {
-  position: absolute;
-    width: 85%;
-    text-align: end;
-}
-
-.header-background {
-  width: 100%;
-}
-
-.header-body {
-  margin-top: -6vw;
-  z-index: 9;
-  width: 100%;
-}
-
-
-.rectangle-div {
+.background-image {
   height: 18vw;
   justify-content: space-between;
   align-items: start;
 }
 
-.rectangle-div img {
-  width: 4%;
-  margin: 1.4rem;
-}
-
-.down-arrow-1-4 {
-  transform: rotate(180deg);
-}
-
-.ds-1-icon {
-  top: 0;
-  height: 19%;
-}
-
-.body-row {
-  justify-content: space-around;
-  align-items: end;
-}
-
-.body-name {
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  margin-left: 1rem;
-}
-
-.body-name > b {
-  margin-top: 1rem;
-}
-
-#pencil {
-    width: 7vw;
-}
-
-#change-Image {
-  all: unset;
-  cursor: pointer;
+.banner-title {
   position: absolute;
-  z-index: 10;
-}
-
-.grey-back {
+  margin-top: 10%;
   width: 100%;
-    height: 100%;
-    background-color: gray;
-    border-radius: 125px;
-    opacity: 0.5;
+  align-items: end;
+  justify-content: space-around;
+  height: 38%;
 }
 
-#header-piece {
-  width: 68%;
+.icon-name {
+  gap: 5px;
+  align-self: start;
+}
+
+.icon-name .user-icon {
+  width: 15vw;
+  height: 15vw;
+  border-radius: 122px;margin-bottom: 15px;
+}
+
+.icon-name > h4 {
+  font-family: var(--Inter);
+  text-transform: capitalize;
+  width: 280px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.icon-name p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.icon-name button {
+  margin-top: 1rem;
+  background-color: var(--red1);
+  border-radius: 10px;
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.icon-name button:hover {
+  transition: .2s;
+  background-color: var(--red2);
+}
+
+.icon-name button > p {
+  font-weight: normal;
+}
+
+.header-desc {
+  width: 70%;
   justify-content: space-between;
 }
 
-#header-piece #editar-bot {
-  all: unset;
+.tag-box {
+  gap: 60px;
+}
+
+.amizades a > h4 {
+  font-weight: normal;
+}
+
+.amizades a > div {
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.tags {
+  align-items: center;
+  gap: 20px;
+}
+
+.tag {
+  background-color: white;
+  border: 3px solid #353535;
+  border-radius: 15px;
+  padding: 15px 12px;
+}
+
+.tag p {
+  color: black;
+  font-family: var(--Inter);
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.buttons {
+  align-items: center;
+  gap: 20px;
+}
+
+.buttons button {
+  background-color: var(--red1);
+  border-radius: 10px;
+  padding: 15px 20px;
+  font-weight: bold;
+  font-size: 20px;
+  width: 250px;
+  text-align: center;
+  cursor: pointer;
+}
+
+button:hover {
+  transition: .2s;
+  background-color: var(--red2);
+}
+
+.bio {
+  margin-top: 13rem;
+  width: 93%;
+  align-self: center;
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
+.bio > * {
+  color: #2F2E2E;
+}
+
+.bio > .horizontal-row {
+  height: 3px;
   width: 100%;
+  background-color: #2F2E2E;
 }
 
-.vector-icon {
-  max-width: 15%;
-  max-height: 15%;
+.bio p {
+  width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 9rem;
+  font-size: 20px;
+  text-align: justify;
 }
 
-.nvel-17 {
-  font-size: var(--font-size-4xl);
-  font-weight: 500;
-  margin-top: .2rem;
+/* Editar Perfil */
+
+.edit-box {
+  width: fit-content;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+#pencil {
+  width: 7vw;
+}
+
+#change-Image {
+cursor: pointer;
+position: absolute;
+z-index: 10;
+}
+
+.grey-filter {
+  width: fit-content;
+  height: 100%;
+  background-color: gray;
+  border-radius: 122px;
+  opacity: 0.5;
+}
+
+.grey-filter > .user-icon {
+  margin: unset;
+}
+
+.icon-name select{
+  all: unset;
+  appearance: auto;
+  font-family: var(--poppins);
+  font-size: 20px;
+  color: white;
+  width: fit-content;
+  background-color: #333; /* Fundo do select */
+  padding: 5px 0 5px 10px; /* Espaço para a seta */
+  border: 1px solid white;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.tag select {
+  all: unset;
+  appearance: auto;
+  font-family: var(--Inter);
+  font-weight: 900;
+  font-size: 20px;
+  width: fit-content;
+  border-radius: 5px;
+  padding-right: 1rem;
+  width: fit-content;
+}
+
+.header-rpg {
+  justify-content: end;
+  gap: 3rem;
+  align-items: center;
 }
 
 #change-age {
-  margin-top: .5rem;
-  border-radius: 15px;
-  background: linear-gradient(0deg, rgba(118, 13, 33, 0.50) 0%, rgba(118, 13, 33, 0.50) 100%), linear-gradient(169deg, #0E0E0E 35.32%, #353333 218.41%);
-}
-
-#change-age p {
-  padding: .5rem;
+  align-items: center;
+  gap: 1rem;
 }
 
 #change-age input {
   all: unset;
-  width: 60px;
+  font-family: var(--Inter);
+  font-size: 20px;
+  width: 40px;
 }
 
-
-.adicionar {
-  all: unset;
-  display: flex;
-  border-radius: var(--br-xl);
-  background-color: rgba(118, 13, 33, 0.7);
-  border: 2px solid rgba(168, 35, 60, 0.7);
-  box-sizing: border-box;
-  width: 43%;
-  height: 8vw;
-  text-align: center;
-  font-size: var(--font-size-xl);
-  flex-direction: row-reverse;
-  justify-content: space-evenly;
-  align-items: center;
-  cursor: pointer;
-}
-
-.adicionar img, .adicionar p {
-  transition: .2s;
-}
-
-#edit {
-  width: 100%;
-}
-
-#edit-aft {
-  width: 32%;
-}
-
-#gear {
-  height: 40%;
+.buttons #editar > p{
+  font-size: 32px;
 }
 
 #img-sent {
   display: none;
 }
 
-.middle-stats.flex, .adicionar {
-  margin-bottom: 2rem;
-  height: 8vw;
-  margin-right: 1rem;
-}
-
-.achieve {
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-around;
-}
-
-.achieve-num {
-  justify-content: space-evenly;
-  width: 100%;
-}
-
-.trophy-2-icon {
-  width: 3.5vw;
-}
-
-.create-group-button-2-1 {
-  height: 80%;
-}
-
-.user-body {
-  border-radius: var(--br-mini);
-  background-color: var(--darkred);
-  width: 90%;
-  padding: 1rem 0 5vw 0;
-  margin-bottom: 3vw;
-}
-
-#edit-desc {
-  width: 92%;
-    border-radius: 15px;
-    background: linear-gradient(0deg, rgba(118, 13, 33, 0.50) 0%, rgba(118, 13, 33, 0.50) 100%), linear-gradient(169deg, #0E0E0E 35.32%, #353333 218.41%);
-    padding: 2%;
-}
-
 #id_descricao {
   all: unset;
   width: 100%;
-  height: 18vw;
-  font-size: clamp(10px, 2.5vw ,36px);;
-}
-
-.image-50-icon {
-  border-radius: var(--br-194xl);
-  width: 15vw;
-  height: 15vw;
-}
-.nome {
-  font-size: var(--subtitle-22-size);
-}
-
-.b {
-  font-size: var(--font-size-21xl);
-}
-
-.middle-column {
-  height: 7vw;
-  margin: 0 4vw;
-}
-
-
-.friendship {
-  flex-direction: column;
   height: 100%;
-  justify-content: space-around;
-}
-
-.friendship a {
-  color: white;
-}
-
-#descrio {
-  font-size: var(--font-size-9xl);
-}
-
-.preferences {
-  width: 100%;
-  justify-content: center;
-  gap: 8vw;
-  margin-bottom: 2rem;
-  flex-direction: column;
-}
-
-.preference-stats {
-  width: 100%;
-  gap: 5rem;
-}
-
-.preference-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.preference-stat img {
-  height: 9vw;
-  width: 11vw;
-}
-
-.preference-stat b {
-  width: 100%;
-  text-align: center;
-}
-
-.preference-stat b select {
-  all: unset;
-  width: 100%;
-  font-weight: bold;
-  background:  url(../img/public/caret-down.svg) no-repeat center right;
-  background-size: 20px 20px;
-  padding-right: 20px;
-  cursor: pointer;
-}
-
-.preference-stat b select option {
-  color: black;
-}
-
-
-.dnd-2-icon {
-  height: 115px;
-}
-
-#id_sistema_rpg {
-  width: 70%;
-}
-
-.frame5 {
-  font-size: var(--font-size-17xl);
-}
-
-#id_descricao {
-  font-size: var(--font-size-29xl);
-  text-align: justify;
-  width: 90%;
 }

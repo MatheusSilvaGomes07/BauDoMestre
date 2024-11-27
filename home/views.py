@@ -284,6 +284,7 @@ def usuario(request):
 def editarconta(request):
     user = request.user
     perfil, created = Perfil.objects.update_or_create(nomePerfil=request.user)
+    fotoConta = Perfil.objects.get(id=user.id).fotoConta
     foto_antiga = perfil.fotoConta.name
 
     quantidade_amigos = Amigo.objects.filter(usuario=perfil.nomePerfil).count()
@@ -304,7 +305,7 @@ def editarconta(request):
     else:
         formPerfil = PerfilForm(instance=perfil)
 
-    return render(request, 'principal/editarPerfil.html', {'formPerfil': formPerfil, 'user':user, 'perfil':perfil, 'quantidade_amigos': quantidade_amigos})
+    return render(request, 'principal/editarPerfil.html', {'formPerfil': formPerfil, 'user':user, 'perfil':perfil, 'quantidade_amigos': quantidade_amigos, 'fotoConta': fotoConta,})
 
 @login_required
 def is_amigo(request, perfil_slug):
