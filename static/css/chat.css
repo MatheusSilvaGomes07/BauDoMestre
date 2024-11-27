@@ -196,8 +196,9 @@ body,
   gap: 1rem;
 }
 
-.header-box > img {
-  width: 5%;
+.header-topIcon {
+  width: 90%;
+  height: 90%;
 }
 
 .sent-bar {
@@ -237,21 +238,19 @@ body,
   width: 100%;
 }
 
-.image-50-icon6 {
-  border-radius: var(--br-194xl);
-  width: clamp(53px, 5.5vw, 500px);
-}
-
 .header-text {
   width: 80%;
   overflow: hidden;
   white-space: nowrap;
+  justify-content: start;
 }
 
-.header-text p, .header-text b{
+.header-text h4{
   white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 32px;
+  text-transform: capitalize;
 }
 
 .online {

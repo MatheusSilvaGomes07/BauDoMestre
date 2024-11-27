@@ -72,20 +72,20 @@
 
     </div>
     <div id="chat" class="chatprivado flex">
-        <div class="header1">
+        <div class="header-chat">
 
-            <div class="header-child flex">
+            <div class="header-box flex">
 
                 <div class="image-50-parent3 flex">
                     {% if chatPerfil.fotoConta != 'Indefinido' %}
-                        <img class="image-50-icon6" alt="" src="{{ chatPerfil.fotoConta.url }}"/>
+                        <img class="header-topIcon" alt="" src="{{ chatPerfil.fotoConta.url }}"/>
                     {% else %}
-                        <img class="image-50-icon6" alt="" src="{% static 'img/ain.png '%}"/>
+                        <img class="header-topIcon" alt="" src="{% static 'img/ain.png '%}"/>
                     {% endif %}
                 </div>
 
-                <div class="header-text">
-                    <a style="all: unset; cursor: pointer;" href="{% url 'exibir_perfil' chatPerfil.slug %}"><b class="lucas-passos3">{{ chatPerfil.nome }}</b></a>
+                <div class="header-text flex-column">
+                    <a style="all: unset; cursor: pointer;" href="{% url 'exibir_perfil' chatPerfil.slug %}"><h4 class="lucas-passos3">{{ chatPerfil.nome }}</h4></a>
                     <p class="online">{{ chatPerfil.tipoJogador }}</p>
                 </div>
 
@@ -128,10 +128,10 @@
 
             <div class="sent-bar flex">
                 <div id="sent" class="flex">
-                    <textarea type="text" id="auto-resize-textarea" oninput="autoResize()" class="flex" name="" cols="0" rows="0"></textarea>
+                    <textarea type="text" id="auto-resize-textarea" oninput="" class="flex" name="" cols="0" rows="0"></textarea>
 
-                    <button style="cursor: pointer;" id="chat-message-submit" type="button" value="Enviar" class="sent-elipse flex">
-                        <img src="{% static "img/public/paper-plane.svg" %}" alt="">
+                    <button style="cursor: pointer;" id="chat-message-submit" type="button" value="Enviar" class="sent-box flex">
+                        <img src="{% static "img/icons/sent.svg" %}" alt="">
                     </button>
                 </div>
             </div>

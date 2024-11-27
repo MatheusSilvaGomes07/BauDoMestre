@@ -12,8 +12,10 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  justify-content: start;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
+  font-family: var(--Inter);
 }
 
 /*CONTACT HEADER*/

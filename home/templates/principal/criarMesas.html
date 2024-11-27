@@ -19,11 +19,11 @@ nav {
 {% block conteudo %}
 
 <div id="go-back" class="flex">
-    
+
     <img src="{% static 'img/public/caret.svg' %}" alt="" style="transform: scaleX(-1);">
     <a style="all: unset; cursor: pointer;" href="{% url 'buscarmesa' %}"><p>Voltar</p></a>
-    
-    
+
+
   </div>
 
   <h1>Crie uma nova aventura</h1>
@@ -56,15 +56,21 @@ nav {
 
   </div>
 
-  
+
   <div class="image-box flex">
-    <h1>Imagem</h1>
     <div class="image-sent">
+      <div class="img-conteiner">
+        <label id="label_image" for="id_fotoCampanha">Selecionar uma imagem<label>
+          {{ form.fotoCampanha }}
+     </div>
+     <div class="image-center">
       <img id="image-preview" src="#" alt="Prévia da imagem" style="max-width: 300px; display: none;" />
-      <button>
-        {{ form.fotoCampanha }}
-      </button>
+     </div>
     </div>
+  </div>
+
+  <div class="img-preview">
+
   </div>
 
   <div class="detail-box">
