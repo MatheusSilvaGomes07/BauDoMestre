@@ -123,6 +123,9 @@ body {
   width: 250px;
   text-align: center;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
 
 button:hover {
